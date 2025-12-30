@@ -1,7 +1,7 @@
 @import url("reset.css");
 
 /* 1. Wrap event titles and prevent overflow */
-.fc .fc-event-title {
+.fc .fc-event-title .fc-sticky {
   white-space: normal;       /* allow wrapping */
   overflow: hidden;          /* hide spillover */
   text-overflow: ellipsis;   /* show ellipsis if too long */
