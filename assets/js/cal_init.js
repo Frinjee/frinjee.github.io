@@ -6,14 +6,30 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Fetch JSON and normalize title
+  // Decode QUOTED-PRINTABLE titles if needed
+  function decodeQuotedPrintable(str) {
+    try {
+      // Replace =XX hex codes
+      return str.replace(/=([A-F0-9]{2})/gi, function (match, hex) {
+        return String.fromCharCode(parseInt(hex, 16));
+      });
+    } catch {
+      return str; // fallback
+    }
+  }
+
+  // Fetch events.json and normalize
   fetch("events.json")
-    .then((res) => res.json())
+    .then((res) => {
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
     .then((data) => {
-      // Transform events for FullCalendar
       const events = data.map((e) => ({
         id: e.id,
-        title: e.title.val, // <-- FIX HERE
+        title: typeof e.title === "string"
+          ? e.title
+          : decodeQuotedPrintable(e.title.val || ""),
         start: e.start,
         end: e.end
       }));
