@@ -1,0 +1,63 @@
+@import url("reset.css");
+
+:root {
+	--color-noir: #1b1717; /*(27,23,24)*/
+	--color-cherry-red: #810100; /*(129,1,0)*/
+
+	--color-maroon: #830000; /*(99,0,0)*/
+	--color-cotton: #EDEBDD; /*(237,235,221)*/
+}
+
+body {
+	background-color: var(--color-noir);
+}
+
+
+
+.sidebar-card,
+article {
+	background: var(--color-maroon);
+	border: 1px solid var(--color-cherry-red);
+	border-radius: 20px;
+	padding: 15px;
+	box-shadow: var(--color-noir);
+	z-index: 1;
+}
+
+.sidebar-card {
+	margin-bottom: 15px;
+	max-height: 112px;
+	overflow: hidden;
+}
+
+.sidebar-info {
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 15px;
+}
+
+.sidebar-card.active {max-height: 400px;}
+
+
+/* NAVBAR */
+
+.navbar {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	background: var(--color-maroon);
+	backdrop-filter: blur(8px);
+	border: 1px solid var(--color-cherry-red);
+	z-index: 5;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 170,
+  'GRAD' 0,
+  'opsz' 16
+}
