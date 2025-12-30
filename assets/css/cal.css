@@ -8,11 +8,12 @@
   --color-azureish: #D8E7EE; /* (216,231,238) */
   --color-charcoal: #394C5C; /* (57,76,92) */
   --color-cotton: #EDEBDD; /* (237,235,221) */
+  --color-eggshell: #FAFFFF; 
 }
 
 /* Reset default page background */
 body {
-  background-color: var(--color-azureish);
+  background-color: var(--color-eggshell);
   margin: 0;
   font-family: Arial, sans-serif;
 }
