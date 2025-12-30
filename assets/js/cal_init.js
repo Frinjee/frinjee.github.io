@@ -39,6 +39,14 @@ document.addEventListener("DOMContentLoaded", function () {
         timeZone: "UTC",
         height: "auto",
 
+        windowResize: function(view) {
+          if (window.innerWidth < 600) {
+            calendar.changeView("listweek");
+          } else {
+            calendar.changeView("dayGridMonth");
+          }
+        },
+
         eventDidMount: function (info) {
           const start = info.event.start;
           const end = info.event.end;

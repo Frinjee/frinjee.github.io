@@ -134,3 +134,32 @@ h1 .calendar{
 #fc-modal-register:hover {
   background-color: var(--color-celestial);
 }
+
+/* Small screens (< 600px) */
+@media (max-width: 600px) {
+  .fc .fc-event-title {
+    font-size: 0.75em;
+  }
+
+  .fc .fc-event {
+    max-height: 2.5em;
+  }
+
+  #calendar {
+    padding: 0 0.5em;
+  }
+
+  /* Modal full width on mobile */
+  .fc-modal-content {
+    margin: 5% auto;
+    width: 95%;
+    max-width: 95%;
+    padding: 1em;
+  }
+
+  #fc-modal-register {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.75em 0;
+  }
+}
