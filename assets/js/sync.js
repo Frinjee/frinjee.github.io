@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "fs"; 
 import ical from "node-ical";
 
 const ICS_URL =
@@ -10,13 +10,28 @@ async function sync() {
 
     const events = Object.values(data)
       .filter(e => e.type === "VEVENT" && e.status !== "CANCELLED")
-      .map(e => ({
-        id: e.uid,
-        title: e.summary || "No title",
-        start: e.start.toISOString(),
-        end: e.end ? e.end.toISOString() : null,
-        url: e.url || null // <-- Add registration URL if present
-      }));
+      .map(e => {
+        let descriptionText = "";
+        let url = null;
+
+        if (e.description) {
+          const parts = e.description.split('---');
+          descriptionText = parts[0].trim();
+          if (parts[1]) {
+            const match = parts[1].match(/Event Details:\s*(\S+)/i);
+            if (match) url = match[1];
+          }
+        }
+
+        return {
+          id: e.uid,
+          title: e.summary || "No title",
+          start: e.start.toISOString(),
+          end: e.end ? e.end.toISOString() : null,
+          description: descriptionText,
+          url: url
+        };
+      });
 
     fs.writeFileSync("events.json", JSON.stringify(events, null, 2));
     console.log(`Generated events.json with ${events.length} events.`);
