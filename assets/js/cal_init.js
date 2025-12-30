@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.json();
     })
     .then((data) => {
-      // Normalize events: title + optional url
+      // Normalize events: title + optional url + description
       const events = data.map((e) => ({
         id: e.id,
         title:
@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
             : decodeQuotedPrintable(e.title.val || ""),
         start: e.start,
         end: e.end,
-        url: e.url || null
+        url: e.url || null,
+        description: e.description || ""
       }));
 
       // Initialize FullCalendar
@@ -73,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const modal = document.getElementById("event-modal");
           const titleEl = document.getElementById("fc-modal-title");
           const datetimeEl = document.getElementById("fc-modal-datetime");
+          const descriptionEl = document.getElementById("fc-modal-description");
           const registerEl = document.getElementById("fc-modal-register");
           const closeEl = document.getElementById("fc-modal-close");
 
@@ -95,6 +97,10 @@ document.addEventListener("DOMContentLoaded", function () {
               }`
             : "";
 
+          // Show description if available
+          descriptionEl.textContent = info.event.extendedProps.description || "";
+
+          // Show or hide register button
           if (info.event.url) {
             registerEl.style.display = "inline-block";
             registerEl.href = info.event.url;
