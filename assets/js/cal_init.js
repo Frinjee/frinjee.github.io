@@ -6,31 +6,25 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Decode QUOTED-PRINTABLE titles if needed
   function decodeQuotedPrintable(str) {
     try {
-      return str.replace(/=([A-F0-9]{2})/gi, function (match, hex) {
-        return String.fromCharCode(parseInt(hex, 16));
-      });
+      return str.replace(/=([A-F0-9]{2})/gi, (match, hex) =>
+        String.fromCharCode(parseInt(hex, 16))
+      );
     } catch {
-      return str; // fallback
+      return str;
     }
   }
 
-  // Fetch events.json and normalize
   fetch("events.json")
-    .then((res) => {
+    .then(res => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();
     })
-    .then((data) => {
-      // Normalize events: move url and description to extendedProps
-      const events = data.map((e) => ({
+    .then(data => {
+      const events = data.map(e => ({
         id: e.id,
-        title:
-          typeof e.title === "string"
-            ? e.title
-            : decodeQuotedPrintable(e.title.val || ""),
+        title: typeof e.title === "string" ? e.title : decodeQuotedPrintable(e.title.val || ""),
         start: e.start,
         end: e.end,
         extendedProps: {
@@ -39,14 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }));
 
-      // Initialize FullCalendar
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        events: events,
+        events,
         timeZone: "UTC",
         height: "auto",
 
-        // Tooltip for all events
         eventDidMount: function (info) {
           const start = info.event.start;
           const end = info.event.end;
@@ -63,15 +55,12 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip += `\n${start.toLocaleString([], options)}`;
             if (end) tooltip += ` - ${end.toLocaleString([], options)}`;
           }
-          if (info.event.extendedProps.url) {
-            tooltip += "\nClick to register";
-          }
+          if (info.event.extendedProps.url) tooltip += "\nClick to register";
           info.el.setAttribute("title", tooltip);
         },
 
-        // Event click: show modal with details
         eventClick: function (info) {
-          info.jsEvent.preventDefault(); // prevent automatic navigation
+          info.jsEvent.preventDefault();
 
           const modal = document.getElementById("event-modal");
           const titleEl = document.getElementById("fc-modal-title");
@@ -80,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function () {
           const registerEl = document.getElementById("fc-modal-register");
           const closeEl = document.getElementById("fc-modal-close");
 
-          // Set modal content
           titleEl.textContent = info.event.title;
 
           const start = info.event.start;
@@ -99,10 +87,8 @@ document.addEventListener("DOMContentLoaded", function () {
               }`
             : "";
 
-          // Description
           descriptionEl.textContent = info.event.extendedProps.description || "";
 
-          // Register button
           if (info.event.extendedProps.url) {
             registerEl.style.display = "inline-block";
             registerEl.href = info.event.extendedProps.url;
@@ -110,24 +96,16 @@ document.addEventListener("DOMContentLoaded", function () {
             registerEl.style.display = "none";
           }
 
-          // Show modal
           modal.style.display = "block";
 
-          // Close modal when clicking X
-          closeEl.onclick = function () {
-            modal.style.display = "none";
-          };
-
-          // Close modal when clicking outside content
-          window.onclick = function (event) {
-            if (event.target == modal) {
-              modal.style.display = "none";
-            }
+          closeEl.onclick = () => (modal.style.display = "none");
+          window.onclick = (event) => {
+            if (event.target == modal) modal.style.display = "none";
           };
         }
       });
 
       calendar.render();
     })
-    .catch((err) => console.error("Failed to load events:", err));
+    .catch(err => console.error("Failed to load events:", err));
 });
