@@ -12,7 +12,7 @@
 
 /* Reset default page background */
 body {
-  background-color: var(--color-cotton);
+  background-color: var(--color-azureish);
   margin: 0;
   font-family: Arial, sans-serif;
 }
