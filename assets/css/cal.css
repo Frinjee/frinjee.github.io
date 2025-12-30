@@ -1,3 +1,22 @@
+:root {
+  /* BLUE */
+  --color-maastricht: #041A38; /* (4,26,56) */
+  --color-celestial: #4A9ACB; /* (74,154,203) */
+  --color-cornflower: #97D4F1; /* (151,212,241) */
+
+  /* GREY | WHITE | BLACK */
+  --color-azureish: #D8E7EE; /* (216,231,238) */
+  --color-charcoal: #394C5C; /* (57,76,92) */
+  --color-cotton: #EDEBDD; /* (237,235,221) */
+}
+
+/* Reset default page background */
+body {
+  background-color: var(--color-cotton);
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
 @import url("reset.css");
 
 /* 1. Wrap event titles and prevent overflow */
@@ -5,10 +24,10 @@
   white-space: normal;       /* allow wrapping */
   overflow: hidden;          /* hide spillover */
   text-overflow: ellipsis;   /* show ellipsis if too long */
-  line-height: 1.2em;        /* slightly tighter line spacing */
-  font-size: 0.85em;         /* optional: slightly smaller text */
+  line-height: 1.2em;        
+  font-size: 0.85em;         
   display: block;
-  word-break: break-word;    /* break long words if needed */
+  word-break: break-word;    
 }
 
 /* 2. Limit overall event box height (roughly 2-3 lines max) */
@@ -17,6 +36,9 @@
   padding: 0.1em 0.3em;
   box-sizing: border-box;
   overflow: hidden;
+  background-color: var(--color-celestial);
+  border: 1px solid var(--color-maastricht);
+  color: #fff; /* white text on blue background */
 }
 
 /* 3. Adjust day cell event container spacing */
@@ -24,19 +46,19 @@
   margin: 0.1em 0;
 }
 
-/* 4. Optional: tooltip style (works if you add title attribute in JS) */
+/* 4. Tooltip cursor */
 .fc .fc-event[title] {
   cursor: help;
 }
 
-/* 5. Optional: improve readability for multiple events in one day */
+/* 5. Improve readability for multiple events */
 .fc .fc-daygrid-day-events {
   margin-top: 0.2em;
-  max-height: 4.5em; /* roughly 3 events */
+  max-height: 4.5em; 
   overflow-y: auto;
 }
 
-/* 6. Optional: hover effect for events */
+/* 6. Hover effect for events */
 .fc .fc-event:hover {
   opacity: 0.85;
   transition: opacity 0.2s ease-in-out;
@@ -53,11 +75,11 @@
 }
 
 /* ===========================
-   Event Modal Styles (Neutral)
+   Event Modal Styles
    =========================== */
 
 .fc-modal {
-  display: none; /* hidden by default */
+  display: none; 
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -65,11 +87,11 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.3); /* semi-transparent overlay */
+  background-color: rgba(0,0,0,0.3);
 }
 
 .fc-modal-content {
-  background-color: #fff; /* keep default theme */
+  background-color: #fff; 
   color: #000;
   margin: 10% auto;
   padding: 1.5em;
@@ -77,7 +99,7 @@
   width: 90%;
   max-width: 400px;
   text-align: center;
-  box-shadow: none; /* no extra shadows */
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 .fc-modal-close {
@@ -88,7 +110,7 @@
 }
 
 .fc-modal-close:hover {
-  color: inherit; /* keep default */
+  color: inherit;
 }
 
 #fc-modal-register {
@@ -98,5 +120,10 @@
   border-radius: 5px;
   text-decoration: none;
   cursor: pointer;
+  background-color: var(--color-cornflower);
+  color: var(--color-maastricht);
+  font-weight: bold;
 }
-
+#fc-modal-register:hover {
+  background-color: var(--color-celestial);
+}
