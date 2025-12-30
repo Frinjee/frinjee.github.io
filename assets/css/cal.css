@@ -15,10 +15,16 @@
 body {
   background-color: var(--color-eggshell);
   margin: 0;
-  font-family: Arial, sans-serif;
 }
 
 @import url("reset.css");
+
+h1 .calendar{
+  font-family: "Vend Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 550;
+  font-style: normal;
+}
 
 /* 1. Wrap event titles and prevent overflow */
 .fc .fc-event-title .fc-sticky {
