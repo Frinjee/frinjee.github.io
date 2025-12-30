@@ -1,0 +1,16 @@
+@import url("reset.css");
+/* Make event titles wrap instead of overflowing */
+.fc .fc-event-title {
+  white-space: normal;       /* allow wrapping */
+  overflow: hidden;          /* hide anything overflowing */
+  text-overflow: ellipsis;   /* add ellipsis if it still overflows */
+  line-height: 1.2em;        /* optional: slightly smaller spacing */
+  font-size: 0.85em;         /* optional: slightly smaller font */
+}
+
+/* Optional: limit max height for multi-line events */
+.fc .fc-event {
+  max-height: 3em;           /* roughly 2 lines */
+  overflow: hidden;
+}
+
