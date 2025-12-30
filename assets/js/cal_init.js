@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const calendar = new FullCalendar.Calendar(calendarEl, {
     initialView: "dayGridMonth",
-    events: "/events.json",
+    events: "events.json",
     height: "auto"
   });
 
