@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 20
 
-      - run: npm install node-fetch node-ical
+      - run: npm install node-ical
 
       - run: node scripts/sync.js
 
