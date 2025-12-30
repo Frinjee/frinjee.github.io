@@ -71,16 +71,6 @@ h1 .calendar{
   transition: opacity 0.2s ease-in-out;
 }
 
-/* 7. Responsive tweaks for small screens */
-@media (max-width: 600px) {
-  .fc .fc-event-title {
-    font-size: 0.75em;
-  }
-  .fc .fc-event {
-    max-height: 2.5em;
-  }
-}
-
 /* ===========================
    Event Modal Styles
    =========================== */
@@ -135,31 +125,27 @@ h1 .calendar{
   background-color: var(--color-celestial);
 }
 
-/* Small screens (< 600px) */
 @media (max-width: 600px) {
+  /* Increase the height of day cells so events have more room */
+  .fc .fc-daygrid-day-frame {
+    min-height: 80px; /* adjust as needed */
+  }
+
+  /* Make event titles and times more readable */
   .fc .fc-event-title {
-    font-size: 0.75em;
+    font-size: 0.85em; /* slightly bigger than default */
+    line-height: 1.2em;
+    white-space: normal;       /* allow wrapping */
+    word-break: break-word;    /* break long words */
   }
 
+  .fc .fc-event-time {
+    font-size: 0.75em;  /* readable without crowding */
+  }
+
+  /* Optional: reduce padding inside event boxes */
   .fc .fc-event {
-    max-height: 2.5em;
-  }
-
-  #calendar {
-    padding: 0 0.5em;
-  }
-
-  /* Modal full width on mobile */
-  .fc-modal-content {
-    margin: 5% auto;
-    width: 95%;
-    max-width: 95%;
-    padding: 1em;
-  }
-
-  #fc-modal-register {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 0.75em 0;
+    padding: 0.15em 0.25em;
+    max-height: none;  /* allow text to wrap freely */
   }
 }
