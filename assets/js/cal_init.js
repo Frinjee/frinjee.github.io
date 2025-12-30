@@ -43,11 +43,27 @@ document.addEventListener("DOMContentLoaded", function () {
         timeZone: "UTC",
         height: "auto",
 
-        // Show tooltip for events with URL
+        // Tooltip for all events
         eventDidMount: function (info) {
-          if (info.event.url) {
-            info.el.setAttribute("title", "Click to register");
+          const start = info.event.start;
+          const end = info.event.end;
+          const options = {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          };
+          let tooltip = info.event.title;
+          if (start) {
+            tooltip += `\n${start.toLocaleString([], options)}`;
+            if (end) tooltip += ` - ${end.toLocaleString([], options)}`;
           }
+          if (info.event.url) {
+            tooltip += "\nClick to register";
+          }
+          info.el.setAttribute("title", tooltip);
         },
 
         // Event click: show modal with details

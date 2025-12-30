@@ -69,7 +69,8 @@
 }
 
 .fc-modal-content {
-  background-color: inherit; /* keep default theme */
+  background-color: #fff; /* keep default theme */
+  color: #000;
   margin: 10% auto;
   padding: 1.5em;
   border-radius: 10px;
