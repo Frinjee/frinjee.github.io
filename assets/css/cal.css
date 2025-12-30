@@ -52,3 +52,50 @@
   }
 }
 
+/* ===========================
+   Event Modal Styles (Neutral)
+   =========================== */
+
+.fc-modal {
+  display: none; /* hidden by default */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.3); /* semi-transparent overlay */
+}
+
+.fc-modal-content {
+  background-color: inherit; /* keep default theme */
+  margin: 10% auto;
+  padding: 1.5em;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: none; /* no extra shadows */
+}
+
+.fc-modal-close {
+  float: right;
+  font-size: 1.5em;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.fc-modal-close:hover {
+  color: inherit; /* keep default */
+}
+
+#fc-modal-register {
+  display: inline-block;
+  margin-top: 1em;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+}
+

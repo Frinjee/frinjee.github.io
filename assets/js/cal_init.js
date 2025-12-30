@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function () {
   // Decode QUOTED-PRINTABLE titles if needed
   function decodeQuotedPrintable(str) {
     try {
-      // Replace =XX hex codes
       return str.replace(/=([A-F0-9]{2})/gi, function (match, hex) {
         return String.fromCharCode(parseInt(hex, 16));
       });
@@ -25,20 +24,83 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.json();
     })
     .then((data) => {
+      // Normalize events: title + optional url
       const events = data.map((e) => ({
         id: e.id,
-        title: typeof e.title === "string"
-          ? e.title
-          : decodeQuotedPrintable(e.title.val || ""),
+        title:
+          typeof e.title === "string"
+            ? e.title
+            : decodeQuotedPrintable(e.title.val || ""),
         start: e.start,
-        end: e.end
+        end: e.end,
+        url: e.url || null
       }));
 
+      // Initialize FullCalendar
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         events: events,
         timeZone: "UTC",
-        height: "auto"
+        height: "auto",
+
+        // Show tooltip for events with URL
+        eventDidMount: function (info) {
+          if (info.event.url) {
+            info.el.setAttribute("title", "Click to register");
+          }
+        },
+
+        // Event click: show modal with details
+        eventClick: function (info) {
+          info.jsEvent.preventDefault();
+
+          const modal = document.getElementById("event-modal");
+          const titleEl = document.getElementById("fc-modal-title");
+          const datetimeEl = document.getElementById("fc-modal-datetime");
+          const registerEl = document.getElementById("fc-modal-register");
+          const closeEl = document.getElementById("fc-modal-close");
+
+          // Set modal content
+          titleEl.textContent = info.event.title;
+
+          const start = info.event.start;
+          const end = info.event.end;
+          const options = {
+            weekday: "short",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+          };
+          datetimeEl.textContent = start
+            ? `${start.toLocaleString([], options)}${
+                end ? " - " + end.toLocaleString([], options) : ""
+              }`
+            : "";
+
+          if (info.event.url) {
+            registerEl.style.display = "inline-block";
+            registerEl.href = info.event.url;
+          } else {
+            registerEl.style.display = "none";
+          }
+
+          // Show modal
+          modal.style.display = "block";
+
+          // Close modal when clicking X
+          closeEl.onclick = function () {
+            modal.style.display = "none";
+          };
+
+          // Close modal when clicking outside content
+          window.onclick = function (event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          };
+        }
       });
 
       calendar.render();

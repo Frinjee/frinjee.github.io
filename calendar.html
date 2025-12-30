@@ -15,8 +15,20 @@
 	<h1>Upcoming Events</h1>
 	<div id="calendar"></div>
 
+
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
 	<script src="assets/js/cal_init.js"></script>
+
+	<!-- Event Detail Modal -->
+	<div id="event-modal" class="fc-modal">
+  		<div class="fc-modal-content">
+    		<span id="fc-modal-close" class="fc-modal-close">&times;</span>
+    		<h2 id="fc-modal-title"></h2>
+    		<p id="fc-modal-datetime"></p>
+    		<a id="fc-modal-register" href="#" target="_blank">Register</a>
+  		</div>
+	</div>
+
 </body>
 
 </html>
