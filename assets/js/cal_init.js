@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.json();
     })
     .then((data) => {
-      // Normalize events: title + optional url + description
+      // Normalize events: move url and description to extendedProps
       const events = data.map((e) => ({
         id: e.id,
         title:
@@ -33,8 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
             : decodeQuotedPrintable(e.title.val || ""),
         start: e.start,
         end: e.end,
-        url: e.url || null,
-        description: e.description || ""
+        extendedProps: {
+          url: e.url || null,
+          description: e.description || ""
+        }
       }));
 
       // Initialize FullCalendar
@@ -61,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function () {
             tooltip += `\n${start.toLocaleString([], options)}`;
             if (end) tooltip += ` - ${end.toLocaleString([], options)}`;
           }
-          if (info.event.url) {
+          if (info.event.extendedProps.url) {
             tooltip += "\nClick to register";
           }
           info.el.setAttribute("title", tooltip);
@@ -69,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Event click: show modal with details
         eventClick: function (info) {
-          info.jsEvent.preventDefault();
+          info.jsEvent.preventDefault(); // prevent automatic navigation
 
           const modal = document.getElementById("event-modal");
           const titleEl = document.getElementById("fc-modal-title");
@@ -97,13 +99,13 @@ document.addEventListener("DOMContentLoaded", function () {
               }`
             : "";
 
-          // Show description if available
+          // Description
           descriptionEl.textContent = info.event.extendedProps.description || "";
 
-          // Show or hide register button
-          if (info.event.url) {
+          // Register button
+          if (info.event.extendedProps.url) {
             registerEl.style.display = "inline-block";
-            registerEl.href = info.event.url;
+            registerEl.href = info.event.extendedProps.url;
           } else {
             registerEl.style.display = "none";
           }
