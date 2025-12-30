@@ -19,7 +19,7 @@ body {
 
 @import url("reset.css");
 
-h1 .calendar{
+h1 {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 550;
@@ -34,7 +34,11 @@ h1 .calendar{
   line-height: 1.2em;        
   font-size: 0.85em;         
   display: block;
-  word-break: break-word;    
+  word-break: break-word;
+  font-family: "Vend Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
 }
 
 /* 2. Limit overall event box height (roughly 2-3 lines max) */
