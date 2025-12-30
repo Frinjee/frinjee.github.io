@@ -1,0 +1,28 @@
+name: Sync Calendar
+
+on:
+  schedule:
+    - cron: "0 * * * *" # hourly
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install node-fetch node-ical
+
+      - run: node scripts/sync.js
+
+      - run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add events.json
+          git commit -m "Update events" || echo "No changes"
+          git push
