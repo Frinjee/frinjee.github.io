@@ -1,0 +1,57 @@
+[
+  {
+    "id": "d8fae8657613d81f22125bcaab9332584162025_3:05:57_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Orientation"
+    },
+    "start": "2026-02-25T22:00:00.000Z",
+    "end": "2026-02-26T00:00:00.000Z"
+  },
+  {
+    "id": "238270a812aa951f71f1a326b362617f12162025_12:36:42_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "International Women's Day- \"Women Thrive: Our Stories Matter\""
+    },
+    "start": "2026-03-05T20:30:00.000Z",
+    "end": "2026-03-05T22:30:00.000Z"
+  },
+  {
+    "id": "6090c888e934a08bf4e2d16976f43cf711202025_8:15:30_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Black Bookstores Impact on History"
+    },
+    "start": "2026-03-05T22:30:00.000Z",
+    "end": "2026-03-06T00:30:00.000Z"
+  },
+  {
+    "id": "be8ee81c3d01b578d8958fa5ad008b9c11222025_7:17:14_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "3rd Annual Women's History Month Brunch "
+    },
+    "start": "2026-03-28T15:00:00.000Z",
+    "end": "2026-03-28T19:00:00.000Z"
+  },
+  {
+    "id": "680102809632900a9f39dfd6f84aa72a11132025_10:43:00_AM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "De-Stress with CSEI "
+    },
+    "start": "2026-05-05T18:00:00.000Z",
+    "end": "2026-05-05T20:00:00.000Z"
+  }
+]
