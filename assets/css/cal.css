@@ -1,3 +1,6 @@
+/* CSS Reset */
+@import url("reset.css");
+
 :root {
   /* BLUE */
   --color-maastricht: #041A38; /* (4,26,56) */
@@ -11,9 +14,6 @@
   --color-cotton: #EDEBDD;   /* (237,235,221) */
   --color-eggshell: #FAFFFF; /* (250,255,255) */
 }
-
-/* CSS Reset */
-@import url("reset.css");
 
 /* Reset default page background */
 body {
