@@ -93,13 +93,14 @@ h1 {
 
 /* Event box sizing & colors */
 .fc .fc-event {
-  max-height: 3em;
+  max-height: 3em; /* approx. 2–3 lines */
   padding: 0.1em 0.3em;
   box-sizing: border-box;
   overflow: hidden;
-  color: var(--color-maastricht);
+  color: #fff; /* white text for contrast */
   font-weight: 474;
-  border: 1px solid rgba(0,0,0,0.12); /* subtle border between events */
+  background-color: var(--color-celestial); /* restore readable background */
+  border: 1px solid rgba(0,0,0,0.18); 
   border-radius: 3px;
 }
 
@@ -196,8 +197,7 @@ h1 {
   background-color: var(--color-eggshell);
 }
 
-.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-bg {
-  background-color: var(--color-robinsegg);
+.fc .fc-daygrid-day.fc-day-today {
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
 }
@@ -289,8 +289,10 @@ h1 {
 
   .fc .fc-event {
     padding: 0.15em 0.25em;
-    max-height: none;
-    border: 1px solid rgba(0,0,0,0.18); /* stronger event borders on mobile */
+    max-height: none; /* allow full wrapping */
+    background-color: var(--color-celestial); /* ensure visible background */
+    color: #fff; /* text remains visible */
+    border: 1px solid rgba(0,0,0,0.18);
   }
 
   .fc .fc-col-header-cell-cushion {
