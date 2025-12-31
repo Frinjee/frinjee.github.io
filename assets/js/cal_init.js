@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.json();
     })
     .then((data) => {
-      // Map events, keep UTC ISO strings intact
       const events = data.map((e) => ({
         id: e.id,
         title:
@@ -41,12 +40,26 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         timeZone: "America/New_York", // Display all events in EST
-        eventTimeFormat: {            // Fix calendar box times
+        events,
+        height: "auto",
+
+        /* Force correct times in calendar boxes */
+        eventTimeFormat: { 
           hour: '2-digit',
           minute: '2-digit',
           hour12: true,
-          meridiem: 'short',
-          omitZeroMinute: false
+          meridiem: 'short'
+        },
+        eventContent: function(arg) {
+          const start = arg.event.start;
+          let timeText = '';
+          if (start) {
+            const options = { hour: '2-digit', minute: '2-digit', hour12: true };
+            timeText = start.toLocaleTimeString('en-US', options);
+          }
+          return { 
+            html: `<div class="fc-event-time">${timeText}</div><div class="fc-event-title">${arg.event.title}</div>`
+          };
         },
 
         /* Custom toggle button */
@@ -74,9 +87,6 @@ document.addEventListener("DOMContentLoaded", function () {
           center: "",
           right: "next"
         },
-
-        events,
-        height: "auto",
 
         /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
@@ -115,7 +125,6 @@ document.addEventListener("DOMContentLoaded", function () {
           };
 
           let tooltip = info.event.title;
-
           if (start) {
             tooltip += `\n${start.toLocaleString([], options)} EST`;
             if (end) tooltip += ` - ${end.toLocaleString([], options)} EST`;
