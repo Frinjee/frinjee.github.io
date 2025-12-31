@@ -59,11 +59,21 @@ document.addEventListener("DOMContentLoaded", function () {
               ? arg.event.title.slice(0, maxChars) + "…"
               : arg.event.title;
 
-          const timeText = arg.timeText
-            ? `<div class="fc-event-time">${arg.timeText}</div>`
-            : "";
+          let timeText = '';
+          if (arg.event.start) {
+            const options = { 
+              hour: '2-digit', 
+              minute: '2-digit', 
+              hour12: true, 
+              timeZone: 'America/New_York' // Proper timezone conversion
+            };
+            timeText = arg.event.start.toLocaleTimeString('en-US', options);
+            timeText = `<div class="fc-event-time">${timeText}</div>`;
+          }
 
-          return { html: timeText + `<div class="fc-event-title">${displayTitle}</div>` };
+          return { 
+            html: timeText + `<div class="fc-event-title">${displayTitle}</div>` 
+          };
         },
 
         /* Custom toggle button */
@@ -92,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
           right: "next"
         },
 
-        /* Responsive view: auto switch to listWeek on mobile */
+        /* Responsive view + day event scrollbar adjustment */
         datesSet() {
           if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
@@ -100,6 +110,21 @@ document.addEventListener("DOMContentLoaded", function () {
           if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
             calendar.changeView("dayGridMonth");
           }
+
+          // Adjust scrollbar only for days with events
+          document.querySelectorAll('.fc-daygrid-day').forEach((dayCell) => {
+            const eventsContainer = dayCell.querySelector('.fc-daygrid-day-events');
+            if (eventsContainer) {
+              if (eventsContainer.children.length > 0) {
+                eventsContainer.style.maxHeight = '5em';
+                eventsContainer.style.overflowY = 'auto';
+                eventsContainer.style.scrollbarWidth = 'thin';
+              } else {
+                eventsContainer.style.maxHeight = 'none';
+                eventsContainer.style.overflowY = 'visible';
+              }
+            }
+          });
         },
 
         /* Update toggle icon */
