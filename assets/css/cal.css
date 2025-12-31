@@ -1,27 +1,27 @@
 :root {
   /* BLUE */
-  --color-maastricht: #041A38;
-  --color-celestial: #4A9ACB;
-  --color-cornflower: #97D4F1;
+  --color-maastricht: #041A38; /* (4,26,56) */
+  --color-celestial: #4A9ACB;  /* (74,154,203) */
+  --color-cornflower: #97D4F1; /* (151,212,241) */
   --color-robinsegg: #96DED1;
 
   /* GREY | WHITE | BLACK */
-  --color-azureish: #D8E7EE;
-  --color-charcoal: #394C5C;
-  --color-cotton: #EDEBDD;
-  --color-eggshell: #FAFFFF;
+  --color-azureish: #D8E7EE; /* (216,231,238) */
+  --color-charcoal: #394C5C; /* (57,76,92) */
+  --color-cotton: #EDEBDD;   /* (237,235,221) */
+  --color-eggshell: #FAFFFF; /* (250,255,255) */
 }
 
 /* CSS Reset */
 @import url("reset.css");
 
-/* Body background */
+/* Reset default page background */
 body {
   background-color: var(--color-eggshell);
   margin: 0;
 }
 
-/* Page heading */
+/* Page Heading */
 h1 {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
@@ -31,7 +31,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-/* Calendar wrapper */
+/* Calendar Wrapper */
 .calendar-wrapper {
   max-width: 1000px;
   margin: 0 auto;
@@ -41,33 +41,25 @@ h1 {
   display: block;
 }
 
-/* Calendar base */
+/* Calendar Base Typography */
 #calendar {
   width: 100%;
   background-color: var(--color-eggshell);
   border-radius: 10px;
   padding: 1rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   font-family: "Vend Sans", sans-serif;
+  font-optical-sizing: auto;
   font-weight: 300;
+  font-style: normal;
 }
 
-/* Event boxes */
-.fc .fc-event {
-  max-height: 3em;
-  padding: 0.1em 0.3em;
-  box-sizing: border-box;
-  overflow: hidden;
-  color: var(--color-maastricht);
-  font-weight: 300;
-}
-
-/* Event title wrapping */
+/* Event title wrapping & overflow handling */
 .fc .fc-event-title {
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.02em;
+  line-height: 1.2em;
   font-size: 0.85em;
   display: block;
   word-break: break-word;
@@ -99,6 +91,18 @@ h1 {
   gap: 1rem;
 }
 
+/* Event box sizing & colors */
+.fc .fc-event {
+  max-height: 3em;
+  padding: 0.1em 0.3em;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--color-maastricht);
+  font-weight: 474;
+  border: 1px solid rgba(0,0,0,0.12); /* subtle border between events */
+  border-radius: 3px;
+}
+
 /* Day cell event spacing */
 .fc .fc-daygrid-event-harness {
   margin: 0.1em 0;
@@ -116,13 +120,13 @@ h1 {
   overflow-y: auto;
 }
 
-/* Event hover */
+/* Event hover state */
 .fc .fc-event:hover {
   opacity: 0.85;
   transition: opacity 0.2s ease-in-out;
 }
 
-/* Calendar buttons */
+/* Calendar navigation buttons */
 .fc .fc-button {
   background-color: var(--color-maastricht);
   border: none;
@@ -140,7 +144,6 @@ h1 {
   opacity: 0.5;
 }
 
-/* Toggle MultiMonth icon */
 .fc-toggleMultiMonth-button::before {
   font-family: "Material Symbols Outlined";
   font-size: 1.4em;
@@ -158,33 +161,24 @@ h1 {
   opacity: 0.75;
 }
 
-/* Day cell backgrounds */
-.fc .fc-daygrid-day-bg {
-  background-color: var(--color-eggshell);
-}
+/* --------------------- */
+/* GRID & DAY STYLING     */
+/* --------------------- */
 
-.fc .fc-daygrid-day.fc-day-today {
-  background-color: var(--color-eggshell);
-  outline: 2px solid var(--color-celestial);
-  outline-offset: -2px;
-}
-
-/* Subtle grid lines */
+/* Darker grid lines for scrollgrid & day boxes */
 .fc .fc-scrollgrid,
 .fc .fc-scrollgrid-section > td {
-  border-color: rgba(0, 0, 0, 0.12);
+  border-color: rgba(0, 0, 0, 0.18);
 }
 
-/* Correct border-radius usage */
 .fc .fc-daygrid-day {
-  border: 1px solid rgba(0, 0, 0, 0.09);
-  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-/* Column headers (weekdays) */
-.fc .fc-col-header-cell.fc-day {
+/* Column header (day titles) */
+.fc .fc-col-header-cell {
   background-color: var(--color-azureish);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
 }
 
 .fc .fc-col-header-cell-cushion {
@@ -194,7 +188,18 @@ h1 {
 }
 
 .fc .fc-col-header {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.13);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+}
+
+/* Day background */
+.fc .fc-daygrid-day-bg {
+  background-color: var(--color-eggshell);
+}
+
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-bg {
+  background-color: var(--color-robinsegg);
+  outline: 2px solid var(--color-celestial);
+  outline-offset: -2px;
 }
 
 /* Event modal overlay */
@@ -252,8 +257,11 @@ h1 {
   background-color: var(--color-celestial);
 }
 
-/* Mobile adjustments */
+/* --------------------- */
+/* MOBILE ADJUSTMENTS     */
+/* --------------------- */
 @media (max-width: 600px) {
+
   .calendar-wrapper {
     padding: 0.5rem;
   }
@@ -263,6 +271,7 @@ h1 {
     border-radius: 6px;
   }
 
+  /* Day cell height */
   .fc-daygrid-day-events {
     min-height: 3.5em;
   }
@@ -281,6 +290,7 @@ h1 {
   .fc .fc-event {
     padding: 0.15em 0.25em;
     max-height: none;
+    border: 1px solid rgba(0,0,0,0.18); /* stronger event borders on mobile */
   }
 
   .fc .fc-col-header-cell-cushion {
