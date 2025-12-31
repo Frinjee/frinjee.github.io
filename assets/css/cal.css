@@ -160,10 +160,11 @@ h1 {
 }
 
 .fc .fc-daygrid-day-bg {
-  background-color: var(--color-robinsegg);
+  background-color: var(--color-eggshell);
 }
 
 .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-bg {
+  background-color: var(--color-robinsegg);
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
 }
