@@ -54,15 +54,40 @@ h1 {
   font-style: normal;
 }
 
-/* Event title wrapping & overflow handling */
-.fc .fc-event-title {
-  white-space: normal;
+/* Event box styling */
+.fc .fc-event {
+  max-height: 3em;
+  padding: 0.1em 0.3em;
+  box-sizing: border-box;
   overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.2em;
-  font-size: 0.85em;
-  display: block;
-  word-break: break-word;
+  color: #fff; /* white text for readability */
+  font-weight: 474;
+  background-color: var(--color-celestial);
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 3px;
+}
+
+/* Day cell event spacing */
+.fc .fc-daygrid-event-harness {
+  margin: 0.1em 0;
+}
+
+/* Tooltip cursor */
+.fc .fc-event[title] {
+  cursor: help;
+}
+
+/* Multiple event readability */
+.fc .fc-daygrid-day-events {
+  margin-top: 0.2em;
+  max-height: 4.5em;
+  overflow-y: auto;
+}
+
+/* Event hover state */
+.fc .fc-event:hover {
+  opacity: 0.85;
+  transition: opacity 0.2s ease-in-out;
 }
 
 /* Toolbar title */
@@ -91,42 +116,6 @@ h1 {
   gap: 1rem;
 }
 
-/* Event box sizing & colors */
-.fc .fc-event {
-  max-height: 3em; /* approx. 2–3 lines */
-  padding: 0.1em 0.3em;
-  box-sizing: border-box;
-  overflow: hidden;
-  color: #fff; /* white text for contrast */
-  font-weight: 474;
-  background-color: var(--color-celestial); /* restore readable background */
-  border: 1px solid rgba(0,0,0,0.18); 
-  border-radius: 3px;
-}
-
-/* Day cell event spacing */
-.fc .fc-daygrid-event-harness {
-  margin: 0.1em 0;
-}
-
-/* Tooltip cursor */
-.fc .fc-event[title] {
-  cursor: help;
-}
-
-/* Multiple event readability */
-.fc .fc-daygrid-day-events {
-  margin-top: 0.2em;
-  max-height: 4.5em;
-  overflow-y: auto;
-}
-
-/* Event hover state */
-.fc .fc-event:hover {
-  opacity: 0.85;
-  transition: opacity 0.2s ease-in-out;
-}
-
 /* Calendar navigation buttons */
 .fc .fc-button {
   background-color: var(--color-maastricht);
@@ -145,6 +134,7 @@ h1 {
   opacity: 0.5;
 }
 
+/* Custom toggle button icon */
 .fc-toggleMultiMonth-button::before {
   font-family: "Material Symbols Outlined";
   font-size: 1.4em;
@@ -162,24 +152,30 @@ h1 {
   opacity: 0.75;
 }
 
-/* --------------------- */
-/* GRID & DAY STYLING     */
-/* --------------------- */
+/* Grid & day backgrounds */
+.fc .fc-daygrid-day-bg {
+  background-color: var(--color-eggshell);
+}
 
-/* Darker grid lines for scrollgrid & day boxes */
+.fc .fc-daygrid-day.fc-day-today {
+  outline: 2px solid var(--color-celestial);
+  outline-offset: -2px;
+}
+
+/* Darker grid lines */
 .fc .fc-scrollgrid,
 .fc .fc-scrollgrid-section > td {
-  border-color: rgba(0, 0, 0, 0.18);
+  border-color: rgba(0, 0, 0, 0.15);
 }
 
 .fc .fc-daygrid-day {
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0,0,0,0.15);
 }
 
-/* Column header (day titles) */
+/* Day-of-week header */
 .fc .fc-col-header-cell {
   background-color: var(--color-azureish);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .fc .fc-col-header-cell-cushion {
@@ -189,17 +185,18 @@ h1 {
 }
 
 .fc .fc-col-header {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.18);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* Day background */
-.fc .fc-daygrid-day-bg {
-  background-color: var(--color-eggshell);
-}
-
-.fc .fc-daygrid-day.fc-day-today {
-  outline: 2px solid var(--color-celestial);
-  outline-offset: -2px;
+/* Event title wrapping & overflow handling */
+.fc .fc-event-title {
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.2em;
+  font-size: 0.85em;
+  display: block;
+  word-break: break-word;
 }
 
 /* Event modal overlay */
@@ -257,11 +254,8 @@ h1 {
   background-color: var(--color-celestial);
 }
 
-/* --------------------- */
-/* MOBILE ADJUSTMENTS     */
-/* --------------------- */
+/* Mobile adjustments */
 @media (max-width: 600px) {
-
   .calendar-wrapper {
     padding: 0.5rem;
   }
@@ -271,7 +265,6 @@ h1 {
     border-radius: 6px;
   }
 
-  /* Day cell height */
   .fc-daygrid-day-events {
     min-height: 3.5em;
   }
@@ -289,9 +282,9 @@ h1 {
 
   .fc .fc-event {
     padding: 0.15em 0.25em;
-    max-height: none; /* allow full wrapping */
-    background-color: var(--color-celestial); /* ensure visible background */
-    color: #fff; /* text remains visible */
+    max-height: none;
+    background-color: var(--color-celestial);
+    color: #fff;
     border: 1px solid rgba(0,0,0,0.18);
   }
 
