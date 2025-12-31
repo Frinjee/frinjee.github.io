@@ -52,12 +52,22 @@ h1 {
   font-weight: 300;
 }
 
+/* Event boxes */
+.fc .fc-event {
+  max-height: 3em;
+  padding: 0.1em 0.3em;
+  box-sizing: border-box;
+  overflow: hidden;
+  color: var(--color-maastricht);
+  font-weight: 300;
+}
+
 /* Event title wrapping */
 .fc .fc-event-title {
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.2em;
+  line-height: 1.02em;
   font-size: 0.85em;
   display: block;
   word-break: break-word;
@@ -87,16 +97,6 @@ h1 {
   display: flex;
   justify-content: center;
   gap: 1rem;
-}
-
-/* Event boxes */
-.fc .fc-event {
-  max-height: 3em;
-  padding: 0.1em 0.3em;
-  box-sizing: border-box;
-  overflow: hidden;
-  color: var(--color-maastricht);
-  font-weight: 474;
 }
 
 /* Day cell event spacing */
