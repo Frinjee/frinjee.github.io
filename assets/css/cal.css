@@ -158,11 +158,16 @@ h1 {
   opacity: 0.75;
 }
 
-.fc-daygrid-day-bg {
-  color: var(--color-azureish);
+.fc td, .fc th {
+  padding: 0.2px;
+  vertical-align: top;
 }
 
-.fc-day-today {
+.fc .fc-daygrid-day {
+  background-color: var(--color-azureish);
+}
+
+.fc .fc-daygrid-day.fc-day-today {
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
 }
