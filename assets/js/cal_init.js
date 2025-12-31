@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
+  // Decode QUOTED-PRINTABLE titles
   function decodeQuotedPrintable(str) {
     try {
       return str.replace(/=([A-F0-9]{2})/gi, (_, hex) =>
@@ -16,28 +17,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Convert UTC string to America/New_York Date object
-  function convertToEST(utcStr) {
-    if (!utcStr) return null;
-    const date = new Date(utcStr);
-    const estStr = date.toLocaleString("en-US", { timeZone: "America/New_York" });
-    return new Date(estStr);
-  }
-
   fetch("events.json")
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();
     })
     .then((data) => {
+      // Map events, keep UTC ISO strings intact
       const events = data.map((e) => ({
         id: e.id,
         title:
           typeof e.title === "string"
             ? e.title
             : decodeQuotedPrintable(e.title?.val || ""),
-        start: convertToEST(e.start),
-        end: convertToEST(e.end),
+        start: e.start, // UTC ISO string
+        end: e.end,     // UTC ISO string
         extendedProps: {
           url: e.url || null,
           description: e.description || ""
@@ -46,11 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        timeZone: "America/New_York",
-        height: "auto",
-        events,
+        timeZone: "America/New_York", // Display all events in EST
 
-        // Custom button for multi-month toggle
+        /* Custom toggle button */
         customButtons: {
           toggleMultiMonth: {
             text: "",
@@ -76,16 +68,20 @@ document.addEventListener("DOMContentLoaded", function () {
           right: "next"
         },
 
-        // Switch to listWeek on mobile, dayGridMonth on desktop
+        events,
+        height: "auto",
+
+        /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
           if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
-          } else if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
+          }
+          if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
             calendar.changeView("dayGridMonth");
           }
         },
 
-        // Update multi-month toggle icon
+        /* Update toggle icon */
         viewDidMount(info) {
           const btn = document.querySelector(".fc-toggleMultiMonth-button");
           if (!btn) return;
@@ -96,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
               : "calendar_view_month";
         },
 
-        // Tooltip for events
+        /* Tooltip on hover */
         eventDidMount(info) {
           const start = info.event.start;
           const end = info.event.end;
@@ -107,30 +103,32 @@ document.addEventListener("DOMContentLoaded", function () {
             day: "numeric",
             hour: "2-digit",
             minute: "2-digit",
+            hour12: true,
             timeZone: "America/New_York"
           };
 
           let tooltip = info.event.title;
+
           if (start) {
-            tooltip += `\n${start.toLocaleString("en-US", options)}`;
-            if (end) tooltip += ` - ${end.toLocaleString("en-US", options)}`;
+            tooltip += `\n${start.toLocaleString([], options)} EST`;
+            if (end) tooltip += ` - ${end.toLocaleString([], options)} EST`;
           }
 
-          if (info.event.extendedProps.url) tooltip += "\nClick to register";
+          if (info.event.extendedProps.url) {
+            tooltip += "\nClick to register";
+          }
 
           info.el.setAttribute("title", tooltip);
         },
 
-        // Modal on click
+        /* Modal on click */
         eventClick(info) {
           info.jsEvent.preventDefault();
 
           const modal = document.getElementById("event-modal");
           const titleEl = document.getElementById("fc-modal-title");
           const datetimeEl = document.getElementById("fc-modal-datetime");
-          const descriptionEl = document.getElementById(
-            "fc-modal-description"
-          );
+          const descriptionEl = document.getElementById("fc-modal-description");
           const registerEl = document.getElementById("fc-modal-register");
           const closeEl = document.getElementById("fc-modal-close");
 
@@ -145,12 +143,13 @@ document.addEventListener("DOMContentLoaded", function () {
             day: "numeric",
             hour: "2-digit",
             minute: "2-digit",
+            hour12: true,
             timeZone: "America/New_York"
           };
 
           datetimeEl.textContent = start
-            ? `${start.toLocaleString("en-US", options)}${
-                end ? " - " + end.toLocaleString("en-US", options) : ""
+            ? `${start.toLocaleString([], options)}${
+                end ? " - " + end.toLocaleString([], options) + " EST" : ""
               }`
             : "";
 
@@ -174,15 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       calendar.render();
-
-      // Ensure mobile responsiveness on resize
-      window.addEventListener("resize", () => {
-        if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
-          calendar.changeView("listWeek");
-        } else if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
-          calendar.changeView("dayGridMonth");
-        }
-      });
     })
     .catch((err) => console.error("Failed to load events:", err));
 });
