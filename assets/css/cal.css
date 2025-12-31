@@ -160,7 +160,7 @@ h1 {
 }
 
 .fc .fc-daygrid-day-bg {
-  background-color: var(--color-azureish);
+  background-color: var(--color-robinsegg);
 }
 
 .fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-bg {
@@ -178,7 +178,7 @@ h1 {
 }
 
 .fc .fc-col-header-cell {
-  background-color: var(--color-robinsegg);
+  background-color: var(--color-azureish);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
