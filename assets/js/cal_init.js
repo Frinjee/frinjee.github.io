@@ -20,16 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function convertToEST(utcStr) {
     if (!utcStr) return null;
     const date = new Date(utcStr);
-    const options = {
-      timeZone: "America/New_York",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit"
-    };
-    const estStr = date.toLocaleString("en-US", options);
+    const estStr = date.toLocaleString("en-US", { timeZone: "America/New_York" });
     return new Date(estStr);
   }
 
@@ -55,8 +46,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
+        timeZone: "America/New_York",
+        height: "auto",
+        events,
 
-        /* Custom multi-month toggle button */
+        // Custom button for multi-month toggle
         customButtons: {
           toggleMultiMonth: {
             text: "",
@@ -82,21 +76,16 @@ document.addEventListener("DOMContentLoaded", function () {
           right: "next"
         },
 
-        events,
-        timeZone: "America/New_York",
-        height: "auto",
-
-        /* Responsive view handling */
+        // Switch to listWeek on mobile, dayGridMonth on desktop
         datesSet() {
           if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
-          }
-          if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
+          } else if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
             calendar.changeView("dayGridMonth");
           }
         },
 
-        /* Update multi-month toggle icon */
+        // Update multi-month toggle icon
         viewDidMount(info) {
           const btn = document.querySelector(".fc-toggleMultiMonth-button");
           if (!btn) return;
@@ -107,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
               : "calendar_view_month";
         },
 
-        /* Tooltip for events */
+        // Tooltip for events
         eventDidMount(info) {
           const start = info.event.start;
           const end = info.event.end;
@@ -122,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
           };
 
           let tooltip = info.event.title;
-
           if (start) {
             tooltip += `\n${start.toLocaleString("en-US", options)}`;
             if (end) tooltip += ` - ${end.toLocaleString("en-US", options)}`;
@@ -133,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
           info.el.setAttribute("title", tooltip);
         },
 
-        /* Modal on click */
+        // Modal on click
         eventClick(info) {
           info.jsEvent.preventDefault();
 
@@ -186,6 +174,15 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       calendar.render();
+
+      // Ensure mobile responsiveness on resize
+      window.addEventListener("resize", () => {
+        if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
+          calendar.changeView("listWeek");
+        } else if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
+          calendar.changeView("dayGridMonth");
+        }
+      });
     })
     .catch((err) => console.error("Failed to load events:", err));
 });
