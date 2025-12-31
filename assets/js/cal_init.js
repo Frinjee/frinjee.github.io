@@ -111,6 +111,21 @@ document.addEventListener("DOMContentLoaded", function () {
             info.view.type === "multiMonthYear"
               ? "calendar_month"
               : "calendar_view_month";
+
+          // ✅ Scrollbar fix: only enable scroll for days with events
+          document.querySelectorAll('.fc-daygrid-day').forEach((dayCell) => {
+            const eventsContainer = dayCell.querySelector('.fc-daygrid-day-events');
+            if (eventsContainer) {
+              if (eventsContainer.children.length > 0) {
+                eventsContainer.style.maxHeight = '5em';
+                eventsContainer.style.overflowY = 'auto';
+                eventsContainer.style.scrollbarWidth = 'thin';
+              } else {
+                eventsContainer.style.maxHeight = 'none';
+                eventsContainer.style.overflowY = 'visible';
+              }
+            }
+          });
         },
 
         /* Tooltip on hover */
