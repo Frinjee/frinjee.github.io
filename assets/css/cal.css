@@ -164,6 +164,7 @@ h1 {
 }
 
 .fc .fc-daygrid-day.fc-day-today {
+  background-color: var(--color-eggshell);
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
 }
