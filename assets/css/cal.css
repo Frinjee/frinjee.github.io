@@ -158,11 +158,11 @@ h1 {
   opacity: 0.75;
 }
 
-.fc-daygrid-day {
-  background-color: var(--color-azureish);
+.fc-daygrid-day-bg {
+  color: var(--color-azureish);
 }
 
-.fc-daygrid-day.fc-day-today {
+.fc-day-today {
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
 }
@@ -240,7 +240,7 @@ h1 {
   .fc-daygrid-day-events{
     min-height: 3.5em;
   }
-  
+
   /* Event title readability */
   .fc .fc-event-title {
     font-size: 0.85em;
