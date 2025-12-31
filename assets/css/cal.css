@@ -182,7 +182,7 @@ h1 {
 }
 
 /* Column headers (weekdays) */
-.fc .fc-col-header-cell {
+.fc .fc-col-header-cell.fc-day {
   background-color: var(--color-azureish);
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
