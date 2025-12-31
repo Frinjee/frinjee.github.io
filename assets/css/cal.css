@@ -82,6 +82,29 @@ h1 {
   margin-top: 0.2em;
   max-height: 4.5em;
   overflow-y: auto;
+
+  /* Slim material-like scrollbar */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(0,0,0,0.3) transparent;
+}
+
+/* Webkit scrollbars */
+.fc .fc-daygrid-day-events::-webkit-scrollbar {
+  width: 6px;
+}
+
+.fc .fc-daygrid-day-events::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 3px;
+  transition: background-color 0.2s;
+}
+
+.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0,0,0,0.5);
 }
 
 /* Event hover state */
@@ -190,13 +213,19 @@ h1 {
 
 /* Event title wrapping & overflow handling */
 .fc .fc-event-title {
+  font-size: 0.8em; /* slimmer */
+  line-height: 1.1em; /* tighter */
   white-space: normal;
+  word-break: break-word;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.2em;
-  font-size: 0.85em;
   display: block;
-  word-break: break-word;
+}
+
+/* Event time text */
+.fc .fc-event-time {
+  font-size: 0.7em;
+  line-height: 1em;
 }
 
 /* Event modal overlay */
@@ -270,18 +299,19 @@ h1 {
   }
 
   .fc .fc-event-title {
-    font-size: 0.85em;
-    line-height: 1.2em;
+    font-size: 0.8em;
+    line-height: 1.1em;
     white-space: normal;
     word-break: break-word;
   }
 
   .fc .fc-event-time {
-    font-size: 0.75em;
+    font-size: 0.7em;
+    line-height: 1em;
   }
 
   .fc .fc-event {
-    padding: 0.15em 0.25em;
+    padding: 0.1em 0.2em;
     max-height: none;
     background-color: var(--color-celestial);
     color: #fff;
