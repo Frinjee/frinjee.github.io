@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        timeZone: "America/New_York",
+        timeZone: "America/New_York", // Display all events in EST/EDT
         events,
         height: "auto",
 
@@ -59,21 +59,12 @@ document.addEventListener("DOMContentLoaded", function () {
               ? arg.event.title.slice(0, maxChars) + "…"
               : arg.event.title;
 
-          let timeText = '';
-          if (arg.event.start) {
-            const options = { 
-              hour: '2-digit', 
-              minute: '2-digit', 
-              hour12: true, 
-              timeZone: 'America/New_York' // Proper timezone conversion
-            };
-            timeText = arg.event.start.toLocaleTimeString('en-US', options);
-            timeText = `<div class="fc-event-time">${timeText}</div>`;
-          }
+          // Use FullCalendar's built-in timeText (already in the correct timezone)
+          const timeText = arg.timeText
+            ? `<div class="fc-event-time">${arg.timeText}</div>`
+            : "";
 
-          return { 
-            html: timeText + `<div class="fc-event-title">${displayTitle}</div>` 
-          };
+          return { html: timeText + `<div class="fc-event-title">${displayTitle}</div>` };
         },
 
         /* Custom toggle button */
@@ -102,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
           right: "next"
         },
 
-        /* Responsive view + day event scrollbar adjustment */
+        /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
           if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
@@ -111,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
             calendar.changeView("dayGridMonth");
           }
 
-          // Adjust scrollbar only for days with events
+          // Adjust scrollbars dynamically per day
           document.querySelectorAll('.fc-daygrid-day').forEach((dayCell) => {
             const eventsContainer = dayCell.querySelector('.fc-daygrid-day-events');
             if (eventsContainer) {
