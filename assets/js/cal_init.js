@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         events,
-        timeZone: "UTC",
+        timeZone: "America/New_York",
         height: "auto",
 
         windowResize: function(view) {
