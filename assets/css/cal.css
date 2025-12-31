@@ -63,7 +63,6 @@ h1 {
   box-sizing: border-box;
   max-height: 4.2em; /* slightly taller for stacked events */
   overflow: hidden;
-  font-weight: 474;
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.18);
   background-color: var(--color-celestial);
@@ -88,6 +87,7 @@ h1 {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  font-weight: 300;
 }
 
 /* Multi-line event container adjustments */
