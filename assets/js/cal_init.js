@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        timeZone: "America/New_York", // Display all events in EST
+        timeZone: "America/New_York",
         events,
         height: "auto",
 
@@ -50,16 +50,20 @@ document.addEventListener("DOMContentLoaded", function () {
           hour12: true,
           meridiem: 'short'
         },
+
+        /* Truncate long titles in calendar boxes only */
         eventContent: function(arg) {
-          const start = arg.event.start;
-          let timeText = '';
-          if (start) {
-            const options = { hour: '2-digit', minute: '2-digit', hour12: true };
-            timeText = start.toLocaleTimeString('en-US', options);
-          }
-          return { 
-            html: `<div class="fc-event-time">${timeText}</div><div class="fc-event-title">${arg.event.title}</div>`
-          };
+          const maxChars = 27; // length of "International Women's Day"
+          const displayTitle =
+            arg.event.title.length > maxChars
+              ? arg.event.title.slice(0, maxChars) + "…"
+              : arg.event.title;
+
+          const timeText = arg.timeText
+            ? `<div class="fc-event-time">${arg.timeText}</div>`
+            : "";
+
+          return { html: timeText + `<div class="fc-event-title">${displayTitle}</div>` };
         },
 
         /* Custom toggle button */
