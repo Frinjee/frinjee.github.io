@@ -41,6 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         timeZone: "America/New_York", // Display all events in EST
+        eventTimeFormat: {            // Fix calendar box times
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true,
+          meridiem: 'short',
+          omitZeroMinute: false
+        },
 
         /* Custom toggle button */
         customButtons: {
