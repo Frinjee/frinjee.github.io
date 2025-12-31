@@ -172,19 +172,19 @@ h1 {
 /* Subtle grid lines */
 .fc .fc-scrollgrid,
 .fc .fc-scrollgrid-section > td {
-  border-color: rgba(0, 0, 0, 0.08);
+  border-color: rgba(0, 0, 0, 0.12);
 }
 
 /* Correct border-radius usage */
 .fc .fc-daygrid-day {
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.09);
   border-radius: 4px;
 }
 
 /* Column headers (weekdays) */
 .fc .fc-col-header-cell.fc-day {
   background-color: var(--color-azureish);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.13);
 }
 
 .fc .fc-col-header-cell-cushion {
@@ -194,7 +194,7 @@ h1 {
 }
 
 .fc .fc-col-header {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.13);
 }
 
 /* Event modal overlay */
