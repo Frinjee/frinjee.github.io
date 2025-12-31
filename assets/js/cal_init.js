@@ -35,6 +35,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
+
+        headerToolbar: {
+          left: "",
+          center: "title",
+          right: ""
+        },
+
+        footerToolbar: {
+          left: "prev",
+          center: "",
+          right: "next"
+        },
+
         events,
         timeZone: "America/New_York",
         height: "auto",

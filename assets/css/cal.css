@@ -24,7 +24,22 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 550;
   font-style: normal;
+  text-align: center;
+  margin-bottom: 1rem;
 }
+
+#calendar {
+  background-color: var(--color-eggshell);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.calendar-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
 .calendar {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
@@ -33,7 +48,7 @@ h1 {
 }
 
 /* 1. Wrap event titles and prevent overflow */
-.fc .fc-event-title .fc-sticky {
+.fc .fc-event-title {
   white-space: normal;       /* allow wrapping */
   overflow: hidden;          /* hide spillover */
   text-overflow: ellipsis;   /* show ellipsis if too long */
@@ -41,6 +56,21 @@ h1 {
   font-size: 0.85em;         
   display: block;
   word-break: break-word;
+}
+
+.fc-toolbar-title {
+  text-align: center;
+  font-weight: 450;
+}
+
+.fc-footer-toolbar {
+  justify-content: center;
+}
+
+.fc-footer-toolbar .fc-toolbar-chunk {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
 }
 
 /* 2. Limit overall event box height (roughly 2-3 lines max) */
