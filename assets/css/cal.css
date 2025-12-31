@@ -56,61 +56,75 @@ h1 {
 
 /* Event box styling */
 .fc .fc-event {
-  max-height: 3em;
-  padding: 0.1em 0.3em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 0.1em 0.25em;
   box-sizing: border-box;
+  max-height: 4.2em; /* slightly taller for stacked events */
   overflow: hidden;
-  color: #fff; /* white text for readability */
   font-weight: 474;
-  background-color: var(--color-celestial);
-  border: 1px solid rgba(0,0,0,0.18);
   border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.18);
+  background-color: var(--color-celestial);
+  color: #fff;
+  line-height: 1em;
 }
 
-/* Day cell event spacing */
+/* Event time (above title) */
+.fc .fc-event-time {
+  font-size: 0.65em;
+  font-weight: 400;
+  line-height: 1em;
+  opacity: 0.85;
+  margin-bottom: 1px;
+}
+
+/* Event title (slimmed) */
+.fc .fc-event-title {
+  font-size: 0.78em;
+  line-height: 1em;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
+}
+
+/* Multi-line event container adjustments */
 .fc .fc-daygrid-event-harness {
   margin: 0.1em 0;
-}
-
-/* Tooltip cursor */
-.fc .fc-event[title] {
-  cursor: help;
-}
-
-/* Multiple event readability */
-.fc .fc-daygrid-day-events {
-  margin-top: 0.2em;
-  max-height: 4.5em;
-  overflow-y: auto;
-
-  /* Slim material-like scrollbar */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgba(0,0,0,0.3) transparent;
-}
-
-/* Webkit scrollbars */
-.fc .fc-daygrid-day-events::-webkit-scrollbar {
-  width: 6px;
-}
-
-.fc .fc-daygrid-day-events::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.3);
-  border-radius: 3px;
-  transition: background-color 0.2s;
-}
-
-.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
 }
 
 /* Event hover state */
 .fc .fc-event:hover {
   opacity: 0.85;
   transition: opacity 0.2s ease-in-out;
+}
+
+/* Day cell event spacing */
+.fc .fc-daygrid-day-events {
+  margin-top: 0.15em;
+  max-height: 5em; /* more room for multiple events */
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,0.3) transparent;
+}
+
+/* Webkit scrollbar */
+.fc .fc-daygrid-day-events::-webkit-scrollbar {
+  width: 5px;
+}
+
+.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 5px;
+}
+
+.fc .fc-daygrid-day-events::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Toolbar title */
@@ -211,23 +225,6 @@ h1 {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
-/* Event title wrapping & overflow handling */
-.fc .fc-event-title {
-  font-size: 0.8em; /* slimmer */
-  line-height: 1.1em; /* tighter */
-  white-space: normal;
-  word-break: break-word;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-}
-
-/* Event time text */
-.fc .fc-event-time {
-  font-size: 0.7em;
-  line-height: 1em;
-}
-
 /* Event modal overlay */
 .fc-modal {
   display: none;
@@ -296,26 +293,22 @@ h1 {
 
   .fc-daygrid-day-events {
     min-height: 3.5em;
+    max-height: 5em;
   }
 
   .fc .fc-event-title {
-    font-size: 0.8em;
-    line-height: 1.1em;
-    white-space: normal;
-    word-break: break-word;
+    font-size: 0.75em;
+    line-height: 1em;
   }
 
   .fc .fc-event-time {
-    font-size: 0.7em;
-    line-height: 1em;
+    font-size: 0.6em;
+    margin-bottom: 1px;
   }
 
   .fc .fc-event {
     padding: 0.1em 0.2em;
     max-height: none;
-    background-color: var(--color-celestial);
-    color: #fff;
-    border: 1px solid rgba(0,0,0,0.18);
   }
 
   .fc .fc-col-header-cell-cushion {
