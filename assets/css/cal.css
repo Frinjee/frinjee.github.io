@@ -3,6 +3,7 @@
   --color-maastricht: #041A38; /* (4,26,56) */
   --color-celestial: #4A9ACB;  /* (74,154,203) */
   --color-cornflower: #97D4F1; /* (151,212,241) */
+  --color-robinsegg: #96DED1;
 
   /* GREY | WHITE | BLACK */
   --color-azureish: #D8E7EE; /* (216,231,238) */
@@ -158,13 +159,37 @@ h1 {
   opacity: 0.75;
 }
 
-.fc-daygrid-day {
+.fc .fc-daygrid-day-bg {
   background-color: var(--color-azureish);
 }
 
-.fc-daygrid-day.fc-day-today {
+.fc .fc-daygrid-day.fc-day-today .fc-daygrid-day-bg {
   outline: 2px solid var(--color-celestial);
   outline-offset: -2px;
+}
+
+.fc .fc-scrollgrid,
+.fc .fc-scrollgrid-section > td {
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+.fc .fc-daygrid-day {
+  border-radius: 1px solid rgba(0,0,0,0.05);
+}
+
+.fc .fc-col-header-cell {
+  background-color: var(--color-robinsegg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.fc .fc-col-header-cell-cushion {
+  color: var(--color-charcoal);
+  font-weight: 500;
+  padding: 0.5em 0;
+}
+
+.fc .fc-col-header {
+  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.08);
 }
 
 /* Event modal overlay */
@@ -258,5 +283,10 @@ h1 {
   .fc .fc-event {
     padding: 0.15em 0.25em;
     max-height: none; /* allow full wrapping */
+  }
+
+  .fc .fc-col-header-cell-cushion {
+    font-size: 0.8em;
+    padding: 0.4em 0;
   }
 }
