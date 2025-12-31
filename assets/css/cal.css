@@ -43,10 +43,13 @@ h1 {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
+  background-color: var(--color-eggshell);
+  border-radius: 10px;
+  display: block;
 }
 
 /* Calendar Base Typography */
-.calendar {
+#calendar {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
