@@ -52,18 +52,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Truncate long titles in calendar boxes only */
         eventContent: function(arg) {
-          const maxChars = 27; // length of "International Women's Day"
+          const maxChars = 27;
           const displayTitle =
             arg.event.title.length > maxChars
               ? arg.event.title.slice(0, maxChars) + "…"
               : arg.event.title;
 
-          // Use FullCalendar's built-in timeText (already in the correct timezone)
           const timeText = arg.timeText
             ? `<div class="fc-event-time">${arg.timeText}</div>`
             : "";
 
-          return { html: timeText + `<div class="fc-event-title">${displayTitle}</div>` };
+          return {
+            html: timeText + `<div class="fc-event-title">${displayTitle}</div>`
+          };
         },
 
         /* Custom toggle button */
@@ -101,17 +102,16 @@ document.addEventListener("DOMContentLoaded", function () {
             calendar.changeView("dayGridMonth");
           }
 
-          // Adjust scrollbars dynamically per day
-          document.querySelectorAll('.fc-daygrid-day').forEach((dayCell) => {
-            const eventsContainer = dayCell.querySelector('.fc-daygrid-day-events');
+          document.querySelectorAll(".fc-daygrid-day").forEach((dayCell) => {
+            const eventsContainer = dayCell.querySelector(".fc-daygrid-day-events");
             if (eventsContainer) {
               if (eventsContainer.children.length > 0) {
-                eventsContainer.style.maxHeight = '5em';
-                eventsContainer.style.overflowY = 'auto';
-                eventsContainer.style.scrollbarWidth = 'thin';
+                eventsContainer.style.maxHeight = "5em";
+                eventsContainer.style.overflowY = "auto";
+                eventsContainer.style.scrollbarWidth = "thin";
               } else {
-                eventsContainer.style.maxHeight = 'none';
-                eventsContainer.style.overflowY = 'visible';
+                eventsContainer.style.maxHeight = "none";
+                eventsContainer.style.overflowY = "visible";
               }
             }
           });
@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log("RAW EVENT:", {
             title: info.event.title,
             start: info.event.start?.toISOString(),
-            end: info.event.end?.toISOString(),
+            end: info.event.end?.toISOString()
           });
         },
 
@@ -212,6 +212,94 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       calendar.render();
+
+      /* =====================================
+         Upcoming Events Slim Card Integration
+         ===================================== */
+      const upcomingEvents = events
+        .filter(e => e.start && new Date(e.start) > new Date())
+        .sort((a, b) => new Date(a.start) - new Date(b.start));
+
+      let upcomingIndex = 0;
+      let upcomingInterval = null;
+
+      const card = document.querySelector(".upcoming-event-card");
+      if (!card || !upcomingEvents.length) return;
+
+      const titleEl = card.querySelector(".upcoming-event-title");
+      const datetimeEl = card.querySelector(".upcoming-event-date-time");
+      const contentEl = card.querySelector(".upcoming-event-content");
+      const prevBtn = card.querySelector(".prev");
+      const nextBtn = card.querySelector(".next");
+
+      const formatOptions = {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      };
+
+      function renderUpcoming(fade = true) {
+        const event = upcomingEvents[upcomingIndex];
+        const start = new Date(event.start);
+        const end = event.end ? new Date(event.end) : null;
+
+        if (fade) card.style.opacity = 0;
+
+        setTimeout(() => {
+          titleEl.textContent = event.title;
+          datetimeEl.textContent =
+            start.toLocaleString([], formatOptions) +
+            (end ? " – " + end.toLocaleString([], formatOptions) : "");
+
+          contentEl.onclick = (e) => {
+            e.preventDefault();
+            const calEvent = calendar.getEventById(event.id);
+            if (calEvent) {
+              calendar.trigger("eventClick", {
+                event: calEvent,
+                el: calendarEl,
+                jsEvent: e,
+                view: calendar.view
+              });
+            }
+          };
+
+          card.style.opacity = 1;
+        }, fade ? 180 : 0);
+      }
+
+      function startAutoScroll() {
+        if (upcomingInterval) return;
+        upcomingInterval = setInterval(() => {
+          upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
+          renderUpcoming();
+        }, 6000);
+      }
+
+      function stopAutoScroll() {
+        clearInterval(upcomingInterval);
+        upcomingInterval = null;
+      }
+
+      prevBtn.onclick = () => {
+        upcomingIndex =
+          (upcomingIndex - 1 + upcomingEvents.length) % upcomingEvents.length;
+        renderUpcoming();
+      };
+
+      nextBtn.onclick = () => {
+        upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
+        renderUpcoming();
+      };
+
+      card.addEventListener("mouseenter", stopAutoScroll);
+      card.addEventListener("mouseleave", startAutoScroll);
+
+      renderUpcoming(false);
+      startAutoScroll();
     })
     .catch((err) => console.error("Failed to load events:", err));
 });
