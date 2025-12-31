@@ -36,10 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
 
+        viewButtons: {
+          toggleMultiMonth: {
+            text: "",
+            click: function() {
+              const currentView = calendar.view.type;
+              calendar.changeView (
+                currentView === "dayGridMonth" ? "multiMonthYear" : "dayGridMonth"
+              );
+            }
+          }
+        },
+
         headerToolbar: {
           left: "",
           center: "title",
-          right: ""
+          right: "toggleMultiMonth"
         },
 
         footerToolbar: {
@@ -52,12 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
         timeZone: "America/New_York",
         height: "auto",
 
-        windowResize: function(view) {
-          if (window.innerWidth < 600) {
-            calendar.changeView("listweek");
+        setResponsiveView: function () {
+          if(window.innerWidth < 600) {
+            calendar.changeView("listWeek");
           } else {
             calendar.changeView("dayGridMonth");
           }
+        }
+
+        viewDidMount: function (info) {
+          const view_btn = document.querySelector(".fc-toggleMultiMonth-button");
+          if(!view_btn) return;
+
+          view_btn.dataset.icon =
+            info.view.type === "multiMonthYear" ? "calendar_month" : "calendar_view_month";
         },
 
         eventDidMount: function (info) {
@@ -125,6 +145,9 @@ document.addEventListener("DOMContentLoaded", function () {
           };
         }
       });
+      
+      setResponsiveView();
+      window.addEventListener("resize", setResponsiveView);
 
       calendar.render();
     })

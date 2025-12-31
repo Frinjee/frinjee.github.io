@@ -1,15 +1,18 @@
 :root {
   /* BLUE */
   --color-maastricht: #041A38; /* (4,26,56) */
-  --color-celestial: #4A9ACB; /* (74,154,203) */
+  --color-celestial: #4A9ACB;  /* (74,154,203) */
   --color-cornflower: #97D4F1; /* (151,212,241) */
 
   /* GREY | WHITE | BLACK */
   --color-azureish: #D8E7EE; /* (216,231,238) */
   --color-charcoal: #394C5C; /* (57,76,92) */
-  --color-cotton: #EDEBDD; /* (237,235,221) */
-  --color-eggshell: #FAFFFF; 
+  --color-cotton: #EDEBDD;   /* (237,235,221) */
+  --color-eggshell: #FAFFFF; /* (250,255,255) */
 }
+
+/* CSS Reset */
+@import url("reset.css");
 
 /* Reset default page background */
 body {
@@ -17,8 +20,7 @@ body {
   margin: 0;
 }
 
-@import url("reset.css");
-
+/* Page Heading */
 h1 {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
@@ -28,18 +30,22 @@ h1 {
   margin-bottom: 1rem;
 }
 
+/* Calendar Container */
 #calendar {
   background-color: var(--color-eggshell);
   border-radius: 10px;
   padding: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
 }
 
+/* Calendar Wrapper */
 .calendar-wrapper {
   max-width: 1000px;
   margin: 0 auto;
   padding: 1rem;
 }
 
+/* Calendar Base Typography */
 .calendar {
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
@@ -47,22 +53,33 @@ h1 {
   font-style: normal;
 }
 
-/* 1. Wrap event titles and prevent overflow */
+/* Event title wrapping & overflow handling */
 .fc .fc-event-title {
   white-space: normal;       /* allow wrapping */
   overflow: hidden;          /* hide spillover */
   text-overflow: ellipsis;   /* show ellipsis if too long */
-  line-height: 1.2em;        
-  font-size: 0.85em;         
+  line-height: 1.2em;
+  font-size: 0.85em;
   display: block;
   word-break: break-word;
 }
 
+/* Toolbar title */
 .fc-toolbar-title {
   text-align: center;
   font-weight: 450;
 }
 
+/* Sticky header toolbar */
+.fc-header-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background-color: var(color-eggshell);
+  padding-bottom: 0.4rem;
+}
+
+/* Footer toolbar alignment */
 .fc-footer-toolbar {
   justify-content: center;
 }
@@ -73,9 +90,9 @@ h1 {
   gap: 1rem;
 }
 
-/* 2. Limit overall event box height (roughly 2-3 lines max) */
+/* Event box sizing & colors */
 .fc .fc-event {
-  max-height: 3em;
+  max-height: 3em; /* approx. 2–3 lines */
   padding: 0.1em 0.3em;
   box-sizing: border-box;
   overflow: hidden;
@@ -84,35 +101,84 @@ h1 {
   color: #fff; /* white text on blue background */
 }
 
-/* 3. Adjust day cell event container spacing */
+/* Day cell event spacing */
 .fc .fc-daygrid-event-harness {
   margin: 0.1em 0;
 }
 
-/* 4. Tooltip cursor */
+/* Tooltip cursor */
 .fc .fc-event[title] {
   cursor: help;
 }
 
-/* 5. Improve readability for multiple events */
+/* Multiple event readability */
 .fc .fc-daygrid-day-events {
   margin-top: 0.2em;
-  max-height: 4.5em; 
+  max-height: 4.5em;
   overflow-y: auto;
 }
 
-/* 6. Hover effect for events */
+/* Event hover state */
 .fc .fc-event:hover {
   opacity: 0.85;
   transition: opacity 0.2s ease-in-out;
 }
 
-/* ===========================
-   Event Modal Styles
-   =========================== */
+/* Calendar navigation buttons */
+.fc .fc-button {
+  background-color: var(--color-maastricht);
+  border: none;
+  color: #fff;
+  border-radius: 777px;
+  padding: 0.4em 0.8em;
+  font-weight: 400;
+}
 
+.fc .fc-button:hover {
+  background-color: var(--color-celestial);
+}
+
+.fc .fc-button:disabled {
+  opacity: 0.5;
+}
+
+.fc-toggleMultiMonth-button::before {
+  font-family: "Material Symbols Outlined";
+  font-size: 1.4em;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  content: attr(data-icon);
+}
+
+.fc-toggleMultiMonth-button {
+  padding: 0.4em 0.6em;
+}
+
+.fc-toggleMultiMonth-button:hover {
+  opacity: 0.75;
+}
+
+.fc-day-sun,
+.fc-day-sat {
+  background-color: var(color-azureish);
+}
+
+.fc-day-mon,
+.fc-day-tue,
+.fc-day-wed,
+.fc-day-thu,
+.fc-day-fri {
+  background-color: var(color-azureish);
+}
+
+.fc-day-today {
+  outline: 2px solid var(color-celestial);
+}
+
+/* Event modal overlay */
 .fc-modal {
-  display: none; 
+  display: none;
   position: fixed;
   z-index: 1000;
   left: 0;
@@ -123,8 +189,9 @@ h1 {
   background-color: rgba(0,0,0,0.3);
 }
 
+/* Event modal content */
 .fc-modal-content {
-  background-color: #fff; 
+  background-color: #fff;
   color: #000;
   margin: 10% auto;
   padding: 1.5em;
@@ -135,6 +202,7 @@ h1 {
   box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
+/* Modal close button */
 .fc-modal-close {
   float: right;
   font-size: 1.5em;
@@ -146,6 +214,7 @@ h1 {
   color: inherit;
 }
 
+/* Modal register button */
 #fc-modal-register {
   display: inline-block;
   margin-top: 1em;
@@ -157,31 +226,46 @@ h1 {
   color: var(--color-maastricht);
   font-weight: bold;
 }
+
 #fc-modal-register:hover {
   background-color: var(--color-celestial);
 }
 
+/* Mobile adjustments */
 @media (max-width: 600px) {
-  /* Increase the height of day cells so events have more room */
+
+  /* Wrapper spacing */
+  .calendar-wrapper {
+    padding: 0.5rem;
+  }
+
+  /* Calendar container spacing */
+  #calendar {
+    padding: 0.75rem;
+    border-radius: 6px;
+  }
+
+  /* Day cell height */
   .fc .fc-daygrid-day-frame {
     min-height: 80px; /* adjust as needed */
   }
 
-  /* Make event titles and times more readable */
+  /* Event title readability */
   .fc .fc-event-title {
-    font-size: 0.85em; /* slightly bigger than default */
+    font-size: 0.85em;
     line-height: 1.2em;
-    white-space: normal;       /* allow wrapping */
-    word-break: break-word;    /* break long words */
+    white-space: normal;
+    word-break: break-word;
   }
 
+  /* Event time text */
   .fc .fc-event-time {
-    font-size: 0.75em;  /* readable without crowding */
+    font-size: 0.75em;
   }
 
-  /* Optional: reduce padding inside event boxes */
+  /* Event box spacing */
   .fc .fc-event {
     padding: 0.15em 0.25em;
-    max-height: none;  /* allow text to wrap freely */
+    max-height: none; /* allow full wrapping */
   }
 }
