@@ -167,7 +167,8 @@ h1 {
 
 /* Darker grid lines for scrollgrid & day boxes */
 .fc .fc-scrollgrid,
-.fc .fc-scrollgrid-section > td {
+.fc .fc-scrollgrid-section > td,
+.fc .fc-scrollgrid-section > th {
   border-color: rgba(0, 0, 0, 0.18);
 }
 
