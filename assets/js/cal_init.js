@@ -113,21 +113,6 @@ document.addEventListener("DOMContentLoaded", function () {
               : "calendar_view_month";
         },
 
-        document.querySelectorAll('.fc-daygrid-day').forEach((dayCell) => {
-            const eventsContainer = dayCell.querySelector('.fc-daygrid-day-events');
-            if (eventsContainer) {
-              if (eventsContainer.children.length > 0) {
-                eventsContainer.style.maxHeight = '5em';
-                eventsContainer.style.overflowY = 'auto';
-                eventsContainer.style.scrollbarWidth = 'thin';
-              } else {
-                eventsContainer.style.maxHeight = 'none';
-                eventsContainer.style.overflowY = 'visible';
-              }
-            }
-          });
-        },
-
         /* Tooltip on hover */
         eventDidMount(info) {
           const start = info.event.start;
