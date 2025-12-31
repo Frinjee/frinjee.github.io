@@ -1,6 +1,3 @@
-/* CSS Reset */
-@import url("reset.css");
-
 :root {
   /* BLUE */
   --color-maastricht: #041A38; /* (4,26,56) */
@@ -14,6 +11,9 @@
   --color-cotton: #EDEBDD;   /* (237,235,221) */
   --color-eggshell: #FAFFFF; /* (250,255,255) */
 }
+
+/* CSS Reset */
+@import url("reset.css");
 
 /* Reset default page background */
 body {
@@ -167,8 +167,7 @@ h1 {
 
 /* Darker grid lines for scrollgrid & day boxes */
 .fc .fc-scrollgrid,
-.fc .fc-scrollgrid-section > td,
-.fc .fc-scrollgrid-section > th {
+.fc .fc-scrollgrid-section > td {
   border-color: rgba(0, 0, 0, 0.18);
 }
 
