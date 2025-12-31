@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        timeZone: "America/New_York", // Display all events in EST/EDT
         events,
         height: "auto",
 
@@ -140,8 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
             day: "numeric",
             hour: "2-digit",
             minute: "2-digit",
-            hour12: true,
-            timeZone: "America/New_York"
+            hour12: true
           };
 
           let tooltip = info.event.title;
@@ -155,6 +153,12 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           info.el.setAttribute("title", tooltip);
+
+          console.log("RAW EVENT:", {
+            title: info.event.title,
+            start: info.event.start?.toISOString(),
+            end: info.event.end?.toISOString(),
+          });
         },
 
         /* Modal on click */
@@ -179,8 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
             day: "numeric",
             hour: "2-digit",
             minute: "2-digit",
-            hour12: true,
-            timeZone: "America/New_York"
+            hour12: true
           };
 
           datetimeEl.textContent = start

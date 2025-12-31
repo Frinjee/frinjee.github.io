@@ -1,5 +1,24 @@
+# Node / dev server
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-fIron-murder-mystery/css/imgs/bg.jpg
-fIron-murder-mystery/media/imgs/toad.png~
-github-widget/
-index.html
+# Local env files
+.env
+.env.local
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+
+# Temporary / cache
+.cache/
+.tmp/
+
+# Logs
+*.log
