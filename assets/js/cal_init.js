@@ -16,6 +16,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
+  // Convert UTC string to America/New_York Date object
+  function convertToEST(utcStr) {
+    if (!utcStr) return null;
+    const date = new Date(utcStr);
+    const options = {
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    };
+    const estStr = date.toLocaleString("en-US", options);
+    return new Date(estStr);
+  }
+
   fetch("events.json")
     .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
@@ -28,8 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
           typeof e.title === "string"
             ? e.title
             : decodeQuotedPrintable(e.title?.val || ""),
-        start: e.start,
-        end: e.end,
+        start: convertToEST(e.start),
+        end: convertToEST(e.end),
         extendedProps: {
           url: e.url || null,
           description: e.description || ""
@@ -39,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
 
-        /* ✅ Custom button definition */
+        /* Custom multi-month toggle button */
         customButtons: {
           toggleMultiMonth: {
             text: "",
@@ -69,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
         timeZone: "America/New_York",
         height: "auto",
 
-        /* ✅ Responsive view handling */
+        /* Responsive view handling */
         datesSet() {
           if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
@@ -79,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         },
 
-        /* ✅ Update icon when view changes */
+        /* Update multi-month toggle icon */
         viewDidMount(info) {
           const btn = document.querySelector(".fc-toggleMultiMonth-button");
           if (!btn) return;
@@ -90,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function () {
               : "calendar_view_month";
         },
 
-        /* Tooltip */
+        /* Tooltip for events */
         eventDidMount(info) {
           const start = info.event.start;
           const end = info.event.end;
@@ -100,19 +117,18 @@ document.addEventListener("DOMContentLoaded", function () {
             month: "short",
             day: "numeric",
             hour: "2-digit",
-            minute: "2-digit"
+            minute: "2-digit",
+            timeZone: "America/New_York"
           };
 
           let tooltip = info.event.title;
 
           if (start) {
-            tooltip += `\n${start.toLocaleString([], options)}`;
-            if (end) tooltip += ` - ${end.toLocaleString([], options)}`;
+            tooltip += `\n${start.toLocaleString("en-US", options)}`;
+            if (end) tooltip += ` - ${end.toLocaleString("en-US", options)}`;
           }
 
-          if (info.event.extendedProps.url) {
-            tooltip += "\nClick to register";
-          }
+          if (info.event.extendedProps.url) tooltip += "\nClick to register";
 
           info.el.setAttribute("title", tooltip);
         },
@@ -124,7 +140,9 @@ document.addEventListener("DOMContentLoaded", function () {
           const modal = document.getElementById("event-modal");
           const titleEl = document.getElementById("fc-modal-title");
           const datetimeEl = document.getElementById("fc-modal-datetime");
-          const descriptionEl = document.getElementById("fc-modal-description");
+          const descriptionEl = document.getElementById(
+            "fc-modal-description"
+          );
           const registerEl = document.getElementById("fc-modal-register");
           const closeEl = document.getElementById("fc-modal-close");
 
@@ -138,12 +156,13 @@ document.addEventListener("DOMContentLoaded", function () {
             month: "short",
             day: "numeric",
             hour: "2-digit",
-            minute: "2-digit"
+            minute: "2-digit",
+            timeZone: "America/New_York"
           };
 
           datetimeEl.textContent = start
-            ? `${start.toLocaleString([], options)}${
-                end ? " - " + end.toLocaleString([], options) : ""
+            ? `${start.toLocaleString("en-US", options)}${
+                end ? " - " + end.toLocaleString("en-US", options) : ""
               }`
             : "";
 
