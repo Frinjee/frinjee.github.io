@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function decodeQuotedPrintable(str) {
     try {
-      return str.replace(/=([A-F0-9]{2})/gi, (match, hex) =>
+      return str.replace(/=([A-F0-9]{2})/gi, (_, hex) =>
         String.fromCharCode(parseInt(hex, 16))
       );
     } catch {
@@ -17,14 +17,17 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   fetch("events.json")
-    .then(res => {
+    .then((res) => {
       if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
       return res.json();
     })
-    .then(data => {
-      const events = data.map(e => ({
+    .then((data) => {
+      const events = data.map((e) => ({
         id: e.id,
-        title: typeof e.title === "string" ? e.title : decodeQuotedPrintable(e.title.val || ""),
+        title:
+          typeof e.title === "string"
+            ? e.title
+            : decodeQuotedPrintable(e.title?.val || ""),
         start: e.start,
         end: e.end,
         extendedProps: {
@@ -36,14 +39,16 @@ document.addEventListener("DOMContentLoaded", function () {
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
 
-        viewButtons: {
+        /* ✅ Custom button definition */
+        customButtons: {
           toggleMultiMonth: {
             text: "",
-            click: function() {
-              const currentView = calendar.view.type;
-              calendar.changeView (
-                currentView === "dayGridMonth" ? "multiMonthYear" : "dayGridMonth"
-              );
+            click() {
+              const newView =
+                calendar.view.type === "dayGridMonth"
+                  ? "multiMonthYear"
+                  : "dayGridMonth";
+              calendar.changeView(newView);
             }
           }
         },
@@ -64,23 +69,29 @@ document.addEventListener("DOMContentLoaded", function () {
         timeZone: "America/New_York",
         height: "auto",
 
-        setResponsiveView: function () {
-          if(window.innerWidth < 600) {
+        /* ✅ Responsive view handling */
+        datesSet() {
+          if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
-          } else {
+          }
+          if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
             calendar.changeView("dayGridMonth");
           }
-        }
-
-        viewDidMount: function (info) {
-          const view_btn = document.querySelector(".fc-toggleMultiMonth-button");
-          if(!view_btn) return;
-
-          view_btn.dataset.icon =
-            info.view.type === "multiMonthYear" ? "calendar_month" : "calendar_view_month";
         },
 
-        eventDidMount: function (info) {
+        /* ✅ Update icon when view changes */
+        viewDidMount(info) {
+          const btn = document.querySelector(".fc-toggleMultiMonth-button");
+          if (!btn) return;
+
+          btn.dataset.icon =
+            info.view.type === "multiMonthYear"
+              ? "calendar_month"
+              : "calendar_view_month";
+        },
+
+        /* Tooltip */
+        eventDidMount(info) {
           const start = info.event.start;
           const end = info.event.end;
           const options = {
@@ -91,16 +102,23 @@ document.addEventListener("DOMContentLoaded", function () {
             hour: "2-digit",
             minute: "2-digit"
           };
+
           let tooltip = info.event.title;
+
           if (start) {
             tooltip += `\n${start.toLocaleString([], options)}`;
             if (end) tooltip += ` - ${end.toLocaleString([], options)}`;
           }
-          if (info.event.extendedProps.url) tooltip += "\nClick to register";
+
+          if (info.event.extendedProps.url) {
+            tooltip += "\nClick to register";
+          }
+
           info.el.setAttribute("title", tooltip);
         },
 
-        eventClick: function (info) {
+        /* Modal on click */
+        eventClick(info) {
           info.jsEvent.preventDefault();
 
           const modal = document.getElementById("event-modal");
@@ -122,13 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
             hour: "2-digit",
             minute: "2-digit"
           };
+
           datetimeEl.textContent = start
             ? `${start.toLocaleString([], options)}${
                 end ? " - " + end.toLocaleString([], options) : ""
               }`
             : "";
 
-          descriptionEl.textContent = info.event.extendedProps.description || "";
+          descriptionEl.textContent =
+            info.event.extendedProps.description || "";
 
           if (info.event.extendedProps.url) {
             registerEl.style.display = "inline-block";
@@ -140,16 +160,13 @@ document.addEventListener("DOMContentLoaded", function () {
           modal.style.display = "block";
 
           closeEl.onclick = () => (modal.style.display = "none");
-          window.onclick = (event) => {
-            if (event.target == modal) modal.style.display = "none";
+          window.onclick = (e) => {
+            if (e.target === modal) modal.style.display = "none";
           };
         }
       });
-      
-      setResponsiveView();
-      window.addEventListener("resize", setResponsiveView);
 
       calendar.render();
     })
-    .catch(err => console.error("Failed to load events:", err));
+    .catch((err) => console.error("Failed to load events:", err));
 });
