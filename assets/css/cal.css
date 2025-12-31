@@ -104,8 +104,8 @@ h1 {
   transition: opacity 0.2s ease-in-out;
 }
 
-/* Day cell event spacing */
-.fc .fc-daygrid-day-events {
+/* Day cell event spacing with conditional scrollbar only if events exist */
+.fc .fc-daygrid-day-events:has(.fc-event) {
   margin-top: 0.15em;
   max-height: 5em; /* more room for multiple events */
   overflow-y: auto;
@@ -113,17 +113,17 @@ h1 {
   scrollbar-color: rgba(0,0,0,0.3) transparent;
 }
 
-/* Webkit scrollbar */
-.fc .fc-daygrid-day-events::-webkit-scrollbar {
+/* Webkit scrollbar for days with events */
+.fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar {
   width: 5px;
 }
 
-.fc .fc-daygrid-day-events::-webkit-scrollbar-thumb {
+.fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar-thumb {
   background-color: rgba(0,0,0,0.3);
   border-radius: 5px;
 }
 
-.fc .fc-daygrid-day-events::-webkit-scrollbar-track {
+.fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar-track {
   background: transparent;
 }
 
