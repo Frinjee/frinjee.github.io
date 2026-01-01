@@ -64,8 +64,7 @@ function getPrimaryOrgFromICS(event) {
  */
 function getPrimaryOrgColorVar(event) {
     const primaryOrg = getPrimaryOrgFromICS(event);
-    const key = orgs.length > 1 ? "Multi" : orgs[0];
-    return ORG_COLOR_MAP[key] || ORG_COLOR_MAP["Campus"];
+    return ORG_COLOR_MAP[primaryOrg] || ORG_COLOR_MAP["Campus"];
 }
 
 /* ---------- URL EXTRACTION & HANDLING ---------- */

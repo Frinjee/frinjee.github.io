@@ -53,7 +53,7 @@ h1 {
 /* Calendar Wrapper */
 .calendar-wrapper {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: 0.75rem auto 0.5rem; /* closer to heading and upcoming events */
   padding: 0.1rem 1rem 0.25rem; /* shrink top and bottom padding */
   background-color: var(--color-eggshell);
   border-radius: 10px;

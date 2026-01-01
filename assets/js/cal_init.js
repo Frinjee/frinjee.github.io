@@ -219,8 +219,12 @@ document.addEventListener("DOMContentLoaded", function () {
               span.className = "org-badge";
               span.textContent = org;
 
-              const colorVar = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgColorVar({Title: info.event.title, Description: 
-              info.event.extendedProps.description}) : "var(--color-satin_linen)";
+              const colorVar = window.CalendarOrgs 
+                               ? window.CalendarOrgs.getPrimaryOrgColorVar({
+                               Title: info.event.title, 
+                               Description: info.event.extendedProps.description || ""
+                               }) : "var(--color-satin_linen)";
+
 
               span.style.backgroundColor = colorVar;
               modalOrgsEl.appendChild(span);
@@ -246,7 +250,7 @@ document.addEventListener("DOMContentLoaded", function () {
       calendar.render();
 
       /* =====================================
-         Upcoming Events Slim Card Integration
+         Upcoming event Slim Card Integration
          ===================================== */
       const upcomingEvents = events
         .filter(e => e.start && new Date(e.start) > new Date())
@@ -299,8 +303,11 @@ document.addEventListener("DOMContentLoaded", function () {
                   span.textContent = org;
 
                   // Use Existing ORG_COLOR_MAP if available
-                  const colorVar = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgColorVar({Title: info.event.title, Description: 
-                  info.event.extendedProps.description || ""}) : "var(--color-satin_linen)";
+                  const colorVar = window.CalendarOrgs 
+                               ? window.CalendarOrgs.getPrimaryOrgColorVar({
+                               Title: event.title, 
+                               Description: event.extendedProps.description || ""
+                               }) : "var(--color-satin_linen)";
                   span.style.backgroundColor = colorVar;
                   badgeContainer.appendChild(span);
                 });
