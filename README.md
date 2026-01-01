@@ -33,7 +33,7 @@
 
 ## 🎨 **Org Color Codes**
 
-![Org Color Codes]()
+![Org Color Codes](https://github.com/Frinjee/frinjee.github.io/blob/main/assets/imgs/c_codes.png?raw=true)
 
 ## 🎯 **Current Functionality**
 
