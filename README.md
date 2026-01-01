@@ -52,30 +52,30 @@
 
 ### **Desktop Plans**
 
-    #### 📍 Multi-day agenda overview for the selected week
+    📍 Multi-day agenda overview for the selected week
 
-    #### 📍 Hover preview (full-card modal)
+    📍 Hover preview (full-card modal)
 
-    #### 📍 Change "Upcoming Events" transition -> Scrolling left to right (vs current fade transition)
+    📍 Change "Upcoming Events" transition -> Scrolling left to right (vs current fade transition)
 
-    #### 📍 Add descriptions for Orgs that are tracked
+    📍 Add descriptions for Orgs that are tracked
 
-    #### 📍 Add function allowing adding an event to personal calendar (gcal, ical, outlook, ics file dl)
+    📍 Add function allowing adding an event to personal calendar (gcal, ical, outlook, ics file dl)
 
-    #### 📍 Expose event change history (date/time/location updates, etc)
+    📍 Expose event change history (date/time/location updates, etc)
 
-    #### 📍 Search/Filter module (by event/org)
+    📍 Search/Filter module (by event/org)
 
 ### 📱 **Mobile Plans**
 
-    #### 📍 Gestures (Swipe integration)
+    📍 Gestures (Swipe integration)
 
-    #### 📍 "Jump-to" first listed event week (default-onload)
+    📍 "Jump-to" first listed event week (default-onload)
 
-    #### 📍 Ensure theme/function conitinuity
+    📍 Ensure theme/function conitinuity
 
-    #### 📍 Bottom-sheet style event modal
+    📍 Bottom-sheet style event modal
 
-    #### 📍 Sticky "Upcoming Events" mini card
+    📍 Sticky "Upcoming Events" mini card
 
-    #### 📍 Haptic feedback for gesture interactions
+    📍 Haptic feedback for gesture interactions
