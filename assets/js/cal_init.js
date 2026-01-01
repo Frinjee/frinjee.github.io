@@ -23,24 +23,45 @@ document.addEventListener("DOMContentLoaded", function () {
       return res.json();
     })
     .then((data) => {
-      const events = data.map((e) => ({
-        id: e.id,
-        title:
-          typeof e.title === "string"
-            ? e.title
-            : decodeQuotedPrintable(e.title?.val || ""),
-        start: e.start, // UTC ISO string
-        end: e.end,     // UTC ISO string
-        extendedProps: {
-          url: e.url || null,
-          description: e.description || ""
+      const events = data.map((event) => {
+        const transformed = {
+          id: event.id,
+          title:
+            typeof event.title === "string"
+              ? event.title
+              : decodeQuotedPrintable(event.title?.val || ""),
+          start: event.start, // UTC ISO string
+          end: event.end,     // UTC ISO string
+          extendedProps: {
+            url: event.url || null,
+            description: event.description || ""
+          }
+        };
+
+        // Enhance with org info if CalendarOrgs exists
+        if (window.CalendarOrgs) {
+          const orgData = window.CalendarOrgs.transformICSEvent({
+            Title: event.title,
+            Description: event.description,
+            Location: event.location || "",
+            UID: event.id,
+            Starts: event.start,
+            Ends: event.end
+          });
+          transformed.extendedProps.hostingOrg = orgData.extendedProps.hostingOrg;
+          transformed.extendedProps.primaryOrg = orgData.extendedProps.primaryOrg;
+          transformed.extendedProps.primaryOrgColor = orgData.extendedProps.primaryOrgColor;
+          transformed.backgroundColor = transformed.extendedProps.primaryOrgColor;
         }
-      }));
+
+        return transformed;
+      });
 
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
         events,
         height: "auto",
+        eventDisplay: "block",
 
         /* Force correct times in calendar boxes */
         eventTimeFormat: { 
@@ -52,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Truncate long titles in calendar boxes only */
         eventContent: function(arg) {
-          const maxChars = 27;
+          const maxChars = 27; 
           const displayTitle =
             arg.event.title.length > maxChars
               ? arg.event.title.slice(0, maxChars) + "…"
@@ -62,9 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
             ? `<div class="fc-event-time">${arg.timeText}</div>`
             : "";
 
-          return {
-            html: timeText + `<div class="fc-event-title">${displayTitle}</div>`
-          };
+          return { html: timeText + `<div class="fc-event-title">${displayTitle}</div>` };
         },
 
         /* Custom toggle button */
@@ -81,17 +100,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         },
 
-        headerToolbar: {
-          left: "",
-          center: "title",
-          right: "toggleMultiMonth"
-        },
-
-        footerToolbar: {
-          left: "prev",
-          center: "",
-          right: "next"
-        },
+        headerToolbar: { left: "", center: "title", right: "toggleMultiMonth" },
+        footerToolbar: { left: "prev", center: "", right: "next" },
 
         /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
@@ -142,10 +152,16 @@ document.addEventListener("DOMContentLoaded", function () {
             hour12: true
           };
 
+          // Base tooltip: title + time
           let tooltip = info.event.title;
           if (start) {
             tooltip += `\n${start.toLocaleString([], options)} EST`;
             if (end) tooltip += ` - ${end.toLocaleString([], options)} EST`;
+          }
+
+          // Add hosting orgs info
+          if (info.event.extendedProps.hostingOrg) {
+            tooltip += `\nHosted by: ${info.event.extendedProps.hostingOrg.join(", ")}`;
           }
 
           if (info.event.extendedProps.url) {
@@ -154,11 +170,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
           info.el.setAttribute("title", tooltip);
 
-          console.log("RAW EVENT:", {
-            title: info.event.title,
-            start: info.event.start?.toISOString(),
-            end: info.event.end?.toISOString()
-          });
+          // Apply primary org color
+          if (info.event.extendedProps.primaryOrgColor) {
+            info.el.style.backgroundColor = info.event.extendedProps.primaryOrgColor;
+            info.el.style.borderColor = info.el.style.backgroundColor;
+          }
         },
 
         /* Modal on click */
@@ -186,14 +202,30 @@ document.addEventListener("DOMContentLoaded", function () {
             hour12: true
           };
 
-          datetimeEl.textContent = start
-            ? `${start.toLocaleString([], options)}${
-                end ? " - " + end.toLocaleString([], options) + " EST" : ""
-              }`
-            : "";
+          datetimeEl.textContent =
+            start
+              ? `${start.toLocaleString([], options)}${
+                  end ? " – " + end.toLocaleString([], options) + " EST" : ""
+                }`
+              : "";
 
-          descriptionEl.textContent =
-            info.event.extendedProps.description || "";
+          descriptionEl.textContent = info.event.extendedProps.description || "";
+
+          const modalOrgsEl = document.getElementById("fc-modal-orgs");
+          if (modalOrgsEl && info.event.extendedProps.hostingOrg) {
+            modalOrgsEl.innerHTML = "";
+            info.event.extendedProps.hostingOrg.forEach(org => {
+              const span = document.createElement("span");
+              span.className = "org-badge";
+              span.textContent = org;
+
+              const colorVar = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgColorVar({Title: info.event.title, Description: 
+              info.event.extendedProps.description}) : "var(--color-satin_linen)";
+
+              span.style.backgroundColor = colorVar;
+              modalOrgsEl.appendChild(span);
+            });
+          }
 
           if (info.event.extendedProps.url) {
             registerEl.style.display = "inline-block";
@@ -224,82 +256,103 @@ document.addEventListener("DOMContentLoaded", function () {
       let upcomingInterval = null;
 
       const card = document.querySelector(".upcoming-event-card");
-      if (!card || !upcomingEvents.length) return;
 
-      const titleEl = card.querySelector(".upcoming-event-title");
-      const datetimeEl = card.querySelector(".upcoming-event-date-time");
-      const contentEl = card.querySelector(".upcoming-event-content");
-      const prevBtn = card.querySelector(".prev");
-      const nextBtn = card.querySelector(".next");
+      if (card && upcomingEvents.length) {
+        const titleEl = card.querySelector(".upcoming-event-title");
+        const datetimeEl = card.querySelector(".upcoming-event-date-time");
+        const contentEl = card.querySelector(".upcoming-event-content");
+        const prevBtn = card.querySelector(".prev");
+        const nextBtn = card.querySelector(".next");
 
-      const formatOptions = {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-      };
+        const formatOptions = {
+          weekday: "short",
+          month: "short",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        };
 
-      function renderUpcoming(fade = true) {
-        const event = upcomingEvents[upcomingIndex];
-        const start = new Date(event.start);
-        const end = event.end ? new Date(event.end) : null;
+        function renderUpcoming(fade = true) {
+          const event = upcomingEvents[upcomingIndex];
+          const start = new Date(event.start);
+          const end = event.end ? new Date(event.end) : null;
 
-        if (fade) card.style.opacity = 0;
+          if (fade) {
+            card.style.opacity = 0;
+          }
 
-        setTimeout(() => {
-          titleEl.textContent = event.title;
-          datetimeEl.textContent =
-            start.toLocaleString([], formatOptions) +
-            (end ? " – " + end.toLocaleString([], formatOptions) : "");
+          setTimeout(() => {
+            titleEl.textContent = event.title;
+            datetimeEl.textContent =
+              start.toLocaleString([], formatOptions) +
+              (end ? " – " + end.toLocaleString([], formatOptions) : "");
 
-          contentEl.onclick = (e) => {
-            e.preventDefault();
-            const calEvent = calendar.getEventById(event.id);
-            if (calEvent) {
-              calendar.trigger("eventClick", {
-                event: calEvent,
-                el: calendarEl,
-                jsEvent: e,
-                view: calendar.view
-              });
+            // Add org badges to upcoming card if available
+            if (window.CalendarOrgs && event.extendedProps.hostingOrg) {
+              const badgeContainer = card.querySelector(".upcoming-event-orgs");
+              if(badgeContainer) {
+                badgeContainer.innerHTML = "";
+                event.extendedProps.hostingOrg.forEach(org => {
+                  const span = document.createElement("span");
+                  span.className = "org-badge";
+                  span.textContent = org;
+
+                  // Use Existing ORG_COLOR_MAP if available
+                  const colorVar = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgColorVar({Title: info.event.title, Description: 
+                  info.event.extendedProps.description || ""}) : "var(--color-satin_linen)";
+                  span.style.backgroundColor = colorVar;
+                  badgeContainer.appendChild(span);
+                });
+              } 
             }
-          };
 
-          card.style.opacity = 1;
-        }, fade ? 180 : 0);
-      }
+            contentEl.onclick = (e) => {
+              e.preventDefault();
+              const calEvent = calendar.getEventById(event.id);
+              if (calEvent) {
+                calendar.trigger("eventClick", {
+                  event: calEvent,
+                  el: calendarEl,
+                  jsEvent: e,
+                  view: calendar.view
+                });
+              }
+            };
 
-      function startAutoScroll() {
-        if (upcomingInterval) return;
-        upcomingInterval = setInterval(() => {
+            card.style.opacity = 1;
+          }, fade ? 180 : 0);
+        }
+
+        function startAutoScroll() {
+          if (upcomingInterval) return;
+          upcomingInterval = setInterval(() => {
+            upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
+            renderUpcoming();
+          }, 6000);
+        }
+
+        function stopAutoScroll() {
+          clearInterval(upcomingInterval);
+          upcomingInterval = null;
+        }
+
+        prevBtn.onclick = () => {
+          upcomingIndex = (upcomingIndex - 1 + upcomingEvents.length) % upcomingEvents.length;
+          renderUpcoming();
+        };
+
+        nextBtn.onclick = () => {
           upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
           renderUpcoming();
-        }, 6000);
+        };
+
+        card.addEventListener("mouseenter", stopAutoScroll);
+        card.addEventListener("mouseleave", startAutoScroll);
+
+        renderUpcoming(false);
+        startAutoScroll();
       }
-
-      function stopAutoScroll() {
-        clearInterval(upcomingInterval);
-        upcomingInterval = null;
-      }
-
-      prevBtn.onclick = () => {
-        upcomingIndex =
-          (upcomingIndex - 1 + upcomingEvents.length) % upcomingEvents.length;
-        renderUpcoming();
-      };
-
-      nextBtn.onclick = () => {
-        upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
-        renderUpcoming();
-      };
-
-      card.addEventListener("mouseenter", stopAutoScroll);
-      card.addEventListener("mouseleave", startAutoScroll);
-
-      renderUpcoming(false);
-      startAutoScroll();
     })
     .catch((err) => console.error("Failed to load events:", err));
 });

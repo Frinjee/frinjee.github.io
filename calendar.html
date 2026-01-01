@@ -14,15 +14,15 @@
 </head>
 
 <body>
-	<h1>Upcoming Events</h1>
-
 	<section class="upcoming-events-wrapper">
+		<h1>Upcoming Events</h1>
 		<div class="upcoming-event-card">
 			<button class="upcoming-nav prev" aria-label="Previous Event"></button>
 
 			<a class="upcoming-event-content" href="#" target="_blank" rel="noopener">
 				<div class="upcoming-event-title"></div>
 				<div class="upcoming-event-date-time"></div>
+				<div class="upcoming-event-orgs"></div>
 			</a>
 
 			<button class="upcoming-nav next" aria-label="Next Event"></button>
@@ -35,6 +35,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.20/index.global.min.js"></script>
 	<script src="assets/js/cal_init.js"></script>
+	<script src="assets/js/cal_orgs.js"></script>
 
   	<!-- Event Modal -->
   	<div id="event-modal" class="fc-modal">
@@ -43,6 +44,7 @@
       		<h2 id="fc-modal-title"></h2>
 	      	<p id="fc-modal-datetime"></p>
 	      	<p id="fc-modal-description"></p>
+			<div id="fc-modal-orgs" class="upcoming-event-orgs"></div>
       		<a id="fc-modal-register" href="#" target="_blank">Register</a>
     	</div>
   	</div>

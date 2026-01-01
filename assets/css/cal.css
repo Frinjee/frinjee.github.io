@@ -1,3 +1,5 @@
+/* ---------- CSS Reset & Variables ---------- */
+
 /* CSS Reset */
 @import url("reset.css");
 
@@ -6,14 +8,30 @@
   --color-maastricht: #041A38; /* (4,26,56) */
   --color-celestial: #4A9ACB;  /* (74,154,203) */
   --color-cornflower: #97D4F1; /* (151,212,241) */
-  --color-robinsegg: #96DED1;
+  --color-botticelli: #D8E7EE;
+  --color-link_water: #D0E6F6;
+  --color-east_bay: #445B7D;
+  --color-pigeon_post: #A7C0DD;
 
   /* GREY | WHITE | BLACK */
   --color-azureish: #D8E7EE; /* (216,231,238) */
   --color-charcoal: #394C5C; /* (57,76,92) */
   --color-cotton: #EDEBDD;   /* (237,235,221) */
   --color-eggshell: #FAFFFF; /* (250,255,255) */
+  --color-satin_linen: #EDEBDE;
+
+  /* ORG EVENT COLOR PALETTE */
+  --color-nsls-regent_st_blue: #A3C7E0;
+  --color-wocsa-peranopurp: #A8A2F1;
+  --color-odk-sinbad:  #A3D7D5;
+  --color-csei-zanah: #D2E4C8;
+  --color-dis-sidecar: #F3E0B4;
+  --color-bsu-mandys_pink: #F2BAC5;
+  --color-titleix-wewak: #F1A8A2;
+  --color-multi-vanilla_ice: #F2D2DE;
 }
+
+/* ---------- Global Page Layout ---------- */
 
 /* Reset default page background */
 body {
@@ -28,7 +46,7 @@ h1 {
   font-weight: 550;
   font-style: normal;
   text-align: center;
-  margin-bottom: 0;
+  margin-bottom: 0; /* minimal spacing below heading */
   color: var(--color-charcoal);
 }
 
@@ -36,10 +54,7 @@ h1 {
 .calendar-wrapper {
   max-width: 1000px;
   margin: 0 auto;
-  margin-top: 0.5rem;
-  padding: 1rem;
-  padding-bottom: 1rem;
-  padding-top: 0.25rem;
+  padding: 0.1rem 1rem 0.25rem; /* shrink top and bottom padding */
   background-color: var(--color-eggshell);
   border-radius: 10px;
   display: block;
@@ -50,13 +65,15 @@ h1 {
   width: 100%;
   background-color: var(--color-eggshell);
   border-radius: 10px;
-  padding: 1rem;
+  padding: 0.25rem 1rem; /* smaller top padding to reduce visual gap */
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
   font-family: "Vend Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
 }
+
+/* ---------- FullCalendar Event Appearance ---------- */
 
 /* Event box styling */
 .fc .fc-event {
@@ -65,7 +82,7 @@ h1 {
   justify-content: flex-start;
   padding: 0.1em 0.25em;
   box-sizing: border-box;
-  max-height: 4.2em; /* slightly taller for stacked events */
+  max-height: 4.2em;
   overflow: hidden;
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.18);
@@ -110,8 +127,8 @@ h1 {
 
 /* Day cell event spacing with conditional scrollbar only if events exist */
 .fc .fc-daygrid-day-events {
-  margin-top: 0.15em;
-  max-height: 5em; /* more room for multiple events */
+  margin-top: 0.1em;
+  max-height: 5em;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(0,0,0,0.3) transparent;
@@ -130,6 +147,8 @@ h1 {
 .fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* ---------- FullCalendar Toolbar & Buttons ---------- */
 
 /* Toolbar title */
 .fc-toolbar-title {
@@ -194,6 +213,8 @@ h1 {
   opacity: 0.75;
 }
 
+/* ---------- FullCalendar Grid & Day Cells ---------- */
+
 /* Grid & day backgrounds */
 .fc .fc-daygrid-day-bg {
   background-color: var(--color-eggshell);
@@ -229,6 +250,8 @@ h1 {
 .fc .fc-col-header {
   box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
+
+/* ---------- Event Modal Styles ---------- */
 
 /* Event modal overlay */
 .fc-modal {
@@ -285,10 +308,12 @@ h1 {
   background-color: var(--color-celestial);
 }
 
+/* ---------- Upcoming Event Org Badges ---------- */
+
 /* Upcoming Event Card */
 .upcoming-events-wrapper {
   max-width: 925px;
-  margin: 0.05rem auto 0.1rem;    /* less vertical gap to calendar */
+  margin: 0.1rem auto 0.05rem; /* closer to heading and calendar */
   padding: 0 0.25rem;
 }
 
@@ -299,8 +324,8 @@ h1 {
   background-color: var(--color-eggshell);
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 8px;
-  margin-bottom: 0.14rem;
-  padding: 0.1rem 0.2rem;      /* slim top-to-bottom height */
+  margin-bottom: 0.05rem;
+  padding: 0.08rem 0.15rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.6);
   font-size: 0.8rem;
   transition: opacity 0.25s ease;
@@ -311,7 +336,7 @@ h1 {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 0.3rem;                /* inline spacing */
+  gap: 0.3rem;
   text-decoration: none;
   overflow: hidden;
   white-space: nowrap;
@@ -320,15 +345,32 @@ h1 {
 
 .upcoming-event-title {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--color-charcoal);
 }
 
 .upcoming-event-date-time {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   opacity: 0.75;
   color: var(--color-maastricht);
   margin: 0;
+}
+
+.upcoming-event-orgs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  margin-top: 0.15rem;
+}
+
+.org-badge {
+  display: inline-block;
+  padding: 0.1rem 0.4rem;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 500;
+  color: #fff;
+  white-space: nowrap ;
 }
 
 .upcoming-nav {
@@ -344,14 +386,15 @@ h1 {
   color: var(--color-celestial);
 }
 
-/* Mobile adjustments */
+/* ---------- Responsive (Mobile) Adjustments ---------- */
+
 @media (max-width: 600px) {
   .calendar-wrapper {
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
   }
 
   #calendar {
-    padding: 0.75rem;
+    padding: 0.25rem 0.5rem;
     border-radius: 6px;
   }
 
@@ -379,12 +422,18 @@ h1 {
     font-size: 0.8em;
     padding: 0.4em 0;
   }
-  
+
   .upcoming-event-title {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .upcoming-event-date-time {
-    font-size: 0.7rem;
-  } 
+    font-size: 0.65rem;
+  }
+
+  .org-badge {
+    font-size: 0.6rem;
+    padding: 0.08rem 0.3rem;
+  }
+
 }
