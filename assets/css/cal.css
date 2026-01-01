@@ -156,6 +156,10 @@ h1 {
 }
 
 /* ---------- FullCalendar Toolbar & Buttons ---------- */
+/*
+.chevron-left .chevron-right{
+  
+}*/
 
 /* Toolbar title */
 .fc-toolbar-title {
@@ -165,7 +169,10 @@ h1 {
 }
 
 /* Sticky header toolbar */
-.fc-header-toolbar {
+.fc .fc-header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 5;
@@ -193,8 +200,8 @@ h1 {
   background-color: var(--color-maastricht);
   border: none;
   color: #fff;
-  border-radius: 777px;
-  padding: 0.4em 0.8em;
+  border-radius: 25px;
+  padding: 0.2em 0.8em;
   font-weight: 400;
 }
 
@@ -210,7 +217,7 @@ h1 {
 .fc-toggleMultiMonth-button::before {
   font-family: "Material Symbols Outlined";
   font-size: 1.4em;
-  line-height: 1;
+  line-height: 0.5em;
   display: inline-block;
   vertical-align: middle;
   content: attr(data-icon);
@@ -239,7 +246,8 @@ h1 {
 /* Darker grid lines */
 .fc .fc-scrollgrid,
 .fc .fc-scrollgrid-section > td {
-  border-color: rgba(0, 0, 0, 0.15);
+  border: 1px solid;
+  border-color: var(--color-blue_bayou);
 }
 
 .fc .fc-daygrid-day {
@@ -249,7 +257,8 @@ h1 {
 /* Day-of-week header */
 .fc .fc-col-header-cell {
   background-color: var(--color-azureish);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  border: 0.5px solid;
+  border-color: var(--color-blue_bayou);
 }
 
 .fc .fc-col-header-cell-cushion {

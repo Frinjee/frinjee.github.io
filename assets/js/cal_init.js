@@ -102,8 +102,8 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         },
 
-        headerToolbar: { left: "", center: "title", right: "toggleMultiMonth" },
-        footerToolbar: { left: "prev", center: "", right: "next" },
+        headerToolbar: { left: "toggleMultiMonth", center: "title", right: "prev,next" },
+        footerToolbar: { left: "", center: "", right: "" },
 
         /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
