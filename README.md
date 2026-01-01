@@ -50,7 +50,7 @@
 
 ## ‼️ **TO DO** ‼️
 
-### **Desktop Plans**
+### 💻 **Desktop Plans**
 
     📍 Multi-day agenda overview for the selected week
 
