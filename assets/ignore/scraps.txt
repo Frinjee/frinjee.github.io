@@ -1,0 +1,10 @@
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+
+  .upcoming-event-title-dt-wrapper {
+  padding: 0.1rem 0.4rem;
+  border-radius: 8px;
+  margin: 0;
+}

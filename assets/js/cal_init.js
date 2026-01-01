@@ -52,6 +52,8 @@ document.addEventListener("DOMContentLoaded", function () {
           transformed.extendedProps.primaryOrg = orgData.extendedProps.primaryOrg;
           transformed.extendedProps.primaryOrgColor = orgData.extendedProps.primaryOrgColor;
           transformed.backgroundColor = transformed.extendedProps.primaryOrgColor;
+          transformed.extendedProps.primaryOrgEmoji = orgData.extendedProps.primaryOrgEmoji;
+          transformed.extendedProps.orgEmojis = orgData.extendedProps.orgEmojis;
         }
 
         return transformed;
@@ -217,16 +219,16 @@ document.addEventListener("DOMContentLoaded", function () {
             info.event.extendedProps.hostingOrg.forEach(org => {
               const span = document.createElement("span");
               span.className = "org-badge";
-              span.textContent = org;
 
               const colorVar = window.CalendarOrgs 
                                ? window.CalendarOrgs.getPrimaryOrgColorVar({
                                Title: info.event.title, 
                                Description: info.event.extendedProps.description || ""
                                }) : "var(--color-satin_linen)";
-
-
+              
+              span.textContent = org;
               span.style.backgroundColor = colorVar;
+
               modalOrgsEl.appendChild(span);
             });
           }
@@ -287,7 +289,17 @@ document.addEventListener("DOMContentLoaded", function () {
           }
 
           setTimeout(() => {
-            titleEl.textContent = event.title;
+
+            //Build org object for emoji function
+            const orgEmojiEventObj = {
+              Title: event.title,
+              Description: event.extendedProps.description || ""
+            };
+
+            // Proper function for displaying emojis within upcoming event title
+            const emoji = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgEmoji(orgEmojiEventObj) : "";
+            titleEl.textContent = emoji ? `${emoji} ${event.title}` : event.title;
+    
             datetimeEl.textContent =
               start.toLocaleString([], formatOptions) +
               (end ? " – " + end.toLocaleString([], formatOptions) : "");

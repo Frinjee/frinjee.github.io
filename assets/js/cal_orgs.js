@@ -26,6 +26,18 @@ const ORG_COLOR_MAP = {
     Campus: "var(--color-satin_linen)" // Safety Fallback/Catch
 };
 
+/* ---------- ORG → EMOJI MAP ---------- */
+const ORG_EMOJI_MAP = {
+    BSU: "✊🏿",
+    DIS: "🌍",
+    TitleIX: "🙌🏽",
+    ODK: "🌟",
+    NSLS: "👩🏾‍🎓",
+    WoCSA: "💜",
+    CSEI: "🤝",
+    Campus: "📣"
+};
+
 /* ---------- ORG DETECTION ---------- */
 
 /**
@@ -67,6 +79,18 @@ function getPrimaryOrgColorVar(event) {
     return ORG_COLOR_MAP[primaryOrg] || ORG_COLOR_MAP["Campus"];
 }
 
+function getPrimaryOrgEmoji(event) {
+    const primaryOrg = getPrimaryOrgFromICS(event);
+    return ORG_EMOJI_MAP[primaryOrg] || ORG_EMOJI_MAP["Campus"];
+}
+
+function getOrgEmojis(event) {
+    const orgs = getHostOrgFromICS(event);
+    const emojis = orgs.map(org => ORG_EMOJI_MAP[org] || ORG_EMOJI_MAP["Campus"])
+                       .filter(emoji => emoji.length >0)
+                       .join(" ");
+    return emojis;
+}   
 /* ---------- URL EXTRACTION & HANDLING ---------- */
 
 // Extract RSVP/Registration link
@@ -99,5 +123,7 @@ window.CalendarOrgs = {
     getHostOrgFromICS,
     getPrimaryOrgFromICS,
     getPrimaryOrgColorVar,
+    getPrimaryOrgEmoji,
+    getOrgEmojis,
     transformICSEvent
 };
