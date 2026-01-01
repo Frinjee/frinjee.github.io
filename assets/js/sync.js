@@ -12,15 +12,9 @@ const OUTPUT_FILE = "events.json";
 function normalizeText(input = "") {
   if (input == null) return "";
 
-  if (typeof input !== "string") {
-    return input
-    .replace(/\r\n/g, "\n")
-    .replace(/\s+/g, " ")
-    .trim();
-  }
-
   try {
-    return String(input)
+    const str = typeof input === "string" ? input : String(input);
+    return str
       .replace(/\r\n/g, "\n")
       .replace(/\s+/g, " ")
       .trim();  
@@ -92,7 +86,7 @@ async function sync() {
     const data = await ical.async.fromURL(ICS_URL);
 
     const events = Object.values(data)
-      .filter(e => e.type === "VEVENT" && e.status !== "CANCELLED")
+      .filter(e => e.type === "VEVENT" && e.status !== "CANCELLED" && e.start)
       .map(e => {
         let descriptionText = "";
         let url = null;
