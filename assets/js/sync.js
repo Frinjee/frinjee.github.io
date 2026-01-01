@@ -9,8 +9,8 @@ const OUTPUT_FILE = "events.json";
 
 /* ---------- helpers ---------- */
 
-function normalizeText(str = "") {
-  return str
+function normalizeText(input = "") {
+  return input
     .replace(/\r\n/g, "\n")
     .replace(/\s+/g, " ")
     .trim();

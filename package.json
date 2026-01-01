@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Local dev server for FullCalendar work site",
+  "type": "module",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve .",
