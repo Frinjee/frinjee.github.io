@@ -11,16 +11,23 @@ const OUTPUT_FILE = "events.json";
 
 function normalizeText(input = "") {
   if (input == null) return "";
+  if (typeof input !== "string") return "";
 
-  try {
-    const str = typeof input === "string" ? input : String(input);
-    return str
-      .replace(/\r\n/g, "\n")
-      .replace(/\s+/g, " ")
-      .trim();  
-  } catch {
-    return "";
+  return input
+    .replace(/\r\n/g, "\n")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * Preserve quoted-printable objects exactly as node-ical provides them.
+ * cal_init.js already knows how to decode them.
+ */
+function preserveQP(value) {
+  if (value && typeof value === "object" && "val" in value) {
+    return value;
   }
+  return normalizeText(value);
 }
 
 function hashContent(content) {
@@ -53,7 +60,7 @@ function diffEvents(oldEvents, newEvents) {
     const changes = {};
 
     ["title", "start", "end", "description", "url"].forEach(field => {
-      if ((oldEvent[field] || "") !== (newEvent[field] || "")) {
+      if (JSON.stringify(oldEvent[field] || "") !== JSON.stringify(newEvent[field] || "")) {
         changes[field] = {
           from: oldEvent[field] || null,
           to: newEvent[field] || null
@@ -62,18 +69,12 @@ function diffEvents(oldEvents, newEvents) {
     });
 
     if (Object.keys(changes).length) {
-      updated.push({
-        id,
-        title: newEvent.title,
-        changes
-      });
+      updated.push({ id, title: newEvent.title, changes });
     }
   }
 
   for (const [id, oldEvent] of oldMap) {
-    if (!newMap.has(id)) {
-      removed.push(oldEvent);
-    }
+    if (!newMap.has(id)) removed.push(oldEvent);
   }
 
   return { added, updated, removed };
@@ -86,60 +87,60 @@ async function sync() {
     const data = await ical.async.fromURL(ICS_URL);
 
     const events = Object.values(data)
-      .filter(e => e.type === "VEVENT" && e.status !== "CANCELLED" && e.start)
+      .filter(e => e.type === "VEVENT" && e.status !== "CANCELLED")
       .map(e => {
         let descriptionText = "";
         let url = null;
 
         if (e.description) {
-          const parts = e.description.split("---");
-          descriptionText = normalizeText(parts[0]);
+          const rawDesc = preserveQP(e.description);
 
-          if (parts[1]) {
-            const match = parts[1].match(/Event Details:\s*(\S+)/i);
-            if (match) url = match[1];
+          if (typeof rawDesc === "string") {
+            const parts = rawDesc.split("---");
+            descriptionText = parts[0];
+
+            if (parts[1]) {
+              const match = parts[1].match(/Event Details:\s*(\S+)/i);
+              if (match) url = match[1];
+            }
+          } else {
+            // quoted-printable object
+            descriptionText = rawDesc;
           }
         }
 
         return {
           id: e.uid,
-          title: normalizeText(e.summary || "No title"),
+          title: preserveQP(e.summary || "No title"),
           start: e.start.toISOString(),
           end: e.end ? e.end.toISOString() : null,
           description: descriptionText,
           url
         };
       })
-      .sort((a, b) => {
-        if (a.start !== b.start) return a.start.localeCompare(b.start);
-        return a.id.localeCompare(b.id);
-      });
+      .sort((a, b) => a.start.localeCompare(b.start));
 
     const previousEvents = readExistingEvents();
     const diff = diffEvents(previousEvents, events);
 
     /* ---------- logging ---------- */
 
-    if (
-      diff.added.length ||
-      diff.updated.length ||
-      diff.removed.length
-    ) {
+    if (diff.added.length || diff.updated.length || diff.removed.length) {
       console.log("Calendar changes detected:");
 
       diff.added.forEach(e =>
-        console.log(`🟢 Added: ${e.title} (${e.start})`)
+        console.log(`🟢 Added: ${typeof e.title === "string" ? e.title : e.title.val}`)
       );
 
       diff.updated.forEach(e => {
-        console.log(`🔵 Updated: ${e.title}`);
+        console.log(`🔵 Updated: ${typeof e.title === "string" ? e.title : e.title.val}`);
         Object.entries(e.changes).forEach(([field, change]) => {
-          console.log(`   - ${field}: "${change.from}" → "${change.to}"`);
+          console.log(`   - ${field}:`, change.from, "→", change.to);
         });
       });
 
       diff.removed.forEach(e =>
-        console.log(`🔴 Removed: ${e.title} (${e.start})`)
+        console.log(`🔴 Removed: ${typeof e.title === "string" ? e.title : e.title.val}`)
       );
     } else {
       console.log("No event-level changes detected.");
