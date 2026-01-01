@@ -14,11 +14,15 @@
   --color-pigeon_post: #A7C0DD;
 
   /* GREY | WHITE | BLACK */
-  --color-azureish: #D8E7EE; /* (216,231,238) */
-  --color-charcoal: #394C5C; /* (57,76,92) */
+  --color-azureish: #D8E7EE; /* (216,231,238) */ 
   --color-cotton: #EDEBDD;   /* (237,235,221) */
   --color-eggshell: #FAFFFF; /* (250,255,255) */
-  --color-satin_linen: #EDEBDE;
+  --color-satin_linen: #EDEBDE; /* I dont think I like this one */
+
+  /* TEXT | BORDERS | SHADOWS */
+  --color-blue_bayou:#4B5C71;
+  --color-pickled_bluewood: #2A384C;
+  --color-charcoal: #394C5C;
 
   /* ORG EVENT COLOR PALETTE */
   --color-nsls-regent_st_blue: #A3C7E0;
@@ -71,7 +75,9 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
-  color: var(--color-east_bay)
+  color: var(--color-east_bay);
+  border: solid;
+  border-color: var(--color-blue_bayou)
 }
 
 /* ---------- FullCalendar Event Appearance ---------- */
@@ -164,7 +170,11 @@ h1 {
   top: 0;
   z-index: 5;
   background-color: var(--color-eggshell);
-  padding-bottom: 0.4rem;
+  padding: 0.4rem 0;
+  border: solid;
+  border-color: var(--color-blue_bayou);
+  border-radius: 10px;
+  border-width: thin thin 0 thin thin;
 }
 
 /* Footer toolbar alignment */
