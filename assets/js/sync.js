@@ -10,10 +10,23 @@ const OUTPUT_FILE = "events.json";
 /* ---------- helpers ---------- */
 
 function normalizeText(input = "") {
-  return input
+  if (input == null) return "";
+
+  if (typeof input !== "string") {
+    return input
     .replace(/\r\n/g, "\n")
     .replace(/\s+/g, " ")
     .trim();
+  }
+
+  try {
+    return String(input)
+      .replace(/\r\n/g, "\n")
+      .replace(/\s+/g, " ")
+      .trim();  
+  } catch {
+    return "";
+  }
 }
 
 function hashContent(content) {
