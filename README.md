@@ -33,21 +33,7 @@
 
 ## 🎨 **Org Color Codes**
 
-NSLS: `#A3C7E0` <span style="display:inline-block;width:1.1em;height:0.9em;background:#A3C7E0;border-radius:3px;border:1px solid #999;"></span>
-
-WoSCA: `#A8A2F1` <span style="display:inline-block;width:1.1em;height:0.9em;background:#A8A2F1;border-radius:3px;border:1px solid #999;"></span>
-
-ODK: `#A3D7D5` <span style="display:inline-block;width:1.1em;height:0.9em;background:#A3D7D5;border-radius:3px;border:1px solid #999;"></span>
-
-DIS: `#F3E0B4` <span style="display:inline-block;width:1.1em;height:0.9em;background:#F3E0B4;border-radius:3px;border:1px solid #999;"></span>
-
-BSU: `#F2BAC5` <span style="display:inline-block;width:1.1em;height:0.9em;background:#F2BAC5;border-radius:3px;border:1px solid #999;"></span>
-
-DEI | TitleIX: `#F1A8A2` <span style="display:inline-block;width:1.1em;height:0.9em;background:#F1A8A2;border-radius:3px;border:1px solid #999;"></span>
-
-CSEI: `#D2E4C8` <span style="display:inline-block;width:1.1em;height:0.9em;background:#D2E4C8;border-radius:3px;border:1px solid #999;"></span>
-
-Multi-Org | Fallback: `#F2D2DE` <span style="display:inline-block;width:1.1em;height:0.9em;background:#F2D2DE;border-radius:3px;border:1px solid #999;"></span>
+![Org Color Codes]()
 
 ## 🎯 **Current Functionality**
 
