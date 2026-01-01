@@ -23,7 +23,7 @@ const ORG_COLOR_MAP = {
     BSU: "var(--color-bsu-mandys_pink)",
     TitleIX: "var(--color-titleix-wewak)",
     Multi: "var(--color-multi-vanilla_ice)", // Multiple Orgs Detected
-    Campus: "var(--color-satin_linen)" // Safety Fallback/Catch
+    Campus: "var(--color-pigeon_post)" // Safety Fallback/Catch
 };
 
 /* ---------- ORG → EMOJI MAP ---------- */

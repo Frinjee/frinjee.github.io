@@ -224,7 +224,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                ? window.CalendarOrgs.getPrimaryOrgColorVar({
                                Title: info.event.title, 
                                Description: info.event.extendedProps.description || ""
-                               }) : "var(--color-satin_linen)";
+                               }) : "var(--color-pigeon_post)";
               
               span.textContent = org;
               span.style.backgroundColor = colorVar;
@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                ? window.CalendarOrgs.getPrimaryOrgColorVar({
                                Title: event.title, 
                                Description: event.extendedProps.description || ""
-                               }) : "var(--color-satin_linen)";
+                               }) : "var(--color-pigeon_post)";
                   span.style.backgroundColor = colorVar;
                   badgeContainer.appendChild(span);
                 });

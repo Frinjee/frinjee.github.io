@@ -71,6 +71,7 @@ h1 {
   font-optical-sizing: auto;
   font-weight: 300;
   font-style: normal;
+  color: var(--color-east_bay)
 }
 
 /* ---------- FullCalendar Event Appearance ---------- */
@@ -86,8 +87,6 @@ h1 {
   overflow: hidden;
   border-radius: 3px;
   border: 1px solid rgba(0,0,0,0.18);
-  background-color: var(--color-celestial);
-  color: #fff;
   line-height: 1em;
 }
 
@@ -98,6 +97,7 @@ h1 {
   line-height: 1em;
   opacity: 0.85;
   margin-bottom: 1px;
+  color: var(--color-maastricht);
 }
 
 /* Event title (slimmed) */
@@ -109,6 +109,7 @@ h1 {
   text-overflow: ellipsis;
   word-break: break-word;
   font-weight: 300;
+  color: var(--color-charcoal);
 }
 
 /* Multi-line event container adjustments */
