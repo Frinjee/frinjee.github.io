@@ -1,12 +1,7 @@
 [
   {
     "id": "d8fae8657613d81f22125bcaab9332584162025_3:05:57_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "Orientation"
-    },
+    "title": "[object Object]",
     "start": "2026-02-25T22:00:00.000Z",
     "end": "2026-02-26T00:00:00.000Z",
     "description": "This event is the first step required for new members to complete towards becoming an inducted member.",
@@ -14,38 +9,23 @@
   },
   {
     "id": "238270a812aa951f71f1a326b362617f12162025_12:36:42_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "International Women's Day- \"Women Thrive: Our Stories Matter\""
-    },
+    "title": "[object Object]",
     "start": "2026-03-05T20:30:00.000Z",
     "end": "2026-03-05T22:30:00.000Z",
-    "description": "The Office of Diversity and International Services, in collaboration with the Law School's Office of DEI & Belonging and the Diversity Council, cordially invites the campus to a vibrant event highlighting the stories of the women of UBalt. Join us on Thursday, March 5, 2026, from 3:30 to 5:30 PM on the 5th Floor of the Student Center.  As customary, there will be a poster exhibition, reception, and a showcase of publications, arts and crafts, and other contributions. This year, we are also introducing a panel discussion, held between 3:30 – 4:30 PM, where students and faculty will share their personal stories of resilience and achievement. All are invited and encouraged to attend. Questions? Contact emichael@ubalt.edu.",
+    "description": "The Office of Diversity and International Services, in collaboration with the Law School's Office of DEI & Belonging and the Diversity Council, cordially invites the campus to a vibrant event highlighting the stories of the women of UBalt. Join us on Thursday, March 5, 2026, from 3:30 to 5:30 PM on the 5th Floor of the Student Center. As customary, there will be a poster exhibition, reception, and a showcase of publications, arts and crafts, and other contributions. This year, we are also introducing a panel discussion, held between 3:30 – 4:30 PM, where students and faculty will share their personal stories of resilience and achievement. All are invited and encouraged to attend. Questions? Contact emichael@ubalt.edu.",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135580"
   },
   {
     "id": "6090c888e934a08bf4e2d16976f43cf711202025_8:15:30_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "Black Bookstores Impact on History"
-    },
+    "title": "[object Object]",
     "start": "2026-03-05T22:30:00.000Z",
     "end": "2026-03-06T00:30:00.000Z",
-    "description": "Join the History Club, Denit Honors, and the Office of Diversity and International Services as we discuss the lasting impact of Black Bookstores with Katie Mitchell and Char Adams. Local bookstores will have a variety of books available for purchase. Food will be served.\n\n\nLearning Commons Town Hall on Thursday, March 5 between 4 and 8.30 PM for our discussion on Black bookstores with  The discussion will likley just be 5.30-7.30, with additional time for set-up and breakdown.\n\nWe'll need OTS to set up a table on the  stage with three mics, plus two mic stands in the audience for questions, plus help with setting up a Zoom recording in the control room. Finally, we'll plan to do a catered reception in the lobby and also to invite a local bookseller to sell books.",
+    "description": "Join the History Club, Denit Honors, and the Office of Diversity and International Services as we discuss the lasting impact of Black Bookstores with Katie Mitchell and Char Adams. Local bookstores will have a variety of books available for purchase. Food will be served. Learning Commons Town Hall on Thursday, March 5 between 4 and 8.30 PM for our discussion on Black bookstores with The discussion will likley just be 5.30-7.30, with additional time for set-up and breakdown. We'll need OTS to set up a table on the stage with three mics, plus two mic stands in the audience for questions, plus help with setting up a Zoom recording in the control room. Finally, we'll plan to do a catered reception in the lobby and also to invite a local bookseller to sell books.",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135539"
   },
   {
     "id": "be8ee81c3d01b578d8958fa5ad008b9c11222025_7:17:14_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "3rd Annual Women's History Month Brunch "
-    },
+    "title": "[object Object]",
     "start": "2026-03-28T15:00:00.000Z",
     "end": "2026-03-28T19:00:00.000Z",
     "description": "It's back for the third year! Spend the last Saturday of Women's History Month engaging with and learning from women from diverse backgrounds as we enjoy a hearty brunch and mocktails. This event is for female students, but everyone is welcome to attend.",
@@ -53,15 +33,10 @@
   },
   {
     "id": "680102809632900a9f39dfd6f84aa72a11132025_10:43:00_AM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "De-Stress with CSEI "
-    },
+    "title": "[object Object]",
     "start": "2026-05-05T18:00:00.000Z",
     "end": "2026-05-05T20:00:00.000Z",
-    "description": "Hey, fellow academic rockstars! 🌟 Brace yourselves for the epic Finals Frenzy! 📚 De-Stress with Center for Student Engagement (CSEI). More information to come in the spring. \n\nVisit the De-Stress Fest Tag here- https://involvement.ubalt.edu/events?topic_tags=14230786 for all of this semesters events!",
+    "description": "Hey, fellow academic rockstars! 🌟 Brace yourselves for the epic Finals Frenzy! 📚 De-Stress with Center for Student Engagement (CSEI). More information to come in the spring. Visit the De-Stress Fest Tag here- https://involvement.ubalt.edu/events?topic_tags=14230786 for all of this semesters events!",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135524"
   }
 ]
