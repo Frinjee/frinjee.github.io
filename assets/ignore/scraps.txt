@@ -8,3 +8,27 @@
   border-radius: 8px;
   margin: 0;
 }
+
+
+<div class="site-title-bar">
+            <div class="cx-image-box"></div>
+        </div>
+
+        .site-title-bar {
+    width: 960px;
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    background: transparent;
+    border: 3px solid #000;
+    box-sizing: border-box;
+}
+
+.cx-image-box {
+    width: 64px;
+    height: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

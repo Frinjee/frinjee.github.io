@@ -1,0 +1,145 @@
+@import url("reset.css");
+
+:root {
+    --color-bg-purple: #C59AC9;
+    --color-bg-london_lilac: #B68DBf;
+    --color-bg-coinifer: #A3D55D;
+    --color-bg-grannysmith: #B1E2a2;
+    --color-bg-padua: #A8E6CE;
+    --color-bg-blue_romance: #BEF2D7;
+    --color-bg-tickle_me: #FF7092;
+    --color-bg-can_can: #DFA6AB;
+    --color-bg-bittersweet: #FF6E61;
+    --color-frame-gold: #F0B233;
+    --color-frame-border: #2B1A0F;
+    --color-cork: #FDE3B3;
+    --color-shadow: #000;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--color-bg-padua);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.page-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.board-title-clip {
+    position: absolute;
+    top: 20px;
+    left: 20%;
+    width: 60%;
+    height: 155px;
+
+    background-image: url('pngs/title-pin.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.event-dashboard {
+    position: relative;
+    width: 1080px;
+    height: 560px;
+    background: none;
+    border: none;
+}
+
+.event-dashboard-frame {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-frame-gold);
+    border: 3.5px solid var(--color-frame-border);
+    box-sizing: border-box;
+    display: flex;
+    padding: 8px;
+}
+
+.event-dashboard-frame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translate(10px, 10px);
+    background: var(--color-shadow);
+    z-index: -1;
+    border-radius: 2px;
+}
+
+.event-dashboard-frame-inner {
+    flex: 1;
+    background-color: var(--color-cork);
+    border: 4px solid var(--color-frame-border);
+    box-sizing: border-box;
+    /* Corkboard Speckle Effect */
+    background-image: radial-gradient(rgba(0, 0, 0, 0.8) 1px, transparent 1px),
+                      radial-gradient(rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+    background-size: 18px 18px, 26px 26px;
+    background-position: 0 0, 8px 12px;
+}
+
+/* Widget Card Template */
+.widget {position: absolute;}
+
+.w-cork {
+    top: 16px;
+    left: 32px;
+    width: 136px;
+    height: 131px;
+    background-image: url('pngs/group_listing.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/*
+.w-cork-frame {}
+.w-cork-frame-inner {}
+*/
+
+.w-misc {
+    top: -25px;
+    right: 195px;
+    width: 220px;
+    height: 144px;
+}
+
+/*
+.w-miscframe {}
+.w-misc-frame-inner {}
+*/
+
+.w-calendar {
+    bottom: 56px;
+    left: 40px;
+    width: 620px;
+    height: 302px;
+}
+
+/*
+.w-calendar-frame {}
+.w-calendar-frame-inner {}
+*/
+
+.w-tall-notepad {
+    bottom: 60px;
+    right: 25px;
+    width: 180px;
+    height: 300px;
+}
+
+/*
+.w-tall-notepad-frame {}
+.w-tall-notepad-frame-inner {}
+*/

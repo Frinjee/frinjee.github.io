@@ -1,0 +1,20 @@
+Group IDs:
+NSLS: 23864
+BSU: 72934
+DIS: 23888
+TitleIX|DEI: 72941
+ODK: 23844
+WoCSA: 23869
+
+
+
+- LATER
+Filter emojis based on description?
+🌟 💠
+
+Desktop Dimension: 1440x1920px (<=1199px) [width]
+  - Main Content Width: 960x1200px
+  - Fold (page is visible without scrolling): 600x800px
+Tablet Dimension: 600x768px(<=991px) [width]
+
+Mobile Dimension: 320x414px (<=767px) [width]
