@@ -3,7 +3,8 @@ import crypto from "crypto";
 import ical from "node-ical";
 
 const ICS_URL =
-  "https://involvement.ubalt.edu/ics?group_ids=72934,23888,23844,23864&school=ubalt";
+  "https://involvement.ubalt.edu/ics?type=starredgroups&eid=b5ecb7ad12987be3f0d26d9154c08b9a";
+  /* Old ICS_URL = "https://involvement.ubalt.edu/ics?group_ids=72934,23888,23844,23864&school=ubalt" */
 
 const OUTPUT_FILE = "events.json";
 

@@ -30,13 +30,7 @@
     4. Registration URL (UBALT BeeInvolved Page)
     5. Hosting Org(s)
     6. Primary Org Color Code
-
-## **Please tell me if you prefer the site to have a more corkboard layout; Below is an example I started**
-
-### Last Updated 01/02/2026 02:14am
-
-![Example Site](https://github.com/Frinjee/frinjee.github.io/blob/main/assets/imgs/start.png?raw=true)
-
+    
 ## 🎨 **Org Color Codes**
 
 ![Org Color Codes](https://github.com/Frinjee/frinjee.github.io/blob/main/assets/imgs/c_codes.png?raw=true)
