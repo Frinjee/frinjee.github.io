@@ -526,7 +526,9 @@ h1 {
   }
 
   /* gfx columin inheritance (row color, prevent shaping) */
-  .fc .fc-list-event-graphic,
+  .fc .fc-list-event-graphic {
+    display: none;
+  }
   .fc .fc-list-event-graphic td {
     background-color: inherit !important;
   }
@@ -581,7 +583,7 @@ h1 {
   .fc .fc-list-event-title,
   .fc .fc-list-event-time,
   .fc .fc-list-event-graphic {
-    background: transparent !important;
+    background: inherit !important;
     color:inherit !important;
   }
 
