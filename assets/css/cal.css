@@ -513,7 +513,7 @@ h1 {
     padding: 0.85rem 0.85rem !important;
     display: table-cell !important;
     white-space: nowrap;
-    font-weight: 450;
+    font-weight: 350;
     font-size: 0.6em;
     margin-bottom: 1px;
   }
@@ -571,6 +571,7 @@ h1 {
     margin-top: 0.25rem;
     font-size: 0.75em;
     line-height: 1em;
+    font-weight: 450;
   }
 
   /* catch all paint selection background fix  */
