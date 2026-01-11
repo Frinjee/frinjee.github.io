@@ -217,24 +217,6 @@ h1 {
   opacity: 0.5;
 }
 
-/* Custom toggle button icon */
-.fc-toggleMultiMonth-button::before {
-  font-family: "Material Symbols Outlined";
-  font-size: 1.4em;
-  line-height: 0.5em;
-  display: inline-block;
-  vertical-align: middle;
-  content: attr(data-icon);
-}
-
-.fc-toggleMultiMonth-button {
-  padding: 0.4em 0.6em;
-}
-
-.fc-toggleMultiMonth-button:hover {
-  opacity: 0.75;
-}
-
 /* ---------- FullCalendar Grid & Day Cells ---------- */
 
 /* Grid & day backgrounds */
@@ -415,6 +397,91 @@ h1 {
 
 .upcoming-nav:hover {
   color: var(--color-celestial);
+}
+
+/* ---------- Mobile List View Fixes ---------- */
+
+/* Enforce row bg color to show through ALL cells */
+.fc .fc-list, 
+.fc .fc-list-table {
+  border-collapse: separate; /* to prevent weird pixel seams on mobile */
+  border-spacing: 0;
+}
+
+.fc .fc-list-event,
+.fc .fc-list-event td {
+  background: transparent !important; /* important to prevent iOS white fill */
+}
+
+/* Remove internal separators (white lines) on android */
+.fc .fc-list-event td {
+  border-top: 0 !important;
+  border-bottom: 0 !important;
+  background-clip: padding-box;
+}
+
+/* Soften outer edge of the row that have color */
+.fc .fc-list-event {
+  border-radius: 10px;
+  overflow: hidden; /* round corner clip correction for iOS */
+}
+
+/* Remove clickable areas painting background */
+.fc .fc-list-event-title a,
+.fc .fc-list-event-time {
+  background: transparent !important;
+}
+
+/* Day header row consistency */
+.fc .fc-list-day-cushion,
+.fc .fc-list-day-cushion td {
+  background: var(--color-azureish) !important;
+}
+
+
+/* ---------- Nav Button(s) & Toggle Icon Cleanup ---------- */
+
+/* FC prev & next buttons (circle + center) */
+.fc .fc-prev-button,
+.fc .fc-next-button {
+  border-radius: 999px !important;
+  padding: 0.45em 0.9em !important;
+  line-height: 1 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* FC built-in arrow cleanup */
+.fc .fc-button .fc-icon {
+  font-size: 1.4em !important;
+  line-height: 1 !important;
+}
+
+/* Custom Toggle (Material Symbol): Ligature and approp sizing force */
+.fc-toggleMultiMonth-button::before {
+  font-family: "Material Symbols Outlined";
+  font-feature-settings: "liga" 1; /* ensures cvm renders as icon */
+  -webkit-font-smoothing: antialiased; /* Safari, Chrome, webkit browsers ... */
+  -moz-osx-font-smoothing: grayscale; /* firefox mapping for similar ^^ behavior */
+  font-variation-settings: "FILL" 0, "wght" 500;
+  font-size: 1.4em !important;
+  line-height: 1 !important;
+  display: inline-block;
+  vertical-align: middle;
+  content: attr(data-icon);
+}
+
+.fc-toggleMultiMonth-button {
+  border-radius: 999px !important;
+  padding: 0.45em 0.85em !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.fc-toggleMultiMonth-button:hover {
+  opacity: 0.75;
 }
 
 /* ---------- Responsive (Mobile) Adjustments ---------- */
