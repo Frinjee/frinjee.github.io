@@ -495,6 +495,51 @@ h1 {
         padding: 0.08rem 0.3rem;
     }
 
+    /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
+    .fc .fc-toolbar-title {
+      font-size: 0.85rem;
+      font-weight: 400;
+      line-height: 1.1;
+      pointer-events: none;
+
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .fc .fc-prev-button,
+    .fc .fc-next-button,
+    .fc-toggleMultiMonth-button {
+      padding: 0.35em 0.6em !important;
+    }
+
+    .fc .fc-button .fc-icon {
+      font-size: 1.1em !important;
+    }
+
+    .fc-toggleMultiMonth-button::before {
+      font-size: 1.1em !important;
+    }
+
+    .fc .fc-header-toolbar {
+      padding: 0.35rem 0.6rem; /* Vertical | Horizontal*/
+      position: relative;
+    }
+
+    .fc .fc-toolbar-chunk {
+      gap: 0.4rem;
+    }
+    
+    .fc .fc-toolbar-chunk:first-child {
+      margin-right: auto;
+    }
+
+    .fc .fc-toolbar-chunk:last-child {
+      margin-left: auto;
+    }
+
     /* ---------- Mobile Calendar Outline/Separator Correctors ---------- */
     .fc .fc-list {
         border: 1px solid var(--color-charcoal);
