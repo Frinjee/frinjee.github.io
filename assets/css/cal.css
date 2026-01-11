@@ -512,8 +512,7 @@ h1 {
   }
 
   /* Force ALL cells to inherit the row's bg color */
-  .fc .fc-list-event td,
-  .fc .fc-list-event-time {
+  .fc .fc-list-event td {
     background-color: inherit !important;
     color: var(--color-maastricht) !important;
 
@@ -524,6 +523,10 @@ h1 {
   }
 
   .fc .fc-list-event-time {
+    background-color: inherit !important;
+    color: var(--color-maastricht) !important;
+    background-clip: padding-box;
+    padding: 0.85rem 0.85rem !important;
     display: table-cell !important;
     white-space: nowrap;
     font-weight: 450;
