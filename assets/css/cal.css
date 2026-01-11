@@ -504,16 +504,21 @@ h1 {
     border-spacing: 0;
   }
 
-  /* listWeek events css vars (flex iOS and Android) */
+  /* Force ALL cells to inherit the row's bg color */
   .fc .fc-list-event td {
-    background-color: var(--fc-event-bg-color, var(--color-link_water)) !important;
-    border-color: var(--fc-event-border-color, rgba(0,0,0,0.12)) !important;
-    color: var(--fc-event-text-color, var(--color-maastricht)) !important;
+    background-color: inherit !important;
+    color: var(--color-maastricht) !important;
 
     /* Remove internal separators (white lines) on android */
     border-top: 0 !important;
     border-bottom: 0 !important;
     background-clip: padding-box;
+  }
+
+  /* gfx columin inheritance (row color, prevent shaping) */
+  .fc .fc-list-event-graphic,
+  .fc .fc-list-event-graphic td {
+    background-color: inherit !important;
   }
 
   /* Soften outer edge of the row that have color */
@@ -523,10 +528,20 @@ h1 {
   }
 
   /* Remove clickable areas painting background */
-  .fc .fc-list-event-title a,
   .fc .fc-list-event-time {
     background: transparent !important;
     color:inherit !important;
+  }
+  .fc .fc-list-event-title a,
+  .fc .fc-list-event-time a:active,
+  .fc .fc-list-event-time a:visited {
+    background: transparent !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .fc .fc-list-event a:focus,
+  .fc .fc-list-event a:focus-visible {
+    outline: none !important;
   }
 
   /* Day header row consistency */
