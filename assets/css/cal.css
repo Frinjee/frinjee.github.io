@@ -171,13 +171,9 @@ h1 {
 }
 
 /* ---------- FullCalendar Toolbar & Buttons ---------- */
-/*
-.chevron-left .chevron-right{
-  
-}*/
 
 /* Toolbar title */
-.fc-toolbar-title {
+.fc .fc-toolbar-title {
     text-align: center;
     font-weight: 450;
     color: var(--color-charcoal);
@@ -200,11 +196,11 @@ h1 {
 }
 
 /* Footer toolbar alignment */
-.fc-footer-toolbar {
+.fc .fc-footer-toolbar {
     justify-content: center;
 }
 
-.fc-footer-toolbar .fc-toolbar-chunk {
+.fc .fc-footer-toolbar .fc-toolbar-chunk {
     display: flex;
     justify-content: center;
     gap: 1rem;
