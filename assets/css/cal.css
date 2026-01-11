@@ -625,10 +625,13 @@ h1 {
   .fc .fc-list-event-time,
   .fc .fc-list-event-title,
   .fc .fc-list-event-title a {
-    color: var(--color-maastricht) !important;
     opacity: 1 !important; /* avoid contrast loss <-> opacity */
   }
-
+  
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-title a {
+    color: var(--color-maastricht) !important;
+  }
   /* Visible focus ring (kb/accessibility) */
   .fc .fc-list-event a:focus-visible {
     outline: 2px solid var(--color-maastricht);
