@@ -38,3 +38,14 @@
   .fc .fc-list-event td {
     background: transparent !important; /* important to prevent iOS white fill */
   }
+
+  .fc .fc-list-event-graphic {
+    width: 0.9rem;
+  }
+
+  .fc .fc-list-event-graphic,
+  .fc .fc-list-event-graphic td {
+    padding: 0 !important;
+    border: 0 !important;
+    background-color: inherit !important;
+  }

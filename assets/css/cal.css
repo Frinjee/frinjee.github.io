@@ -530,16 +530,6 @@ h1 {
     display: none;
   }
  
-  .fc .fc-list-event-graphic {
-    width: 0.9rem;
-  }
-
-  .fc .fc-list-event-graphic,
-  .fc .fc-list-event-graphic td {
-    padding: 0 !important;
-    border: 0 !important;
-    background-color: inherit !important;
-  }
   /* Soften outer edge of the row that have color */
   .fc .fc-list-event {
     border-radius: 10px;
@@ -550,6 +540,12 @@ h1 {
     - Fallback after testing
     -webkit-tap-highlight-color: transparent !important;
     */
+  }
+
+  .fc .fc-list-event td:first-child {
+    padding: 0 !important;
+    border: 0 !important;
+    width: 0 !important;
   }
 
   .fc .fc-list-event a,
