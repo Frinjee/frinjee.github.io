@@ -529,17 +529,16 @@ h1 {
   .fc .fc-list-event-graphic {
     display: none;
   }
-  .fc .fc-list-event-graphic td {
-    background-color: inherit !important;
-  }
-
+ 
   .fc .fc-list-event-graphic {
     width: 0.9rem;
   }
 
+  .fc .fc-list-event-graphic,
   .fc .fc-list-event-graphic td {
     padding: 0 !important;
     border: 0 !important;
+    background-color: inherit !important;
   }
   /* Soften outer edge of the row that have color */
   .fc .fc-list-event {
@@ -584,7 +583,7 @@ h1 {
   .fc .fc-list-event-time,
   .fc .fc-list-event-graphic {
     background: inherit !important;
-    color:inherit !important;
+    color: inherit !important;
   }
 
   /* catch all paint selection background fix  */
