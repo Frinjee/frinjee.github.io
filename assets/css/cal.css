@@ -531,7 +531,8 @@ h1 {
   }
  
   /* Soften outer edge of the row that have color */
-  .fc .fc-list-event {
+  .fc .fc-list-event,
+  .fc .fc-list-event-time {
     border-radius: 10px;
     overflow: hidden; /* round corner clip correction for iOS */
     margin: 0.53rem 0.53rem !important;
@@ -542,7 +543,8 @@ h1 {
     */
   }
 
-  .fc .fc-list-event td:first-child {
+  .fc .fc-list-event td:first-child,
+  .fc .fc-list-event-time td:first-child {
     padding: 0 !important;
     border: 0 !important;
     width: 0 !important;
