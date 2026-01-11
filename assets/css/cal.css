@@ -518,10 +518,7 @@ h1 {
     color: var(--color-maastricht) !important;
 
     /* Remove internal separators (white lines) on android */
-    border-top: 1px solid var(--color-charcoal) !important;
-    border-bottom: 1px solid var(--color-charcoal) !important;
-    border-left: 1px solid var(--color-charcoal) !important;
-    border-right: 1px solid var(--color-charcoal) !important;
+    border: 0 !important;
     background-clip: padding-box;
     padding: 0.85rem 0.85rem !important;
   }
@@ -534,10 +531,10 @@ h1 {
   /* Soften outer edge of the row that have color */
   .fc .fc-list-event,
   .fc .fc-list-event-time {
-    border-radius: 10px;
+    border: 1px solid var(--color-charcoal) !important;
+    border-radius: 12px;
     overflow: hidden; /* round corner clip correction for iOS */
     margin: 0.53rem 0.53rem !important;
-    border-radius: 12px;
     /*
     - Fallback after testing
     -webkit-tap-highlight-color: transparent !important;
@@ -583,6 +580,12 @@ h1 {
   .fc .fc-list-event-graphic {
     background: inherit !important;
     color: inherit !important;
+  }
+
+  .fc .fc-list-event-title {
+    border-top: 1px solid var(--color-charcoal);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
   }
 
   /* catch all paint selection background fix  */
