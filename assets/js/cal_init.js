@@ -6,7 +6,31 @@ document.addEventListener("DOMContentLoaded", function () {
     return;
   }
 
-  // Decode QUOTED-PRINTABLE titles
+  /* =====================================
+         Swipe Integration Mobile Utility
+     ===================================== */
+  function mobileSwipeListener(el, onLeft, onRight) {
+    let startX = 0;
+    let endX = 0;
+
+    el.addEventListener("touchstart", e => {
+      startX = e.trackChangedTouches[0].screenX;
+    });
+
+    el.addEventListener("touchend", e => {
+      endX = e.trackChangedTouches[0].screenX;
+      const delta = endX - startX;
+
+      if(Math.abs(delta) > 50) {
+        delta < 0 ? onLeft() : onRight();
+      }
+
+    });
+  }
+
+  /* =====================================
+         Decode Quoted Printables Utility
+     ===================================== */
   function decodeQuotedPrintable(str) {
     try {
       return str.replace(/=([A-F0-9]{2})/gi, (_, hex) =>
@@ -250,6 +274,28 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       calendar.render();
+
+      /* =====================================
+         "Jump-to First" Mobile Utility
+         ===================================== */
+      const firstUpcoming = events
+        .filter(e => e.start && new Date(e.start) > new Date())
+        .sort((a,b) => new Date(a.start) - new Date(b.start))[0];
+
+      if(firstUpcoming) {
+        setTimeout(() => {
+          calendar.gotoDate(firstUpcoming.start);
+        }, 0);
+      }
+
+      /* =====================================
+         Swipe Nav Calendar Functionality
+         ===================================== */
+      mobileSwipeListener(
+        calendarEl,
+        () => calendar.next(),
+        () => calendar.prev()
+      );
 
       /* =====================================
          Upcoming event Slim Card Integration
