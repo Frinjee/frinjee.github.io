@@ -14,18 +14,18 @@ document.addEventListener("DOMContentLoaded", function () {
     let endX = 0;
 
     el.addEventListener("touchstart", e => {
-      startX = e.trackChangedTouches[0].screenX;
-    });
+      startX = (e.touches && e.touches[0] ? e.touches[0].screenX : 0);
+    }, { passive: true });
 
     el.addEventListener("touchend", e => {
-      endX = e.trackChangedTouches[0].screenX;
+      endX = (e.touchesChanged && e.touchesChanged[0] ? e.touchesChanged[0].screenX : 0);
       const delta = endX - startX;
 
       if(Math.abs(delta) > 50) {
         delta < 0 ? onLeft() : onRight();
       }
 
-    });
+    }, { passive: true });
   }
 
   /* =====================================
