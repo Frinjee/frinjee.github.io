@@ -131,10 +131,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         /* Responsive view: auto switch to listWeek on mobile */
         datesSet() {
-          if (window.innerWidth < 600 && calendar.view.type !== "listWeek") {
+          if (window.innerWidth < 640 && calendar.view.type !== "listWeek") {
             calendar.changeView("listWeek");
           }
-          if (window.innerWidth >= 600 && calendar.view.type === "listWeek") {
+          if (window.innerWidth >= 640 && calendar.view.type === "listWeek") {
             calendar.changeView("dayGridMonth");
           }
 
