@@ -531,6 +531,14 @@ h1 {
     background-color: inherit !important;
   }
 
+  .fc .fc-list-event-graphic {
+    width: 0.9rem;
+  }
+
+  .fc .fc-list-event-graphic td {
+    padding: 0 !important;
+    border: 0 !important;
+  }
   /* Soften outer edge of the row that have color */
   .fc .fc-list-event {
     border-radius: 10px;
@@ -627,6 +635,12 @@ h1 {
     outline: 2px solid var(--color-maastricht);
     outline-offset: 3px;
     border-radius: 10px;
+  }
+
+  /* event-dot soften */
+  .fc .fc-list-event-dot {
+    margin: 0.45rem 0 0 0.33rem !important;
+    border-width: 6px !important;
   }
 
 } /* End @media section*/
