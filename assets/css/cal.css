@@ -4,159 +4,170 @@
 @import url("reset.css");
 
 :root {
-  /* BLUE */
-  --color-maastricht: #041A38; /* (4,26,56) */
-  --color-celestial: #4A9ACB;  /* (74,154,203) */
-  --color-cornflower: #97D4F1; /* (151,212,241) */
-  --color-botticelli: #D8E7EE;
-  --color-link_water: #D0E6F6;
-  --color-east_bay: #445B7D;
-  --color-pigeon_post: #A7C0DD;
+    /* BLUE */
+    --color-maastricht: #041A38;
+    /* (4,26,56) */
+    --color-celestial: #4A9ACB;
+    /* (74,154,203) */
+    --color-cornflower: #97D4F1;
+    /* (151,212,241) */
+    --color-botticelli: #D8E7EE;
+    --color-link_water: #D0E6F6;
+    --color-east_bay: #445B7D;
+    --color-pigeon_post: #A7C0DD;
 
-  /* GREY | WHITE | BLACK */
-  --color-azureish: #D8E7EE; /* (216,231,238) */ 
-  --color-cotton: #EDEBDD;   /* (237,235,221) */
-  --color-eggshell: #FAFFFF; /* (250,255,255) */
-  --color-satin_linen: #EDEBDE; /* I dont think I like this one */
+    /* GREY | WHITE | BLACK */
+    --color-azureish: #D8E7EE;
+    /* (216,231,238) */
+    --color-cotton: #EDEBDD;
+    /* (237,235,221) */
+    --color-eggshell: #FAFFFF;
+    /* (250,255,255) */
+    --color-satin_linen: #EDEBDE;
+    /* I dont think I like this one */
 
-  /* TEXT | BORDERS | SHADOWS */
-  --color-blue_bayou:#4B5C71;
-  --color-pickled_bluewood: #2A384C;
-  --color-charcoal: #394C5C;
+    /* TEXT | BORDERS | SHADOWS */
+    --color-blue_bayou: #4B5C71;
+    --color-pickled_bluewood: #2A384C;
+    --color-charcoal: #394C5C;
 
-  /* ORG EVENT COLOR PALETTE */
-  --color-nsls-regent_st_blue: #A3C7E0;
-  --color-wocsa-peranopurp: #A8A2F1;
-  --color-odk-sinbad:  #A3D7D5;
-  --color-csei-zanah: #D2E4C8;
-  --color-dis-sidecar: #F3E0B4;
-  --color-bsu-mandys_pink: #F2BAC5;
-  --color-titleix-wewak: #F1A8A2;
-  --color-multi-vanilla_ice: #F2D2DE;
-  --color-bg-can_can: #DFA6AB;
-  --color-bg-grannysmith: #B1E2a2;
-  --color-bg-padua: #A8E6CE;
-  --color-bg-london_lilac: #B68DBf;
+    /* ORG EVENT COLOR PALETTE */
+    --color-nsls-regent_st_blue: #A3C7E0;
+    --color-wocsa-peranopurp: #A8A2F1;
+    --color-odk-sinbad: #A3D7D5;
+    --color-csei-zanah: #D2E4C8;
+    --color-dis-sidecar: #F3E0B4;
+    --color-bsu-mandys_pink: #F2BAC5;
+    --color-titleix-wewak: #F1A8A2;
+    --color-multi-vanilla_ice: #F2D2DE;
+    --color-bg-can_can: #DFA6AB;
+    --color-bg-grannysmith: #B1E2a2;
+    --color-bg-padua: #A8E6CE;
+    --color-bg-london_lilac: #B68DBf;
 }
 
 /* ---------- Global Page Layout ---------- */
 
 /* Reset default page background */
 body {
-  background-color: var(--color-eggshell);
-  margin: 0;
+    background-color: var(--color-eggshell);
+    margin: 0;
 }
 
 /* Page Heading */
 h1 {
-  font-family: "Vend Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 550;
-  font-style: normal;
-  text-align: center;
-  margin-bottom: 0; /* minimal spacing below heading */
-  color: var(--color-charcoal);
+    font-family: "Vend Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 550;
+    font-style: normal;
+    text-align: center;
+    margin-bottom: 0;
+    /* minimal spacing below heading */
+    color: var(--color-charcoal);
 }
 
 /* Calendar Wrapper */
 .calendar-wrapper {
-  max-width: 1000px;
-  margin: 0.75rem auto 0.5rem; /* closer to heading and upcoming events */
-  padding: 0.1rem 1rem 0.25rem; /* shrink top and bottom padding */
-  background-color: var(--color-eggshell);
-  border-radius: 10px;
-  display: block;
+    max-width: 1000px;
+    margin: 0.75rem auto 0.5rem;
+    /* closer to heading and upcoming events */
+    padding: 0.1rem 1rem 0.25rem;
+    /* shrink top and bottom padding */
+    background-color: var(--color-eggshell);
+    border-radius: 10px;
+    display: block;
 }
 
 /* Calendar Base Typography */
 #calendar {
-  width: 100%;
-  background-color: var(--color-eggshell);
-  border-radius: 10px;
-  padding: 0.25rem 1rem; /* smaller top padding to reduce visual gap */
-  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-  font-family: "Vend Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-  color: var(--color-east_bay);
-  border: solid;
-  border-color: var(--color-blue_bayou)
+    width: 100%;
+    background-color: var(--color-eggshell);
+    border-radius: 10px;
+    padding: 0.25rem 1rem;
+    /* smaller top padding to reduce visual gap */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+    font-family: "Vend Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    color: var(--color-east_bay);
+    border: solid;
+    border-color: var(--color-blue_bayou)
 }
 
 /* ---------- FullCalendar Event Appearance ---------- */
 
 /* Event box styling */
 .fc .fc-event {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 0.1em 0.25em;
-  box-sizing: border-box;
-  max-height: 4.2em;
-  overflow: hidden;
-  border-radius: 3px;
-  border: 1px solid rgba(0,0,0,0.18);
-  line-height: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0.1em 0.25em;
+    box-sizing: border-box;
+    max-height: 4.2em;
+    overflow: hidden;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    line-height: 1em;
 }
 
 /* Event time (above title) */
 .fc .fc-event-time {
-  font-size: 0.65em;
-  font-weight: 400;
-  line-height: 1em;
-  opacity: 0.85;
-  margin-bottom: 1px;
-  color: var(--color-maastricht);
+    font-size: 0.65em;
+    font-weight: 400;
+    line-height: 1em;
+    opacity: 0.85;
+    margin-bottom: 1px;
+    color: var(--color-maastricht);
 }
 
 /* Event title (slimmed) */
 .fc .fc-event-title {
-  font-size: 0.78em;
-  line-height: 1em;
-  white-space: normal;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-break: break-word;
-  font-weight: 300;
-  color: var(--color-charcoal);
+    font-size: 0.78em;
+    line-height: 1em;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    font-weight: 300;
+    color: var(--color-charcoal);
 }
 
 /* Multi-line event container adjustments */
 .fc .fc-daygrid-event-harness {
-  margin: 0.1em 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.1em;
+    margin: 0.1em 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1em;
 }
 
 /* Event hover state */
 .fc .fc-event:hover {
-  opacity: 0.85;
-  transition: opacity 0.2s ease-in-out;
+    opacity: 0.85;
+    transition: opacity 0.2s ease-in-out;
 }
 
 /* Day cell event spacing with conditional scrollbar only if events exist */
 .fc .fc-daygrid-day-events {
-  margin-top: 0.1em;
-  max-height: 5em;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,0.3) transparent;
+    margin-top: 0.1em;
+    max-height: 5em;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 }
 
 /* Webkit scrollbar for days with events */
 .fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar {
-  width: 5px;
+    width: 5px;
 }
 
 .fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,0.3);
-  border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
 }
 
 .fc .fc-daygrid-day-events:has(.fc-event)::-webkit-scrollbar-track {
-  background: transparent;
+    background: transparent;
 }
 
 /* ---------- FullCalendar Toolbar & Buttons ---------- */
@@ -167,54 +178,54 @@ h1 {
 
 /* Toolbar title */
 .fc-toolbar-title {
-  text-align: center;
-  font-weight: 450;
-  color: var(--color-charcoal);
+    text-align: center;
+    font-weight: 450;
+    color: var(--color-charcoal);
 }
 
 /* Sticky header toolbar */
 .fc .fc-header-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 5;
-  background-color: var(--color-eggshell);
-  padding: 0.4rem 0;
-  border: solid;
-  border-color: var(--color-blue_bayou);
-  border-radius: 10px;
-  border-width: thin thin 0 thin thin;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: var(--color-eggshell);
+    padding: 0.4rem 0;
+    border: solid;
+    border-color: var(--color-blue_bayou);
+    border-radius: 10px;
+    border-width: thin thin 0 thin thin;
 }
 
 /* Footer toolbar alignment */
 .fc-footer-toolbar {
-  justify-content: center;
+    justify-content: center;
 }
 
 .fc-footer-toolbar .fc-toolbar-chunk {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
 }
 
 /* Calendar navigation buttons */
 .fc .fc-button {
-  background-color: var(--color-maastricht);
-  border: none;
-  color: #fff;
-  border-radius: 25px;
-  padding: 0.2em 0.8em;
-  font-weight: 400;
+    background-color: var(--color-maastricht);
+    border: none;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0.2em 0.8em;
+    font-weight: 400;
 }
 
 .fc .fc-button:hover {
-  background-color: var(--color-celestial);
+    background-color: var(--color-celestial);
 }
 
 .fc .fc-button:disabled {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 
@@ -222,182 +233,183 @@ h1 {
 
 /* Grid & day backgrounds */
 .fc .fc-daygrid-day-bg {
-  background-color: var(--color-eggshell);
+    background-color: var(--color-eggshell);
 }
 
 .fc .fc-daygrid-day.fc-day-today {
-  outline: 2px solid var(--color-celestial);
-  outline-offset: -2px;
+    outline: 2px solid var(--color-celestial);
+    outline-offset: -2px;
 }
 
 /* Darker grid lines */
 .fc .fc-scrollgrid,
-.fc .fc-scrollgrid-section > td {
-  border: 1px solid;
-  border-color: var(--color-blue_bayou);
+.fc .fc-scrollgrid-section>td {
+    border: 1px solid;
+    border-color: var(--color-blue_bayou);
 }
 
 .fc .fc-daygrid-day {
-  border: 1px solid rgba(0,0,0,0.15);
+    border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 /* Day-of-week header */
 .fc .fc-col-header-cell {
-  background-color: var(--color-azureish);
-  border: 0.5px solid;
-  border-color: var(--color-blue_bayou);
+    background-color: var(--color-azureish);
+    border: 0.5px solid;
+    border-color: var(--color-blue_bayou);
 }
 
 .fc .fc-col-header-cell-cushion {
-  color: var(--color-charcoal);
-  font-weight: 500;
-  padding: 0.5em 0;
+    color: var(--color-charcoal);
+    font-weight: 500;
+    padding: 0.5em 0;
 }
 
 .fc .fc-col-header {
-  box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* ---------- Event Modal Styles ---------- */
 
 /* Event modal overlay */
 .fc-modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.3);
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 /* Event modal content */
 .fc-modal-content {
-  background-color: #fff;
-  color: #000;
-  margin: 10% auto;
-  padding: 1.5em;
-  border-radius: 10px;
-  width: 90%;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background-color: #fff;
+    color: #000;
+    margin: 10% auto;
+    padding: 1.5em;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Modal close button */
 .fc-modal-close {
-  float: right;
-  font-size: 1.5em;
-  font-weight: bold;
-  cursor: pointer;
+    float: right;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .fc-modal-close:hover {
-  color: inherit;
+    color: inherit;
 }
 
 /* Modal register button */
 #fc-modal-register {
-  display: inline-block;
-  margin-top: 1em;
-  padding: 0.5em 1em;
-  border-radius: 5px;
-  text-decoration: none;
-  cursor: pointer;
-  background-color: var(--color-cornflower);
-  color: var(--color-maastricht);
-  font-weight: bold;
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    background-color: var(--color-cornflower);
+    color: var(--color-maastricht);
+    font-weight: bold;
 }
 
 #fc-modal-register:hover {
-  background-color: var(--color-celestial);
+    background-color: var(--color-celestial);
 }
 
 /* ---------- Upcoming Event Org Badges ---------- */
 
 /* Upcoming Event Card */
 .upcoming-events-wrapper {
-  max-width: 925px;
-  margin: 0.1rem auto 0.05rem; /* closer to heading and calendar */
-  padding: 0 0.25rem;
+    max-width: 925px;
+    margin: 0.1rem auto 0.05rem;
+    /* closer to heading and calendar */
+    padding: 0 0.25rem;
 }
 
 .upcoming-event-card {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  background-color: var(--color-link_water);
-  border: 1px solid rgba(0,0,0,0.15);
-  border-radius: 8px;
-  margin-bottom: 0.05rem;
-  padding: 0.08rem 0.15rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.6);
-  font-size: 0.8rem;
-  transition: opacity 0.25s ease;
-  opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: var(--color-link_water);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-bottom: 0.05rem;
+    padding: 0.08rem 0.15rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    font-size: 0.8rem;
+    transition: opacity 0.25s ease;
+    opacity: 1;
 }
 
 .upcoming-event-content {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 0.5rem;
-  text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 0.5rem;
+    text-decoration: none;
 }
 
 .upcoming-event-title-dt-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 0.125rem;
-  flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    flex: 1;
 }
 
 .upcoming-event-title {
-  font-weight: 700;
-  font-size: 0.85rem;
-  color: var(--color-charcoal);
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-charcoal);
 }
 
 .upcoming-event-date-time {
-  font-size: 0.7rem;
-  opacity: 0.75;
-  color: var(--color-maastricht);
-  margin: 0;
+    font-size: 0.7rem;
+    opacity: 0.75;
+    color: var(--color-maastricht);
+    margin: 0;
 }
 
 .upcoming-event-orgs {
-  display: flex;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 0.2rem;
-  padding-top: 0.125rem;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+    padding-top: 0.125rem;
 }
 
 .org-badge {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.2rem 0.4rem;
-  border-radius: 10px;
-  font-size: 0.65rem;
-  font-weight: 500;
-  color: var(--color-maastricht);
-  white-space: nowrap ;
-  line-height: 1.1;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.4rem;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--color-maastricht);
+    white-space: nowrap;
+    line-height: 1.1;
 }
 
 .upcoming-nav {
-  background: transparent;
-  border: none;
-  font-size: 1.3rem;
-  cursor: pointer;
-  color: var(--color-maastricht);
-  padding: 0 0.25rem;
+    background: transparent;
+    border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    color: var(--color-maastricht);
+    padding: 0 0.25rem;
 }
 
 .upcoming-nav:hover {
-  color: var(--color-celestial);
+    color: var(--color-celestial);
 }
 
 /* ---------- Nav Button(s) & Toggle Icon Cleanup ---------- */
@@ -405,237 +417,243 @@ h1 {
 /* FC prev & next buttons (circle + center) */
 .fc .fc-prev-button,
 .fc .fc-next-button {
-  border-radius: 999px !important;
-  padding: 0.45em 0.9em !important;
-  line-height: 1 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+    border-radius: 999px !important;
+    padding: 0.45em 0.9em !important;
+    line-height: 1 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 /* FC built-in arrow cleanup */
 .fc .fc-button .fc-icon {
-  font-size: 1.4em !important;
-  line-height: 1 !important;
+    font-size: 1.4em !important;
+    line-height: 1 !important;
 }
 
 /* Custom Toggle (Material Symbol): Ligature and approp sizing force */
 .fc-toggleMultiMonth-button::before {
-  font-family: "Material Symbols Outlined";
-  font-feature-settings: "liga" 1; /* ensures cvm renders as icon */
-  -webkit-font-smoothing: antialiased; /* Safari, Chrome, webkit browsers ... */
-  -moz-osx-font-smoothing: grayscale; /* firefox mapping for similar ^^ behavior */
-  font-variation-settings: "FILL" 0, "wght" 500;
-  font-size: 1.4em !important;
-  line-height: 1 !important;
-  display: inline-block;
-  vertical-align: middle;
-  content: attr(data-icon);
+    font-family: "Material Symbols Outlined";
+    font-feature-settings: "liga" 1;
+    /* ensures cvm renders as icon */
+    -webkit-font-smoothing: antialiased;
+    /* Safari, Chrome, webkit browsers ... */
+    -moz-osx-font-smoothing: grayscale;
+    /* firefox mapping for similar ^^ behavior */
+    font-variation-settings: "FILL" 0, "wght" 500;
+    font-size: 1.4em !important;
+    line-height: 1 !important;
+    display: inline-block;
+    vertical-align: middle;
+    content: attr(data-icon);
 }
 
 .fc-toggleMultiMonth-button {
-  border-radius: 999px !important;
-  padding: 0.45em 0.85em !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
+    border-radius: 999px !important;
+    padding: 0.45em 0.85em !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 
 .fc-toggleMultiMonth-button:hover {
-  opacity: 0.75;
+    opacity: 0.75;
 }
 
 /* ---------- Responsive (Mobile) Adjustments ---------- */
 
 @media (max-width: 640px) {
-  .calendar-wrapper {
-    padding: 0.25rem 0.5rem;
-  }
+    .calendar-wrapper {
+        padding: 0.25rem 0.5rem;
+    }
 
-  #calendar {
-    padding: 0.25rem 0.5rem;
-    border-radius: 6px;
-  }
+    #calendar {
+        padding: 0.25rem 0.5rem;
+        border-radius: 6px;
+    }
 
-  .fc-daygrid-day-events {
-    min-height: 3.5em;
-    max-height: 5em;
-  }
+    .fc-daygrid-day-events {
+        min-height: 3.5em;
+        max-height: 5em;
+    }
 
-  .fc .fc-col-header-cell-cushion {
-    font-size: 0.8em;
-    padding: 0.4em 0;
-  }
+    .fc .fc-col-header-cell-cushion {
+        font-size: 0.8em;
+        padding: 0.4em 0;
+    }
 
-  .upcoming-event-title {
-    font-size: 0.8rem;
-  }
+    .upcoming-event-title {
+        font-size: 0.8rem;
+    }
 
-  .upcoming-event-date-time {
-    font-size: 0.65rem;
-  }
+    .upcoming-event-date-time {
+        font-size: 0.65rem;
+    }
 
-  .org-badge {
-    font-size: 0.6rem;
-    padding: 0.08rem 0.3rem;
-  }
+    .org-badge {
+        font-size: 0.6rem;
+        padding: 0.08rem 0.3rem;
+    }
 
-  /* ---------- Mobile Calendar Outline/Separator Correctors ---------- */
-  .fc .fc-list {
-    border: 1px solid var(--color-charcoal);
-    border-radius: 8px;
-    overflow: hidden;
-  }
+    /* ---------- Mobile Calendar Outline/Separator Correctors ---------- */
+    .fc .fc-list {
+        border: 1px solid var(--color-charcoal);
+        border-radius: 8px;
+        overflow: hidden;
+    }
 
-  /* ---------- Mobile List View Fixes ---------- */
+    /* ---------- Mobile List View Fixes ---------- */
 
-  /* Enforce row bg color to show through ALL cells */
-  .fc .fc-list-table {
-    border-collapse: separate; /* to prevent weird pixel seams on mobile */
-    border-spacing: 0;
-  }
+    /* Enforce row bg color to show through ALL cells */
+    .fc .fc-list-table {
+        border-collapse: separate;
+        /* to prevent weird pixel seams on mobile */
+        border-spacing: 0;
+    }
 
-  /* Force ALL cells to inherit the row's bg color */
-  .fc .fc-list-event td {
-    background-color: inherit !important;
-    color: var(--color-maastricht) !important;
+    /* Force ALL cells to inherit the row's bg color */
+    .fc .fc-list-event td {
+        background-color: inherit !important;
+        color: var(--color-maastricht) !important;
 
-    /* Remove internal separators (white lines) on android */
-    border: 0 !important;
-    background-clip: padding-box;
-    padding: 0.85rem 0.85rem !important;
-  }
+        /* Remove internal separators (white lines) on android */
+        border: 0 !important;
+        background-clip: padding-box;
+        padding: 0.85rem 0.85rem !important;
+    }
 
-  .fc .fc-list-event-time {
-    background-color: inherit !important;
-    color: var(--color-maastricht) !important;
-    background-clip: padding-box;
-    padding: 0.85rem 0.85rem !important;
-    display: table-cell !important;
-    white-space: nowrap;
-    font-weight: 350;
-    font-size: 0.6em;
-    margin-bottom: 1px;
-  }
+    .fc .fc-list-event-time {
+        background-color: inherit !important;
+        color: var(--color-maastricht) !important;
+        background-clip: padding-box;
+        padding: 0.85rem 0.85rem !important;
+        display: table-cell !important;
+        white-space: nowrap;
+        font-weight: 350;
+        font-size: 0.6em;
+        margin-bottom: 1px;
+    }
 
-  /* gfx columin inheritance (row color, prevent shaping) */
-  .fc .fc-list-event-graphic {
-    display: none;
-  }
- 
-  /* Soften outer edge of the row that have color */
-  .fc .fc-list-event {
-    border: 1px solid var(--color-charcoal) !important;
-    border-radius: 12px !important;
-    overflow: hidden !important; /* round corner clip correction for iOS */
-    margin: 0.53rem 0.53rem !important;
-    padding: 0.1em 0.2em;
-    max-height: none;
+    /* gfx columin inheritance (row color, prevent shaping) */
+    .fc .fc-list-event-graphic {
+        display: none;
+    }
 
-    /*
+    /* Soften outer edge of the row that have color */
+    .fc .fc-list-event {
+        border: 1px solid var(--color-charcoal) !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        /* round corner clip correction for iOS */
+        margin: 0.53rem 0.53rem !important;
+        padding: 0.1em 0.2em;
+        max-height: none;
+
+        /*
     - Fallback after testing
     -webkit-tap-highlight-color: transparent !important;
     */
-  }
+    }
 
-  .fc .fc-list-event td:first-child {
-    padding: 0 !important;
-    border: 0 !important;
-    width: 0 !important;
-  }
+    .fc .fc-list-event td:first-child {
+        padding: 0 !important;
+        border: 0 !important;
+        width: 0 !important;
+    }
 
-  .fc .fc-list-event a,
-  .fc .fc-list-event a:active,
-  .fc .fc-list-event a:visited,
-  .fc .fc-list-event a:hover {
-    background: transparent !important;
-    -webkit-tap-highlight-color: transparent !important;
-  }
-  
-  /* iOS/Safari specific fixes */
-  /* iOS/Safari kill active highlight fill */
-  .fc .fc-list-event a:active {
-    opacity: 1 !important;
-  }
+    .fc .fc-list-event a,
+    .fc .fc-list-event a:active,
+    .fc .fc-list-event a:visited,
+    .fc .fc-list-event a:hover {
+        background: transparent !important;
+        -webkit-tap-highlight-color: transparent !important;
+    }
 
-  /* iOS/Safari kill focus ring / focus paint */
-  .fc .fc-list-event a:focus,
-  .fc .fc-list-event a:focus-visible {
-    outline: none !important;
-    box-shadow: none !important;
-  }
+    /* iOS/Safari specific fixes */
+    /* iOS/Safari kill active highlight fill */
+    .fc .fc-list-event a:active {
+        opacity: 1 !important;
+    }
 
-  .fc .fc-list-event-title {
-    border-top: 1px solid var(--color-charcoal);
-    padding-top: 0.75rem;
-    margin-top: 0.25rem;
-    font-size: 0.75em;
-    line-height: 1em;
-    font-weight: 450;
-  }
+    /* iOS/Safari kill focus ring / focus paint */
+    .fc .fc-list-event a:focus,
+    .fc .fc-list-event a:focus-visible {
+        outline: none !important;
+        box-shadow: none !important;
+    }
 
-  /* catch all paint selection background fix  */
-  .fc .fc-list-event *::selection {
-    background: transparent;
-  }
+    .fc .fc-list-event-title {
+        border-top: 1px solid var(--color-charcoal);
+        padding-top: 0.75rem;
+        margin-top: 0.25rem;
+        font-size: 0.75em;
+        line-height: 1em;
+        font-weight: 450;
+    }
 
-  /* Day header row consistency & border(+outline) correction */
-  .fc .fc-list-day-cushion,
-  .fc .fc-list-day-cushion td {
-    background: var(--color-azureish) !important;
-    border-top: 1px solid var(--color-charcoal);
-    border-bottom: 1px solid var(--color-charcoal);
-    border-left: 1px solid var(--color-charcoal);
-    border-right: 1px solid var(--color-charcoal);
-  }
+    /* catch all paint selection background fix  */
+    .fc .fc-list-event *::selection {
+        background: transparent;
+    }
 
-  /* Typography corrections */
+    /* Day header row consistency & border(+outline) correction */
+    .fc .fc-list-day-cushion,
+    .fc .fc-list-day-cushion td {
+        background: var(--color-azureish) !important;
+        border-top: 1px solid var(--color-charcoal);
+        border-bottom: 1px solid var(--color-charcoal);
+        border-left: 1px solid var(--color-charcoal);
+        border-right: 1px solid var(--color-charcoal);
+    }
 
-  .fc .fc-list-day-cushion td {
-    padding: 0.75rem 0.85rem !important;
-  }
+    /* Typography corrections */
 
-  .fc .fc-list-day-text,
-  .fc .fc-list-day-side-text {
-    font-weight: 600;
-    letter-spacing: 0.2px;
-  }
+    .fc .fc-list-day-cushion td {
+        padding: 0.75rem 0.85rem !important;
+    }
 
-  /* Stacked events divider correction */
-  .fc .fc-list-event + .fc-list-event td {
-    border-top: 1px solid var(--color-charcoal) !important;
-  }
+    .fc .fc-list-day-text,
+    .fc .fc-list-day-side-text {
+        font-weight: 600;
+        letter-spacing: 0.2px;
+    }
 
-  /* Last (day) event + Next Day header divider correction 
+    /* Stacked events divider correction */
+    .fc .fc-list-event+.fc-list-event td {
+        border-top: 1px solid var(--color-charcoal) !important;
+    }
+
+    /* Last (day) event + Next Day header divider correction 
   .fc .fc-list-event:last-of-type td {
     border-bottom: 1px solid var(--color-charcoal) !important;
   } */
 
-  /* Accessibility/Contrast + Focus */
-  .fc .fc-list-event-time,
-  .fc .fc-list-event-title,
-  .fc .fc-list-event-title a {
-    opacity: 1 !important; /* avoid contrast loss <-> opacity */
-  }
+    /* Accessibility/Contrast + Focus */
+    .fc .fc-list-event-time,
+    .fc .fc-list-event-title,
+    .fc .fc-list-event-title a {
+        opacity: 1 !important;
+        /* avoid contrast loss <-> opacity */
+    }
 
-  .fc .fc-list-event-title,
-  .fc .fc-list-event-title a {
-    color: var(--color-maastricht) !important;
-  }
+    .fc .fc-list-event-title,
+    .fc .fc-list-event-title a {
+        color: var(--color-maastricht) !important;
+    }
 
-  /* Visible focus ring (kb/accessibility) */
-  .fc .fc-list-event a:focus-visible {
-    outline: 2px solid var(--color-maastricht);
-    outline-offset: 3px;
-    border-radius: 10px;
-  }
+    /* Visible focus ring (kb/accessibility) */
+    .fc .fc-list-event a:focus-visible {
+        outline: 2px solid var(--color-maastricht);
+        outline-offset: 3px;
+        border-radius: 10px;
+    }
 
-  /* event-dot soften */
-  .fc .fc-list-event-dot {
-    margin: 0.45rem 0 0 0.33rem !important;
-    border-width: 6px !important;
-  }
+    /* event-dot soften */
+    .fc .fc-list-event-dot {
+        margin: 0.45rem 0 0 0.33rem !important;
+        border-width: 6px !important;
+    }
 
-} /* End @media section*/
+}
 
-
+/* End @media section*/

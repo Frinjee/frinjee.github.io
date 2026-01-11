@@ -49,3 +49,16 @@
     border: 0 !important;
     background-color: inherit !important;
   }
+
+    /* iOS/Safari kill block highlight */
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-time,
+  .fc .fc-list-event-graphic {
+    background: inherit !important;
+    color: inherit !important;
+  }
+
+    .fc .fc-event-title {
+    font-size: 0.75em;
+    line-height: 1em;
+  }
