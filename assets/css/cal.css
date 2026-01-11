@@ -514,8 +514,10 @@ h1 {
     border-top: 0 !important;
     border-bottom: 0 !important;
     background-clip: padding-box;
+  }
 
-     /* Soften outer edge of the row that have color */
+  /* Soften outer edge of the row that have color */
+  .fc .fc-list-event {
     border-radius: 10px;
     overflow: hidden; /* round corner clip correction for iOS */
   }
