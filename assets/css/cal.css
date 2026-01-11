@@ -505,7 +505,6 @@ h1 {
   /* ---------- Mobile List View Fixes ---------- */
 
   /* Enforce row bg color to show through ALL cells */
-  .fc .fc-list, 
   .fc .fc-list-table {
     border-collapse: separate; /* to prevent weird pixel seams on mobile */
     border-spacing: 0;
@@ -562,12 +561,7 @@ h1 {
     background: transparent !important;
     -webkit-tap-highlight-color: transparent !important;
   }
-
-  .fc .fc-list-event a:focus,
-  .fc .fc-list-event a:focus-visible {
-    outline: none !important;
-  }
-
+  
   /* iOS/Safari specific fixes */
   /* iOS/Safari kill active highlight fill */
   .fc .fc-list-event a:active {
@@ -579,14 +573,6 @@ h1 {
   .fc .fc-list-event a:focus-visible {
     outline: none !important;
     box-shadow: none !important;
-  }
-
-  /* iOS/Safari kill block highlight */
-  .fc .fc-list-event-title,
-  .fc .fc-list-event-time,
-  .fc .fc-list-event-graphic {
-    background: inherit !important;
-    color: inherit !important;
   }
 
   .fc .fc-list-event-title {
