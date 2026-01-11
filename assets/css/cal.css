@@ -527,21 +527,43 @@ h1 {
     overflow: hidden; /* round corner clip correction for iOS */
   }
 
-  /* Remove clickable areas painting background */
-  .fc .fc-list-event-time {
+  .fc .fc-list-event a,
+  .fc .fc-list-event a:active,
+  .fc .fc-list-event a:visited,
+  .fc .fc-list-event a:hover {
     background: transparent !important;
-    color:inherit !important;
-  }
-  .fc .fc-list-event-title a,
-  .fc .fc-list-event-time a:active,
-  .fc .fc-list-event-time a:visited {
-    background: transparent !important;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent !important;
   }
 
   .fc .fc-list-event a:focus,
   .fc .fc-list-event a:focus-visible {
     outline: none !important;
+  }
+
+  /* iOS/Safari specific fixes */
+  /* iOS/Safari kill active highlight fill */
+  .fc .fc-list-event a:active {
+    opacity: 1 !important;
+  }
+
+  /* iOS/Safari kill focus ring / focus paint */
+  .fc .fc-list-event a:focus,
+  .fc .fc-list-event a:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+
+  /* iOS/Safari kill block highlight */
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-time,
+  .fc .fc-list-event-graphic {
+    background: transparent !important;
+    color:inherit !important;
+  }
+
+  /* catch all paint selection background fix  */
+  .fc .fc-list-event *::selection {
+    background: transparent;
   }
 
   /* Day header row consistency */
