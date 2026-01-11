@@ -495,6 +495,13 @@ h1 {
     padding: 0.08rem 0.3rem;
   }
 
+  /* ---------- Mobile Calendar Outline/Separator Correctors ---------- */
+  .fc .fc-list {
+    border: 1px solid var(--color-charcoal);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
   /* ---------- Mobile List View Fixes ---------- */
 
   /* Enforce row bg color to show through ALL cells */
@@ -510,9 +517,12 @@ h1 {
     color: var(--color-maastricht) !important;
 
     /* Remove internal separators (white lines) on android */
-    border-top: 0 !important;
-    border-bottom: 0 !important;
+    border-top: 1px solid var(--color-charcoal) !important;
+    border-bottom: 1px solid var(--color-charcoal) !important;
+    border-left: 1px solid var(--color-charcoal) !important;
+    border-right: 1px solid var(--color-charcoal) !important;
     background-clip: padding-box;
+    padding: 0.85rem 0.85rem !important;
   }
 
   /* gfx columin inheritance (row color, prevent shaping) */
@@ -525,6 +535,8 @@ h1 {
   .fc .fc-list-event {
     border-radius: 10px;
     overflow: hidden; /* round corner clip correction for iOS */
+    margin: 0.53rem 0.53rem !important;
+    border-radius: 12px;
     /*
     - Fallback after testing
     -webkit-tap-highlight-color: transparent !important;
@@ -576,20 +588,47 @@ h1 {
     background: var(--color-azureish) !important;
     border-top: 1px solid var(--color-charcoal);
     border-bottom: 1px solid var(--color-charcoal);
+    border-left: 1px solid var(--color-charcoal);
+    border-right: 1px solid var(--color-charcoal);
   }
 
-  /* Space, Separator for event rows */
-  .fc .fc-list-event {
-    margin-top: 0.4rem;
+  /* Typography corrections */
+
+  .fc .fc-list-day-cushion td {
+    padding: 0.75rem 0.85rem !important;
+  }
+
+  .fc .fc-list-day-text,
+  .fc .fc-list-day-side-text {
+    font-weight: 600;
+    letter-spacing: 0.2px;
   }
 
   /* Stacked events divider correction */
   .fc .fc-list-event + .fc-list-event td {
-    border-top: 1px solid var(--color-charcoal);
+    border-top: 1px solid var(--color-charcoal) !important;
   }
 
   /* Last (day) event + Next Day header divider correction */
   .fc .fc-list-event:last-of-type td {
-    border-bottom: 1px solid var(--color-charcoal);
+    border-bottom: 1px solid var(--color-charcoal) !important;
   }
-}
+
+  /* Accessibility/Contrast + Focus */
+  .fc .fc-list-event-time,
+  .fc .fc-list-event-title,
+  .fc .fc-list-event-title a {
+    color: var(--color-maastricht) !important;
+    opacity: 1 !important; /* avoid contrast loss <-> opacity */
+  }
+
+  /* Visible focus ring (kb/accessibility) */
+  .fc .fc-list-event a:focus-visible {
+    outline: 2px solid var(--color-maastricht);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+
+} /* End @media section*/
+
+
