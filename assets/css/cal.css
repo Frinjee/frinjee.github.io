@@ -399,44 +399,6 @@ h1 {
   color: var(--color-celestial);
 }
 
-/* ---------- Mobile List View Fixes ---------- */
-
-/* Enforce row bg color to show through ALL cells */
-.fc .fc-list, 
-.fc .fc-list-table {
-  border-collapse: separate; /* to prevent weird pixel seams on mobile */
-  border-spacing: 0;
-}
-
-.fc .fc-list-event,
-.fc .fc-list-event td {
-  background: transparent !important; /* important to prevent iOS white fill */
-}
-
-/* Remove internal separators (white lines) on android */
-.fc .fc-list-event td {
-  border-top: 0 !important;
-  border-bottom: 0 !important;
-  background-clip: padding-box;
-}
-
-/* Soften outer edge of the row that have color */
-.fc .fc-list-event {
-  border-radius: 10px;
-  overflow: hidden; /* round corner clip correction for iOS */
-}
-
-/* Remove clickable areas painting background */
-.fc .fc-list-event-title a,
-.fc .fc-list-event-time {
-  background: transparent !important;
-}
-
-/* Day header row consistency */
-.fc .fc-list-day-cushion,
-.fc .fc-list-day-cushion td {
-  background: var(--color-azureish) !important;
-}
 
 
 /* ---------- Nav Button(s) & Toggle Icon Cleanup ---------- */
@@ -532,6 +494,45 @@ h1 {
   .org-badge {
     font-size: 0.6rem;
     padding: 0.08rem 0.3rem;
+  }
+
+  /* ---------- Mobile List View Fixes ---------- */
+
+  /* Enforce row bg color to show through ALL cells */
+  .fc .fc-list, 
+  .fc .fc-list-table {
+    border-collapse: separate; /* to prevent weird pixel seams on mobile */
+    border-spacing: 0;
+  }
+
+  .fc .fc-list-event,
+  .fc .fc-list-event td {
+    background: transparent !important; /* important to prevent iOS white fill */
+  }
+
+  /* Remove internal separators (white lines) on android */
+  .fc .fc-list-event td {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+    background-clip: padding-box;
+  }
+
+  /* Soften outer edge of the row that have color */
+  .fc .fc-list-event {
+    border-radius: 10px;
+    overflow: hidden; /* round corner clip correction for iOS */
+  }
+
+  /* Remove clickable areas painting background */
+  .fc .fc-list-event-title a,
+  .fc .fc-list-event-time {
+    background: transparent !important;
+  }
+
+  /* Day header row consistency */
+  .fc .fc-list-day-cushion,
+  .fc .fc-list-day-cushion td {
+    background: var(--color-azureish) !important;
   }
 
 }
