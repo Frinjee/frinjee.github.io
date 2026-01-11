@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { passive: true });
 
     el.addEventListener("touchend", e => {
-      endX = (e.touchesChanged && e.touchesChanged[0] ? e.touchesChanged[0].screenX : 0);
+      endX = (e.changedTouches && e.changedTouches[0] ? e.changedTouches[0].screenX : 0);
       const delta = endX - startX;
 
       if(Math.abs(delta) > 50) {
