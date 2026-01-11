@@ -525,6 +525,10 @@ h1 {
   .fc .fc-list-event {
     border-radius: 10px;
     overflow: hidden; /* round corner clip correction for iOS */
+    /*
+    - Fallback after testing
+    -webkit-tap-highlight-color: transparent !important;
+    */
   }
 
   .fc .fc-list-event a,
@@ -566,10 +570,26 @@ h1 {
     background: transparent;
   }
 
-  /* Day header row consistency */
+  /* Day header row consistency & border(+outline) correction */
   .fc .fc-list-day-cushion,
   .fc .fc-list-day-cushion td {
     background: var(--color-azureish) !important;
+    border-top: 1px solid var(--color-charcoal);
+    border-bottom: 1px solid var(--color-charcoal);
   }
 
+  /* Space, Separator for event rows */
+  .fc .fc-list-event {
+    margin-top: 0.4rem;
+  }
+
+  /* Stacked events divider correction */
+  .fc .fc-list-event + .fc-list-event td {
+    border-top: 1px solid var(--color-charcoal);
+  }
+
+  /* Last (day) event + Next Day header divider correction */
+  .fc .fc-list-event:last-of-type td {
+    border-bottom: 1px solid var(--color-charcoal);
+  }
 }
