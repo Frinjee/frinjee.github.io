@@ -217,6 +217,7 @@ h1 {
   opacity: 0.5;
 }
 
+
 /* ---------- FullCalendar Grid & Day Cells ---------- */
 
 /* Grid & day backgrounds */
@@ -399,8 +400,6 @@ h1 {
   color: var(--color-celestial);
 }
 
-
-
 /* ---------- Nav Button(s) & Toggle Icon Cleanup ---------- */
 
 /* FC prev & next buttons (circle + center) */
@@ -505,20 +504,18 @@ h1 {
     border-spacing: 0;
   }
 
-  .fc .fc-list-event,
+  /* listWeek events css vars (flex iOS and Android) */
   .fc .fc-list-event td {
-    background: transparent !important; /* important to prevent iOS white fill */
-  }
+    background-color: var(--fc-event-bg-color, var(--color-link_water)) !important;
+    border-color: var(--fc-event-border-color, rgba(0,0,0,0.12)) !important;
+    color: var(--fc-event-text-color, var(--color-maastricht)) !important;
 
-  /* Remove internal separators (white lines) on android */
-  .fc .fc-list-event td {
+    /* Remove internal separators (white lines) on android */
     border-top: 0 !important;
     border-bottom: 0 !important;
     background-clip: padding-box;
-  }
 
-  /* Soften outer edge of the row that have color */
-  .fc .fc-list-event {
+     /* Soften outer edge of the row that have color */
     border-radius: 10px;
     overflow: hidden; /* round corner clip correction for iOS */
   }
@@ -527,6 +524,7 @@ h1 {
   .fc .fc-list-event-title a,
   .fc .fc-list-event-time {
     background: transparent !important;
+    color:inherit !important;
   }
 
   /* Day header row consistency */

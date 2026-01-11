@@ -32,3 +32,9 @@
     align-items: center;
     justify-content: center;
 }
+
+
+.fc .fc-list-event,
+  .fc .fc-list-event td {
+    background: transparent !important; /* important to prevent iOS white fill */
+  }
