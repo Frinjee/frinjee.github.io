@@ -415,7 +415,7 @@ h1 {
 
 /* ---------- Responsive (Mobile) Adjustments ---------- */
 
-@media (max-width: 600px) {
+@media (max-width: 640px) {
   .calendar-wrapper {
     padding: 0.25rem 0.5rem;
   }
