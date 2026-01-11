@@ -462,21 +462,6 @@ h1 {
     max-height: 5em;
   }
 
-  .fc .fc-event-title {
-    font-size: 0.75em;
-    line-height: 1em;
-  }
-
-  .fc .fc-event-time {
-    font-size: 0.6em;
-    margin-bottom: 1px;
-  }
-
-  .fc .fc-event {
-    padding: 0.1em 0.2em;
-    max-height: none;
-  }
-
   .fc .fc-col-header-cell-cushion {
     font-size: 0.8em;
     padding: 0.4em 0;
@@ -529,6 +514,8 @@ h1 {
     display: table-cell !important;
     white-space: nowrap;
     font-weight: 450;
+    font-size: 0.6em;
+    margin-bottom: 1px;
   }
 
   /* gfx columin inheritance (row color, prevent shaping) */
@@ -542,6 +529,9 @@ h1 {
     border-radius: 12px !important;
     overflow: hidden !important; /* round corner clip correction for iOS */
     margin: 0.53rem 0.53rem !important;
+    padding: 0.1em 0.2em;
+    max-height: none;
+
     /*
     - Fallback after testing
     -webkit-tap-highlight-color: transparent !important;
@@ -579,6 +569,8 @@ h1 {
     border-top: 1px solid var(--color-charcoal);
     padding-top: 0.75rem;
     margin-top: 0.25rem;
+    font-size: 0.75em;
+    line-height: 1em;
   }
 
   /* catch all paint selection background fix  */
@@ -613,10 +605,10 @@ h1 {
     border-top: 1px solid var(--color-charcoal) !important;
   }
 
-  /* Last (day) event + Next Day header divider correction */
+  /* Last (day) event + Next Day header divider correction 
   .fc .fc-list-event:last-of-type td {
     border-bottom: 1px solid var(--color-charcoal) !important;
-  }
+  } */
 
   /* Accessibility/Contrast + Focus */
   .fc .fc-list-event-time,
