@@ -76,10 +76,10 @@
 
     📍 ~~"Jump-to" first listed event week (default-onload)~~ ✔️
 
-    📍 Ensure theme/function conitinuity
+    📍 ~~Ensure theme/function conitinuity~~ ✔️
 
-    📍 Bottom-sheet style event modal
+    📍 ~~Bottom-sheet style event modal~~ ✔️
 
-    📍 Sticky "Upcoming Events" mini card
+    📍 ~~Sticky "Upcoming Events" mini card~~ ✔️
 
-    📍 Haptic feedback for gesture interactions
+    📍 ~~Haptic feedback for gesture interactions~~ ✔️
