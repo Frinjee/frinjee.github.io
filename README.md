@@ -72,9 +72,9 @@
 
 ### 📱 **Mobile Plans**
 
-    📍 Gestures (Swipe integration)
+    📍 ~~Gestures (Swipe integration)~~ ✔️
 
-    📍 "Jump-to" first listed event week (default-onload)
+    📍 ~~"Jump-to" first listed event week (default-onload)~~ ✔️
 
     📍 Ensure theme/function conitinuity
 

@@ -7,6 +7,22 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* =====================================
+         Haptics: safe no-op when supported
+     ===================================== */
+  function hapticSwipe(pattern = 10) {
+    try {
+      if (
+        typeof navigator !== "undefined" &&
+        typeof navigator.vibrate === "function" &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        navigator.vibrate(pattern);
+      }
+    } catch (_){}
+  }
+
+
+  /* =====================================
          Swipe Integration Mobile Utility
      ===================================== */
   function mobileSwipeListener(el, onLeft, onRight) {
@@ -22,6 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const delta = endX - startX;
 
       if(Math.abs(delta) > 50) {
+        hapticSwipe(10);
         delta < 0 ? onLeft() : onRight();
       }
 
