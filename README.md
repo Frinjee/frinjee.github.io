@@ -10,9 +10,9 @@
 
 ### 🔹 Events are
 
-    1. Normalized
-    2. Diffed against existing datasets
-    3. Logged (additions/updates/removals) 
+1. Normalized
+2. Diffed against existing datasets
+3. Logged (additions/updates/removals) 
 
 ### 🔹 The resulting dataset is written to "events.json", which only commits back to the repository when changes are detected
 
@@ -24,12 +24,12 @@
 
 ### 🔹 Each event has the following attributes
 
-    1. Title
-    2. Start/End Time
-    3. Description
-    4. Registration URL (UBALT BeeInvolved Page)
-    5. Hosting Org(s)
-    6. Primary Org Color Code
+1. Title
+2. Start/End Time
+3. Description
+4. Registration URL (UBALT BeeInvolved Page)
+5. Hosting Org(s)
+6. Primary Org Color Code
     
 ## 🎨 **Org Color Codes**
 
@@ -39,36 +39,36 @@
 
 ### 💻 **Desktop**
 
-    1. MonthGrid View by default
-    2. Slim, stacked events with intelligent scroll behavior
-    3. Hover tooltips for quick details
-    4. Click -> Modal View for full event information
-    5. "Upcoming Events" auto-scroll card (transitions, hover-pause, direct registration access (via click))
+1. MonthGrid View by default
+2. Slim, stacked events with intelligent scroll behavior
+3. Hover tooltips for quick details
+4. Click -> Modal View for full event information
+5. "Upcoming Events" auto-scroll card (transitions, hover-pause, direct registration access (via click))
 
 ### 📱 **MOBILE**
 
-    1. Automatic switch to ListView for readability
-    2. Compact typography and spacing
-    3. Responive touch friendly navigation
-    4. Parity with desktop visuals and functions
+1. Automatic switch to ListView for readability
+2. Compact typography and spacing
+3. Responive touch friendly navigation
+4. Parity with desktop visuals and functions
 
 ## ‼️ **TO DO** ‼️
 
 ### 💻 **Desktop Plans**
 
-    📍 Multi-day agenda overview for the selected week
+📍 Multi-day agenda overview for the selected week
 
-    📍 Hover preview (full-card modal)
+📍 Hover preview (full-card modal)
 
-    📍 Change "Upcoming Events" transition -> Scrolling left to right (vs current fade transition)
+📍 Change "Upcoming Events" transition -> Scrolling left to right (vs current fade transition)
 
-    📍 Add descriptions for Orgs that are tracked
+📍 Add descriptions for Orgs that are tracked
 
-    📍 Add function allowing adding an event to personal calendar (gcal, ical, outlook, ics file dl)
+📍 Add function allowing adding an event to personal calendar (gcal, ical, outlook, ics file dl)
 
-    📍 Expose event change history (date/time/location updates, etc)
+📍 Expose event change history (date/time/location updates, etc)
 
-    📍 Search/Filter module (by event/org)
+📍 Search/Filter module (by event/org)
 
 ### 📱 **Mobile Plans**
 
