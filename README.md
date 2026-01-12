@@ -12,7 +12,7 @@
 
 1. Normalized
 2. Diffed against existing datasets
-3. Logged (additions/updates/removals) 
+3. Logged (additions/updates/removals)
 
 ### 🔹 The resulting dataset is written to "events.json", which only commits back to the repository when changes are detected
 
@@ -30,7 +30,7 @@
 4. Registration URL (UBALT BeeInvolved Page)
 5. Hosting Org(s)
 6. Primary Org Color Code
-    
+
 ## 🎨 **Org Color Codes**
 
 ![Org Color Codes](https://github.com/Frinjee/frinjee.github.io/blob/main/assets/imgs/c_codes.png?raw=true)
