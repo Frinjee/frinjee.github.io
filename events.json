@@ -546,6 +546,19 @@
     "url": "https://involvement.ubalt.edu/rsvp?id=2135591"
   },
   {
+    "id": "4911efa1063e4e652062b91cfe8f7d3b182026_10:45:29_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "BSU General Body Meeting "
+    },
+    "start": "2026-01-30T23:00:00.000Z",
+    "end": "2026-01-31T00:00:00.000Z",
+    "description": "The official general body meeting of the Black Student Union. Open to all students to connect, engage, and share opportunities within the University of Baltimore (UBalt) community. Zoom Passcode: UBaltBSU ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135600"
+  },
+  {
     "id": "6d4b7958ea68e1f2623b3366080bbe241122026_12:16:34_PM@campusgroups.com",
     "title": {
       "params": {
@@ -596,6 +609,19 @@
     "end": "2026-02-26T00:00:00.000Z",
     "description": "This event is the first step required for new members to complete towards becoming an inducted member. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2134906"
+  },
+  {
+    "id": "49b210d43f3a0d361e662fa441a32487182026_10:55:53_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "BSU General Body Meeting "
+    },
+    "start": "2026-02-27T23:00:00.000Z",
+    "end": "2026-02-28T00:00:00.000Z",
+    "description": "The official general body meeting of the Black Student Union. Open to all students to connect, engage, and share opportunities within the University of Baltimore (UBalt) community. Zoom Passcode: UBaltBSU ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135601"
   },
   {
     "id": "238270a812aa951f71f1a326b362617f12162025_12:36:42_PM@campusgroups.com",
