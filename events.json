@@ -650,6 +650,19 @@
     "url": "https://involvement.ubalt.edu/rsvp?id=2135539"
   },
   {
+    "id": "0d3c05f0c8c4ee60ce761b30dbfb44a3182026_10:55:54_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "BSU General Body Meeting "
+    },
+    "start": "2026-03-27T22:00:00.000Z",
+    "end": "2026-03-27T23:00:00.000Z",
+    "description": "The official general body meeting of the Black Student Union. Open to all students to connect, engage, and share opportunities within the University of Baltimore (UBalt) community. Zoom Passcode: UBaltBSU ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135602"
+  },
+  {
     "id": "be8ee81c3d01b578d8958fa5ad008b9c11222025_7:17:14_PM@campusgroups.com",
     "title": {
       "params": {
@@ -674,6 +687,19 @@
     "end": "2026-04-16T22:00:00.000Z",
     "description": "It is our tradition to host a Block Party in the Spring Semester! More details to come soon. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135510"
+  },
+  {
+    "id": "7526aac013e0b8fbcb992a488ef4fe88182026_10:55:55_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "BSU General Body Meeting "
+    },
+    "start": "2026-04-24T22:00:00.000Z",
+    "end": "2026-04-24T23:00:00.000Z",
+    "description": "The official general body meeting of the Black Student Union. Open to all students to connect, engage, and share opportunities within the University of Baltimore (UBalt) community. Zoom Passcode: UBaltBSU ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135603"
   },
   {
     "id": "1ba7c23af9090a1341e057f931f9341011132025_10:41:32_AM@campusgroups.com",
@@ -713,5 +739,18 @@
     "end": "2026-05-06T22:00:00.000Z",
     "description": "An end-of-semester event hosted by SEB that helps students relax and recharge through games, giveaways, and wellness activities before finals week. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135522"
+  },
+  {
+    "id": "ea3941c97ae3bfa6509d770b25dd73f212282025_11:26:17_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Black Tie Night of Elegance Gala "
+    },
+    "start": "2026-05-15T23:00:00.000Z",
+    "end": "2026-05-16T02:00:00.000Z",
+    "description": "Join us for a beautiful night of elegance, cuisine, music, and sisterhood. We’ll honor our WoCSA sisters with graduation cordings, awards for members of WoCSA, BSU, SEB, and ODK, and uplifting words of wisdom. Black Tie attire required. Hosted by WoCSA, BSU, SEB, and ODK ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135585"
   }
 ]
