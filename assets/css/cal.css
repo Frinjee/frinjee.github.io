@@ -493,11 +493,25 @@ h1 {
     }
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
-    .fc .fc-toolbar-chunk:has(.fc-toolbar-title) {
-        position: relative;
+    .fc .fc-header-toolbar .fc-toolbar-chunk {
         display: flex;
-        justify-content: center;
         align-items: center;
+    }
+
+    .fc .fc-header-toolbar .fc-toolbar-chunk:first-child {
+        flex: 0 0 auto;
+        margin-right: 0;
+    }
+
+    .fc .fc-header-toolbar .fc-toolbar-chunk:last-child {
+        flex: 0 0 auto;
+        margin-left: 0;
+    }
+
+    .fc .fc-header-toolbar .fc-toolbar-chunk:has(.fc-toolbar-title) {
+        fleX: 1 1 auto;
+        position: relative;
+        justify-content: center;
     }
 
     .fc .fc-toolbar-title {
