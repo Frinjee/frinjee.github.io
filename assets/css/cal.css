@@ -493,7 +493,6 @@ h1 {
     }
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
-    .fc .fc-header-toolbar,
     .fc .fc-toolbar-chunk:has(.fc-toolbar-title) {
         position: relative;
         display: flex;
