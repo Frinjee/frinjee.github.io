@@ -493,9 +493,8 @@ h1 {
     }
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
-    .fc  .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) {
+    .fc  .fc-header-toolbar .fc-toolbar-chunk:has(.fc-toolbar-title) {
         position: relative;
-        flex: 1;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -511,8 +510,6 @@ h1 {
         left: 50% !important;
         top: 50% !important;
         transform: translate(-50%, -50%) !important;
-        margin: 0 !important;
-        z-index: 10;
         text-align: center;
         white-space: nowrap;
     }
