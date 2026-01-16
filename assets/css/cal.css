@@ -493,8 +493,8 @@ h1 {
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
     .fc .fc-toolbar-title {
-      font-size: 0.85rem;
-      font-weight: 400;
+      font-size: 1rem;
+      font-weight: 500;
       line-height: 1.1;
       pointer-events: none;
 
