@@ -509,7 +509,7 @@ h1 {
     }
 
     .fc .fc-header-toolbar .fc-toolbar-chunk:has(.fc-toolbar-title) {
-        fleX: 1 1 auto;
+        flex: 1 1 auto;
         position: relative;
         justify-content: center;
     }
