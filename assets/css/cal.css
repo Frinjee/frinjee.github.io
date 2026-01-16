@@ -493,7 +493,7 @@ h1 {
     }
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
-    .fc  .fc-header-toolbar .fc-toolbar-chunk:nth-child(1) {
+    .fc  .fc-header-toolbar .fc-toolbar-chunk:nth-child(3) {
         position: relative;
         flex: 1;
         display: flex;
