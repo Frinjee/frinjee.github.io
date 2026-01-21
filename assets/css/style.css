@@ -12,7 +12,21 @@ body {
 	background-color: var(--color-noir);
 }
 
+#dev-progress {
+	width: 100%;
+	background-color: grey;
+	text-align: left;
+}
 
+#dp-bar {
+	width: 63%;
+	height: 25px;
+	background-color: greenyellow;
+	border: #1b1717;
+	border-radius: 12px;
+	color:#1b1717;
+	text-align: center;
+}
 
 .sidebar-card,
 article {
