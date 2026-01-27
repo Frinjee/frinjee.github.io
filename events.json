@@ -390,19 +390,6 @@
     "url": "https://involvement.ubalt.edu/rsvp?id=2135626"
   },
   {
-    "id": "a822c4d50e6082d0a7a7f393e4e56e4f11122025_3:10:02_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "Welcome Week Game Night hosted by SEB and BSU"
-    },
-    "start": "2026-01-28T21:00:00.000Z",
-    "end": "2026-01-28T23:00:00.000Z",
-    "description": "?? Welcome Week Game Night! ?? Join the Student Events Board and Black Student Union on Wednesday, January 28 from 4–6 p.m. for an afternoon of fun on the Student Center First Floor! ?? In The Hive Game Room: • Pool • Air hockey • Board games ?? In the Lounge & Atrium: • Giant Jenga • Tetris XL • Large Uno • Dominoes • And more! ?? Snacks and drinks will be provided! ?? Register on Bee Involved: https://cglink.me/2g3/r2135521 Come play, relax, and kick off the semester with friends! ",
-    "url": "https://involvement.ubalt.edu/rsvp?id=2135521"
-  },
-  {
     "id": "26dc104c0c6a3751bf1dd7acafc71de1152026_9:05:36_PM@campusgroups.com",
     "title": {
       "params": {
@@ -414,6 +401,19 @@
     "end": "2026-01-29T23:00:00.000Z",
     "description": "Start Welcome Week on a cereal-ously fun note! 🥣✨ Join ODK, WoCSA, and the BSU for a Welcome Week Cereal Bar where you can mix and match your favorite cereals, milk, and toppings (with gluten- and dairy-free options available). Swing by to grab a bowl, reconnect with friends, meet new ones, and kick off the semester feeling welcomed and energized. We can’t wait to see you there! ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135591"
+  },
+  {
+    "id": "ffb5a0e23fc2e22b9464e3f1295f71251272026_10:04:40_AM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Game Night hosted by SEB, BSU and SGA "
+    },
+    "start": "2026-02-04T21:00:00.000Z",
+    "end": "2026-02-04T23:00:00.000Z",
+    "description": "Out of abundance of caution, we have decided to move Game Night to next Wednesday, February 4 from 4-6 p.m. Check out @UBaltSEB for any other updates! Game Night! Join the Student Events Board, Black Student Union, and Student Government Association on Wednesday, February 4 from 4–6 p.m. for an afternoon of fun on the Student Center First and Second Floor! UBalt Student Center- The Hive Game Room • Pool • Air hockey • Board games UBalt Student Center- Second Floor Lounge • Giant Jenga • Tetris XL • Large Uno • Dominoes • And more! Snacks and drinks will be provided in Second Floor Lounge! Register on Bee Involved (new registration link due to date/location updates): https://cglink.me/2g3/r2135651 Come play, relax, and kick off the semester with friends! ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135651"
   },
   {
     "id": "6d4b7958ea68e1f2623b3366080bbe241122026_12:16:34_PM@campusgroups.com",
