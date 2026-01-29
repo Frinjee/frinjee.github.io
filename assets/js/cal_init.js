@@ -100,9 +100,17 @@ document.addEventListener("DOMContentLoaded", function () {
         return transformed;
       });
 
+      //
+      const now = new Date();
+      const split = window.AppHandler
+                    ? window.AppHandler.splitEvents(events, now)
+                    : { calEvents: events, appEvents: []};
+      const calEvents = split.calEvents;
+      const appEvents = split.appEvents;
+
       const calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: "dayGridMonth",
-        events,
+        events: calEvents,
         height: "auto",
         eventDisplay: "block",
 
@@ -295,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
       /* =====================================
          "Jump-to First" Mobile Utility
          ===================================== */
-      const firstUpcoming = events
+      const firstUpcoming = calEvents
         .filter(e => e.start && new Date(e.start) > new Date())
         .sort((a,b) => new Date(a.start) - new Date(b.start))[0];
 
@@ -317,59 +325,58 @@ document.addEventListener("DOMContentLoaded", function () {
       /* =====================================
          Upcoming event Slim Card Integration
          ===================================== */
-      const upcomingEvents = events
+      const upcomingEvents = calEvents
         .filter(e => e.start && new Date(e.start) > new Date())
         .sort((a, b) => new Date(a.start) - new Date(b.start));
 
-      let upcomingIndex = 0;
-      let upcomingInterval = null;
+      function initSlide(cardEl, slideEvents, calendar) {
+        if (!cardEl || !slideEvents || !slideEvents.length) return;
 
-      const card = document.querySelector(".upcoming-event-card");
+        let idx = 0;
+        let interval =  null;
 
-      if (card && upcomingEvents.length) {
-        const titleEl = card.querySelector(".upcoming-event-title");
-        const datetimeEl = card.querySelector(".upcoming-event-date-time");
-        const contentEl = card.querySelector(".upcoming-event-content");
-        const prevBtn = card.querySelector(".prev");
-        const nextBtn = card.querySelector(".next");
-
+        const titleEl = cardEl.querySelector(".upcoming-event-title");
+        const datetimeEl = cardEl.querySelector(".upcoming-event-date-time");
+        const contentEl = cardEl.querySelector(".upcoming-event-content");
+        const prevBtn = cardEl.querySelector(".prev");
+        const nextBtn = cardEl.querySelector(".next");
+           
         const formatOptions = {
-          weekday: "short",
-          month: "short",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true
-        };
+            weekday: "short",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+          };
 
-        function renderUpcoming(fade = true) {
-          const event = upcomingEvents[upcomingIndex];
+        function render(fade = true)  {
+          const event = slideEvents[idx];
           const start = new Date(event.start);
           const end = event.end ? new Date(event.end) : null;
 
-          if (fade) {
-            card.style.opacity = 0;
-          }
+          if(fade) cardEl.style.opacity = 0;
 
           setTimeout(() => {
-
-            //Build org object for emoji function
             const orgEmojiEventObj = {
               Title: event.title,
-              Description: event.extendedProps.description || ""
+              Description: event.extendedProps.description  || ""
             };
 
-            // Proper function for displaying emojis within upcoming event title
-            const emoji = window.CalendarOrgs ? window.CalendarOrgs.getPrimaryOrgEmoji(orgEmojiEventObj) : "";
-            titleEl.textContent = emoji ? `${emoji} ${event.title}` : event.title;
-    
-            datetimeEl.textContent =
-              start.toLocaleString([], formatOptions) +
-              (end ? " – " + end.toLocaleString([], formatOptions) : "");
+            const emoji = window.CalendarOrgs
+                          ? window.CalendarOrgs.getPrimaryOrgEmoji(orgEmojiEventObj) : "";
+            
+            if (titleEl) titleEl.textContent = emoji ? `${emoji} ${event.title}` : event.title;
+
+            // for longer ranged app windows
+            if (datetimeEl) {
+              datetimeEl.textContent = start.toLocaleString([], formatOptions) +
+              (end ? " - " + end.toLocaleString([], formatOptions): "");
+            }
 
             // Add org badges to upcoming card if available
             if (window.CalendarOrgs && event.extendedProps.hostingOrg) {
-              const badgeContainer = card.querySelector(".upcoming-event-orgs");
+              const badgeContainer = cardEl.querySelector(".upcoming-event-orgs");
               if(badgeContainer) {
                 badgeContainer.innerHTML = "";
                 event.extendedProps.hostingOrg.forEach(org => {
@@ -379,62 +386,76 @@ document.addEventListener("DOMContentLoaded", function () {
 
                   // Use Existing ORG_COLOR_MAP if available
                   const colorVar = window.CalendarOrgs 
-                               ? window.CalendarOrgs.getPrimaryOrgColorVar({
-                               Title: event.title, 
-                               Description: event.extendedProps.description || ""
-                               }) : "var(--color-pigeon_post)";
-                  span.style.backgroundColor = colorVar;
-                  badgeContainer.appendChild(span);
-                });
-              } 
-            }
-
-            contentEl.onclick = (e) => {
-              e.preventDefault();
-              const calEvent = calendar.getEventById(event.id);
-              if (calEvent) {
-                calendar.trigger("eventClick", {
-                  event: calEvent,
-                  el: calendarEl,
-                  jsEvent: e,
-                  view: calendar.view
-                });
+                                  ? window.CalendarOrgs.getPrimaryOrgColorVar({
+                                  Title: event.title, 
+                                  Description: event.extendedProps.description || ""
+                                  }) : "var(--color-pigeon_post)";
+                                  span.style.backgroundColor = colorVar;
+                                  badgeContainer.appendChild(span);
+                  });
+                } 
               }
-            };
+              // click behavior (normal events -> modal via cal event click), (app items -> open url directly)
+              if (contentEl) {
+                contentEl.onclick = (e) => {
+                  e.preventDefault();
 
-            card.style.opacity = 1;
+                  const calEvents = calendar.getEventById(event.id);
+                  if(calEvents)  {
+                    calendar.trigger("eventClick", {
+                      event: calEvents,
+                      el: calendarEl,
+                      jsEvent: e,
+                      view: calendar.view
+                    });
+                    return;
+                  }
+
+                  if(event.extendedProps && event.extendedProps.url) {
+                    window.open(event.extendedProps.url, "_blank", "noopener");
+                  }
+                };
+              }
+
+              cardEl.style.opacity = 1;
           }, fade ? 180 : 0);
         }
 
-        function startAutoScroll() {
-          if (upcomingInterval) return;
-          upcomingInterval = setInterval(() => {
-            upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
-            renderUpcoming();
+        function startAuto() {
+          if(interval) return;
+          interval = setInterval(() => {
+            idx = (idx + 1) % slideEvents.length;
+            render();
           }, 6000);
         }
 
-        function stopAutoScroll() {
-          clearInterval(upcomingInterval);
-          upcomingInterval = null;
+        function stopAuto() {
+          clearInterval(interval);
+          interval = null;
         }
 
-        prevBtn.onclick = () => {
-          upcomingIndex = (upcomingIndex - 1 + upcomingEvents.length) % upcomingEvents.length;
-          renderUpcoming();
-        };
+        if (prevBtn) prevBtn.onclick = () => { idx = (idx - 1 + slideEvents.length) % slideEvents.length; render(); };
+        if (nextBtn) nextBtn.onclick = () => { idx = (idx + 1) % slideEvents.length; render(); };
 
-        nextBtn.onclick = () => {
-          upcomingIndex = (upcomingIndex + 1) % upcomingEvents.length;
-          renderUpcoming();
-        };
+        cardEl.addEventListener("mouseenter", stopAuto);
+        cardEl.addEventListener("mouseleave", startAuto);
 
-        card.addEventListener("mouseenter", stopAutoScroll);
-        card.addEventListener("mouseleave", startAutoScroll);
-
-        renderUpcoming(false);
-        startAutoScroll();
+        render(false);
+        startAuto();
       }
-    })
-    .catch((err) => console.error("Failed to load events:", err));
+
+      const upcomingCard = document.querySelector(".upcoming-event-card");
+      initSlide(upcomingCard, upcomingEvents, calendar);
+      
+      const appSlide = appEvents
+                      .filter(e => {
+                        const s = new Date (e.start);
+                        const en = e.end ? new Date(e.end) : null;
+                        const now = new Date();
+                        return s <= now && (!en || en > now);
+                      });
+      
+      const applicationCard = document.querySelector(".application-card");
+      initSlide(applicationCard, appSlide, calendar);
+    });
 });

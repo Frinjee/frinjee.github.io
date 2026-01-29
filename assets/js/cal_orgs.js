@@ -9,7 +9,7 @@ const ORG_MATCHERS = [
     {key: "CSEI", match: /center for student engagement and involvement|csei/i},
     {key: "DIS", match: /diversity and international services|\bdis\b/i},
     {key: "BSU", match:/black student union|\bbsu\b/i},
-    {key: "TitleIX | DEI", match:/title ix|diversity equity and inclusion|\bdei\b/i}
+    {key: "TitleIX", match:/title ix|diversity equity and inclusion|\bdei\b/i}
 ];
 
 /* ---------- ORG → COLOR MAP (CSS VARS) ---------- */
