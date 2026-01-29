@@ -26,3 +26,11 @@ Thumbs.db
 # todo
 todo.txt
 ./ignore/scraps.txt
+./ignore/notes.txt
+
+# imgs
+./imgs/start.png
+./imgs/wosca_icon.png
+./imgs/wosca_icon-bgremoved.png
+# misc
+deployment_ids.txt

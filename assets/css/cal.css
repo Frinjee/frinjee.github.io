@@ -56,13 +56,13 @@ body {
 
 /* Page Heading */
 h1 {
+    h1 {
     font-family: "Vend Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 550;
     font-style: normal;
     text-align: center;
-    margin-bottom: 0;
-    /* minimal spacing below heading */
+    margin: 0.35rem 0 0.1rem; /* top | left/right | bottom */
     color: var(--color-charcoal);
 }
 
@@ -93,6 +93,28 @@ h1 {
     color: var(--color-east_bay);
     border: solid;
     border-color: var(--color-blue_bayou)
+}
+
+/* --- Student Org Application section (match Upcoming Events) --- */
+.application-wrapper {
+    max-width: 925px;
+    margin: 0.35rem auto 0;
+    padding: 0 0.25rem;
+}
+
+.application-card {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background-color: var(--color-link_water);
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    margin-bottom: 0.05rem;
+    padding: 0.08rem 0.15rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    font-size: 0.8rem;
+    transition: opacity 0.25s ease;
+    opacity: 1;
 }
 
 /* ---------- FullCalendar Event Appearance ---------- */
@@ -492,13 +514,13 @@ h1 {
         padding: 0.08rem 0.3rem;
     }
     /* Make the applications block match Upcoming Events layout */
-    .applications-wrapper {
+    .application-wrapper {
     max-width: 925px;           /* same as .upcoming-events-wrapper */
     margin: 0.35rem auto 0;     /* slight separation between the two blocks */
     padding: 0 0.25rem;
     }
 
-    .applications-card {
+    .application-card {
     display: flex;              /* same as .upcoming-event-card */
     align-items: center;
     gap: 0.25rem;
