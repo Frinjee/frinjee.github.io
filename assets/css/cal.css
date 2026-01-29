@@ -68,9 +68,9 @@ h1 {
 /* Calendar Wrapper */
 .calendar-wrapper {
     max-width: 1000px;
-    margin: 0.2rem auto 0.5rem;
+    margin: 0 auto 0.5rem;
     /* closer to heading and upcoming events */
-    padding: 0.1rem 1rem 0.25rem;
+    padding: 0 1rem 0.25rem;
     /* shrink top and bottom padding */
     background-color: var(--color-eggshell);
     border-radius: 10px;
@@ -97,20 +97,27 @@ h1 {
 /* --- Student Org Application section (match Upcoming Events) --- */
 .application-wrapper {
     max-width: 925px;
-    margin: 0.35rem auto 0;
+    margin: 0.1rem auto 0;     /* match Upcoming spacing more closely */
     padding: 0 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .application-card {
+    width: 100%;              /* ensure it doesn’t “float” oddly */
+    box-sizing: border-box;
+
     display: flex;
     align-items: center;
     gap: 0.25rem;
+
     background-color: var(--color-link_water);
     border: 1px solid rgba(0, 0, 0, 0.15);
     border-radius: 8px;
     margin-bottom: 0.05rem;
     padding: 0.08rem 0.15rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+
     font-size: 0.8rem;
     transition: opacity 0.25s ease;
     opacity: 1;
@@ -481,8 +488,8 @@ h1 {
 
 @media (max-width: 640px) {
     .calendar-wrapper {
-        margin: 0.2rem auto 0.5rem;
-        padding: 0.22rem 0.5rem;
+        margin: 0 auto 0.5rem;
+        padding: 0 0.5rem;
     }
 
     #calendar {
@@ -513,26 +520,8 @@ h1 {
         padding: 0.08rem 0.3rem;
     }
     /* Make the applications block match Upcoming Events layout */
-    .application-wrapper {
-    max-width: 925px;           /* same as .upcoming-events-wrapper */
-    margin: 0.35rem auto 0;     /* slight separation between the two blocks */
-    padding: 0 0.25rem;
-    }
-
-    .application-card {
-    display: flex;              /* same as .upcoming-event-card */
-    align-items: center;
-    gap: 0.25rem;
-    background-color: var(--color-link_water);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    margin-bottom: 0.05rem;
-    padding: 0.08rem 0.15rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-    font-size: 0.8rem;
-    transition: opacity 0.25s ease;
-    opacity: 1;
-    }
+    .application-wrapper { margin: 0.1rem auto 0; }
+    .application-card { padding: 0.08rem 0.15rem; }
 
     /* ---------- Toolbar Title, Nav + Toggle Scaling ---------- */
     .fc .fc-toolbar-title {
