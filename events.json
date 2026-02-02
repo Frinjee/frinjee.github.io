@@ -1,18 +1,5 @@
 [
   {
-    "id": "205d5891951f939ff2ee2b712de9ffc99292025_2:13:27_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "SNT"
-    },
-    "start": "2025-11-04T23:00:00.000Z",
-    "end": "2025-11-04T23:30:00.000Z",
-    "description": "This event is to assist the members with making a SMART goal and accomplishing it. It also allows the members to meet one another and hold each other accountable. https://us04web.zoom.us/j/7152053241?pwd=tcLZ005bzmfpRLZb9TC5kgdAQIvsjF.1&omn=73397617004 Meeting ID: 715 205 3241 Passcode: 2024 ",
-    "url": "https://involvement.ubalt.edu/rsvp?id=2135397"
-  },
-  {
     "id": "f5a485b6adf0026093ca196a803c46ca8182025_12:58:52_PM@campusgroups.com",
     "title": {
       "params": {
@@ -390,6 +377,19 @@
     "url": "https://involvement.ubalt.edu/rsvp?id=2135605"
   },
   {
+    "id": "fe8d088192d903fedc52b7794190527a222026_3:17:21_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Global Crafting Corner: Make Black History Month tote bags with DIS!"
+    },
+    "start": "2026-02-11T18:00:00.000Z",
+    "end": "2026-02-11T20:00:00.000Z",
+    "description": "This Black History Month, join the Office of Diversity and International Services to create Black History tote bags. We have iron-on decals, markers and more! Stop by and enjoy hot coffee or tea as we craft together. ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135686"
+  },
+  {
     "id": "b8d4c81734abbe92445533fab379218d162026_2:44:35_PM@campusgroups.com",
     "title": {
       "params": {
@@ -596,6 +596,19 @@
     "end": "2026-03-18T23:00:00.000Z",
     "description": "This event is the second step required to become an inducted member of the NSLS. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2134907"
+  },
+  {
+    "id": "0ba8798c69eacb8b30649163cd6385361202026_6:33:02_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Book Discussion: Police Against the Movement - with Dr. Josh Davis"
+    },
+    "start": "2026-03-25T21:30:00.000Z",
+    "end": "2026-03-25T23:30:00.000Z",
+    "description": "Join the Office of Diversity and International Services, the History Club, the Helen P. Denit Honors Program, and the Black Law Students Association for a riveting discussion on how America's police surveilled, targeted, and sabotaged the Civil Rights movement in the 1960s--and how activists fought back with sit-ins, protests, and political resistance. On March 25, Dr. Joshua Davis will discuss his book Police Against the Movement with UBalt Law student and History program alum Ashely Wilson on the 12th Floor of the Angelos Law Center. ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135630"
   },
   {
     "id": "0d3c05f0c8c4ee60ce761b30dbfb44a3182026_10:55:54_PM@campusgroups.com",
