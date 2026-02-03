@@ -1,18 +1,5 @@
 [
   {
-    "id": "f5a485b6adf0026093ca196a803c46ca8182025_12:58:52_PM@campusgroups.com",
-    "title": {
-      "params": {
-        "ENCODING": "QUOTED-PRINTABLE"
-      },
-      "val": "Coffee Cart Chats"
-    },
-    "start": "2025-11-05T20:30:00.000Z",
-    "end": "2025-11-05T22:30:00.000Z",
-    "description": "The perk is on the move! Every other Wednesday during the Fall semester, come find the UBalt Diversity Cart on campus and score a free cup of coffee or tea, engage in a brief meaningful conversation, and maybe win a prize! Follow us on Instagram and Bee Involved for clues! ",
-    "url": "https://involvement.ubalt.edu/rsvp?id=2135177"
-  },
-  {
     "id": "7d981430e385bb0f50d7105468ce505b1132025_1:57:35_PM@campusgroups.com",
     "title": {
       "params": {
@@ -451,7 +438,7 @@
     },
     "start": "2026-02-18T21:30:00.000Z",
     "end": "2026-02-18T23:00:00.000Z",
-    "description": "The Office of Diversity & International Services invites the entire UBalt community to celebrate the holy month of Ramadan, a time dedicated to spiritual reflection and community building. Join us for a special Iftar event featuring activities like crafts, calligraphy, and henna stickers. We will break the fast together with dates, juice, and a meal, and attendees will receive goody bags containing prayer beads and tea. This event is open to all students and their families, reflecting the beautiful diversity of our Muslim community, faculty, and staff. If you're curious to learn more, contact the Director of the Mathematics Program in the Yale Gordon College of Arts and Sciences and Muslim Student Association faculty advisor, Haitham Alkhateeb, at halkhateeb@ubalt.edu.- Co-Sponsored by the UBalt School of Law Office of Diversity, Equity, Inclusion, and Belonging ",
+    "description": "The Office of Diversity & International Services invites the entire UBalt community to celebrate the holy month of Ramadan, a time dedicated to spiritual reflection and community building. Join us for a special Iftar event featuring activities like crafts, calligraphy, and henna stickers. We will break the fast together with dates, juice, and a meal, and attendees will receive goody bags containing prayer beads and tea. This event is open to the entire campus and their families, reflecting the beautiful diversity of our Muslim community, faculty, and staff. If you're curious to learn more, contact the Director of the Mathematics Program in the Yale Gordon College of Arts and Sciences and Muslim Student Association faculty advisor, Haitham Alkhateeb, at halkhateeb@ubalt.edu.- Co-Sponsored by the UBalt School of Law Office of Diversity, Equity, Inclusion, and Belonging ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135620"
   },
   {
@@ -505,6 +492,32 @@
     "end": "2026-02-27T17:00:00.000Z",
     "description": "The Office of Diversity and International Services is so excited to bring 20 UBalt students to the Baltimore Museum of Art to see Amy Sherald's exhibit, American Sublime. Sherald, a graduate of MICA, transformed the portrait world and brought a revived sense of belonging to art. Renowned for being the first African American to win the grand prize in the National Portrait Gallery’s Outwin Boochever Portrait Competition and creating the official portrait of former First Lady Michelle Obama for the National Portrait Gallery’s collection, Sherald is a hometown hero. Learn more here: https://artbma.org/exhibition/amy-sherald-american-sublime We will meet in the Student Center lobby and walk to Penn Station to take the Purple route Charm City Circulator to the BMA. NOTE: This trip is for students only. Thank you for your understanding. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2135654"
+  },
+  {
+    "id": "49b210d43f3a0d361e662fa441a32487182026_10:55:53_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "BSU General Body Meeting "
+    },
+    "start": "2026-02-27T23:00:00.000Z",
+    "end": "2026-02-28T00:00:00.000Z",
+    "description": "The official general body meeting of the Black Student Union. Open to all students to connect, engage, and share opportunities within the University of Baltimore (UBalt) community. Zoom Passcode: UBaltBSU ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135601"
+  },
+  {
+    "id": "a70df7225decbcabe0057727ca6264db212026_12:48:36_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Virtual Orientation"
+    },
+    "start": "2026-03-01T20:00:00.000Z",
+    "end": "2026-03-01T22:00:00.000Z",
+    "description": "This event is the first step required for new members to complete towards becoming an inducted member. ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135663"
   },
   {
     "id": "2ca34f0ba844a81f64517bd34869f9b6222026_11:07:06_AM@campusgroups.com",
@@ -596,6 +609,19 @@
     "end": "2026-03-18T23:00:00.000Z",
     "description": "This event is the second step required to become an inducted member of the NSLS. ",
     "url": "https://involvement.ubalt.edu/rsvp?id=2134907"
+  },
+  {
+    "id": "129853ce690337367ba202d441526619212026_12:52:18_PM@campusgroups.com",
+    "title": {
+      "params": {
+        "ENCODING": "QUOTED-PRINTABLE"
+      },
+      "val": "Virtual Leadership Training Day"
+    },
+    "start": "2026-03-22T19:00:00.000Z",
+    "end": "2026-03-22T21:00:00.000Z",
+    "description": "This event is the second step required to become an inducted member of the NSLS. ",
+    "url": "https://involvement.ubalt.edu/rsvp?id=2135664"
   },
   {
     "id": "0ba8798c69eacb8b30649163cd6385361202026_6:33:02_PM@campusgroups.com",
