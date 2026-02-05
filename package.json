@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve .",
-    "format": "prettier --write \"**/*.{js,css,html,json}\""
+    "format": "prettier --write \"**/*.{js,css,html,json}\"",
+
+    "build:gh-root": "vite build --outDir ../trackme"
   },
   "devDependencies": {
     "prettier": "^3.7.4"
