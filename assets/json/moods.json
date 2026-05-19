@@ -1,0 +1,19 @@
+{
+  "moods": [
+    { "id": "good",        "emoji": "😊", "label": "good" },
+    { "id": "excited",     "emoji": "🤩", "label": "excited" },
+    { "id": "chill",       "emoji": "😎", "label": "chillin" },
+    { "id": "tired",       "emoji": "😴", "label": "tired" },
+    { "id": "angry",       "emoji": "😡", "label": "angry" },
+    { "id": "sad",         "emoji": "😢", "label": "sad" },
+    { "id": "in_love",     "emoji": "😍", "label": "in love" },
+    { "id": "nostalgic",   "emoji": "🥲", "label": "nostalgic" },
+    { "id": "busy",        "emoji": "💼", "label": "busy" },
+    { "id": "gaming",      "emoji": "🎮", "label": "gaming" },
+    { "id": "creative",    "emoji": "🎨", "label": "creative" },
+    { "id": "musical",     "emoji": "🎧", "label": "musical" },
+    { "id": "anxious",     "emoji": "😬", "label": "anxious" },
+    { "id": "party",       "emoji": "🎉", "label": "party" },
+    { "id": "offline",     "emoji": "🧘", "label": "offline" }
+  ]
+}

@@ -1,0 +1,696 @@
+/* MySpace‑style page background */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-image: url("./imgs/layout/bg.png");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  background-position: top left;
+  background-color: #000;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Centered main container */
+#page {
+  width: 900px;
+  margin: 20px auto;
+  color: #000;
+}
+
+/* Top header bar */
+#top-bar {
+  background: #ffffff;
+  border: 1px solid #c7d2e2;
+  padding: 8px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  font-size: 11px;
+}
+
+/* Top bar left side */
+.top-left {
+  display: flex;
+  gap: 8px;
+}
+
+.top-profile-pic {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #c7d2e2;
+}
+
+.top-main-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Title row */
+.top-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.profile-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.profile-theme {
+  font-size: 10px;
+  color: #555;
+}
+
+/* Username / joined */
+.top-status-row {
+  font-size: 11px;
+}
+
+/* Mood row */
+.top-mood-row {
+  font-size: 11px;
+}
+
+.top-mood-row .label {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+#mood-emoji {
+  margin: 0 2px;
+}
+
+.mood-updated {
+  color: #777;
+  margin-left: 4px;
+}
+
+/* View My links */
+.top-links-row {
+  font-size: 11px;
+}
+
+.top-link {
+  color: #003399;
+  text-decoration: none;
+}
+
+.top-link:hover {
+  text-decoration: underline;
+}
+
+.divider {
+  margin: 0 3px;
+  color: #999;
+}
+
+/* Status text row */
+.top-status-edit-row {
+  font-size: 11px;
+}
+
+.top-status-edit-row .label {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+/* Top bar right actions */
+.top-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 11px;
+}
+
+.top-action {
+  color: #003399;
+  text-decoration: none;
+}
+
+.top-action:hover {
+  text-decoration: underline;
+}
+
+.pgo-card {
+  width: 400px;
+  height: 200px;
+  margin: -4.5px 0 0.25px 125px;
+  padding: 2px 2px;
+}
+
+/* 2‑column layout */
+#layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Generic box look */
+.box {
+  background: #ffffff;
+  border: 1px solid #c7d2e2;
+  padding: 10px;
+}
+
+.profile-player-box {
+  padding: 0;
+}
+
+.profile-player-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+.profile-player-gap-box {
+  padding: 0;
+}
+
+.profile-player-gap-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+.activity-box {
+  padding: 0;
+}
+
+.activity-box h2 {
+  margin: 0;
+  padding: 1px 1.25px;
+  font-size: 16px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+.secret-box {
+  padding: 0;
+}
+
+.secret-box h2 {
+  margin: 0;
+  padding: 1px 1.25px;
+  font-size: 16px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+.bookmark-rota-box {
+  padding: 0;
+}
+
+.bookmark-rota-box h2 {
+  margin: 0;
+  padding: 1px 1.25px;
+  font-size: 16px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+/* Activity + Blurbs lists */
+.activity-box ul,
+.bookmark-rota-list ul,
+.secret-list ul {
+  padding: 0;
+}
+
+.activity-box li,
+.secret-list li {
+  margin-top: 4.5px;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+
+.bookmark-rota-li {
+  margin-top: 2.5px;
+  margin-bottom: 3px;
+  font-size: 12px;
+  position: relative;
+  padding-left: 1.5em;
+  list-style: none;
+}
+
+/* add ::before to the li itself */
+.bookmark-rota-li::before {
+  content: "🔖";
+  position: absolute;
+  left: 0;
+  top: -5.25px;
+}
+
+.event-box {
+  padding: 0;
+}
+
+.event-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+/* events grid */
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2.5px;
+}
+
+.event-slot {
+  background: #B9DFF0;
+  color: #254770;                /* looks better behind flyers #F2F2F2;*/
+  margin: 2.25px 2px 2px 2.25px;
+  border: 1.75px solid #d1d8ea;
+  height: 200px;
+  display: flex;
+  flex-direction: column;           /* stack flyer + label */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.event-flyer {
+  max-width: 95%;
+  max-height: 95%;                 
+  object-fit: fill;                /* fills area, may crop a bit */
+  display: block;
+}
+
+.event-label {
+  margin-top: 1.25spx;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+.media-box {
+  padding: 0;
+}
+.media-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+/* media grid */
+.media-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2.5px;
+}
+
+.media-slot {
+  background: #B9DFF0;
+  color: #254770;                /* looks better behind flyers #F2F2F2;*/
+  margin: 2.25px 2px 2px 2.25px;
+  border: 1.75px solid #d1d8ea;
+  height: 185px;
+  display: flex;
+  flex-direction: column;           /* stack flyer + label */
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.media-flyer {
+  max-width: 85%;
+  max-height: 80%;                 
+  object-fit: fill;                /* fills area, may crop a bit */
+  display: block;
+}
+
+.media-label {
+  margin-top: 1.25spx;
+  font-size: 8px;
+  font-weight: bold;
+}
+
+/* Comments / Quiz */
+.secret-box {
+  min-height: 200px;
+}
+
+#player-skin {
+  width: 100%;
+  height: 75px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* GIF layer UNDER */
+.player-gif {
+  position: absolute;
+  inset: 0;
+  width: 80%;
+  height: 62%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Frame + contents OVER */
+.player-inner {
+  position: absolute;
+  inset: 0;
+  background-image: url("./imgs/player/DEH-P6400[frame-resizedx200].png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-screen {
+  width: 60%;
+  height: 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.player-scrolling-text {
+  white-space: nowrap;
+  color: #f5f5f5;
+  font-size: 0px;
+  text-shadow: 0 0 3px #000, 0 0 6px #000;
+  animation: scroll-text 10s linear infinite;
+}
+
+@keyframes scroll-text {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+/* Mood row container is the positioning context */
+#mood-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* Emoji looks clickable */
+#mood-emoji-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Popup select positioned absolutely within mood-container */
+.mood-select {
+  position: absolute;
+  display: none;
+  font-size: 11px;
+  padding: 2px;
+  z-index: 1000;
+  background: #fff;
+  border: 1px solid #c7d2e2;
+}
+
+/* Details box layout (MySpace style) */
+.details-box {
+  padding: 0;
+}
+
+.details-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+/* table body */
+.details-table {
+  font-size: 11px;
+  border: 1px solid #c7d2e2;
+}
+
+.details-row {
+  display: flex;
+}
+
+/* left label column */
+.details-label {
+  width: 40%;
+  padding: 3px 4px;
+  font-weight: bold;
+  background-color: #e4edf9;
+  border-bottom: 1px solid #c7d2e2;
+  border-right: 1px solid #c7d2e2;
+  box-sizing: border-box;
+}
+
+/* right value column */
+.details-value {
+  width: 60%;
+  padding: 3px 4px;
+  background-color: #f5f7fc;
+  border-bottom: 1px solid #c7d2e2;
+  box-sizing: border-box;
+}
+
+/* remove bottom border on last row */
+.details-row:last-child .details-label,
+.details-row:last-child .details-value {
+  border-bottom: none;
+}
+
+.details-inline-img {
+  height: 18px;
+  width: auto;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+/* Interests box (MySpace style) */
+.interests-box {
+  padding: 0;
+}
+
+.interests-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+/* inner area */
+.interests-list {
+  border: 1px solid #c7d2e2;
+  background: #ffffff;
+  text-align: center;
+  padding: 6px 4px;
+}
+
+/* interest links */
+.interest-item {
+  display: block;
+  font-size: 11px;
+  color: #003399;
+  text-decoration: none;
+  margin: 2px 0;
+}
+
+#playlist-panel {
+  margin: 1px 0.25px 0.25px 0.25px;
+  position: relative;
+  width: 100%;
+  height: 197px;
+  background-image: url('./imgs/player/playlist_base_n1.png');
+  background-size: cover;
+  background-position: center;
+  color: #e0e0e0;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+/* Title bar area inside the skin */
+.playlist-header {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  right: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Workbench", system-ui, sans-serif;
+  font-size: 9px;
+  color: #cfcfcf;
+}
+
+#playlist-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Track list area */
+.playlist-body {
+  position: absolute;
+  top: 32px;
+  left: 10px;
+  right: 24px;
+  bottom: 32px;
+  padding-right: 4px;
+  overflow-y: auto;
+}
+
+.track-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 14px;
+  font-size: 8px;
+}
+
+.track-list li {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: "Workbench", system-ui, sans-serif;
+}
+
+.track-list li:hover {
+  color: #ffffff;
+}
+
+.track-list li.current {
+  color: #00ff66;
+  font-family: "Workbench", system-ui, sans-serif;
+}
+
+/* Play / pause button zone along the bottom bar */
+.playlist-controls {
+  position: absolute;
+  bottom: 10.2px;
+  left: 25px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0;             /* no flex spacing */
+}
+
+.playlist-load-area {
+  position: absolute;
+  bottom: 10.2px;
+  right: 33.5px;
+  height: 18px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Image-skinned LOAD button */
+.playlist-load-btn {
+  width: 40px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: url('./imgs/player/loadbtn.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.eject-btn {
+  position: absolute;
+  bottom: 10.311px;   /* same vertical as LOAD */
+  right: 17.2px;       /* closer to the right edge than LOAD (33.5px) */
+  width: 19.777px;
+  height: 17.999px;
+  margin: 0 .02 0 .02;
+}
+
+/* Matte dropdown next to LOAD */
+.mix-select {
+  position: absolute;
+  right: 25px;               /* px to the left of the LOAD button center */
+  /* or use left: auto; right: px; */
+  width: 60px;              
+  display: none;
+  font-size: 9px;
+  font-family: "Workbench", system-ui, sans-serif;
+  background: #111;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 2px 4px;
+  z-index: 10;
+}
+
+/* Shared look for all transport buttons */
+.transport-btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;   /* fills entire cell, less transparent edge */
+  cursor: pointer;
+}
+
+.transport-back {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/backbtn.png');
+}
+
+.transport-play {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/playbtn.png');
+}
+
+.transport-pause {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/pausebtn.png');
+}
+
+.transport-stop {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/stopbtn.png');
+}
+
+.transport-ff {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/ffbtn.png');
+}
+
+.transport-eject {
+  background-image: url('./imgs/player/ejectbtn.png');
+}
