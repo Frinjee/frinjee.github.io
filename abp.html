@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aunt Becks Place</title>
+  <meta name="description" content="Aunt Becks Place community support and neighborhood care page." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <style>
+    :root {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --space-1: .25rem;
+      --space-2: .5rem;
+      --space-3: .75rem;
+      --space-4: 1rem;
+      --space-5: 1.25rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-12: 3rem;
+      --radius-lg: .75rem;
+      --color-border: rgba(84, 42, 90, 0.18);
+      --color-divider: rgba(84, 42, 90, 0.20);
+      --color-text: #52325b;
+      --color-text-muted: #76547d;
+      --color-primary: #7c2d86;
+      --color-primary-hover: #682370;
+      --shadow-sm: 0 1px 2px rgba(82, 50, 91, 0.08);
+      --shadow-md: 0 10px 30px rgba(82, 50, 91, 0.12);
+      --content-default: 1080px;
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Source Sans 3', Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      background: linear-gradient(90deg, #f7f3f8 0%, #f0d8f1 55%, #d7b0dc 100%);
+    }
+
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration-color: rgba(124,45,134,.35); text-underline-offset: 0.18em; }
+    a:hover { color: var(--color-primary-hover); }
+
+    .page {
+      max-width: var(--content-default);
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-4) var(--space-12);
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      background: var(--color-primary);
+      color: #fff;
+      padding: .75rem 1rem;
+      z-index: 100;
+    }
+    .skip-link:focus { left: 1rem; top: 1rem; }
+
+    .hero {
+      display: grid;
+      gap: var(--space-6);
+      align-items: center;
+      padding: var(--space-6) 0 var(--space-8);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .brand-mark { width: 100px; height: 108px; color: var(--color-primary); }
+
+    .eyebrow {
+      font-size: var(--text-xs);
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      line-height: 1.05;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(2.25rem, 1.2rem + 4vw, 4.8rem);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: .18em;
+    }
+
+    h2 { font-size: var(--text-xl); margin-bottom: var(--space-3); }
+    h3 { font-size: var(--text-lg); margin-bottom: var(--space-2); }
+
+    .hero-copy p {
+      max-width: 62ch;
+      color: var(--color-text-muted);
+      margin-top: var(--space-3);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      margin-top: var(--space-5);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: .8rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      text-decoration: none;
+      transition: .18s ease;
+    }
+
+    .btn-primary { background: var(--color-primary); color: #fff; box-shadow: var(--shadow-sm); }
+    .btn-primary:hover { background: var(--color-primary-hover); }
+    .btn-secondary { background: rgba(255,255,255,.58); border-color: var(--color-border); }
+
+    .layout {
+      display: grid;
+      gap: var(--space-6);
+      margin-top: var(--space-8);
+    }
+
+    .card {
+      background: rgba(251,247,251,.78);
+      backdrop-filter: blur(4px);
+      border: 1px solid var(--color-border);
+      border-radius: 24px;
+      padding: var(--space-5);
+      box-shadow: var(--shadow-md);
+    }
+
+    .mission-grid { display: grid; gap: var(--space-5); }
+    .story p + p { margin-top: var(--space-3); }
+
+    .heart-box {
+      display: grid;
+      place-items: center;
+      min-height: 330px;
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .heart-shape {
+      width: 220px;
+      aspect-ratio: 1;
+      background: var(--color-primary);
+      transform: rotate(-45deg);
+      position: relative;
+      border-radius: 16px 0 0 16px;
+      margin-top: 2.6rem;
+    }
+
+    .heart-shape::before,
+    .heart-shape::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+
+    .heart-shape::before { top: -110px; left: 0; }
+    .heart-shape::after { left: 110px; top: 0; }
+
+    .heart-text {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      font-size: .76rem; 
+      padding: 1.00rem;
+      text-align: center;
+      color: #fff;
+      transform: none;
+    }
+
+    .heart-text p {
+      color: #fff;
+      text-shadow: 0 1px 1px rgba(0,0,0,.08);
+    }
+
+    .heart-text h3 {
+      color: #fff;
+      margin-bottom: .65rem;
+    }
+
+    .qr-wrap {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .65rem;
+      margin-top: .35rem;
+    }
+
+    .qr {
+      text-align: center;
+    }
+
+    .qr p {
+      font-size: .82rem;
+      line-height: 1.25;
+      margin-top: .3rem;
+    }
+
+	.columns {
+	  display: grid;
+	  gap: var(--space-2);
+	  align-items: stretch;
+	}
+
+    .columns + .columns { margin-top: var(--space-2); }
+
+    .list-links {
+      display: grid;
+      gap: .45rem;
+      margin-top: var(--space-3);
+    }
+
+    .mini-rule {
+      height: 1px;
+      background: var(--color-divider);
+      margin: var(--space-4) 0;
+    }
+
+    .socials {
+      display: grid;
+      gap: .35rem;
+      min-height: 0;
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .social-links {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: .1rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      color: var(--color-primary);
+      border: 1px solid var(--color-border);
+      text-decoration: none;
+      transition: transform .15s ease, background .15s ease;
+    }
+
+    .social-link:hover {
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.9);
+    }
+
+    .social-link i { font-size: 1.2rem; }
+
+    .donations-label {
+      margin-bottom: .25rem;
+    }
+
+    .footer-note {
+      margin-top: var(--space-8);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+    .footer-note-2 {
+      margin-top: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+    }
+
+
+    @media (min-width: 760px) {
+      .hero { grid-template-columns: 88px 1fr; }
+      .layout { grid-template-columns: 1.05fr 1.2fr; }
+      .columns { grid-template-columns: 1fr 1fr; }
+      .socials { grid-column: 1 / -1; }
+    }
+
+    .card story,
+	.card events {
+	  min-width: 500px;
+	  max-width: 500px;
+	  height: 380px;
+	}
+
+    @media (max-width: 520px) {
+      h1 { font-size: clamp(2rem, 1.5rem + 5vw, 3rem); }
+      .card { border-radius: 18px; }
+      .heart-shape,
+      .heart-shape::before,
+      .heart-shape::after {
+        width: 180px;
+        height: 180px;
+      }
+      .heart-shape::before { top: -90px; }
+      .heart-shape::after { left: 90px; }
+      .heart-text { font-size: .76rem; padding: 1.00rem; }
+      .qr-wrap { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <main class="page" id="content">
+    <section class="hero" aria-labelledby="site-title">
+      <img class="brand-mark" src="./abp_assets/crossstreet-names.png" alt="Aunt Becks Place logo">
+      <div class="hero-copy">
+        <p class="eyebrow">At the corner of care and community</p>
+        <h1 id="site-title">Aunt Becks Place</h1>
+      </div>
+    </section>
+
+    <section class="layout" aria-label="Overview content">
+      <div class="mission-grid">
+        <article class="card heart-box" aria-labelledby="dinner-title">
+          <div class="heart-shape" aria-hidden="true"></div>
+          <div class="heart-text">
+            <div>
+              <h3 id="dinner-title">Sunday Dinner</h3>
+              <p>Serving Sunday dinner between 2:30 and 4:00 PM.</p>
+              <p>Near St. Vincent de Paul</p> 
+              <p>120 N Front Street</p>
+              <p>Baltimore, Maryland 21202.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <h2>Mission</h2>
+          <p>To practice restorative justice as acts of love by building community mutual aid, restoring through Sunday dinners, access to resources, and networking, and restoring the social fabric of Baltimore City.</p>
+
+          <div class="mini-rule"></div>
+
+          <h3>Vision</h3>
+          <p>To be the heart and soul of the community, providing access to services, opportunities, and education, to empower residents to work collaboratively and restore existing communities in Baltimore City.</p>
+
+          <div class="mini-rule"></div>
+
+          <h3>Join our village</h3>
+          <p>If you practice servant leadership, have donations, or want to volunteer your time and talent, connect at <a href="mailto:auntbecksplacebaltimore@gmail.com">auntbecksplacebaltimore@gmail.com</a>.</p>
+
+          <div class="mini-rule"></div>
+          <div class="qr-wrap">
+            <div class="qr">
+              <p>Community care</p>
+            </div>
+            <div class="qr">
+              <p>Restorative justice</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="columns">
+        <article class="card story" id="story" style="min-width: 300px; max-width: 350px; height: 580px;">
+          <h2>Our Story</h2>
+          <p>Aunt Becks Place is the traditional neighborhood spot where you are always welcome. There is always a listening ear, community support, and the kind of practical care that grows through food, fellowship, and faith in each other.</p>
+          <p>Built from lived experiences and dedication from inside and outside the classroom, Aunt Becks Place works to restore the village one meal at a time. Restorative justice is the motive path forward, and love remains the guiding force.</p>
+        </article>
+
+        <article class="card events-card" style="min-width: 340px; max-width: 380px; height: 580px;">
+          <h2>Events</h2>
+          <div class="events-list">
+            <div class="event-item">
+              <h3>Placeholder Community Clothes Drive</h3>
+              <p class="event-meta">Time & Date: 6:00 PM, June 8, 2026</p>
+              <p class="event-meta">Location: St. Vincent de Paul Hall</p>
+              <p class="event-meta">Contact: [foo@gmail.com](mailto:foo@gmail.com) | (410) 555-0101</p>
+            </div>
+            <div class="event-item">
+              <h3>Placeholder Community BBQ</h3>
+              <p class="event-meta">Time & Date: 5:30 PM, June 15, 2026</p>
+              <p class="event-meta">Location: 120 N Front Street, Baltimore</p>
+              <p class="event-meta">Contact: [foo@gmail.com](mailto:foo@gmail.com) | (410) 555-0102 </p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="columns">
+        <article class="card donations" style="min-width: 500px; max-width: 500px; height: 380px;">
+          <h2 class="donations-label" style="text-align: center;">Donations Welcome</h2>
+          <div class="qr-wrap" aria-label="QR Codes">
+            <div class="qr">
+              <img src="./abp_assets/qrcode-base.svg" alt="QR Code $AuntBecksPlace" width="300" height="300">
+              <p>$AuntBecksPlace</p>
+            </div>
+            <div class="qr">
+              <img src="./abp_assets/qrcode-weaves.svg" alt="QR Code $AuntBecksPlaceWeaves" width="300" height="300">
+              <p>$AuntBecksPlaceWeaves</p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="card news-card" style="margin-top: calc(var(--space-2) * -10);">
+        <h2>In the News</h2>
+        <div class="news-list">
+          <article class="news-item">
+          	<h3><b><u>Honor Rows: 'Weave: The Social Fabric Project'</u></b></h3>
+          	<p class="news-meta">&#128240; <a href="https://www.wbaltv.com/article/honor-rows-weave-the-social-fabric-project-started-simply-with-kind-act/63044357" target="_blank" rel="noopener noreferrer">WBALTV</a>, 11/28/2024</p>
+            <img class="news-thumb" src="./abp_assets/videoframe_13226.png" alt="News thumbnail 1">
+            <br>
+          </article>
+          <article class="news-item">
+          	<h3><b><u>Aunt Beck's Place Provides Meals For Those In Need</u></b></h3>
+          	<p class="news-meta">&#128240; <a href="https://www.wypr.org/show/on-the-record/2025-03-03/aunt-becks-place-provides-meals-for-those-in-need" target="_blank" rel="noopener noreferrer">WYPR On the Record</a>, 03/03/2025</p>
+            <img class="news-thumb" src="./abp_assets/wypr.jpg" alt="News thumbnail 2">
+            <br>
+          </article>
+          <article class="news-item">
+          	<h3><b><u>Connections, Opportunities Propel Graduate’s Ambition</u></b></h3>
+          	<p class="news-meta">&#128240; <a href="https://www.ubalt.edu/about/newsroom/student-stories-rebekah-opher.cfm" target="_blank" rel="noopener noreferrer">UBalt Student Stories</a>, 06/05/2025</p>
+            <img class="news-thumb" src="./abp_assets/rebekah-opher-feature2.jpg" alt="News thumbnail 3">
+            <br>
+          </article>
+          <article class="news-item">
+          	<h3><b><u>Compassion and Service Drive Law-Bound Leader</u></b></h3>
+          	<p class="news-meta">&#128240; <a href="https://www.nsls.org/news-and-events/compassion-and-service-drive-law-bound-leader" target="_blank" rel="noopener noreferrer">NSLS News & Events</a>, 12/04/2025</p>
+            <img class="news-thumb" src="./abp_assets/Member Spotligh-Rebekah Opher_Banner.png" alt="News thumbnail 4">
+            <br>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer-note">
+	  <span class="footer-icons" aria-label="Social links">
+	    <a class="social-link" href="https://www.facebook.com/AuntBecksPlace/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+	      <i class="fa-brands fa-facebook-f" aria-hidden="true"></i>
+	    </a>
+	    <a class="social-link" href="https://www.instagram.com/auntbecksplace/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+	      <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+	    </a>
+	  </span>
+	  <br>
+	  <span>Made with &#128156;<br>Aunt Becks Place &copy;2026</span>
+	</footer>
+  </main>
+</body>
+</html>
