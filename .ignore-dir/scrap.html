@@ -1,0 +1,481 @@
+<section class="box profile-player-gap-box">
+          <h2>Playlist Selector & Display</h2>
+        </section>
+
+          <div id="playlist-panel">
+            <div class="playlist-header">
+              <span id="playlist-title">Favorite Song</span>
+            </div>
+            <div class="playlist-body">
+              <ul id="track-list" class="track-list"></ul>
+            </div>
+            <div class="playlist-controls">
+                <button id="btn-back"  class="transport-btn transport-back"  aria-label="Back"></button>
+                <button id="btn-play"  class="transport-btn transport-play"  aria-label="Play"></button>
+                <button id="btn-pause" class="transport-btn transport-pause" aria-label="Pause"></button>
+                <button id="btn-stop"  class="transport-btn transport-stop"  aria-label="Stop"></button>
+                <button id="btn-ff"    class="transport-btn transport-ff"    aria-label="Fast forward"></button>
+            </div>
+            <div class="playlist-load-area">
+              <button id="btn-load" class="playlist-load-btn"></button>
+              <select id="mix-select" class="mix-select" aria-label="Choose mix">
+                <option value="default">default</option>
+                <option value="mix-1">mix-1</option>
+                <option value="mix-2">mix-2</option>
+                <option value="mix-3">mix-3</option>
+                <option value="mix-4">mix-4</option>
+                <option value="mix-5">mix-5</option>
+              </select>
+            </div>
+            <button id="btn-eject"class="transport-btn transport-eject eject-btn" aria-label="Eject"></button>
+          </div>
+
+          <audio id="local-audio" preload="auto"></audio>
+          <!-- GIF layer -->
+            <img src="./assets/imgs/player/diverdolphins.gif"
+                 alt="diverdolphins.gif"
+                 class="player-gif">
+                             <!-- Frame + overlay contents -->
+            <div class="player-inner">
+              <div class="player-screen">
+                <span class="player-scrolling-text" id="player-scrolling-text">
+                </span>
+              </div>
+            </div>
+
+            * GIF layer UNDER */
+.player-gif {
+  position: absolute;
+  inset: 0;
+  width: 80%;
+  height: 62%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Frame + contents OVER */
+.player-inner {
+  position: absolute;
+  inset: 0;
+  background-image: url("./imgs/player/DEH-P6400[frame-resizedx200].png");
+  background-size: cover;
+  background-position: center;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-screen {
+  width: 60%;
+  height: 20px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.player-scrolling-text {
+  white-space: nowrap;
+  color: #f5f5f5;
+  font-size: 0px;
+  text-shadow: 0 0 3px #000, 0 0 6px #000;
+  animation: scroll-text 10s linear infinite;
+}
+
+@keyframes scroll-text {
+  0%   { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+#playlist-panel {
+  margin: 1px 0.25px 0.25px 0.25px;
+  position: relative;
+  width: 100%;
+  height: 197px;
+  background-image: url('./imgs/player/playlist_base_n1.png');
+  background-size: cover;
+  background-position: center;
+  color: #e0e0e0;
+  font-size: 10px;
+  overflow: hidden;
+}
+
+/* Title bar area inside the skin */
+.playlist-header {
+  position: absolute;
+  top: 18px;
+  left: 16px;
+  right: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Workbench", system-ui, sans-serif;
+  font-size: 9px;
+  color: #cfcfcf;
+}
+
+#playlist-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Track list area */
+.playlist-body {
+  position: absolute;
+  top: 32px;
+  left: 10px;
+  right: 24px;
+  bottom: 32px;
+  padding-right: 4px;
+  overflow-y: auto;
+}
+
+
+.media-player-box {
+  padding: 0;
+}
+
+.media-player-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+.profile-player-gap-box {
+  padding: 0;
+}
+
+.profile-player-gap-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+}
+
+#media-player-shell {
+  width: 100%;
+  height: 75px;
+  position: relative;
+  overflow: hidden;
+}
+
+-----------------
+.track-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0 0 14px;
+  font-size: 8px;
+}
+
+.track-list li {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+  font-family: "Workbench", system-ui, sans-serif;
+}
+
+.track-list li:hover {
+  color: #ffffff;
+}
+
+.track-list li.current {
+  color: #00ff66;
+  font-family: "Workbench", system-ui, sans-serif;
+}
+
+/* Play / pause button zone along the bottom bar */
+.playlist-controls {
+  position: absolute;
+  bottom: 10.2px;
+  left: 25px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 0;             /* no flex spacing */
+}
+
+.playlist-load-area {
+  position: absolute;
+  bottom: 10.2px;
+  right: 33.5px;
+  height: 18px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Image-skinned LOAD button */
+.playlist-load-btn {
+  width: 40px;
+  height: 16px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: url('./imgs/player/loadbtn.png') no-repeat center center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.eject-btn {
+  position: absolute;
+  bottom: 10.311px;   /* same vertical as LOAD */
+  right: 17.2px;       /* closer to the right edge than LOAD (33.5px) */
+  width: 19.777px;
+  height: 17.999px;
+  margin: 0 .02 0 .02;
+}
+
+/* Matte dropdown next to LOAD */
+.mix-select {
+  position: absolute;
+  right: 25px;               /* px to the left of the LOAD button center */
+  /* or use left: auto; right: px; */
+  width: 60px;              
+  display: none;
+  font-size: 9px;
+  font-family: "Workbench", system-ui, sans-serif;
+  background: #111;
+  color: #e0e0e0;
+  border: 1px solid #555;
+  padding: 2px 4px;
+  z-index: 10;
+}
+
+/* Shared look for all transport buttons */
+.transport-btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;   /* fills entire cell, less transparent edge */
+  cursor: pointer;
+}
+
+.transport-back {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/backbtn.png');
+}
+
+.transport-play {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/playbtn.png');
+}
+
+.transport-pause {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/pausebtn.png');
+}
+
+.transport-stop {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/stopbtn.png');
+}
+
+.transport-ff {
+  width: 23px;        /* 1 px wider to “touch” neighbors */
+  height: 16px;
+  background-image: url('./imgs/player/ffbtn.png');
+}
+
+.transport-eject {
+  background-image: url('./imgs/player/ejectbtn.png');
+}
+
+<section class="box media-player-box">
+          <div id="media-player-shell">
+            <!-- MAIN.bmp window -->
+            <div id="media-player-main">
+              <!-- Now Playing display area -->
+              <div class="media-player-display">
+                <span id="now-playing-text-scroller"></span>
+              </div>
+
+              <!-- Transport controls (IDs used by player.js) -->
+              <button id="btn-back"  class="mp-btn mp-back"  aria-label="Back"></button>
+              <button id="btn-play"  class="mp-btn mp-play"  aria-label="Play"></button>
+              <button id="btn-pause" class="mp-btn mp-pause" aria-label="Pause"></button>
+              <button id="btn-stop"  class="mp-btn mp-stop"  aria-label="Stop"></button>
+              <button id="btn-ff"    class="mp-btn mp-ff"    aria-label="Fast forward"></button>
+              <button id="btn-load"  class="mp-btn mp-load"  aria-label="Load"></button>
+
+              <!-- TODO: volume / balance knobs mapped from Volume.png / Balance.png -->
+            </div>
+
+            <!-- Eqmain.bmp window & EQ sliders -->
+            <div id="mp-eq">
+              <div class="eq-band" data-band="0"></div>
+              <div class="eq-band" data-band="1"></div>
+              <div class="eq-band" data-band="2"></div>
+              <div class="eq-band" data-band="3"></div>
+              <div class="eq-band" data-band="4"></div>
+              <div class="eq-band" data-band="5"></div>
+              <div class="eq-band" data-band="6"></div>
+              <div class="eq-band" data-band="7"></div>
+              <div class="eq-band" data-band="8"></div>
+              <div class="eq-band" data-band="9"></div>
+            </div>
+
+            <!-- Pledit.bmp playlist window -->
+            <div id="mp-playlist">
+              <div class="mp-pl-header">
+                <span id="playlist-title"></span>
+              </div>
+
+              <div class="mp-pl-body">
+                <ul id="track-list"></ul>
+              </div>
+
+              <div class="mp-pl-footer">
+                <!-- mix selector (reuses existing JS hooks) -->
+                <button id="btn-mix-load" class="mp-btn mp-mix-load" aria-label="Choose mix"></button>
+                <select id="mix-select" class="mix-select" aria-label="Choose mix">
+                  <option value="default">default</option>
+                  <option value="mix-1">mix-1</option>
+                  <option value="mix-2">mix-2</option>
+                  <option value="mix-3">mix-3</option>
+                  <option value="mix-4">mix-4</option>
+                  <option value="mix-5">mix-5</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Local audio element controlled by player.js -->
+            <audio id="local-audio" preload="auto"></audio>
+          </div>
+        </section>
+
+        .media-player-box {
+  position: relative;
+  padding: 0;          /* remove extra width */
+}
+
+/* MAIN.bmp background */
+#media-player-main {
+  position: relative;
+  width: 275px;
+  height: 116px;
+  background: url('./imgs/player/pizza_hut/MAIN.png') no-repeat 0 0;
+}
+
+/* Eqmain.bmp background */
+#mp-eq {
+  position: relative;
+  width: 275px;
+  height: 315px;
+  background: url('./imgs/player/pizza_hut/Eqmain.png') no-repeat 0 0;
+}
+
+/* Pledit.bmp background */
+#mp-playlist {
+  position: relative;
+  width: 280px;
+  height: 186px;
+  background: url('./imgs/player/pizza_hut/Pledit.png') no-repeat 0 0;
+}
+
+/* Shell: stack panels vertically as one unit */
+#media-player-shell {
+  display: flex;
+  flex-direction: column; /* MAIN, EQ, playlist stacked */
+  width: 290px;
+}
+
+/* Keep media-player section in normal flow */
+.media-player-box {
+  position: relative;
+  padding: 10px; /* or 0 if you want edge-to-edge skin */
+}
+
+/* Now Playing display overlay area on MAIN */
+.media-player-display {
+  position: absolute;
+  left: 137px;
+  top: 58px;
+  width: 81px;
+  height: 40px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#now-playing-text-scroller {
+  display: inline-block;
+  font-family: monospace;
+  font-size: 10px;     /* tweak to match Text.png */
+  color: #00ff00;      /* or whatever matches your skin */
+  text-shadow: 0 0 2px #000;
+}
+
+/* EQ band overlays inside Eqmain */
+#mp-eq .eq-band {
+  position: absolute;
+  width: 10px;
+  height: 80px;   /* adjust when you measure travel height */
+  bottom: 20px;   /* vertical offset from bottom inside Eqmain */
+  cursor: ns-resize;
+}
+
+/* placeholder x positions – replace with real values */
+#mp-eq .eq-band[data-band="0"] { left: 35px; }
+#mp-eq .eq-band[data-band="1"] { left: 50px; }
+#mp-eq .eq-band[data-band="2"] { left: 65px; }
+#mp-eq .eq-band[data-band="3"] { left: 80px; }
+#mp-eq .eq-band[data-band="4"] { left: 95px; }
+#mp-eq .eq-band[data-band="5"] { left: 110px; }
+#mp-eq .eq-band[data-band="6"] { left: 125px; }
+#mp-eq .eq-band[data-band="7"] { left: 140px; }
+#mp-eq .eq-band[data-band="8"] { left: 155px; }
+#mp-eq .eq-band[data-band="9"] { left: 170px; }
+
+/* Transport / control buttons from Cbuttons.png */
+.mp-btn {
+  position: absolute;
+  width: 23px;  /* bmp tile width */
+  height: 18px; /* bmp tile height */
+  padding: 0;
+  border: none;
+  background-image: url('./imgs/player/pizza_hut/Cbuttons.png');
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+/* coordinates in MAIN.bmp */
+.mp-back  { left: 116px; top: 72px; background-position:   0    0; }  /* prev */
+.mp-play  { left: 139px; top: 72px; background-position: -23px  0; }  /* play */
+.mp-pause { left: 162px; top: 72px; background-position: -46px  0; }  /* pause */
+.mp-stop  { left: 185px; top: 72px; background-position: -69px  0; }  /* stop */
+.mp-ff    { left: 208px; top: 72px; background-position: -92px  0; }  /* next */
+/* .mp-load will get its own left/top and background-position when you map it */
+
+/* track listing inside playlist */
+#track-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#track-list li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#track-list li.current {
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.2); /* highlight bar */
+}

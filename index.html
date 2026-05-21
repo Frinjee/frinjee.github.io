@@ -74,57 +74,64 @@
       <!-- LEFT COLUMN -->
       <aside id="left-column">
 
-        <section class="box profile-player-box">
-          <h2>Profile Player</h2>
+        <section class="box media-player-box">
+          <div id="song-player" class="multi">
+            <div class="control-container">
+              <div id="button-controls" class="control-group">
+                <button type="button" class="amplitude-stop player multi">
+                  <span class="player-icon">■</span>
+                </button>
 
-          <div id="player-skin">
-            <!-- GIF layer -->
-            <img src="./assets/imgs/player/diverdolphins.gif"
-                 alt="diverdolphins.gif"
-                 class="player-gif">
+                <button type="button" class="amplitude-prev player multi">
+                  <span class="player-icon">◀</span>
+                </button>
 
-            <!-- Frame + overlay contents -->
-            <div class="player-inner">
-              <div class="player-screen">
-                <span class="player-scrolling-text" id="player-scrolling-text">
-                </span>
+                <button type="button" class="amplitude-pause player multi">
+                  <span class="player-icon">❚❚</span>
+                </button>
+
+                <button type="button" class="amplitude-play player multi">
+                  <span class="player-icon">▶</span>
+                </button>
+
+                <button type="button" class="amplitude-next player multi">
+                  <span class="player-icon">▶</span>
+                </button>
+              </div>
+
+              <div class="meta-container">
+                <div id="song-meta">
+                  <img
+                    data-amplitude-song-info="cover_art_url"
+                    amplitude-main-song-info="true"
+                    class="album"
+                    alt="Album art"
+                  >
+
+                  <div class="song-text">
+                    <span data-amplitude-song-info="name" class="song-name"></span>
+                    <span data-amplitude-song-info="artist"></span>
+
+                    <div class="time-container">
+                      <span class="current-time">
+                        <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
+                      </span>
+                      <span class="divider">/</span>
+                      <span class="duration">
+                        <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
+                      </span>
+                    </div>
+
+                    <progress class="amplitude-song-played-progress" value="0" max="100"></progress>
+                  </div>
+
+                  <div class="mmp-eq-container">
+                    <img src="./assets/imgs/player/myspace-mp-player/eq_pause.png" alt="equalizer">
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        
-        <section class="box profile-player-gap-box">
-          <h2>Playlist Selector & Display</h2>
-        </section>
-
-          <div id="playlist-panel">
-            <div class="playlist-header">
-              <span id="playlist-title">Favorite Song</span>
-            </div>
-            <div class="playlist-body">
-              <ul id="track-list" class="track-list"></ul>
-            </div>
-            <div class="playlist-controls">
-                <button id="btn-back"  class="transport-btn transport-back"  aria-label="Back"></button>
-                <button id="btn-play"  class="transport-btn transport-play"  aria-label="Play"></button>
-                <button id="btn-pause" class="transport-btn transport-pause" aria-label="Pause"></button>
-                <button id="btn-stop"  class="transport-btn transport-stop"  aria-label="Stop"></button>
-                <button id="btn-ff"    class="transport-btn transport-ff"    aria-label="Fast forward"></button>
-            </div>
-            <div class="playlist-load-area">
-              <button id="btn-load" class="playlist-load-btn"></button>
-              <select id="mix-select" class="mix-select" aria-label="Choose mix">
-                <option value="default">default</option>
-                <option value="mix-1">mix-1</option>
-                <option value="mix-2">mix-2</option>
-                <option value="mix-3">mix-3</option>
-                <option value="mix-4">mix-4</option>
-                <option value="mix-5">mix-5</option>
-              </select>
-            </div>
-            <button id="btn-eject"class="transport-btn transport-eject eject-btn" aria-label="Eject"></button>
-          </div>
-
-          <audio id="local-audio" preload="auto"></audio>
         </section>
 
 
@@ -459,6 +466,7 @@
 
     document.addEventListener('DOMContentLoaded', loadMoods);
   </script>
-  <script src="./assets/js/player.js"></script>
+  <script src="./assets/js/amplitude.js"></script>
+<script src="./assets/js/player.js"></script>
   </body>
 </html>
