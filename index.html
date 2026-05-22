@@ -6,11 +6,11 @@
      <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Workbench&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./assets/stylesheets/index.css?v=vvs1.1">
+    <link rel="stylesheet" href="index.css?v=vvs1.3">
   </head>
   <body>
+  <div class="bg-anim-overlay"></div>
   <div id="page">
-
     <!-- TOP BAR -->
     <header id="top-bar">
       <div class="top-left">
@@ -64,8 +64,12 @@
       </div>
 
       <div class="top-right">
-        <a href="https://steamcommunity.com/id/codes4koolaid/" class="top-action">&#x1F579;&#xFE0F; Add to Friends</a>
-        <a href="mailto:jenifer_hammond@protonmail.com" class="top-action">&#128231; Send Message</a>
+        <img id="contact_tbl_bg" src="./assets/imgs/layout/contact_tbl/rainbow-with-clouds.gif" alt="rainbow-with-clouds-nobg"></img>  
+        <div class="top-right-actions">
+          <a href="https://steamcommunity.com/id/codes4koolaid/" class="top-action"><img id="gaming-add-me" src="./assets/imgs/layout/contact_tbl/add1.gif"></img></a>
+          <a href="mailto:jenifer_hammond@protonmail.com" class="top-action"><img id="msg-me" src="./assets/imgs/layout/contact_tbl/msg1.gif"></img></a>
+          <a href=# class="top-action"><img id="blk-me" src="./assets/imgs/layout/contact_tbl/blk1.gif"></img></a>
+        </div>
       </div>
     </header>
 
@@ -73,6 +77,11 @@
     <main id="layout">
       <!-- LEFT COLUMN -->
       <aside id="left-column">
+
+        <section class="box welcome-box">
+          <h2>¸,ø¤º°`°º¤ø,¸¸,ø¤º°°º¤ø,¸¸,ø¤º°`°º¤ø,¸,ø¤º°`°º¤ø,¸,ø¤º°`</h2>
+          <img id="welcome-to-page" src="./assets/imgs/layout/headers/welcome-to-my-page-2.gif" alt="welcome to my page">
+        </section>
 
         <section class="box media-player-box">
           <div id="song-player" class="multi">
@@ -134,7 +143,6 @@
           </div>
         </section>
 
-
         <section class="box interests-box">
           <h2>Interests</h2>
           <div class="interests-list">
@@ -188,9 +196,6 @@
         <section class="box activity-box">
           <h2>Activity Stream [WiP]</h2>
           <ul id="activity-list">
-            <li><img src="./assets/imgs/gaming/pgo.png"
-                 alt="pgo trainer card"
-                 class="pgo-card"></li>
             <li>{LoL game tracker placeholder}</li>
             <li>{TFT game tracker placeholder}</li>
             <li>{PokemonGo catch tracker placeholder}</li>
@@ -466,7 +471,7 @@
 
     document.addEventListener('DOMContentLoaded', loadMoods);
   </script>
-  <script src="./assets/js/amplitude.js?vvs1.1"></script>
-<script src="./assets/js/player.js?vvs1.1"></script>
+  <script src="./assets/js/amplitude.js?vvs1.3"></script>
+<script src="./assets/js/player.js?vvs1.3"></script>
   </body>
 </html>
