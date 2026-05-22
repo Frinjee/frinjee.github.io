@@ -17,7 +17,6 @@ const COVER_ART = {
   'Gangsta Kid (Remix)': `${COVER_PATH}shyfx.jpg`,
   'Coffee': `${COVER_PATH}s_esso.jpg`,
   'Break You Off': `${COVER_PATH}The Roots, Musiq Soulchild - Break You Off.jpg.jpg`,
-
   'Electric Relaxation': `${COVER_PATH}A Tribe Called Quest - Electric Relaxation.jpg.jpg`,
   'Good Morning': `${COVER_PATH}Black Thought, Pusha T, Killer Mike, Swizz Beatz - Good Morning.jpg.jpg`,
   'Down And Out': `${COVER_PATH}Cam\'ron, Kanye West, Syleena Johnson - Down And Out (Clean).jpg.jpg`,
@@ -32,7 +31,6 @@ const COVER_ART = {
   'Get a High': `${COVER_PATH}Mamas Gun - Get a High.jpg.jpg`,
   'Clubbin\'': `${COVER_PATH}Marques Houston, Joe Budden, The Pied Piper - Clubbin\' (Instrumental).jpg.jpg`,
   'Darjeeling': `${COVER_PATH}T.H.C. - Darjeeling.jpg.jpg`,
-
   "I'll Whip Ya Head Boy": `${COVER_PATH}50 Cent - I'll Whip Ya Head Boy (Remix) (Clean).jpg.jpg`,
   'Hey Mama': `${COVER_PATH}Black Eyed Peas - Hey Mama.jpg.jpg`,
   'Hey Ma': `${COVER_PATH}Cam\'ron, Juelz Santana, Freekey Zeekey, Toya - Hey Ma (Radio Edit).jpg.jpg`,
@@ -47,7 +45,6 @@ const COVER_ART = {
   'Jimmy Choo': `${COVER_PATH}Shyne, Ashanti - Jimmy Choo (Radio).jpg.jpg`,
   "I'm Sprung": `${COVER_PATH}T-Pain - I\'m Sprung.jpg.jpg`,
   'In the Mood': `${COVER_PATH}Talib Kweli - In The Mood.jpg.jpg`,
-
   'More Than Letters': `${COVER_PATH}Benjamin Francis Leftwich - More Than Letters.jpg.jpg`,
   'ROBOSHOTTA': `${COVER_PATH}Busta Rhymes - Roboshotta.jpg.jpg`,
   'One Call Away': `${COVER_PATH}chingy.jpg`,
@@ -62,7 +59,6 @@ const COVER_ART = {
   "Passin' Me By": `${COVER_PATH}The Pharcyde - Passin' Me By.jpg.jpg`,
   'Overnight Celebrity': `${COVER_PATH}Twista - Overnight Celebrity (Instrumental).jpg.jpg`,
   'Original Nuttah 25 (Remix)': `${COVER_PATH}UK Apachi, Shy FX - Original Nuttah 25 (Chase & Status Remix).jpg.jpg`,
-
   'Trojans': `${COVER_PATH}Atlas Genius - Trojans - EP Version.jpg.jpg`,
   'Teeny Weeny Little Lovin': `${COVER_PATH}Beres Hammond - Teeny Weeny Little Lovin.jpg.jpg`,
   'Steak Um': `${COVER_PATH}Black Thought - Steak Um.jpg.jpg`,
@@ -82,7 +78,6 @@ const COVER_ART = {
 
 const TRACKS = [
   { key: 'Bit Too Much For Me', name: 'Bit Too Much For Me', artist: 'Smash and Young Crip', url: `${BASE_PATH}Smash and Young Crip - Bit Too Much For Me.mp3` },
-
   { key: 'Blood Bank', name: 'Blood Bank', artist: '', url: `${BASE_PATH}mix-1/Blood Bank.mp3` },
   { key: "Fallin' remix", name: "Fallin' remix", artist: '', url: `${BASE_PATH}mix-1/Fallin' remix.mp3` },
   { key: 'Baby We Can Do It', name: 'Baby We Can Do It', artist: 'Hi-Tek feat. Czar-Nok', url: `${BASE_PATH}mix-1/Hi-Tek - ＂Baby We Can Do It＂ (feat. Czar-Nok)  [Of.mp3` },
@@ -96,7 +91,6 @@ const TRACKS = [
   { key: 'Gangsta Kid (Remix)', name: 'Gangsta Kid (Remix)', artist: 'Shy Fx', url: `${BASE_PATH}mix-1/Shy Fx - Gangsta Kid (Hyper Funk T Power Remix).mp3` },
   { key: 'Coffee', name: 'Coffee', artist: 'Sylvan Esso', url: `${BASE_PATH}mix-1/Sylvan Esso - Coffee (Official Audio).mp3` },
   { key: 'Break You Off', name: 'Break You Off', artist: 'The Roots, Musiq Soulchild', url: `${BASE_PATH}mix-1/The Roots, Musiq Soulchild - Break You Off.mp3` },
-
   { key: 'Electric Relaxation', name: 'Electric Relaxation', artist: 'A Tribe Called Quest', url: `${BASE_PATH}mix-2/A Tribe Called Quest - Electric Relaxation.mp3` },
   { key: 'Good Morning', name: 'Good Morning', artist: 'Black Thought, Pusha T, Swizz Beatz, Killer Mike', url: `${BASE_PATH}mix-2/Black Thought, Pusha T, Swizz Beatz, Killer Mike - Good Morning (feat. Pusha T, Swizz Beatz & Killer Mike).mp3` },
   { key: 'Down And Out', name: 'Down And Out', artist: "Cam'ron, Kanye West, Syleena Johnson", url: `${BASE_PATH}mix-2/Cam'ron, Kanye West, Syleena Johnson - Down And Out.mp3` },
@@ -111,7 +105,6 @@ const TRACKS = [
   { key: 'Get a High', name: 'Get a High', artist: 'Mamas Gun', url: `${BASE_PATH}mix-2/Mamas Gun - Get a High.mp3` },
   { key: "Clubbin'", name: "Clubbin'", artist: 'Marques Houston, Joe Budden, Pied Piper', url: `${BASE_PATH}mix-2/Marques Houston, Joe Budden, Pied Piper - Clubbin'.mp3` },
   { key: 'Darjeeling', name: 'Darjeeling', artist: 'T.H.C.', url: `${BASE_PATH}mix-2/T.H.C. - Darjeeling.mp3` },
-
   { key: "I'll Whip Ya Head Boy", name: "I'll Whip Ya Head Boy", artist: '50 Cent, Young Buck', url: `${BASE_PATH}mix-3/50 Cent, Young Buck - I'll Whip Ya Head Boy.mp3` },
   { key: 'Hey Mama', name: 'Hey Mama', artist: 'Black Eyed Peas', url: `${BASE_PATH}mix-3/Black Eyed Peas - Hey Mama.mp3` },
   { key: 'Hey Ma', name: 'Hey Ma', artist: "Cam'ron, Juelz Santana, Freekey Zeekey, Toya", url: `${BASE_PATH}mix-3/Cam'ron, Juelz Santana, Freekey Zeekey, Toya - Hey Ma.mp3` },
@@ -126,7 +119,6 @@ const TRACKS = [
   { key: 'Jimmy Choo', name: 'Jimmy Choo', artist: 'Shyne, Ashanti', url: `${BASE_PATH}mix-3/Shyne, Ashanti - Jimmy Choo.mp3` },
   { key: "I'm Sprung", name: "I'm Sprung", artist: 'T-Pain', url: `${BASE_PATH}mix-3/T-Pain - I'm Sprung.mp3` },
   { key: 'In the Mood', name: 'In the Mood', artist: 'Talib Kweli, Kanye West, Roy Ayers', url: `${BASE_PATH}mix-3/Talib Kweli, Kanye West, Roy Ayers - In the Mood (feat. Kanye West & Roy Ayers).mp3` },
-
   { key: 'More Than Letters', name: 'More Than Letters', artist: 'Benjamin Francis Leftwich', url: `${BASE_PATH}mix-4/Benjamin Francis Leftwich - More Than Letters.mp3` },
   { key: 'ROBOSHOTTA', name: 'ROBOSHOTTA', artist: 'Busta Rhymes, Burna Boy', url: `${BASE_PATH}mix-4/Busta Rhymes, Burna Boy - ROBOSHOTTA (feat. Burna Boy).mp3` },
   { key: 'One Call Away', name: 'One Call Away', artist: 'Chingy, Jason Weaver', url: `${BASE_PATH}mix-4/Chingy, Jason Weaver - One Call Away.mp3` },
@@ -141,7 +133,6 @@ const TRACKS = [
   { key: "Passin' Me By", name: "Passin' Me By", artist: 'The Pharcyde', url: `${BASE_PATH}mix-4/The Pharcyde - Passin' Me By.mp3` },
   { key: 'Overnight Celebrity', name: 'Overnight Celebrity', artist: 'Twista, Miri Ben-Ari', url: `${BASE_PATH}mix-4/Twista, Miri Ben-Ari - Overnight Celebrity (feat. Miri Ben-Ari).mp3` },
   { key: 'Original Nuttah 25 (Remix)', name: 'Original Nuttah 25 (Remix)', artist: 'Uk Apache, SHY FX, IRAH, Chase & Status', url: `${BASE_PATH}mix-4/Uk Apache, SHY FX, IRAH, Chase & Status - Original Nuttah 25 (feat. IRAH) - Chase & Status Remix.mp3` },
-
   { key: 'Trojans', name: 'Trojans', artist: 'Atlas Genius', url: `${BASE_PATH}mix-5/Atlas Genius - Trojans - EP Version.mp3` },
   { key: 'Teeny Weeny Little Lovin', name: 'Teeny Weeny Little Lovin', artist: 'Beres Hammond', url: `${BASE_PATH}mix-5/Beres Hammond - Teeny Weeny Little Lovin.mp3` },
   { key: 'Steak Um', name: 'Steak Um', artist: 'Black Thought, ScHoolboy Q', url: `${BASE_PATH}mix-5/Black Thought, ScHoolboy Q - Steak Um (feat. ScHoolboy Q).mp3` },
@@ -202,14 +193,17 @@ function initPlayer() {
     return;
   }
 
+  const songs = buildSongs();
+  const startSong = Math.floor(Math.random() * songs.length);
+
   Amplitude.init({
     bindings: {
       37: 'prev',
       39: 'next',
       32: 'play_pause'
     },
-    songs: buildSongs(),
-    start_song: 0
+    songs,
+    start_song: startSong
   });
 
   wireProgressSeek();
