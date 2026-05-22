@@ -222,6 +222,7 @@ body {
   width: 40px;
 }
 
+
 .pgo-card {
   width: 400px;
   height: 200px;
@@ -241,24 +242,60 @@ body {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
 #right-column {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-width: 0;
 }
 
-/* Generic box look */
+/*
+
+SECTION: Welcome Box
+
+*/
+
+.welcome-box {
+  padding: 0;
+  max-width: 290px;
+  max-height: 180px;
+}
+
+.welcome-box h2 {
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  background: #1b3b63;
+  color: #fff;
+  white-space: nowrap;
+}
+
+#welcome-to-page {
+  display: flex;
+  margin: 0 auto;
+  padding: 0.25px;
+  width: 55%;
+  height: auto;
+}
+/*
+
+SECTION: Generic Box Styles
+
+*/
 .box {
   background: #ffffff;
   border: 1px solid #c7d2e2;
   padding: 10px;
 }
 
-/* ========================= */
-/* Media Player Section      */
-/* ========================= */
+/*
+
+SECTION: Media Player Box, Children, Controls, and Meta
+
+*/
 
 .media-player-box {
   padding: 1.5px;
@@ -499,6 +536,12 @@ div.time-container span.duration {
   letter-spacing: 0.02em;
 }
 
+/*
+
+SECTION: Font guidelines for box headers
+
+*/
+
 .activity-box h2,
 .secret-box h2,
 .bookmark-rota-box h2,
@@ -513,7 +556,7 @@ div.time-container span.duration {
   letter-spacing: -0.02em;
   text-transform: uppercase;
 }
-  
+
 /**  Remaining Boxes **/
 .activity-box {
   padding: 0;
@@ -556,7 +599,12 @@ div.time-container span.duration {
   color: #fff;
 }
 
-/* Activity + Blurbs lists */
+
+/*
+
+SECTION: Activity + Blurbs lists
+
+*/
 .activity-box ul,
 .bookmark-rota-list ul,
 .secret-list ul {
@@ -805,25 +853,233 @@ div.time-container span.duration {
   margin: 2px 0;
 }
 
-.welcome-box {
-  padding: 0;
-  max-width: 290px;
-  max-height: 180px;
+/*
+
+SECTION: Activity Stream
+
+*/
+
+.activity-stream {
+  padding: 8px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
 }
 
-.welcome-box h2 {
+.activity-stream-section {
+  margin-bottom: 8px;
+  border: 1px solid #c7d2e2;
+  background: #fff;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.activity-stream-section--photos {
+  min-width: 0;
+  width: 100%;
+  height: 55%;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.activity-stream-section--photos  .activity-stream-title {
+  flex: 0 0 auto;
+}
+
+.activity-stream-section--photos .activity-photo-carousel {
+  height: calc(595px - 24px);
+  overflow: hidden;
+  padding: 2px 0;
+}
+
+.activity-stream-section:last-child {
+  margin-bottom: 0;
+}
+
+.activity-stream-section--photos .splide,
+.activity-stream-section--photos .splide__track,
+.activity-stream-section--photos .splide__list {
+  height: 100%;
+}
+.activity-stream-title {
   margin: 0;
   padding: 4px 6px;
-  font-size: 12px;
+  font-size: 11px;
   background: #1b3b63;
   color: #fff;
-  white-space: nowrap;
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
-#welcome-to-page {
+.activity-photo-carousel {
+  padding: 2px;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.activity-photo-carousel .splide__track {
+  overflow: hidden;
+  width: 100%;
+  min-width: 0;
+  padding: 0;
+}
+
+.activity-photo-carousel .splide__list {
   display: flex;
-  margin: 0 auto;
-  padding: 0.25px;
-  width: 55%;
-  height: auto;
+  align-items: stretch;
+  padding: 0 4px;
+}
+
+.activity-photo-carousel .splide__slide {
+  display: flex;
+  min-width: 0;
+  width: auto;
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+.activity-photo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  color: inherit;
+  text-decoration: none;
+  width: 150px;
+  max-width: 150px;
+  min-width: 150px;
+  box-sizing: border-box;
+  padding: 0.25px 0;
+}
+
+.activity-photo-thumb {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border: 1px solid #c7d2e2;
+  background: #eef3f8;
+  display: block;
+  flex: 0 0 150px;
+}
+
+.activity-stream-section--photos .splide__slide {
+  display: flex;
+  min-width: 0;
+  width: auto;
+  padding: 0 2px;
+  box-sizing: border-box;
+}
+
+.activity-photo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 0 1px;
+  font-size: 9px;
+  line-height: 1.25;
+  min-width: 0;
+  max-width: 150%;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.activity-photo-title {
+  font-weight: 700;
+  color: #003399;
+}
+
+.activity-photo-details {
+  color: #444;
+  overflow-wrap: anywhere;
+}
+
+.activity-entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.activity-entry {
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #c7d2e2;
+}
+
+.activity-entry:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.activity-entry-title {
+  color: #003399;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.activity-entry-title:hover {
+  text-decoration: underline;
+}
+
+.activity-entry-meta {
+  display: inline;
+  font-size: 11px;
+  color: #666;
+  margin-left: 4px;
+}
+
+.activity-entry-summary {
+  margin: 4px 0 0;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #222;
+}
+
+.activity-entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+  font-size: 10px;
+}
+
+.activity-tag {
+  color: #003399;
+  text-decoration: none;
+}
+
+.activity-tag::after {
+  content: ",";
+  color: #888;
+  margin-right: 2px;
+}
+
+.activity-tag:last-child::after {
+  content: "";
+}
+
+.activity-entry--compact .activity-entry-summary,
+.activity-entry--compact .activity-entry-tags {
+  display: none;
+}
+
+@media (max-width: 699px) {
+  .activity-stream {
+    padding: 6px;
+  }
+
+  .activity-photo-meta {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 700px) {
+  .activity-stream {
+    padding: 8px;
+  }
 }

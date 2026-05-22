@@ -7,6 +7,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css?v=vvs1.3">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
+
   </head>
   <body>
   <div class="bg-anim-overlay"></div>
@@ -194,13 +199,69 @@
       <section id="right-column">
         <!-- Activity Stream -->
         <section class="box activity-box">
-          <h2>Activity Stream [WiP]</h2>
-          <ul id="activity-list">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ul>
+          <h2>Activity Stream</h2>
+
+          <div class="activity-stream">
+            <section class="activity-stream-section activity-stream-section--photos" aria-labelledby="activity-photo-title">
+              <h3 id="activity-photo-title" class="activity-stream-title">Photo Stream</h3>
+
+              <div id="photo-carousel" class="splide activity-photo-carousel" aria-label="Recent Flickr photo stream">
+                <div class="splide__track">
+                  <ul class="splide__list" id="photo-carousel-list">
+                    <!-- injected from flickr_album_recent.json -->
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <section class="activity-stream-section activity-stream-section--writing" aria-labelledby="activity-writing-title">
+              <h3 id="activity-writing-title" class="activity-stream-title">Ramblings &amp; Research</h3>
+
+              <ul class="activity-entry-list" id="writing-list">
+                <li class="activity-entry">
+                  <a class="activity-entry-title" href="#">Entry Title</a>
+                  <span class="activity-entry-meta">- @Jen Hammond | 05%22%202026 : 0842</span>
+                  <p class="activity-entry-summary">summary placeholder.</p>
+                  <div class="activity-entry-tags" aria-label="Tags">
+                    <a href="#" class="activity-tag">tag one</a>
+                    <a href="#" class="activity-tag">tag two</a>
+                  </div>
+                </li>
+
+                <li class="activity-entry">
+                  <a class="activity-entry-title" href="#">Entry Title</a>
+                  <span class="activity-entry-meta">- @Jen Hammond | 05%21%202026 : 1705</span>
+                  <p class="activity-entry-summary">summary placeholder</p>
+                  <div class="activity-entry-tags" aria-label="Tags">
+                    <a href="#" class="activity-tag">research</a>
+                    <a href="#" class="activity-tag">draft</a>
+                  </div>
+                </li>
+
+                <li class="activity-entry">
+                  <a class="activity-entry-title" href="#">Entry Title</a>
+                  <span class="activity-entry-meta">- @Jen Hammond | 05%20%202026 : 0918</span>
+                  <p class="activity-entry-summary">summary placeholder</p>
+                  <div class="activity-entry-tags" aria-label="Tags">
+                    <a href="#" class="activity-tag">blog</a>
+                  </div>
+                </li>
+              </ul>
+            </section>
+
+            <section class="activity-stream-section activity-stream-section--misc" aria-labelledby="activity-misc-title">
+              <h3 id="activity-misc-title" class="activity-stream-title">Side Quests</h3>
+
+              <ul class="activity-entry-list activity-entry-list--misc" id="misc-list">
+                <li class="activity-entry activity-entry--compact">
+                  <a class="activity-entry-title" href="#">Entry Title</a>
+                  <span class="activity-entry-meta">- @Jen Hammond | 05%19%202026 : 2140</span>
+                  <p class="activity-entry-summary">summary placeholder</p>
+                </li>
+              </ul>
+            </section>
+            
+          </div>
         </section>
 
         <!-- Bookmarks -->
@@ -466,6 +527,7 @@
     document.addEventListener('DOMContentLoaded', loadMoods);
   </script>
   <script src="./assets/js/amplitude.js?vvs1.3"></script>
-<script src="./assets/js/player.js?vvs1.3"></script>
+  <script src="./assets/js/player.js?vvs1.3"></script>
+  <script src="./assets/js/photo_stream.js"></script>
   </body>
 </html>
