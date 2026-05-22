@@ -30,12 +30,9 @@ body {
   z-index: 0;
   pointer-events: none;
   opacity: 1;
-}
-
-.bg-anim-overlay {
   transform: translate(0px, 0px);
 }
-/* Centered main container */
+
 #page {
   position: relative;
   z-index: 1;
@@ -44,7 +41,6 @@ body {
   color: #000;
 }
 
-/* Top header bar */
 #top-bar {
   background: #ffffff;
   border: 1px solid #c7d2e2;
@@ -55,7 +51,6 @@ body {
   font-size: 11px;
 }
 
-/* Top bar left side */
 .top-left {
   display: flex;
   gap: 8px;
@@ -74,7 +69,6 @@ body {
   gap: 3px;
 }
 
-/* Title row */
 .top-title-row {
   display: flex;
   align-items: baseline;
@@ -83,8 +77,12 @@ body {
 
 .profile-title {
   margin: 0;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+  font-weight: 500;
   font-size: 14px;
-  font-weight: bold;
+  letter-spacing: 0.01em;
 }
 
 .profile-theme {
@@ -92,38 +90,11 @@ body {
   color: #555;
 }
 
-/* Username / joined */
-.top-status-row {
+.top-status-row,
+.top-mood-row,
+.top-links-row,
+.top-status-edit-row {
   font-size: 11px;
-}
-
-/* Mood row */
-.top-mood-row {
-  font-size: 11px;
-}
-
-.top-mood-row .label {
-  font-weight: bold;
-  margin-right: 2px;
-}
-
-.profile-title {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "wdth" 100;
-  font-weight: 500;
-  font-size: 14px;        /* keep your current size */
-  letter-spacing: 0.01em;
-}
-
-/* username */
-.top-username {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "wdth" 100;
-  font-weight: 400;
-  font-size: 11px;        /* inherits from row, keep size */
-  letter-spacing: 0.01em;
 }
 
 .top-mood-row .label,
@@ -136,6 +107,21 @@ body {
   letter-spacing: 0.01em;
 }
 
+.top-mood-row .label,
+.top-status-edit-row .label {
+  font-weight: bold;
+  margin-right: 2px;
+}
+
+.top-username {
+  font-family: "IBM Plex Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "wdth" 100;
+  font-weight: 400;
+  font-size: 11px;
+  letter-spacing: 0.01em;
+}
+
 #mood-emoji {
   margin: 0 2px;
 }
@@ -143,11 +129,6 @@ body {
 .mood-updated {
   color: #777;
   margin-left: 4px;
-}
-
-/* View My links */
-.top-links-row {
-  font-size: 11px;
 }
 
 .top-link {
@@ -164,17 +145,6 @@ body {
   color: #999;
 }
 
-/* Status text row */
-.top-status-edit-row {
-  font-size: 11px;
-}
-
-.top-status-edit-row .label {
-  font-weight: bold;
-  margin-right: 2px;
-}
-
-/* Top bar right actions */
 .top-right {
   position: relative;
   width: 160px;
@@ -201,10 +171,6 @@ body {
   text-decoration: none;
 }
 
-.top-action:hover {
-  text-decoration: none;
-}
-
 #contact_tbl_bg {
   position: absolute;
   top: 0;
@@ -222,7 +188,6 @@ body {
   width: 40px;
 }
 
-
 .pgo-card {
   width: 400px;
   height: 200px;
@@ -230,7 +195,6 @@ body {
   padding: 2px 2px;
 }
 
-/* 2‑column layout */
 #layout {
   display: grid;
   grid-template-columns: 290px 1fr;
@@ -238,13 +202,7 @@ body {
   margin-top: 10px;
 }
 
-#left-column {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  min-width: 0;
-}
-
+#left-column,
 #right-column {
   display: flex;
   flex-direction: column;
@@ -252,23 +210,23 @@ body {
   min-width: 0;
 }
 
-
-/*
-
-SECTION: Generic Box Styles
-
-*/
-.box {
+.box,
+.media-player-box,
+.activity-box,
+.secret-box,
+.bookmark-rota-box,
+.event-box,
+.media-box,
+.details-box,
+.interests-box,
+.welcome-box {
   background: #ffffff;
   border: 1px solid #c7d2e2;
-  padding: 10px;
 }
 
-/*
-
-SECTION: Media Player Box, Children, Controls, and Meta
-
-*/
+.box {
+  padding: 10px;
+}
 
 .media-player-box {
   padding: 1.5px;
@@ -287,14 +245,11 @@ div#song-player {
   -webkit-font-smoothing: antialiased;
 }
 
-
 div#song-player.multi {
   max-width: 100%;
 }
 
-
 div.control-container {
-  background: rgb(244,244,244);
   background: linear-gradient(180deg, rgba(244,244,244,1) 3%, rgba(215,216,213,1) 26%, rgba(188,189,187,1) 43%, rgba(137,137,137,1) 79%, rgba(226,224,225,1) 96%, rgba(236,232,232,1) 100%);
   border-color: #d5d5d5;
   border-style: groove;
@@ -307,7 +262,6 @@ div.control-container {
   box-sizing: border-box;
   overflow: hidden;
 }
-
 
 .control-group {
   display: flex;
@@ -354,7 +308,6 @@ button i.multi {
   z-index: 4;
 }
 
-
 i.icon-prev.multi.shadow,
 i.icon-next.multi.shadow,
 i.icon-play.multi.shadow,
@@ -367,7 +320,6 @@ i.icon-stop.multi.shadow {
 }
 
 div.control-container div.meta-container {
-  background: rgb(94,94,94);
   background: linear-gradient(180deg, rgba(94,94,94,1) 0%, rgba(51,51,51,1) 7%, rgba(0,0,0,1) 100%);
   border-radius: 3px;
   border-style: groove;
@@ -392,7 +344,6 @@ div.control-container div.meta-container {
   gap: 8px;
 }
 
-
 .song-text {
   flex: 1;
   min-width: 0;
@@ -400,35 +351,14 @@ div.control-container div.meta-container {
   overflow: hidden;
 }
 
-/* 10. song name + artist: clip long text cleanly */
-div.control-container div.meta-container span[data-amplitude-song-info="name"] {
-  font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #fff;
-  text-shadow:
-    0 0 2px rgba(0, 255, 180, 0.7),
-    0 0 4px rgba(0, 255, 180, 0.5),
-    1px 1px 1px #000;
-  display: block;
-  text-shadow: 1px 1px 1px #000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+div.control-container div.meta-container span[data-amplitude-song-info="name"],
 div.control-container div.meta-container span[data-amplitude-song-info="artist"] {
   font-family: "Orbitron", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
-  font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: #fff;
-  text-shadow: 1px 1px 1px #000;
   display: block;
   text-shadow: 1px 1px 1px #000;
   white-space: nowrap;
@@ -436,18 +366,21 @@ div.control-container div.meta-container span[data-amplitude-song-info="artist"]
   text-overflow: ellipsis;
 }
 
-img.album {
+div.control-container div.meta-container span[data-amplitude-song-info="name"] {
+  font-size: 10px;
+}
+
+div.control-container div.meta-container span[data-amplitude-song-info="artist"] {
+  font-size: 9px;
+}
+
+img.album,
+div#song-meta img.album[data-amplitude-song-info="cover_art_url"] {
   width: 45px;
   height: 45px;
   flex-shrink: 0;
   object-fit: cover;
-  border-radius: 3px;
-}
-
-div#song-meta img.album[data-amplitude-song-info="cover_art_url"] {
-  width: 45px;
   border-radius: 5px;
-  flex-shrink: 0;
 }
 
 .mmp-eq-container {
@@ -462,7 +395,6 @@ div#song-meta img.album[data-amplitude-song-info="cover_art_url"] {
   display: block;
 }
 
-/* 13. progress bar: already 100% width, just ensure it clears */
 progress.amplitude-song-played-progress {
   background-color: #313252;
   -webkit-appearance: none;
@@ -475,11 +407,10 @@ progress.amplitude-song-played-progress {
   margin-top: 4px;
 }
 
-/* 14. time container sits cleanly under song text */
 div.time-container {
   font-family: "Share Tech Mono", monospace;
   font-weight: 400;
-  font-size: 8px;
+  font-size: 6px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   opacity: 1;
@@ -505,15 +436,10 @@ div.time-container span.duration {
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
   font-weight: 500;
-  font-size: 11px; 
+  font-size: 11px;
   letter-spacing: 0.02em;
 }
 
-/*
-
-SECTION: Font guidelines for box headers
-
-*/
 .activity-box h2,
 .secret-box h2,
 .bookmark-rota-box h2,
@@ -524,7 +450,7 @@ SECTION: Font guidelines for box headers
 .welcome-box h2 {
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 600;       /* not as heavy as 700, still strong */
+  font-weight: 600;
   letter-spacing: -0.02em;
   text-transform: uppercase;
   text-align: center;
@@ -535,84 +461,49 @@ SECTION: Font guidelines for box headers
   overflow: hidden;
 }
 
-.welcome-box .box-title {
-  margin: 0;
-  padding: 1px 1.25px;
-  font-size: 16px;
-  background: #1b3b63;
-  color: #fff;
-  font-family: "Space Grotesk", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-  box-sizing: border-box;
-  width: 100%;
-  display: block;
-}
-
-.welcome-box__body {
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  display: block;
-}
-
-#welcome-to-page {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0;
-  padding: 0;
-}
-/**  Remaining Boxes **/
-.activity-box {
-  padding: 0;
-}
+.welcome-box .box-title,
 .activity-box h2,
 .secret-box h2,
 .bookmark-rota-box h2 {
-  font-size: 15px;        /* ~3% down from 16px */
-}
-
-.activity-box h2 {
   margin: 0;
   padding: 1px 1.25px;
   font-size: 16px;
   background: #1b3b63;
   color: #fff;
+}
+
+.welcome-box .box-title {
+  display: block;
+  width: 100%;
+}
+
+.welcome-box__body,
+#welcome-to-page {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  height: auto;
+}
+
+.activity-box {
+  padding: 0;
+}
+
+.activity-box h2,
+.secret-box h2,
+.bookmark-rota-box h2 {
+  font-size: 15px;
 }
 
 .secret-box {
   padding: 0;
 }
 
-.secret-box h2 {
-  margin: 0;
-  padding: 1px 1.25px;
-  font-size: 16px;
-  background: #1b3b63;
-  color: #fff;
-}
-
 .bookmark-rota-box {
   padding: 0;
 }
 
-.bookmark-rota-box h2 {
-  margin: 0;
-  padding: 1px 1.25px;
-  font-size: 16px;
-  background: #1b3b63;
-  color: #fff;
-}
-
-
-/*
-
-SECTION: Activity + Blurbs lists
-
-*/
 .activity-box ul,
 .bookmark-rota-list ul,
 .secret-list ul {
@@ -633,14 +524,13 @@ SECTION: Activity + Blurbs lists
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
   font-weight: 400;
-  font-size: 12.5px;      /* ~+2% over 12px */
+  font-size: 12.5px;
   letter-spacing: 0.01em;
   position: relative;
   padding-left: 1.5em;
   list-style: none;
 }
 
-/* add ::before to the li itself */
 .bookmark-rota-li::before {
   content: "🔖";
   position: absolute;
@@ -652,7 +542,11 @@ SECTION: Activity + Blurbs lists
   padding: 0;
 }
 
-.event-box h2 {
+.event-box h2,
+.media-box h2,
+.details-box h2,
+.interests-box h2,
+.activity-stream-title {
   margin: 0;
   padding: 4px 6px;
   font-size: 12px;
@@ -660,64 +554,19 @@ SECTION: Activity + Blurbs lists
   color: #fff;
 }
 
-/* events grid */
-.event-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 2.5px;
-}
-
-.event-slot {
-  background: #B9DFF0;
-  color: #254770;
-  margin: 2.25px 2px 2px 2.25px;
-  border: 1.75px solid #d1d8ea;
-  height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.event-flyer {
-  max-width: 95%;
-  max-height: 95%;
-  object-fit: fill;
-  display: block;
-}
-
-.event-label {
-  margin-top: 1.25spx;
-  font-size: 8px;
-  font-weight: bold;
-}
-
-.media-box {
-  padding: 0;
-}
-
-.media-box h2 {
-  margin: 0;
-  padding: 4px 6px;
-  font-size: 12px;
-  background: #1b3b63;
-  color: #fff;
-}
-
-/* media grid */
+.event-grid,
 .media-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 2.5px;
 }
 
+.event-slot,
 .media-slot {
   background: #B9DFF0;
   color: #254770;
   margin: 2.25px 2px 2px 2.25px;
   border: 1.75px solid #d1d8ea;
-  height: 185px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -725,37 +574,47 @@ SECTION: Activity + Blurbs lists
   text-align: center;
 }
 
+.event-slot {
+  height: 200px;
+}
+
+.media-slot {
+  height: 185px;
+}
+
+.event-flyer,
 .media-flyer {
-  max-width: 85%;
-  max-height: 80%;
   object-fit: fill;
   display: block;
 }
 
+.event-flyer {
+  max-width: 95%;
+  max-height: 95%;
+}
+
+.media-flyer {
+  max-width: 85%;
+  max-height: 80%;
+}
+
+.event-label,
 .media-label {
   margin-top: 1.25spx;
   font-size: 8px;
   font-weight: bold;
 }
 
-/* Comments / Quiz */
-.secret-box {
-  min-height: 200px;
-}
-
-/* Mood row container is the positioning context */
 #mood-container {
   position: relative;
   display: inline-block;
 }
 
-/* Emoji looks clickable */
 #mood-emoji-wrapper {
   display: inline-block;
   cursor: pointer;
 }
 
-/* Popup select positioned absolutely within mood-container */
 .mood-select {
   position: absolute;
   display: none;
@@ -766,20 +625,10 @@ SECTION: Activity + Blurbs lists
   border: 1px solid #c7d2e2;
 }
 
-/* Details box layout (MySpace style) */
 .details-box {
   padding: 0;
 }
 
-.details-box h2 {
-  margin: 0;
-  padding: 4px 6px;
-  font-size: 12px;
-  background: #1b3b63;
-  color: #fff;
-}
-
-/* table body */
 .details-table {
   font-size: 11px;
   border: 1px solid #c7d2e2;
@@ -789,18 +638,15 @@ SECTION: Activity + Blurbs lists
   display: flex;
 }
 
-/* left label column */
 .details-label {
   width: 40%;
   padding: 3px 4px;
-  font-weight: bold;
   background-color: #e4edf9;
   border-bottom: 1px solid #c7d2e2;
   border-right: 1px solid #c7d2e2;
   box-sizing: border-box;
 }
 
-/* right value column */
 .details-value {
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
@@ -814,7 +660,6 @@ SECTION: Activity + Blurbs lists
   box-sizing: border-box;
 }
 
-/* remove bottom border on last row */
 .details-row:last-child .details-label,
 .details-row:last-child .details-value {
   border-bottom: none;
@@ -827,20 +672,10 @@ SECTION: Activity + Blurbs lists
   vertical-align: middle;
 }
 
-/* Interests box (MySpace style) */
 .interests-box {
   padding: 0;
 }
 
-.interests-box h2 {
-  margin: 0;
-  padding: 4px 6px;
-  font-size: 12px;
-  background: #1b3b63;
-  color: #fff;
-}
-
-/* inner area */
 .interests-list {
   border: 1px solid #c7d2e2;
   background: #ffffff;
@@ -848,24 +683,17 @@ SECTION: Activity + Blurbs lists
   padding: 6px 4px;
 }
 
-/* interest links */
 .interest-item {
   display: block;
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
   font-weight: 400;
-  font-size: 11px;        
+  font-size: 11px;
   color: #003399;
   text-decoration: none;
   margin: 2px 0;
 }
-
-/*
-
-SECTION: Activity Stream
-
-*/
 
 .activity-stream {
   padding: 8px;
@@ -891,7 +719,8 @@ SECTION: Activity Stream
   overflow: hidden;
 }
 
-.activity-stream-section--photos  .activity-stream-title {
+.activity-stream-section--photos .activity-stream-title,
+.activity-stream-title {
   flex: 0 0 auto;
 }
 
@@ -910,12 +739,8 @@ SECTION: Activity Stream
 .activity-stream-section--photos .splide__list {
   height: 100%;
 }
+
 .activity-stream-title {
-  margin: 0;
-  padding: 4px 6px;
-  font-size: 11px;
-  background: #1b3b63;
-  color: #fff;
   font-family: "Space Grotesk", sans-serif;
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -943,7 +768,8 @@ SECTION: Activity Stream
   padding: 0 4px;
 }
 
-.activity-photo-carousel .splide__slide {
+.activity-photo-carousel .splide__slide,
+.activity-stream-section--photos .splide__slide {
   display: flex;
   min-width: 0;
   width: auto;
@@ -972,14 +798,6 @@ SECTION: Activity Stream
   background: #eef3f8;
   display: block;
   flex: 0 0 150px;
-}
-
-.activity-stream-section--photos .splide__slide {
-  display: flex;
-  min-width: 0;
-  width: auto;
-  padding: 0 2px;
-  box-sizing: border-box;
 }
 
 .activity-photo-meta {
