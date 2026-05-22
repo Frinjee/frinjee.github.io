@@ -252,34 +252,7 @@ body {
   min-width: 0;
 }
 
-/*
 
-SECTION: Welcome Box
-
-*/
-
-.welcome-box {
-  padding: 0;
-  max-width: 290px;
-  max-height: 180px;
-}
-
-.welcome-box h2 {
-  margin: 0;
-  padding: 4px 6px;
-  font-size: 12px;
-  background: #1b3b63;
-  color: #fff;
-  white-space: nowrap;
-}
-
-#welcome-to-page {
-  display: flex;
-  margin: 0 auto;
-  padding: 0.25px;
-  width: 55%;
-  height: auto;
-}
 /*
 
 SECTION: Generic Box Styles
@@ -557,6 +530,41 @@ SECTION: Font guidelines for box headers
   text-transform: uppercase;
 }
 
+.welcome-box {
+  padding: 0;
+  overflow: hidden;
+}
+
+.welcome-box .box-title {
+  margin: 0;
+  padding: 1px 1.25px;
+  font-size: 16px;
+  background: #1b3b63;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  box-sizing: border-box;
+  width: 100%;
+  display: block;
+}
+
+.welcome-box__body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  display: block;
+}
+
+#welcome-to-page {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
 /**  Remaining Boxes **/
 .activity-box {
   padding: 0;
