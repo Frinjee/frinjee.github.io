@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instagram Photo Resizer</title>
+  <meta name="description" content="Resize and crop photos for Instagram without a backend." />
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500&family=Atkinson+Hyperlegible&family=Comic+Neue:wght@600;700&display=swap" />
+
+  <!-- App styles -->
+  <link rel="stylesheet" href="./css/styles.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/blueimp-file-upload@10.32.0/css/jquery.fileupload.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cropper@4.1.0/dist/cropper.min.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/pica@10.0.1/dist/pica.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blueimp-canvas-to-blob@3.29.0/js/canvas-to-blob.min.js" integrity="sha256-3Pql6NOQRgfenfZ2Ng2uE5nL7uNGewvLVfcqsU4Yvz0=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/blueimp-load-image@5.16.0/js/load-image.all.min.js" integrity="sha256-f6OG4WTiIGgXR5AAh9y/fefqYj4oG6JfZWzGuGH82EE=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/cropperjs@2.1.1/dist/cropper.min.js"></script>
+  <script src="./js/app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <h1>Instagram Photo Resizer</h1>
+
+    <!-- Step indicator -->
+    <div class="step-indicator">
+      <span class="step active" data-step="1">1. Upload</span>
+      <span class="step" data-step="2">2. Adjust</span>
+      <span class="step" data-step="3">3. Save</span>
+    </div>
+
+    <!-- Tips area -->
+    <div class="tips">
+      <p class="tip">Tip: High‑resolution photos give the best Instagram results.</p>
+    </div>
+
+    <!-- Step 1: Upload -->
+    <section id="step-upload" class="step-section active">
+      <div class="upload-card">
+        <div class="upload-dropzone" id="upload-dropzone">
+          <p>Drop a photo here or click to choose.</p>
+          <p class="upload-subtext">Works with most camera and phone photos.</p>
+        </div>
+        <input type="file" id="file-input" accept="image/*" hidden />
+      </div>
+
+      <!-- Metadata / orientation after upload -->
+      <div id="upload-info" class="upload-info hidden">
+        <p id="file-meta"></p>
+        <p id="orientation-msg" class="helper-text"></p>
+      </div>
+    </section>
+
+    <!-- Step 2: Presets + Cropping -->
+    <section id="step-adjust" class="step-section hidden">
+      <!-- Instagram presets -->
+      <div class="presets">
+        <h2 class="section-title">Choose Instagram size</h2>
+        <div class="preset-group">
+          <!-- Square -->
+          <label class="preset-card preset-radio">
+            <input type="radio" name="ig-size" value="1080x1080" checked />
+            <span class="preset-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" fill="currentColor" />
+              </svg>
+            </span>
+            <span class="preset-label">Square 1080×1080 (Best for grid posts)</span>
+          </label>
+
+          <!-- Portrait 4:5 -->
+          <label class="preset-card preset-radio">
+            <input type="radio" name="ig-size" value="1080x1350" />
+            <span class="preset-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <rect x="6" y="2" width="12" height="20" fill="currentColor" />
+              </svg>
+            </span>
+            <span class="preset-label">Portrait 1080×1350 (4:5) (Tall photo)</span>
+          </label>
+
+          <!-- Landscape 1.91:1 -->
+          <label class="preset-card preset-radio">
+            <input type="radio" name="ig-size" value="1080x566" />
+            <span class="preset-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24">
+                <rect x="2" y="8" width="20" height="8" fill="currentColor" />
+              </svg>
+            </span>
+            <span class="preset-label">Landscape 1080×566 (1.91:1) (Wide photo)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Crop area -->
+      <div class="crop-area-wrapper">
+        <div id="crop-container" class="crop-container"></div>
+        <div class="crop-controls">
+          <p class="crop-helper">Drag to move. Use scroll to zoom (if supported).</p>
+          <button type="button" id="crop-reset" class="btn btn-secondary">Reset view</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Step 3: Save & compare -->
+    <section id="step-save" class="step-section hidden">
+      <h2 class="section-title">Save for Instagram</h2>
+
+      <!-- Side‑by‑side thumbnails -->
+      <div class="compare-row">
+        <div class="thumbnail-box">
+          <h3 class="thumbnail-label">Original</h3>
+          <div id="thumb-original" class="thumbnail-placeholder"></div>
+          <div class="thumbnail-meta" id="thumb-original-meta"></div>
+        </div>
+        <div class="thumbnail-box">
+          <h3 class="thumbnail-label">Ready for Instagram</h3>
+          <div id="thumb-instagram" class="thumbnail-placeholder"></div>
+          <div class="thumbnail-meta" id="thumb-instagram-meta"></div>
+        </div>
+      </div>
+
+      <!-- Simple presets: quality + crop mode -->
+      <div class="preset-controls">
+        <h3 class="preset-title">Quality</h3>
+        <div class="preset-group">
+          <label class="preset-radio">
+            <input type="radio" name="quality" value="standard" checked />
+            <span class="preset-label">Standard quality (recommended)</span>
+          </label>
+          <label class="preset-radio">
+            <input type="radio" name="quality" value="smaller" />
+            <span class="preset-label">Smaller file (faster upload)</span>
+          </label>
+        </div>
+
+        <h3 class="preset-title">Crop mode</h3>
+        <div class="preset-group">
+          <label class="preset-radio">
+            <input type="radio" name="crop-mode" value="crop" checked />
+            <span class="preset-label">Crop to fit</span>
+          </label>
+          <label class="preset-radio">
+            <input type="radio" name="crop-mode" value="borders" />
+            <span class="preset-label">Add borders (no crop)</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Advanced controls toggle -->
+      <button type="button" id="toggle-advanced" class="btn btn-link">Advanced controls ▾</button>
+      <div id="advanced-panel" class="advanced-panel hidden">
+        <h3 class="preset-title">Advanced controls</h3>
+        <p class="helper-text">Adjust these only if you know what you’re doing.</p>
+
+        <!-- Zoom slider -->
+        <div class="control-row">
+          <label class="control-label">
+            <span>Zoom (0–100)</span>
+            <span class="help-tip" title="Finely zoom in or out in the crop area.">?</span>
+          </label>
+          <div class="control-input">
+            <input type="range" id="zoom-slider" min="0" max="100" value="50" />
+            <span class="reset-control" id="reset-zoom" title="Reset to default">×</span>
+          </div>
+        </div>
+
+        <!-- Brightness slider -->
+        <div class="control-row">
+          <label class="control-label">
+            <span>Brightness (how light or dark)</span>
+            <span class="help-tip" title="Adjust brightness from -20 (darker) to +20 (brighter).">?</span>
+          </label>
+          <div class="control-input">
+            <input type="range" id="brightness-slider" min="-20" max="20" value="0" />
+            <span class="reset-control" id="reset-brightness" title="Reset to default">×</span>
+          </div>
+        </div>
+
+        <!-- Contrast slider -->
+        <div class="control-row">
+          <label class="control-label">
+            <span>Contrast</span>
+            <span class="help-tip" title="Adjust contrast from -20 to +20.">?</span>
+          </label>
+          <div class="control-input">
+            <input type="range" id="contrast-slider" min="-20" max="20" value="0" />
+            <span class="reset-control" id="reset-contrast" title="Reset to default">×</span>
+          </div>
+        </div>
+
+        <!-- Auto‑fix checkbox -->
+        <div class="control-row">
+          <label class="control-label">
+            <span>Auto‑fix</span>
+            <span class="help-tip" title="Apply a basic automatic tone adjustment.">?</span>
+          </label>
+          <input type="checkbox" id="auto-fix" />
+        </div>
+
+        <!-- Reset advanced badge + button -->
+        <div class="advanced-footer">
+          <div id="advanced-changed-tag" class="advanced-changed-tag hidden">Advanced changes applied</div>
+          <button type="button" id="reset-advanced" class="btn btn-secondary">Reset advanced</button>
+        </div>
+      </div>
+
+      <!-- Export buttons -->
+      <div class="export-row">
+        <button type="button" id="download-jpg" class="btn btn-primary">Download JPG (recommended)</button>
+        <button type="button" id="download-png" class="btn btn-secondary-like">Download PNG (for graphics)</button>
+        <button type="button" id="preview-changes" class="btn btn-link">Preview changes</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Hidden work canvas used by Pica -->
+  <canvas id="pica-work-canvas" class="hidden"></canvas>
+</body>
+</html>

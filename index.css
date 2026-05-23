@@ -43,7 +43,10 @@ body {
 
 #top-bar {
   background: #ffffff;
-  border: 1px solid #c7d2e2;
+  border: 1px;
+  border-style: solid;
+  border-color: #1b3b63;
+  /*border: 1px solid #c7d2e2;*/
   padding: 8px 10px;
   display: flex;
   justify-content: space-between;
@@ -210,18 +213,21 @@ body {
   min-width: 0;
 }
 
-.box,
 .media-player-box,
+.media-box {
+  background: #ffffff;
+  border: 1px solid #c7d2e2;
+}
+
+.box,
 .activity-box,
 .secret-box,
 .bookmark-rota-box,
 .event-box,
-.media-box,
 .details-box,
-.interests-box,
-.welcome-box {
+.interests-box {
   background: #ffffff;
-  border: 1px solid #c7d2e2;
+  border: 2px ridge #707788;
 }
 
 .box {
@@ -444,7 +450,6 @@ div.time-container span.duration {
 .secret-box h2,
 .bookmark-rota-box h2,
 .event-box h2,
-.media-box h2,
 .details-box h2,
 .interests-box h2,
 .welcome-box h2 {
@@ -454,9 +459,22 @@ div.time-container span.duration {
   letter-spacing: -0.02em;
   text-transform: uppercase;
   text-align: center;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+}
+
+.media-box h2 {
+  font-family: "Space Grotesk", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .welcome-box {
+  border: 2px ridge #707788;
   padding: 0;
   overflow: hidden;
 }
@@ -480,8 +498,8 @@ div.time-container span.duration {
 .welcome-box__body,
 #welcome-to-page {
   display: block;
-  width: 100%;
-  margin: 0;
+  width: 85%;
+  margin: 1px 2px 4px 15px;
   padding: 0;
   height: auto;
 }
@@ -843,7 +861,7 @@ div.time-container span.duration {
 }
 
 .activity-entry-title {
-  color: #003399;
+  color: #506a96;
   text-decoration: none;
   font-weight: 700;
   font-size: 12px;
