@@ -560,10 +560,14 @@ div.time-container span.duration {
   padding: 0;
 }
 
+.interests-box h2 {
+  margin: 0;
+  padding: 0.02px 0.02px;
+}
+
 .event-box h2,
 .media-box h2,
 .details-box h2,
-.interests-box h2,
 .activity-stream-title {
   margin: 0;
   padding: 4px 6px;

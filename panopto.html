@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Panopto Video DL Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400;1,700&family=Comic+Relief:wght@400;700&family=Lexend:wght@100..900&display=swap" rel="stylesheet">
+
+  <!-- UnoCSS runtime -->
+  <script src="https://unpkg.com/@unocss/runtime"></script>
+  <script>
+    window.__unocss = { presets: ['mini'] };
+  </script>
+
+  <!-- app styles -->
+  <link rel="stylesheet" href="./assets/styles/panopto.css">
+</head>
+<body>
+  <div class="app-shell">
+    <div class="app-window">
+      <!-- top bar -->
+      <header class="app-bar">
+        <div class="traffic-dots">
+          <div class="traffic-dot red"></div>
+          <div class="traffic-dot yellow"></div>
+          <div class="traffic-dot green"></div>
+        </div>
+
+        <!-- left: title + subtitle -->
+        <div class="flex-row flex-gap-2" style="flex: 1;">
+          <div class="app-bar-title">
+            <span class="material-symbols-rounded" style="font-size:18px;color:#9182ec;">cloud_download</span>
+            <span>Panopto Video DL</span>
+          </div>
+          <div class="app-bar-subtitle">
+            Paste course links. Your browser stays logged into Panopto.
+          </div>
+        </div>
+
+        <!-- middle: single connection status chip -->
+        <div style="flex: 0 0 auto; margin: 0 16px;">
+          <div id="connectionChip" class="chip">
+            <div id="connectionDot" class="chip-dot"
+                style="background:#ffb74d;box-shadow:0 0 8px rgba(255,183,77,0.8);"></div>
+            <span id="connectionLabel">Test connection</span>
+          </div>
+        </div>
+
+        <!-- right: theme + verify buttons -->
+        <div class="flex-row flex-gap-2" style="flex: 0 0 auto; align-items:center;">
+          <button id="themeToggle" class="light-toggle" type="button" aria-label="Toggle theme">
+            <span>💡</span>
+          </button>
+
+          <button id="verifyBtn"
+                  class="light-toggle"
+                  type="button"
+                  aria-label="Verify Panopto connection"
+                  style="margin-left:6px;background:radial-gradient(circle at 30% 0, #00c89b, #007352);">
+            <span>◉</span>
+          </button>
+        </div>
+      </header>
+      
+      <!-- main panes -->
+      <main class="app-main">
+        <!-- left pane -->
+        <section class="pane" style="flex: 1.15;">
+          <div class="pane-header">
+            <div>
+              <div class="pane-title">URL Ingest</div>
+              <div class="pane-subtitle">
+              </div>
+            </div>
+            <div class="chip">
+              <div class="chip-dot"></div>
+              <span>Up to 50 links per batch</span>
+            </div>
+          </div>
+
+          <div class="pane-body">
+            <div class="field-label">Panopto URLs</div>
+            <div class="field-caption">
+              Paste Panopto Viewer/Embed URLs; scan to list videos.
+              Each line should contain a full Panopto URL with an <code>id</code> or <code>tid</code> parameter.
+              You must already be logged into your institution’s Panopto in this browser.
+            </div>
+
+            <div class="textbox-shell" style="flex:1;">
+              <textarea id="urlInput" placeholder="https://your.panopto.host/Panopto/Pages/Viewer.aspx?id=...&#10;https://your.panopto.host/Panopto/Pages/Viewer.aspx?id=..."></textarea>
+              <div class="textbox-toolbar">
+                <div class="toolbar-badge">Batch input</div>
+                <div class="toolbar-stats">
+                  <span><strong id="urlCount">0</strong> links</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="field-label" style="margin-top:8px;">Mode</div>
+            <div class="field-caption">
+              Choose how to handle multiple source streams when they exist.
+            </div>
+            <div class="stream-options">
+              <label>
+                <input type="radio" name="mode" value="auto" checked>
+                <span>Default stream (auto choose best)</span>
+              </label>
+              <label>
+                <input type="radio" name="mode" value="manual">
+                <span>Manual: show all streams to pick from</span>
+              </label>
+            </div>
+
+            <div class="field-label" style="margin-top:8px;">Detected videos</div>
+            <div class="field-caption">
+              Click “Scan links” list recordings then select the ones you want.
+            </div>
+            <div id="videoList" class="status-console"></div>
+          </div>
+
+          <footer class="pane-footer">
+            <button id="clearInput" class="secondary-btn" type="button">
+              <span class="icon">⟲</span>
+              <span>Clear batch</span>
+            </button>
+
+            <button id="scanBtn" class="secondary-btn" type="button">
+              <span class="icon">🔍</span>
+              <span>Scan links</span>
+            </button>
+
+            <button id="downloadBtn" class="primary-btn" type="button">
+              <span class="icon">⬇</span>
+              <span>Download</span>
+            </button>
+          </footer>
+        </section>
+
+        <!-- right pane -->
+        <section class="pane" style="flex: 0.95;">
+          <div class="pane-header">
+            <div>
+              <div class="pane-title">Queue &amp; status</div>
+              <div class="pane-subtitle">
+                Live feedback logs on connection, scanning, and download progress.
+              </div>
+            </div>
+          </div>
+
+          <div class="pane-body">
+            <div class="field-label">Activity log</div>
+            <div class="field-caption">
+              Errors usually mean you are not logged in, or don’t have rights to that recording.
+            </div>
+
+            <div id="statusConsole" class="status-console"></div>
+          </div>
+
+          <footer class="pane-footer">
+            <button id="clearLog" class="secondary-btn" type="button">
+              <span class="icon">🧹</span>
+              <span>Clear log</span>
+            </button>
+          </footer>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- Panopto logic -->
+  <script type="module" src="./assets/js/panopto/Panopto-Video-DL.js"></script>
+
+  <!-- dashboard wiring -->
+  <script>
+    const urlInput = document.getElementById('urlInput');
+    const urlCount = document.getElementById('urlCount');
+    const statusConsole = document.getElementById('statusConsole');
+    const videoList = document.getElementById('videoList');
+
+    const connectionDot = document.getElementById('connectionDot');
+    const connectionLabel = document.getElementById('connectionLabel');
+    let lastScanResult = null;
+
+    function updateCount() {
+      const lines = urlInput.value.split(/\r?\n/).filter(l => l.trim().length > 0);
+      urlCount.textContent = String(lines.length);
+    }
+
+    urlInput.addEventListener('input', updateCount);
+    updateCount();
+
+    function appendStatus(metaText, message, cls = 'ok') {
+      const row = document.createElement('div');
+      row.className = 'status-line';
+      const meta = document.createElement('span');
+      meta.className = 'meta';
+      meta.textContent = metaText;
+      const msg = document.createElement('span');
+      msg.className = 'msg ' + cls;
+      msg.textContent = message;
+      row.appendChild(meta);
+      row.appendChild(msg);
+      statusConsole.appendChild(row);
+      statusConsole.scrollTop = statusConsole.scrollHeight;
+    }
+
+    function renderVideoList(items) {
+      videoList.innerHTML = '';
+      if (!items.length) {
+        videoList.textContent = 'No valid Panopto viewer links detected.';
+        return;
+      }
+      for (const item of items) {
+        const row = document.createElement('div');
+        row.className = 'status-line';
+
+        const left = document.createElement('span');
+        left.className = 'meta';
+
+        const cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.className = 'select-checkbox';
+        cb.checked = true;
+        cb.dataset.url = item.url;
+        cb.dataset.id = item.id;
+        cb.dataset.isTid = item.isTid ? '1' : '0';
+        left.appendChild(cb);
+
+        const label = document.createElement('span');
+        label.textContent = ' ' + (item.title || item.url);
+        left.appendChild(label);
+
+        const right = document.createElement('span');
+        right.className = 'msg ok';
+        right.textContent = 'Ready';
+
+        row.appendChild(left);
+        row.appendChild(right);
+        videoList.appendChild(row);
+      }
+    }
+
+    function setConnectionState(state) {
+      if (state === 'ok') {
+        connectionDot.style.background = '#00c89b';
+        connectionDot.style.boxShadow = '0 0 8px rgba(0,200,155,0.8)';
+        connectionLabel.textContent = 'Connected';
+      } else if (state === 'warn') {
+        connectionDot.style.background = '#ffb74d';
+        connectionDot.style.boxShadow = '0 0 8px rgba(255,183,77,0.8)';
+        connectionLabel.textContent = 'Test connection';
+      } else {
+        connectionDot.style.background = '#ff7e7e';
+        connectionDot.style.boxShadow = '0 0 8px rgba(255,126,126,0.8)';
+        connectionLabel.textContent = 'Not connected';
+      }
+    }
+
+    async function performScan(lines) {
+      if (typeof window.scanPanoptoLinks !== 'function') {
+        appendStatus('[system]', 'scanPanoptoLinks not available (dashboard JS)', 'err');
+        setConnectionState('error');
+        return null;
+      }
+      appendStatus('[system]', 'Checking login and scanning links...', 'ok');
+      const result = await window.scanPanoptoLinks(lines);
+      lastScanResult = result;
+      if (!result.loggedIn && result.loginUrl) {
+        appendStatus('[auth]', 'Not logged in. Opening Panopto login page...', 'err');
+        setConnectionState('error');
+        window.open(result.loginUrl, '_blank');
+      } else if (!result.loggedIn) {
+        appendStatus('[auth]', 'Not logged in. Open your Panopto site in another tab and sign in, then retry.', 'err');
+        setConnectionState('error');
+      } else {
+        appendStatus('[auth]', 'Panopto cookies detected for this browser.', 'ok');
+        setConnectionState('ok');
+      }
+      renderVideoList(result.items || []);
+      return result;
+    }
+
+    document.getElementById('clearInput').addEventListener('click', () => {
+      urlInput.value = '';
+      updateCount();
+      renderVideoList([]);
+      setConnectionState('warn');
+    });
+
+    document.getElementById('clearLog').addEventListener('click', () => {
+      statusConsole.innerHTML = '';
+    });
+
+    // secondary: rescan links
+    document.getElementById('scanBtn').addEventListener('click', async () => {
+      const lines = urlInput.value.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (!lines.length) {
+        appendStatus('[system]', 'Paste at least one Panopto URL first', 'err');
+        setConnectionState('warn');
+        return;
+      }
+      try {
+        await performScan(lines);
+      } catch (e) {
+        appendStatus('[system]', 'Scan failed: ' + (e && e.message ? e.message : e), 'err');
+        setConnectionState('error');
+      }
+    });
+
+    document.getElementById('downloadBtn').addEventListener('click', async () => {
+      const checked = Array.from(videoList.querySelectorAll('.select-checkbox'))
+        .filter(cb => cb.checked)
+        .map(cb => ({
+          url: cb.dataset.url,
+          id: cb.dataset.id,
+          isTid: cb.dataset.isTid === '1',
+        }));
+
+      if (!checked.length) {
+        appendStatus('[system]', 'Select at least one video in the list.', 'err');
+        return;
+      }
+      if (typeof window.queuePanoptoDownloads !== 'function') {
+        appendStatus('[system]', 'queuePanoptoDownloads not available (dashboard JS)', 'err');
+        return;
+      }
+
+      const mode = document.querySelector('input[name="mode"]:checked').value;
+      appendStatus('[system]', `Starting downloads (${mode} mode) for ` + checked.length + ' videos...', 'ok');
+
+      window.queuePanoptoDownloads(checked, mode, (evt) => {
+        appendStatus(evt.url || '[item]', evt.message, evt.status === 'error' ? 'err' : 'ok');
+      });
+    });
+
+    // primary: verify + scan via ◉
+    document.getElementById('verifyBtn').addEventListener('click', async () => {
+      const lines = urlInput.value.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (!lines.length && !lastScanResult) {
+        appendStatus('[auth]', 'Paste at least one Panopto URL, then click ◉ to test and scan.', 'err');
+        setConnectionState('warn');
+        return;
+      }
+      const sourceUrls = lines.length ? lines : (lastScanResult ? lastScanResult.items.map(i => i.url) : []);
+      if (!sourceUrls.length) {
+        appendStatus('[auth]', 'No URLs to test. Paste links and click ◉.', 'err');
+        setConnectionState('warn');
+        return;
+      }
+      try {
+        await performScan(sourceUrls);
+      } catch (e) {
+        appendStatus('[auth]', 'Connection test failed: ' + (e && e.message ? e.message : e), 'err');
+        setConnectionState('error');
+      }
+    });
+
+    // theme toggle
+    const themeToggle = document.getElementById('themeToggle');
+    let dark = true;
+    themeToggle.addEventListener('click', () => {
+      dark = !dark;
+      if (dark) {
+        document.documentElement.style.setProperty('color-scheme', 'dark');
+        document.body.style.background = '#333236';
+      } else {
+        document.documentElement.style.setProperty('color-scheme', 'light');
+        document.body.style.background = '#f6f4ff';
+      }
+    });
+  </script>
+</body>
+</html>
