@@ -246,7 +246,6 @@ No extra padding so the gradient fills edge to edge.
 .activity-box,
 .secret-box,
 .bookmark-rota-box,
-.event-box,
 .details-box,
 .interests-box {
   background: #ffffff;
@@ -422,7 +421,6 @@ Shared heading treatment for major sections.
 .activity-box h2,
 .secret-box h2,
 .bookmark-rota-box h2,
-.event-box h2,
 .details-box h2,
 .interests-box h2,
 .welcome-box h2 {
@@ -437,6 +435,7 @@ Shared heading treatment for major sections.
   border-color: #707788;
 }
 
+.event-box h2,
 .media-box h2 {
   font-family: "Space Grotesk", sans-serif;
   font-optical-sizing: auto;
@@ -474,9 +473,6 @@ Shared heading treatment for major sections.
   border-style: ridge;
   border-color: #707788;
   font-weight: bolder;
-  margin: 0;
-  padding: 1px 1.25px;
-  font-size: 16px;
 }
 
 .welcome-box .box-title {
@@ -554,9 +550,6 @@ Events and media grid.
 Five-column grid for flyers and media tiles.
 Styleguide Events.Grid.
 */
-.event-box {
-  padding: 0;
-}
 
 .interests-box h2 {
   background-image: url("imgs/dividers/notes4.gif");
@@ -568,60 +561,76 @@ Styleguide Events.Grid.
   height: 40px ;
 }
 
-.event-box h2,
-.media-box h2,
 .activity-stream-title h2,
 .details-box h2 {
   margin: 0;
   padding: 4px 6px;
   font-size: 12px;
-  color: #fff;
+  font-weight: bolder;
+  color: #210c48;;
+}
+.activity-stream-title,
+.event-box,
+.media-box  {
+  margin: 0;
+  padding: 1px 6px;
+  font-size: 12px;
+  font-weight: bolder;
+  color: #210c48;;
 }
 
-.activity-stream-title h2{
-  background-image: url("imgs/dividers/jewels4.gif") ;
+.event-box h2 {
+  background-image: url("imgs/dividers/sparkles.gif") ;
+  background-size: contain;
+  border-top: #222 solid 1.75px;
+  border-bottom: #222 solid 1.75px;
 }
+
+.media-box h2 {
+  background-image: url("imgs/dividers/blood-rainbow.gif") ;
+  background-repeat: repeat-x;
+  background-size: 35% 35%;
+  border-top: #222 solid 1.75px;
+  border-bottom: #222 solid 1.75px;
+}
+
 
 #activity-photo-title {
   background-image: url("imgs/dividers/rainbowstars5.gif");
   background-repeat: repeat-x;
   background-size: contain;
-  margin: 0;
   padding: 4px 6px;
   font-size: 12px;
-  color: #000000;
-  border: 1.75px;
-  border-style: ridge;
-  border-color: #707788;
   font-weight: bolder;
+  color: #210c48;
+  border-top: #222 solid 1.75px;
+  border-bottom: #222 solid 1.75px;
 }
 
 #activity-writing-title {
   background-image: url("imgs/dividers/sparkles.gif");
   background-repeat: repeat-x;
   background-size: contain;
-  margin: 0;
+  margin: 1.5px 0;
   padding: 4px 6px;
   font-size: 12px;
-  color: #000000;
-  border: 1.75px;
-  border-style: ridge;
-  border-color: #707788;
   font-weight: bolder;
+  color: #210c48;
+  border-bottom: #222 solid 1.75px;
 }
 
 #activity-misc-title {
   background-image: url("imgs/dividers/bubbles2.gif");
   background-repeat: repeat-x;
   background-size: contain;
+  border-spacing: 1px 0;
   margin: 0;
   padding: 4px 6px;
   font-size: 12px;
-  color: #08080a;
-  border: 1.75px;
-  border-style: ridge;
-  border-color: #707788;
   font-weight: bolder;
+  color: #210c48;
+  border-top: #222 solid 1.75px;
+  border-bottom: #222 solid 1.75px;
 }
 
 .event-grid,
@@ -800,12 +809,31 @@ Styleguide Activity.Stream.
   overflow: hidden;
 }
 
-.activity-stream-section--photos {
+.activity-stream-section--photos,
+.activity-stream-section--writing,
+.activity-stream-section--misc {
   min-width: 0;
   width: 100%;
   height: 55%;
   min-height: 0;
   overflow: hidden;
+  border: #363333 solid 1px;
+  border-top: #363333b0 solid 0.25px ;
+}
+
+.activity-stream-section--photos {
+  margin: 0.25px 0.25px;
+  padding: 1px 1.25px;
+}
+
+.activity-stream-section--writing,
+.activity-stream-section--misc {
+  margin: 0.25px 0.25px;
+  padding: 1px 1.25px;
+}
+
+.activity-stream-section--writing {
+   border-bottom: none;
 }
 
 .activity-stream-section--photos .activity-stream-title,
@@ -820,7 +848,7 @@ Styleguide Activity.Stream.
 }
 
 .activity-stream-section:last-child {
-  margin-bottom: 0;
+  margin-bottom: 1px;
 }
 
 .activity-stream-section--photos .splide,
@@ -922,6 +950,10 @@ Activity stream: writing and misc lists.
 Default list styling for entries and tags.
 Styleguide Activity.Stream.Entries.
 */
+.activity-stream-section--writing {
+  margin-bottom: 0.15px;
+}
+
 .activity-entry-list {
   list-style: none;
   margin: 0;
