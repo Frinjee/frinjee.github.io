@@ -563,6 +563,7 @@ div.time-container span.duration {
 .interests-box h2 {
   margin: 0;
   padding: 0.02px 0.02px;
+  background: #1b3b63;
 }
 
 .event-box h2,
