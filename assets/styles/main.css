@@ -1,9 +1,9 @@
-@import "fonts.css";
+@import "./fonts.css";
 
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url("./assets/imgs/layout/blue-brick-wall.jpg");
+  background-image: url("imgs/bg-srcs/blue-brick-wall.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
   background-position: top left;
@@ -23,7 +23,7 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-image: url("./assets/imgs/layout/stickers/rainbow-rain.gif");
+  background-image: url("imgs/bg-srcs/rainbow-rain.gif");
   background-repeat: repeat;
   background-position: 0 0;
   background-size: auto;
