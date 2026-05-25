@@ -3,537 +3,539 @@
   <head>
     <meta charset="UTF-8">
     <title>Jen</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="assets/styles/main.css">
+
+    <link rel="stylesheet" href="assets/styles/main.css?v=1.1">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide-extension-auto-scroll@0.5.3/dist/js/splide-extension-auto-scroll.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   </head>
+
   <body>
-  <div class="bg-anim-overlay"></div>
-  <div id="page">
-    <!-- TOP BAR -->
-    <header id="top-bar">
-      <div class="top-left">
-        <img src="assets/imgs/layout/misc/rainbow-stars.gif" alt="Profile picture" class="top-profile-pic">
+    <div class="bg-anim-overlay"></div>
+    <div id="page">
+      <!-- TOP BAR -->
+      <header id="top-bar">
+        <div class="top-left">
+          <img src="assets/imgs/pfp/pfp.jpg" alt="Profile picture" class="top-profile-pic">
 
-        <div class="top-main-info">
-          <div class="top-title-row">
-            <h1 class="profile-title">Jen Hammond <span class="top-username">@Frinjee</span></h1>
+          <div class="top-main-info">
+            <div class="top-title-row">
+              <h1 class="profile-title">Jen Hammond <span class="top-username">@Frinjee</span></h1>
+            </div>
+
+            <div class="top-status-row">
+            </div>
+
+            <div class="top-status-edit-row">
+              <span class="label">&#128173;:</span>
+              <span id="status-text" contenteditable="true">mitochondria go brr &#x1F9A0; &#128168;</span>
+              <!--<img id="online-now" src="assets/imgs/layout/status/online-1.gif"></img>-->
+            </div>
+
+            <div id="mood-container" class="top-mood-row">
+              <span class="label">Mood:</span>
+
+              <!-- emoji acts as the dropdown trigger -->
+              <span id="mood-emoji-wrapper">
+                <span id="mood-emoji">😊</span>
+              </span>
+              <span id="mood-text">good</span>
+
+              <span class="mood-updated">
+                @ <span id="mood-time">4:39 PM</span> <span id="mood-date">May 19</span>
+              </span>
+
+              <!-- real selector -->
+              <select id="mood-select" class="mood-select">
+                <!-- options populated from moods.json -->
+              </select>
+            </div>
+
+            <div class="top-links-row">
+              View My:
+              <a href="https://www.flickr.com/photos/204607174@N02/albums/72177720333790446/with/55286408224" class="top-link">Photos</a>
+              <span class="divider">|</span>
+              <a href="#" class="top-link">Research & Writings</a>
+              <span class="divider">|</span>
+              <a href="#" class="top-link">Personal Baltimore City Map</a>
+              <span class="divider">|</span>
+              <a href="https://www.github.com/frinjee" class="top-link">Github</a>
+            </div>
           </div>
-
-          <div class="top-status-row">
-            
-          </div>
-
-          <div class="top-status-edit-row">
-            <span class="label">&#128173;:</span>
-            <span id="status-text" contenteditable="true">mitochondria go brr &#x1F9A0; &#128168;</span>
-          </div>
-          <div id="mood-container" class="top-mood-row">
-            <span class="label">Mood:</span>
-
-            <!-- emoji acts as the dropdown trigger -->
-            <span id="mood-emoji-wrapper">
-              <span id="mood-emoji">😊</span>
-            </span>
-            <span id="mood-text">good</span>
-
-            <span class="mood-updated">
-              @ <span id="mood-time">4:39 PM</span> <span id="mood-date">May 19</span>
-            </span>
-
-            <!-- real selector -->
-            <select id="mood-select" class="mood-select">
-              <!-- options populated from moods.json -->
-            </select>
-          </div>
-          
-
-          <div class="top-links-row">
-            View My:
-            <a href="https://www.flickr.com/photos/204607174@N02/albums/72177720333790446/with/55286408224" class="top-link">Photos</a>
-            <span class="divider">|</span>
-            <a href="#" class="top-link">Research & Writings</a>
-            <span class="divider">|</span>
-            <a href="#" class="top-link">Personal Baltimore City Map</a>
-            <span class="divider">|</span>
-            <a href="https://www.github.com/frinjee" class="top-link">Github</a>
-          </div>
-
         </div>
-      </div>
 
-      <div class="top-right">
-        <img id="contact_tbl_bg" src="./assets/imgs/layout/contact_tbl/rainbow-with-clouds.gif" alt="rainbow-with-clouds-nobg"></img>  
-        <div class="top-right-actions">
-          <a href="https://steamcommunity.com/id/codes4koolaid/" class="top-action"><img id="gaming-add-me" src="./assets/imgs/layout/contact_tbl/add1.gif"></img></a>
-          <a href="mailto:jenifer_hammond@protonmail.com" class="top-action"><img id="msg-me" src="./assets/imgs/layout/contact_tbl/msg1.gif"></img></a>
-          <a href=# class="top-action"><img id="blk-me" src="./assets/imgs/layout/contact_tbl/blk1.gif"></img></a>
-        </div>
-      </div>
-    </header>
-
-  <!-- MAIN LAYOUT -->
-    <main id="layout">
-      <!-- LEFT COLUMN -->
-      <aside id="left-column">
-
-        <section class="box welcome-box">
-          <h2 class="box-title">Howdy &#x1F920;</h2>
-          <div class="welcome-box__body">
-            <img
-              id="welcome-to-page"
-              src="./assets/imgs/layout/headers/welcome-to-my-page-2.gif"
-              alt="welcome to my page"
-            >
+        <div class="top-right">
+          <img id="contact_tbl_bg" src="./assets/imgs/layout/contact_tbl/rainbow-with-clouds.gif" alt="rainbow-with-clouds-nobg">
+          <div class="top-right-actions">
+            <a href="https://steamcommunity.com/id/codes4koolaid/" class="top-action">
+              <img id="gaming-add-me" src="./assets/imgs/layout/contact_tbl/add1.gif" alt="Add me on Steam">
+            </a>
+            <a href="mailto:jenifer_hammond@protonmail.com" class="top-action">
+              <img id="msg-me" src="./assets/imgs/layout/contact_tbl/msg1.gif" alt="Email me">
+            </a>
+            <a href="#" class="top-action">
+              <img id="blk-me" src="./assets/imgs/layout/contact_tbl/blk1.gif" alt="Block me">
+            </a>
           </div>
-        </section>
+        </div>
+      </header>
 
-        <section class="box media-player-box">
-          <div id="song-player" class="multi">
-            <div class="control-container">
-              <div id="button-controls" class="control-group">
-                <button type="button" class="amplitude-stop player multi">
-                  <span class="player-icon">■</span>
-                </button>
+      <!-- MAIN LAYOUT -->
+      <main id="layout">
+        <!-- LEFT COLUMN -->
+        <aside id="left-column">
 
-                <button type="button" class="amplitude-prev player multi">
-                  <span class="player-icon">◀</span>
-                </button>
-
-                <button type="button" class="amplitude-pause player multi">
-                  <span class="player-icon">❚❚</span>
-                </button>
-
-                <button type="button" class="amplitude-play player multi">
-                  <span class="player-icon">▶</span>
-                </button>
-
-                <button type="button" class="amplitude-next player multi">
-                  <span class="player-icon">▶</span>
+          <!-- MUSIC PLAYER -->
+          <section class="box media-player-box">
+            <!-- Single-song MySpace-style player -->
+            <div class="music_player_container">
+              <div class="music_player_play">
+                <button class="music_player_play_button" type="button" aria-label="Play">
+                  <i class="fa-solid fa-play"></i>
                 </button>
               </div>
+              <div class="music_player_body">
+                <div class="music_player_body_text">
+                  <div class="music_player_body_text_track">
+                    <span class="music_player_track_title">Song Name</span>
+                    <span class="music_player_track_artist">Artist Name</span>
+                  </div>
+                  <div class="music_player_visual" aria-hidden="true">
+                    <div id="visual_0" class="music_player_visual_bar"></div>
+                    <div id="visual_1" class="music_player_visual_bar"></div>
+                    <div id="visual_2" class="music_player_visual_bar"></div>
+                    <div id="visual_3" class="music_player_visual_bar"></div>
+                    <div id="visual_4" class="music_player_visual_bar"></div>
+                    <div id="visual_5" class="music_player_visual_bar"></div>
+                    <div id="visual_6" class="music_player_visual_bar"></div>
+                    <div id="visual_7" class="music_player_visual_bar"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <!-- END MUSIC PLAYER -->
 
-              <div class="meta-container">
-                <div id="song-meta">
-                  <img
-                    data-amplitude-song-info="cover_art_url"
-                    amplitude-main-song-info="true"
-                    class="album"
-                    alt="Album art"
-                  >
+          <section class="box welcome-box">
+            <!--<h2 class="box-title">Howdy &#x1F920;</h2>-->
+            <div class="welcome-box__body">
+              <img
+                id="welcome-to-page"
+                src="./assets/imgs/layout/headers/welcome-to-my-page-2.gif"
+                alt="welcome to my page"
+              >
+            </div>
+          </section>
 
-                  <div class="song-text">
-                    <span data-amplitude-song-info="name" class="song-name"></span>
-                    <span data-amplitude-song-info="artist"></span>
+          <section class="box interests-box">
+            <h2></h2>
+            <div class="interests-list">
+              <p class="interest-item">ꉓꂦꀸꀤꈤꁅ</p>
+              <p class="interest-item">Ⓟⓗⓞⓣⓞⓖⓡⓐⓟⓗⓨ</p>
+              <p class="interest-item">ɔısnɯ</p>
+              <p class="interest-item">♙  Ⓖ𝓪𝕄Į𝐧𝐠  ♙</p>
+              <p class="interest-item">*´¯`*.¸¸.*´¯`*   🎀  𝒫o𝑒𝓉𝓇𝓎  🎀   *`¯´*.¸¸.*`¯´*</p>
+              <p class="interest-item">ɦɨֆȶօʀʏ</p>
+            </div>
+          </section>
 
-                    <div class="time-container">
-                      <span class="current-time">
-                        <span class="amplitude-current-minutes"></span>:<span class="amplitude-current-seconds"></span>
-                      </span>
-                      <span class="divider">/</span>
-                      <span class="duration">
-                        <span class="amplitude-duration-minutes"></span>:<span class="amplitude-duration-seconds"></span>
-                      </span>
+          <section class="box details-box">
+            <h2><img id="about_me" src="./assets/imgs/layout/headers/about_me_rainbow.gif" alt="about me"></h2>
+            <div class="details-table">
+              <div class="details-row">
+                <div class="details-label">Favorite Holiday:</div>
+                <div class="details-value">Halloween &#128123;</div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Favorite Greeting:</div>
+                <div class="details-value">Howdy &#x1F920;</div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Zodiac Sign:</div>
+                <div class="details-value">Sagittarius &#9808;</div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Favorite Color:</div>
+                <div class="details-value">Robins Egg Blue</div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Favorite Video Game:</div>
+                <div class="details-value">
+                  FF7
+                  <img src="./assets/imgs/FFRK_Vincent.webp" alt="ffvii-vincent" class="details-inline-img">
+                  <img src="./assets/imgs/FFRK_Cid_Highwind.webp" alt="ffvii-cid" class="details-inline-img">
+                  <img src="./assets/imgs/FFRK_Aerith_Sprite.webp" alt="ffvii-aerith" class="details-inline-img">
+                  <img src="./assets/imgs/FFRK_Barret.webp" alt="ffvii-barrett" class="details-inline-img">
+                  <img src="./assets/imgs/FFRK_Yuffie.webp" alt="ffvii-yuffie" class="details-inline-img">
+                </div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Favorite Movie:</div>
+                <div class="details-value">Eternal Sunshine of the Spotless Mind</div>
+              </div>
+              <div class="details-row">
+                <div class="details-label">Favorite Airplane Model:</div>
+                <div class="details-value">1959 Saab J 35A Draken</div>
+              </div>
+            </div>
+          </section>
+        </aside>
+
+        <!-- RIGHT COLUMN -->
+        <section id="right-column">
+          <!-- Activity Stream -->
+          <section class="box activity-box">
+            <h2>Activity Stream</h2>
+
+            <div class="activity-stream">
+              <section class="activity-stream-section activity-stream-section--photos" aria-labelledby="activity-photo-title">
+                <h3 id="activity-photo-title" class="activity-stream-title">Photo Stream</h3>
+
+                <div id="photo-carousel" class="splide activity-photo-carousel" aria-label="Recent Flickr photo stream">
+                  <div class="splide__track">
+                    <ul class="splide__list" id="photo-carousel-list">
+                      <!-- injected from flickr_album_recent.json -->
+                    </ul>
+                  </div>
+                </div>
+              </section>
+
+              <section class="activity-stream-section activity-stream-section--writing" aria-labelledby="activity-writing-title">
+                <h3 id="activity-writing-title" class="activity-stream-title">Ramblings &amp; Research</h3>
+
+                <ul class="activity-entry-list" id="writing-list">
+                  <li class="activity-entry">
+                    <a class="activity-entry-title" href="#">Entry Title</a>
+                    <span class="activity-entry-meta">- @Jen Hammond | 05%22%202026 : 0842</span>
+                    <p class="activity-entry-summary">summary placeholder.</p>
+                    <div class="activity-entry-tags" aria-label="Tags">
+                      <a href="#" class="activity-tag">tag one</a>
+                      <a href="#" class="activity-tag">tag two</a>
                     </div>
+                  </li>
 
-                    <progress class="amplitude-song-played-progress" value="0" max="100"></progress>
-                  </div>
+                  <li class="activity-entry">
+                    <a class="activity-entry-title" href="#">Entry Title</a>
+                    <span class="activity-entry-meta">- @Jen Hammond | 05%21%202026 : 1705</span>
+                    <p class="activity-entry-summary">summary placeholder</p>
+                    <div class="activity-entry-tags" aria-label="Tags">
+                      <a href="#" class="activity-tag">research</a>
+                      <a href="#" class="activity-tag">draft</a>
+                    </div>
+                  </li>
 
-                  <div class="mmp-eq-container">
-                    <img src="./assets/imgs/player/myspace-mp-player/eq_pause.png" alt="equalizer">
-                  </div>
-                </div>
+                  <li class="activity-entry">
+                    <a class="activity-entry-title" href="#">Entry Title</a>
+                    <span class="activity-entry-meta">- @Jen Hammond | 05%20%202026 : 0918</span>
+                    <p class="activity-entry-summary">summary placeholder</p>
+                    <div class="activity-entry-tags" aria-label="Tags">
+                      <a href="#" class="activity-tag">blog</a>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+
+              <section class="activity-stream-section activity-stream-section--misc" aria-labelledby="activity-misc-title">
+                <h3 id="activity-misc-title" class="activity-stream-title">Side Quests</h3>
+
+                <ul class="activity-entry-list activity-entry-list--misc" id="misc-list">
+                  <li class="activity-entry activity-entry--compact">
+                    <a class="activity-entry-title" href="#">Entry Title</a>
+                    <span class="activity-entry-meta">- @Jen Hammond | 05%19%202026 : 2140</span>
+                    <p class="activity-entry-summary">summary placeholder</p>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </section>
+
+          <!-- Bookmarks -->
+          <section class="box bookmark-rota-box">
+            <h2>Bookmark Rota - Week of 5/19/2026</h2>
+            <ul id="bookmark-rota-list">
+              <li class="bookmark-rota-li"><a href="https://anthonygallante.github.io/BracketOfBabel/#/">Bracket Archive</a></li>
+              <li class="bookmark-rota-li"><a href="https://theuselessweb.com/sites-we-lost/">The Sites We Lost</a></li>
+              <li class="bookmark-rota-li"><a href="https://aeris.edbn.me/city/sfo">Aeris - Live flight tracking in 3D</a></li>
+              <li class="bookmark-rota-li"><a href="https://greem.co.uk/otherbits/jelly.html">Nailing jelly to a wall: is it possible?</a></li>
+              <li class="bookmark-rota-li"><a href="https://www.ankle.website/">Ankle - A cultural operating system you author into. </a></li>
+              <li class="bookmark-rota-li"><a href="https://binaryforay.blogspot.com/2017/10/amcache-still-rules-everything-around.html">(Am)cache still rules everything around me (part 2 of 1)</a></li>
+              <li class="bookmark-rota-li"><a href="https://github.com/hendricius/the-sourdough-framework">The Sourdough Framework - an open-source book dedicated to helping you to make the best possible sourdough bread at home.</a></li>
+              <li class="bookmark-rota-li"><a href="https://gtfobins.org/">GTFOBins - a curated list of Unix-like executables that can be used to bypass local security restrictions in misconfigured systems.</a></li>
+              <li class="bookmark-rota-li"><a href="https://www.justine-haupt.com/rotarycellphone/">Rotary Cellphone  - The point isn't to be anachronistic. </a></li>
+              <li class="bookmark-rota-li"><a href="https://data.baltimorecity.gov/search">Open Baltimore Data Sets</a></li>
+              <li class="bookmark-rota-li"><a href="https://equipboard.com/pros/the-alchemist">The Alchemist - Equipboard</a></li>
+              <li class="bookmark-rota-li"><a href="https://marmia.aviaryplatform.com/collections/948/collection_resources/144713">Butterfly McQueen A-roll, circa 1985 WJZ-TV Collection</a></li>
+            </ul>
+          </section>
+
+          <!-- Events -->
+          <section class="box event-box">
+            <h2>Upcoming Events</h2>
+            <div class="event-grid">
+              <div class="event-slot">
+                <img src="./assets/imgs/events/gardenhours.webp" alt="Event 1 flyer" class="event-flyer">
+                <span class="event-label">Garden Hours w/ Jayswann,Tromac 05/21 8PM @ Current Space</span>
+                <a href="https://pools.events/event/WALy1Uij/garden-hours/" style="font-size: 10px">&#128279;</a>
+              </div>
+              <div class="event-slot">
+                <img src="./assets/imgs/events/fatbuttrodeo.jpg" alt="Event 2 flyer" class="event-flyer">
+                <span class="event-label">Fatt Butt Rodeo. 05/22 10PM @ Ottobar Upstairs</span>
+                <a href="https://theottobar.com/event/fat-butt-rodeo-40/upstairs-ottobar/baltimore-maryland/" style="font-size: 10px">&#128279;</a>
+              </div>
+              <div class="event-slot">
+                <img src="./assets/imgs/events/artscape.png" alt="Event 3 flyer" class="event-flyer">
+                <span class="event-label">Artscape w/ The Roots 05/23 12PM @ 100 Holliday St</span>
+                <a href="https://www.weaa.org/arts-culture/2026-01-09/the-roots-stephanie-mills-to-headline-artscape-2026" style="font-size: 10px">&#128279;</a>
+              </div>
+              <div class="event-slot">
+                <img src="./assets/imgs/events/bma.jpg" alt="Event 4 flyer" class="event-flyer">
+                <span class="event-label">The Making of America’s Greatest Classical Architect: A Talk by Charlie Duff 05/24 2PM @ 11 West Mount Vernon Place</span>
+                <a href="https://baltimoreheritage.org/event/the-making-of-americas-greatest-classical-architect-a-talk-by-charlie-duff" style="font-size: 10px">&#128279;</a>
+              </div>
+              <div class="event-slot">
+                <img src="./assets/imgs/events/brb.jpg" alt="Event 5 flyer" class="event-flyer">
+                <span class="event-label">Baltimore Record Bazaar. 05/31 12PM, $FREE @ Peabody Heights</span>
+                <a href="https://peabodyheightsbrewery.com/event/baltimore-record-bazaar/2026-05-31/" style="font-size: 10px">&#128279;</a>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
 
-        <section class="box interests-box">
-          <h2><img id="about_me" src="./assets/imgs/layout/headers/about_me_rainbow.gif" alt="about me"></h2>
-          <div class="interests-list">
-            <p class="interest-item">ꉓꂦꀸꀤꈤꁅ</p>
-            <p class="interest-item">Ⓟⓗⓞⓣⓞⓖⓡⓐⓟⓗⓨ</p>
-            <p class="interest-item">ɔısnɯ</p>
-            <p class="interest-item">♙  Ⓖ𝓪𝕄Į𝐧𝐠  ♙</p>
-            <p class="interest-item">*´¯`*.¸¸.*´¯`*   🎀  𝒫o𝑒𝓉𝓇𝓎  🎀   *`¯´*.¸¸.*`¯´*</p>
-            <p class="interest-item">ɦɨֆȶօʀʏ</p>
-          </div>
-        </section>
-
-        <section class="box details-box">
-          <h2>Details</h2>
-          <div class="details-table">
-            <div class="details-row">
-              <div class="details-label">Favorite Holiday:</div>
-              <div class="details-value">Halloween &#128123;</div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Favorite Greeting:</div>
-              <div class="details-value">Howdy &#x1F920;</div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Zodiac Sign:</div>
-              <div class="details-value">Sagittarius &#9808;</div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Favorite Color:</div>
-              <div class="details-value">Robins Egg Blue</div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Favorite Video Game:</div>
-              <div class="details-value">FF7 <img src="./assets/imgs/FFRK_Vincent.webp" alt="ffvii-vincent" class="details-inline-img"><img src="./assets/imgs/FFRK_Cid_Highwind.webp" alt="ffvii-cid" class="details-inline-img"><img src="./assets/imgs/FFRK_Aerith_Sprite.webp" alt="ffvii-aerith" class="details-inline-img"><img src="./assets/imgs/FFRK_Barret.webp" alt="ffvii-barrett" class="details-inline-img"><img src="./assets/imgs/FFRK_Yuffie.webp" alt="ffvii-yuffie" class="details-inline-img"></div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Favorite Movie:</div>
-              <div class="details-value">Eternal Sunshine of the Spotless Mind</div>
-            </div>
-            <div class="details-row">
-              <div class="details-label">Favorite Airplane Model:</div>
-              <div class="details-value">1959 Saab J 35A Draken</div>
-            </div>
-          </div>
-        </section>
-      </aside>
-
-      <!-- RIGHT COLUMN -->
-      <section id="right-column">
-        <!-- Activity Stream -->
-        <section class="box activity-box">
-          <h2>Activity Stream</h2>
-
-          <div class="activity-stream">
-            <section class="activity-stream-section activity-stream-section--photos" aria-labelledby="activity-photo-title">
-              <h3 id="activity-photo-title" class="activity-stream-title">Photo Stream</h3>
-
-              <div id="photo-carousel" class="splide activity-photo-carousel" aria-label="Recent Flickr photo stream">
-                <div class="splide__track">
-                  <ul class="splide__list" id="photo-carousel-list">
-                    <!-- injected from flickr_album_recent.json -->
-                  </ul>
-                </div>
+          <!-- Media -->
+          <section class="box media-box">
+            <h2>Culture Queue</h2>
+            <div class="media-grid">
+              <div class="media-slot">
+                <img src="./assets/imgs/media/usesoftheerotic.jpg" alt="Media 1 flyer" class="media-flyer">
+                <span class="media-label">Uses of the Erotic: The Erotic as Power by Audre Lorde</span>
               </div>
-            </section>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/roffire.jpg" alt="Media 2 flyer" class="media-flyer">
+                <span class="media-label">River of Fire: My Spiritual Journey by Sister Helen Prejean</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/vart.jpg" alt="Media 3 flyer" class="media-flyer">
+                <span class="media-label">The Deserving by Elizabeth Vartkessian</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/weapons.jpg" alt="Media 4 flyer" class="media-flyer">
+                <span class="media-label">Weapons (2025) - Movie</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/kout.webp" alt="Media 5 flyer" class="media-flyer">
+                <span class="media-label">Wake Up Dead Man: A Knives Out Mystery (2025) - Movie</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/amy.jpg" alt="Media 6 flyer" class="media-flyer">
+                <span class="media-label">Billie Eilish | Good Hang with Amy Poehler (05/05/2026) - Podcast</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/asc.webp" alt="Media 7 flyer" class="media-flyer">
+                <span class="media-label">All Songs Considered: José González studies hope, Jungle brings the sunshine, more (04/07/2026) - Podcast</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/wwdtm.webp" alt="Media 8 flyer" class="media-flyer">
+                <span class="media-label">Wait Wait... Don't Tell Me! Spirit Airlines, The Book of Mormon, and Grunting (05/09/2026) - Podcast</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/lilflip.jpg" alt="Media 9 flyer" class="media-flyer">
+                <span class="media-label">Lil' Flip - La Clover Nostra III: I Trust Me (03/17/2026) - Album Release</span>
+              </div>
+              <div class="media-slot">
+                <img src="./assets/imgs/media/deckchedda.jpg" alt="Media 10 flyer" class="media-flyer">
+                <span class="media-label">Inspectah Deck & Chetta Bang - Inspectah Deck Vs. Chedda Bang (05/15/2026) - Album Release</span>
+              </div>
+            </div>
+          </section>
 
-            <section class="activity-stream-section activity-stream-section--writing" aria-labelledby="activity-writing-title">
-              <h3 id="activity-writing-title" class="activity-stream-title">Ramblings &amp; Research</h3>
-
-              <ul class="activity-entry-list" id="writing-list">
-                <li class="activity-entry">
-                  <a class="activity-entry-title" href="#">Entry Title</a>
-                  <span class="activity-entry-meta">- @Jen Hammond | 05%22%202026 : 0842</span>
-                  <p class="activity-entry-summary">summary placeholder.</p>
-                  <div class="activity-entry-tags" aria-label="Tags">
-                    <a href="#" class="activity-tag">tag one</a>
-                    <a href="#" class="activity-tag">tag two</a>
-                  </div>
-                </li>
-
-                <li class="activity-entry">
-                  <a class="activity-entry-title" href="#">Entry Title</a>
-                  <span class="activity-entry-meta">- @Jen Hammond | 05%21%202026 : 1705</span>
-                  <p class="activity-entry-summary">summary placeholder</p>
-                  <div class="activity-entry-tags" aria-label="Tags">
-                    <a href="#" class="activity-tag">research</a>
-                    <a href="#" class="activity-tag">draft</a>
-                  </div>
-                </li>
-
-                <li class="activity-entry">
-                  <a class="activity-entry-title" href="#">Entry Title</a>
-                  <span class="activity-entry-meta">- @Jen Hammond | 05%20%202026 : 0918</span>
-                  <p class="activity-entry-summary">summary placeholder</p>
-                  <div class="activity-entry-tags" aria-label="Tags">
-                    <a href="#" class="activity-tag">blog</a>
-                  </div>
-                </li>
-              </ul>
-            </section>
-
-            <section class="activity-stream-section activity-stream-section--misc" aria-labelledby="activity-misc-title">
-              <h3 id="activity-misc-title" class="activity-stream-title">Side Quests</h3>
-
-              <ul class="activity-entry-list activity-entry-list--misc" id="misc-list">
-                <li class="activity-entry activity-entry--compact">
-                  <a class="activity-entry-title" href="#">Entry Title</a>
-                  <span class="activity-entry-meta">- @Jen Hammond | 05%19%202026 : 2140</span>
-                  <p class="activity-entry-summary">summary placeholder</p>
-                </li>
-              </ul>
-            </section>
-            
-          </div>
+          <section class="box secret-box">
+            <h2>Secret Section</h2>
+          </section>
         </section>
+      </main>
+    </div>
 
-        <!-- Bookmarks -->
-        <section class="box bookmark-rota-box">
-          <h2>Bookmark Rota - Week of 5/19/2026</h2>
-          <ul id="bookmark-rota-list">
-            <li class="bookmark-rota-li"><a href="https://anthonygallante.github.io/BracketOfBabel/#/">Bracket Archive</a></li>
-            <li class="bookmark-rota-li"><a href="https://theuselessweb.com/sites-we-lost/">The Sites We Lost</a></li>
-            <li class="bookmark-rota-li"><a href="https://aeris.edbn.me/city/sfo">Aeris - Live flight tracking in 3D</a></li>
-            <li class="bookmark-rota-li"><a href="https://greem.co.uk/otherbits/jelly.html">Nailing jelly to a wall: is it possible?</a></li>
-            <li class="bookmark-rota-li"><a href="https://www.ankle.website/">Ankle - A cultural operating system you author into. </a></li>
-            <li class="bookmark-rota-li"><a href="https://binaryforay.blogspot.com/2017/10/amcache-still-rules-everything-around.html">(Am)cache still rules everything around me (part 2 of 1)</a></li>
-            <li class="bookmark-rota-li"><a href="https://github.com/hendricius/the-sourdough-framework">The Sourdough Framework - an open-source book dedicated to helping you to make the best possible sourdough bread at home.</a></li>
-            <li class="bookmark-rota-li"><a href="https://gtfobins.org/">GTFOBins - a curated list of Unix-like executables that can be used to bypass local security restrictions in misconfigured systems.</a></li>
-            <li class="bookmark-rota-li"><a href="https://www.justine-haupt.com/rotarycellphone/">Rotary Cellphone  - The point isn't to be anachronistic. </a></li>
-            <li class="bookmark-rota-li"><a href="https://data.baltimorecity.gov/search">Open Baltimore Data Sets</a></li>
-            <li class="bookmark-rota-li"><a href="https://equipboard.com/pros/the-alchemist">The Alchemist - Equipboard</a></li>
-            <li class="bookmark-rota-li"><a href="https://marmia.aviaryplatform.com/collections/948/collection_resources/144713">Butterfly McQueen A-roll, circa 1985 WJZ-TV Collection</a></li>
-          </ul>
-        </section>
+    <script>
+      const MOODS_URL = 'assets/json/moods.json';
+      const STORAGE_KEY = 'myspaceHeaderState';
 
-        <!-- Events -->
-        <section class="box event-box">
-          <h2>Upcoming Events</h2>
-          <div class="event-grid">
-            <div class="event-slot"><img src="./assets/imgs/events/gardenhours.webp" alt="Event 1 flyer" class="event-flyer">
-              <span class="event-label">Garden Hours w/ Jayswann,Tromac 05/21 8PM @ Current Space</span>
-              <a href="https://pools.events/event/WALy1Uij/garden-hours/" style="font-size: 10px">&#128279;</a>
-            </div>
-            <div class="event-slot"><img src="./assets/imgs/events/fatbuttrodeo.jpg" alt="Event 2 flyer" class="event-flyer">
-              <span class="event-label">Fatt Butt Rodeo. 05/22 10PM @ Ottobar Upstairs</span>
-              <a href="https://theottobar.com/event/fat-butt-rodeo-40/upstairs-ottobar/baltimore-maryland/" style="font-size: 10px">&#128279;</a>
-          </div>
-            <div class="event-slot"><img src="./assets/imgs/events/artscape.png" alt="Event 3 flyer" class="event-flyer">
-              <span class="event-label">Artscape w/ The Roots 05/23 12PM @ 100 Holliday St</span>
-              <a href="https://www.weaa.org/arts-culture/2026-01-09/the-roots-stephanie-mills-to-headline-artscape-2026" style="font-size: 10px">&#128279;</a>
-          </div>
-            <div class="event-slot"><img src="./assets/imgs/events/bma.jpg" alt="Event 4 flyer" class="event-flyer">
-              <span class="event-label">The Making of America’s Greatest Classical Architect: A Talk by Charlie Duff 05/24 2PM @ 11 West Mount Vernon Place</span>
-              <a href="https://baltimoreheritage.org/event/the-making-of-americas-greatest-classical-architect-a-talk-by-charlie-duff" style="font-size: 10px">&#128279;</a>
-          </div>
-            <div class="event-slot"><img src="./assets/imgs/events/brb.jpg" alt="Event 5 flyer" class="event-flyer">
-              <span class="event-label">Baltimore Record Bazaar. 05/31 12PM, $FREE @ Peabody Heights</span>
-              <a href="https://peabodyheightsbrewery.com/event/baltimore-record-bazaar/2026-05-31/" style="font-size: 10px">&#128279;</a>
-          </div>
-        </section>
-
-        <!-- Media -->
-        <section class="box media-box">
-          <h2>Culture Queue</h2>
-          <div class="media-grid">
-            <div class="media-slot"><img src="./assets/imgs/media/usesoftheerotic.jpg" alt="Media 1 flyer" class="media-flyer">
-              <span class="media-label">Uses of the Erotic: The Erotic as Power by Audre Lorde</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/roffire.jpg" alt="Media 2 flyer" class="media-flyer">
-              <span class="media-label">River of Fire: My Spiritual Journey by Sister Helen Prejean</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/vart.jpg" alt="Media 3 flyer" class="media-flyer">
-              <span class="media-label">The Deserving by Elizabeth Vartkessian</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/weapons.jpg" alt="Media 4 flyer" class="media-flyer">
-              <span class="media-label">Weapons (2025) - Movie</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/kout.webp" alt="Media 5 flyer" class="media-flyer">
-              <span class="media-label">Wake Up Dead Man: A Knives Out Mystery (2025) - Movie</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/amy.jpg" alt="Media 6 flyer" class="media-flyer">
-              <span class="media-label">Billie Eilish | Good Hang with Amy Poehler (05/05/2026) - Podcast</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/asc.webp" alt="Media 7 flyer" class="media-flyer">
-              <span class="media-label">All Songs Considered: José González studies hope, Jungle brings the sunshine, more (04/07/2026) - Podcast</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/wwdtm.webp" alt="Media 8 flyer" class="media-flyer">
-              <span class="media-label">Wait Wait... Don't Tell Me! Spirit Airlines, The Book of Mormon, and Grunting (05/09/2026) - Podcast</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/lilflip.jpg" alt="Media 9 flyer" class="media-flyer">
-              <span class="media-label">Lil' Flip - La Clover Nostra III: I Trust Me (03/17/2026) - Album Release</span>
-            </div>
-            <div class="media-slot"><img src="./assets/imgs/media/deckchedda.jpg" alt="Media 10 flyer" class="media-flyer">
-              <span class="media-label">Inspectah Deck & Chetta Bang - Inspectah Deck Vs. Chedda Bang (05/15/2026) - Album Release</span>
-            </div>
-          </div>
-        </section>
-
-        
-        <section class="box secret-box">
-          <h2>Secret Section</h2>
-        </section>
-      </section>
-    </main>
-  </div>
-  <script>
-    const MOODS_URL = 'assets/json/moods.json';
-    const STORAGE_KEY = 'myspaceHeaderState';
-
-    function loadState() {
-      try {
-        const raw = localStorage.getItem(STORAGE_KEY);
-        return raw ? JSON.parse(raw) : null;
-      } catch (e) {
-        console.warn('Failed to parse saved state', e);
-        return null;
+      function loadState() {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          console.warn('Failed to parse saved state', e);
+          return null;
+        }
       }
-    }
 
-    function saveState(state) {
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-      } catch (e) {
-        console.warn('Failed to save state', e);
+      function saveState(state) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) {
+          console.warn('Failed to save state', e);
+        }
       }
-    }
 
-    async function loadMoods() {
-      try {
-        console.log('Loading moods from', MOODS_URL);
-        const response = await fetch(MOODS_URL);
-        const data = await response.json();
-        const moods = data.moods || [];
+      async function loadMoods() {
+        try {
+          console.log('Loading moods from', MOODS_URL);
+          const response = await fetch(MOODS_URL);
+          const data = await response.json();
+          const moods = data.moods || [];
 
-        if (!moods.length) {
-          console.warn('No moods found in JSON');
-          return;
-        }
-
-        const emojiEl = document.getElementById('mood-emoji');
-        const textEl = document.getElementById('mood-text');
-        const selectEl = document.getElementById('mood-select');
-        const emojiWrapper = document.getElementById('mood-emoji-wrapper');
-        const moodContainer = document.getElementById('mood-container');
-        const statusEl = document.getElementById('status-text');
-        const timeEl = document.getElementById('mood-time');
-        const dateEl = document.getElementById('mood-date');
-
-        if (!emojiEl || !textEl || !selectEl || !emojiWrapper || !moodContainer || !statusEl || !timeEl || !dateEl) {
-          console.warn('Header elements missing');
-          return;
-        }
-
-        // Populate dropdown from JSON
-        selectEl.innerHTML = '';
-        moods.forEach(mood => {
-          const option = document.createElement('option');
-          option.value = mood.id;
-          option.textContent = `${mood.emoji} ${mood.label}`;
-          selectEl.appendChild(option);
-        });
-
-        // Load any previously saved state
-        const saved = loadState();
-
-        let currentMood = moods[0];
-        if (saved && saved.moodId) {
-          const found = moods.find(m => m.id === saved.moodId);
-          if (found) currentMood = found;
-        }
-
-        // Apply mood, status, and timestamp from saved state or defaults
-        applyMood(currentMood, emojiEl, textEl, selectEl);
-
-        if (saved && typeof saved.status === 'string') {
-          statusEl.textContent = saved.status;
-        }
-
-        if (saved && saved.time && saved.date) {
-          timeEl.textContent = saved.time;
-          dateEl.textContent = saved.date;
-        } else {
-          updateMoodTimestamp(timeEl, dateEl); // initialize once
-        }
-
-        // Change handler (dropdown -> UI + save)
-        selectEl.addEventListener('change', () => {
-          const selected = moods.find(m => m.id === selectEl.value);
-          if (!selected) return;
-          applyMood(selected, emojiEl, textEl, selectEl);
-          updateMoodTimestamp(timeEl, dateEl);
-          selectEl.style.display = 'none';
-          persistHeaderState(selected.id, statusEl.textContent, timeEl.textContent, dateEl.textContent);
-        });
-
-        // Click emoji to toggle popup
-        emojiWrapper.addEventListener('click', () => {
-          const isVisible = selectEl.style.display === 'block';
-          if (isVisible) {
-            selectEl.style.display = 'none';
+          if (!moods.length) {
+            console.warn('No moods found in JSON');
             return;
           }
 
-          const emojiRect = emojiWrapper.getBoundingClientRect();
-          const containerRect = moodContainer.getBoundingClientRect();
-          const offsetLeft = emojiRect.left - containerRect.left;
-          const offsetTop = emojiRect.bottom - containerRect.top;
+          const emojiEl = document.getElementById('mood-emoji');
+          const textEl = document.getElementById('mood-text');
+          const selectEl = document.getElementById('mood-select');
+          const emojiWrapper = document.getElementById('mood-emoji-wrapper');
+          const moodContainer = document.getElementById('mood-container');
+          const statusEl = document.getElementById('status-text');
+          const timeEl = document.getElementById('mood-time');
+          const dateEl = document.getElementById('mood-date');
 
-          selectEl.style.left = offsetLeft + 'px';
-          selectEl.style.top = offsetTop + 'px';
-          selectEl.style.display = 'block';
-          selectEl.focus();
-        });
-
-        // Hide when it loses focus
-        selectEl.addEventListener('blur', () => {
-          selectEl.style.display = 'none';
-        });
-
-        // Status editing: enforce ~20 chars and save
-        statusEl.addEventListener('input', () => {
-          if (statusEl.textContent.length > 20) {
-            statusEl.textContent = statusEl.textContent.slice(0, 20);
-            const range = document.createRange();
-            const sel = window.getSelection();
-            range.selectNodeContents(statusEl);
-            range.collapse(false);
-            sel.removeAllRanges();
-            sel.addRange(range);
+          if (!emojiEl || !textEl || !selectEl || !emojiWrapper || !moodContainer || !statusEl || !timeEl || !dateEl) {
+            console.warn('Header elements missing');
+            return;
           }
-        });
 
-        statusEl.addEventListener('blur', () => {
-          // When status changes, update timestamp + save
-          updateMoodTimestamp(timeEl, dateEl);
-          const savedMoodId = selectEl.value || currentMood.id;
-          persistHeaderState(savedMoodId, statusEl.textContent, timeEl.textContent, dateEl.textContent);
-        });
+          // Populate dropdown from JSON
+          selectEl.innerHTML = '';
+          moods.forEach(mood => {
+            const option = document.createElement('option');
+            option.value = mood.id;
+            option.textContent = `${mood.emoji} ${mood.label}`;
+            selectEl.appendChild(option);
+          });
 
-      } catch (e) {
-        console.error('Failed to load moods.json', e);
+          // Load any previously saved state
+          const saved = loadState();
+
+          let currentMood = moods[0];
+          if (saved && saved.moodId) {
+            const found = moods.find(m => m.id === saved.moodId);
+            if (found) currentMood = found;
+          }
+
+          // Apply mood, status, and timestamp from saved state or defaults
+          applyMood(currentMood, emojiEl, textEl, selectEl);
+
+          if (saved && typeof saved.status === 'string') {
+            statusEl.textContent = saved.status;
+          }
+
+          if (saved && saved.time && saved.date) {
+            timeEl.textContent = saved.time;
+            dateEl.textContent = saved.date;
+          } else {
+            updateMoodTimestamp(timeEl, dateEl); // initialize once
+          }
+
+          // Change handler (dropdown -> UI + save)
+          selectEl.addEventListener('change', () => {
+            const selected = moods.find(m => m.id === selectEl.value);
+            if (!selected) return;
+            applyMood(selected, emojiEl, textEl, selectEl);
+            updateMoodTimestamp(timeEl, dateEl);
+            selectEl.style.display = 'none';
+            persistHeaderState(selected.id, statusEl.textContent, timeEl.textContent, dateEl.textContent);
+          });
+
+          // Click emoji to toggle popup
+          emojiWrapper.addEventListener('click', () => {
+            const isVisible = selectEl.style.display === 'block';
+            if (isVisible) {
+              selectEl.style.display = 'none';
+              return;
+            }
+
+            const emojiRect = emojiWrapper.getBoundingClientRect();
+            const containerRect = moodContainer.getBoundingClientRect();
+            const offsetLeft = emojiRect.left - containerRect.left;
+            const offsetTop = emojiRect.bottom - containerRect.top;
+
+            selectEl.style.left = offsetLeft + 'px';
+            selectEl.style.top = offsetTop + 'px';
+            selectEl.style.display = 'block';
+            selectEl.focus();
+          });
+
+          // Hide when it loses focus
+          selectEl.addEventListener('blur', () => {
+            selectEl.style.display = 'none';
+          });
+
+          // Status editing: enforce ~20 chars and save
+          statusEl.addEventListener('input', () => {
+            if (statusEl.textContent.length > 20) {
+              statusEl.textContent = statusEl.textContent.slice(0, 20);
+              const range = document.createRange();
+              const sel = window.getSelection();
+              range.selectNodeContents(statusEl);
+              range.collapse(false);
+              sel.removeAllRanges();
+              sel.addRange(range);
+            }
+          });
+
+          statusEl.addEventListener('blur', () => {
+            // When status changes, update timestamp + save
+            updateMoodTimestamp(timeEl, dateEl);
+            const savedMoodId = selectEl.value || currentMood.id;
+            persistHeaderState(savedMoodId, statusEl.textContent, timeEl.textContent, dateEl.textContent);
+          });
+
+        } catch (e) {
+          console.error('Failed to load moods.json', e);
+        }
       }
-    }
 
-    function applyMood(mood, emojiEl, textEl, selectEl) {
-      emojiEl.textContent = mood.emoji;
-      textEl.textContent = mood.label;
-      selectEl.value = mood.id;
-    }
+      function applyMood(mood, emojiEl, textEl, selectEl) {
+        emojiEl.textContent = mood.emoji;
+        textEl.textContent = mood.label;
+        selectEl.value = mood.id;
+      }
 
-    function updateMoodTimestamp(timeEl, dateEl) {
-      if (!timeEl || !dateEl) return;
+      function updateMoodTimestamp(timeEl, dateEl) {
+        if (!timeEl || !dateEl) return;
 
-      const now = new Date();
-      const hours = now.getHours();
-      const minutes = now.getMinutes().toString().padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      const hour12 = ((hours + 11) % 12) + 1;
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        const hour12 = ((hours + 11) % 12) + 1;
 
-      timeEl.textContent = `${hour12}:${minutes} ${ampm}`;
-      dateEl.textContent = now.toLocaleDateString(undefined, {
-        month: 'short',
-        day: 'numeric'
-      });
-    }
+        timeEl.textContent = `${hour12}:${minutes} ${ampm}`;
+        dateEl.textContent = now.toLocaleDateString(undefined, {
+          month: 'short',
+          day: 'numeric'
+        });
+      }
 
-    function persistHeaderState(moodId, status, time, date) {
-      const state = {
-        moodId,
-        status,
-        time,
-        date
-      };
-      saveState(state);
-    }
+      function persistHeaderState(moodId, status, time, date) {
+        const state = {
+          moodId,
+          status,
+          time,
+          date
+        };
+        saveState(state);
+      }
 
-    document.addEventListener('DOMContentLoaded', loadMoods);
-  </script>
-  <script src="./assets/js/amplitude.js?vvs1.4"></script>
-  <script src="./assets/js/player.js?vvs1.4"></script>
-  <script src="./assets/js/photo_stream.js"></script>
+      document.addEventListener('DOMContentLoaded', loadMoods);
+    </script>
+
+    <script src="./assets/js/player.js"></script>
+    <script src="./assets/js/photo_stream.js"></script>
   </body>
 </html>

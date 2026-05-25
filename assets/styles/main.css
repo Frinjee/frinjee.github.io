@@ -1,5 +1,9 @@
 @import "./fonts.css";
 
+/*
+Page chrome: body, background, global box-sizing.
+Defines the overall page canvas, brick wall background, and rainbow overlay.
+*/
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -41,12 +45,13 @@ body {
   color: #000;
 }
 
+/*
+Header: top bar layout and contact strip.
+Wraps profile picture, header meta, and contact GIF buttons.
+*/
 #top-bar {
   background: #ffffff;
-  border: 1px;
-  border-style: solid;
-  border-color: #1b3b63;
-  /*border: 1px solid #c7d2e2;*/
+  border: 2px ridge #707788;
   padding: 8px 10px;
   display: flex;
   justify-content: space-between;
@@ -191,6 +196,10 @@ body {
   width: 40px;
 }
 
+/*
+Layout grid: main two-column structure.
+Defines left/right columns and overall page flow.
+*/
 .pgo-card {
   width: 400px;
   height: 200px;
@@ -213,10 +222,24 @@ body {
   min-width: 0;
 }
 
+/*
+Box chrome: reusable box containers and media wrappers.
+Shared border and background treatment for boxed sections.
+*/
 .media-player-box,
 .media-box {
   background: #ffffff;
   border: 1px solid #c7d2e2;
+}
+
+/*
+Media player wrapper: let the player own the box.
+No extra padding so the gradient fills edge to edge.
+*/
+.box.media-player-box {
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .box,
@@ -234,218 +257,168 @@ body {
   padding: 10px;
 }
 
-.media-player-box {
-  padding: 1.5px;
-  border-radius: 2px;
-  background-color: #d4d5d2;
-  border-style: groove;
-}
-
-div#song-player {
-  border-radius: 2px;
-  border-color: #697f7f;
-  border-style: groove;
-  margin: 0.25px;
+/*
+Single-song player: main shell and visualizer.
+MySpace-style mini player with one track, no cover art.
+Styleguide Media.Player.Single.
+*/
+.music_player_container {
   width: 100%;
   max-width: 100%;
-  -webkit-font-smoothing: antialiased;
-}
-
-div#song-player.multi {
-  max-width: 100%;
-}
-
-div.control-container {
-  background: linear-gradient(180deg, rgba(244,244,244,1) 3%, rgba(215,216,213,1) 26%, rgba(188,189,187,1) 43%, rgba(137,137,137,1) 79%, rgba(226,224,225,1) 96%, rgba(236,232,232,1) 100%);
-  border-color: #d5d5d5;
-  border-style: groove;
-  border-radius: 2px;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  overflow: hidden;
-}
-
-.control-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 3px;
-  padding: 3px 4px 2px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 1px;
-  border-color: #697f7f;
-  border-style: groove;
-}
-
-.control-group .player.multi {
-  width: 30px;
-  height: 30px;
-  margin: 0;
-  padding: 0;
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.control-group .player.multi i.multi {
-  font-size: 18px;
-  line-height: 1;
-  top: 0;
-}
-
-button.player.multi {
-  width: 38px;
-  height: 38px;
-  margin: 0;
-  flex: 0 0 auto;
-}
-
-button i.multi {
-  color: #000;
-  font-size: 26px;
-  top: 2px;
-  position: relative;
-  z-index: 4;
-}
-
-i.icon-prev.multi.shadow,
-i.icon-next.multi.shadow,
-i.icon-play.multi.shadow,
-i.icon-pause.multi.shadow,
-i.icon-stop.multi.shadow {
-  position: relative;
-  right: 20px;
-  text-shadow: 1px 1px 1px #fff;
-  z-index: 2;
-}
-
-div.control-container div.meta-container {
-  background: linear-gradient(180deg, rgba(94,94,94,1) 0%, rgba(51,51,51,1) 7%, rgba(0,0,0,1) 100%);
-  border-radius: 3px;
-  border-style: groove;
-  color: white;
-  font-size: 80%;
-  margin-top: 3px;
-  padding: 2px 4px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-#song-meta {
+  height: 100%;
+  min-height: 50px;
+  background: linear-gradient(
+    180deg,
+    rgba(247,249,246,1) 0%,
+    rgba(216,213,214,1) 55%,
+    rgb(158,160,160) 88%
+  );
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 100%;
-  gap: 8px;
+  align-items: center;
+  border: 1px solid black;
+  box-sizing: border-box;
 }
 
-.song-text {
-  flex: 1;
-  min-width: 0;
-  margin-left: 0;
-  overflow: hidden;
-}
-
-div.control-container div.meta-container span[data-amplitude-song-info="name"],
-div.control-container div.meta-container span[data-amplitude-song-info="artist"] {
-  font-family: "Orbitron", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: #fff;
-  display: block;
-  text-shadow: 1px 1px 1px #000;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-div.control-container div.meta-container span[data-amplitude-song-info="name"] {
-  font-size: 10px;
-}
-
-div.control-container div.meta-container span[data-amplitude-song-info="artist"] {
-  font-size: 9px;
-}
-
-img.album,
-div#song-meta img.album[data-amplitude-song-info="cover_art_url"] {
-  width: 45px;
-  height: 45px;
-  flex-shrink: 0;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.mmp-eq-container {
-  flex: 0 0 36px;
-  width: 36px;
-  margin-left: 0;
-}
-
-.mmp-eq-container img {
-  width: 36px;
-  height: auto;
-  display: block;
-}
-
-progress.amplitude-song-played-progress {
-  background-color: #313252;
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 5px;
-  display: block;
-  cursor: pointer;
-  border: none;
-  margin-top: 4px;
-}
-
-div.time-container {
-  font-family: "Share Tech Mono", monospace;
-  font-weight: 400;
-  font-size: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 1;
-  color: #fff;
-  height: auto;
-  margin-top: 2px;
+.music_player_play {
+  height: 100%;
+  width: 75px;
+  background: transparent;
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.music_player_play_button {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(
+    180deg,
+    rgba(247,249,246,1) 0%,
+    rgba(216,213,214,1) 21%,
+    rgb(167,167,167) 82%,
+    rgba(255,255,255,1) 99%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #6a6a6a;
+  border-radius: 8px;
+  border: 1px solid #737373;
+  cursor: pointer;
+  padding: 0;
+}
+
+.music_player_play_button:focus-visible {
+  outline: 2px solid #003399;
+  outline-offset: 2px;
+}
+
+.music_player_body {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1.5px 0 0;
+}
+
+.music_player_body_text {
+  height: 40px;
+  width: 100%;
+  background: #27201e;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  color: white;
+  border-radius: 8px;
+  box-sizing: border-box;
+  padding: 5px;
+  font-family: inherit;
+}
+
+.music_player_body_text_track {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.music_player_body_text_track span {
+  height: 50%;
+  color: white;
+  line-height: 1.1;
+}
+
+.music_player_track_title {
+  font-size: 0.5rem;
+  font-weight: 600;
+}
+
+.music_player_track_artist {
+  font-size: 0.5rem;
+  opacity: 0.85;
+  font-weight: 400;
+}
+
+.music_player_visual {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 2px;
 }
 
-div.time-container span.current-time {
-  color: #00a0ff;
+.music_player_visual_bar {
+  height: 100%;
+  width: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 2px;
 }
 
-div.time-container span.duration {
-  color: #fff;
-  opacity: 0.6;
+.music_player_visual_pip {
+  width: 100%;
+  height: 2px;
 }
 
-.player-icon {
-  font-family: "IBM Plex Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-variation-settings: "wdth" 100;
-  font-weight: 500;
-  font-size: 11px;
-  letter-spacing: 0.02em;
+/*
+Single-song player: bar color stack.
+Color bands for the fake EQ pips.
+*/
+.music_player_visual_pip:nth-child(1) { background: #188a18; }
+.music_player_visual_pip:nth-child(2) { background: #a8f37c; }
+.music_player_visual_pip:nth-child(3) { background: #fbfbcc; }
+.music_player_visual_pip:nth-child(4) { background: #e9ef81; }
+.music_player_visual_pip:nth-child(5) { background: #dea671; }
+.music_player_visual_pip:nth-child(6) { background: #dec671; }
+.music_player_visual_pip:nth-child(7) { background: #de8771; }
+
+/*
+Single-song player: mobile behavior.
+Let the container scale in narrow viewports.
+*/
+@media (max-width: 480px) {
+  .music_player_container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .music_player_body_text_track span {
+    font-size: 0.75rem;
+  }
 }
 
+/*
+Box headers and welcome banner.
+Shared heading treatment for major sections.
+*/
 .activity-box h2,
 .secret-box h2,
 .bookmark-rota-box h2,
@@ -480,14 +453,30 @@ div.time-container span.duration {
 }
 
 .welcome-box .box-title,
-.activity-box h2,
 .secret-box h2,
-.bookmark-rota-box h2 {
+.bookmark-rota-box h2{
   margin: 0;
   padding: 1px 1.25px;
   font-size: 16px;
   background: #1b3b63;
   color: #fff;
+}
+
+.activity-box h2 {
+  background-image: url("imgs/dividers/cat2.gif");
+  background-repeat: repeat-x;
+  background-size: contain;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #000000;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+  font-weight: bolder;
+  margin: 0;
+  padding: 1px 1.25px;
+  font-size: 16px;
 }
 
 .welcome-box .box-title {
@@ -504,6 +493,10 @@ div.time-container span.duration {
   height: auto;
 }
 
+/*
+Side boxes: activity, secrets, bookmarks.
+Tightens padding and resets list basics for these modules.
+*/
 .activity-box {
   padding: 0;
 }
@@ -556,25 +549,79 @@ div.time-container span.duration {
   top: -5.25px;
 }
 
+/*
+Events and media grid.
+Five-column grid for flyers and media tiles.
+Styleguide Events.Grid.
+*/
 .event-box {
   padding: 0;
 }
 
 .interests-box h2 {
+  background-image: url("imgs/dividers/notes4.gif");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
   margin: 0;
-  padding: 0.02px 0.02px;
-  background: #1b3b63;
+  padding: 4px 6px;
+  width: auto;
+  height: 40px ;
 }
 
 .event-box h2,
 .media-box h2,
-.details-box h2,
-.activity-stream-title {
+.activity-stream-title h2,
+.details-box h2 {
   margin: 0;
   padding: 4px 6px;
   font-size: 12px;
-  background: #1b3b63;
   color: #fff;
+}
+
+.activity-stream-title h2{
+  background-image: url("imgs/dividers/jewels4.gif") ;
+}
+
+#activity-photo-title {
+  background-image: url("imgs/dividers/rainbowstars5.gif");
+  background-repeat: repeat-x;
+  background-size: contain;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #000000;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+  font-weight: bolder;
+}
+
+#activity-writing-title {
+  background-image: url("imgs/dividers/sparkles.gif");
+  background-repeat: repeat-x;
+  background-size: contain;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #000000;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+  font-weight: bolder;
+}
+
+#activity-misc-title {
+  background-image: url("imgs/dividers/bubbles2.gif");
+  background-repeat: repeat-x;
+  background-size: contain;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #08080a;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+  font-weight: bolder;
 }
 
 .event-grid,
@@ -628,6 +675,11 @@ div.time-container span.duration {
   font-weight: bold;
 }
 
+/*
+Mood selector popover.
+Inline mood chip with emoji trigger and positioned <select>.
+Styleguide Header.Mood.
+*/
 #mood-container {
   position: relative;
   display: inline-block;
@@ -648,6 +700,11 @@ div.time-container span.duration {
   border: 1px solid #c7d2e2;
 }
 
+/*
+Details table.
+Two-column label/value grid for personal trivia.
+Styleguide Details.Table.
+*/
 .details-box {
   padding: 0;
 }
@@ -695,6 +752,10 @@ div.time-container span.duration {
   vertical-align: middle;
 }
 
+/*
+Interests list.
+Blue links-ish typography for the little interest stacks.
+*/
 .interests-box {
   padding: 0;
 }
@@ -718,6 +779,11 @@ div.time-container span.duration {
   margin: 2px 0;
 }
 
+/*
+Activity stream container.
+Wrapper for the stream sections and content cards.
+Styleguide Activity.Stream.
+*/
 .activity-stream {
   padding: 8px;
   width: 100%;
@@ -771,6 +837,11 @@ div.time-container span.duration {
   text-align: center;
 }
 
+/*
+Activity stream: photo carousel.
+Splide-powered horizontal strip of Flickr cards.
+Styleguide Activity.Stream.Photos.
+*/
 .activity-photo-carousel {
   padding: 2px;
   width: 100%;
@@ -846,6 +917,11 @@ div.time-container span.duration {
   overflow-wrap: anywhere;
 }
 
+/*
+Activity stream: writing and misc lists.
+Default list styling for entries and tags.
+Styleguide Activity.Stream.Entries.
+*/
 .activity-entry-list {
   list-style: none;
   margin: 0;
@@ -898,6 +974,10 @@ div.time-container span.duration {
   font-size: 10px;
 }
 
+/*
+Activity stream: tag commas.
+Adds trailing commas between tags and hides the last comma.
+*/
 .activity-tag {
   color: #003399;
   text-decoration: none;
@@ -918,6 +998,10 @@ div.time-container span.duration {
   display: none;
 }
 
+/*
+Activity stream: responsive tweaks.
+Pads the stream a bit differently on narrow vs. wide viewports.
+*/
 @media (max-width: 699px) {
   .activity-stream {
     padding: 6px;
