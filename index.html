@@ -8,7 +8,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/styles/main.css?v=1.2">
+    <link rel="stylesheet" href="assets/styles/main.css?v=1.3">
+
+    <link rel="preconnect" href="https://townsquare.cauenapier.com" crossorigin>
+    <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css">
+    <link rel="stylesheet" href="https://townsquare.cauenapier.com/api/sites/site_v_ezltHN6MAW07vG/style.css">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
@@ -194,10 +198,81 @@
               </div>
             </div>
           </section>
+
+          <!-- Bookmarks -->
+          <section class="box bookmark-rota-box">
+            <h2>Bookmark Rota - Week of 5/19/2026</h2>
+            <ul id="bookmark-rota-list">
+              <li class="bookmark-rota-li"><a href="https://anthonygallante.github.io/BracketOfBabel/#/">Bracket Archive</a></li>
+              <li class="bookmark-rota-li"><a href="https://theuselessweb.com/sites-we-lost/">The Sites We Lost</a></li>
+              <li class="bookmark-rota-li"><a href="https://aeris.edbn.me/city/sfo">Aeris - Live flight tracking in 3D</a></li>
+              <li class="bookmark-rota-li"><a href="https://greem.co.uk/otherbits/jelly.html">Nailing jelly to a wall: is it possible?</a></li>
+              <li class="bookmark-rota-li"><a href="https://www.ankle.website/">Ankle - A cultural operating system you author into. </a></li>
+              <li class="bookmark-rota-li"><a href="https://binaryforay.blogspot.com/2017/10/amcache-still-rules-everything-around.html">(Am)cache still rules everything around me (part 2 of 1)</a></li>
+              <li class="bookmark-rota-li"><a href="https://github.com/hendricius/the-sourdough-framework">The Sourdough Framework - an open-source book dedicated to helping you to make the best possible sourdough bread at home.</a></li>
+              <li class="bookmark-rota-li"><a href="https://gtfobins.org/">GTFOBins - a curated list of Unix-like executables that can be used to bypass local security restrictions in misconfigured systems.</a></li>
+              <li class="bookmark-rota-li"><a href="https://www.justine-haupt.com/rotarycellphone/">Rotary Cellphone  - The point isn't to be anachronistic. </a></li>
+              <li class="bookmark-rota-li"><a href="https://data.baltimorecity.gov/search">Open Baltimore Data Sets</a></li>
+              <li class="bookmark-rota-li"><a href="https://equipboard.com/pros/the-alchemist">The Alchemist - Equipboard</a></li>
+              <li class="bookmark-rota-li"><a href="https://marmia.aviaryplatform.com/collections/948/collection_resources/144713">Butterfly McQueen A-roll, circa 1985 WJZ-TV Collection</a></li>
+            </ul>
+          </section>
+
+          <!-- Events -->
+          <section class="box event-box">
+            <h2 id="upcoming-events-title">Upcoming Events</h2>
+            <div id="event-carousel" class="splide event-carousel" aria-labelledby="upcoming-events-title">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide">
+                    <article class="event-card">
+                      <img src="./assets/imgs/events/gardenhours.webp" alt="Garden Hours event flyer" class="event-flyer thumbnail--portrait" width="103" height="129">
+                      <span class="event-label">Garden Hours w/ Jayswann,Tromac 05/21 8PM @ Current Space</span>
+                      <a class="event-link" href="https://pools.events/event/WALy1Uij/garden-hours/" aria-label="Open Garden Hours event page">&#128279;</a>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="event-card">
+                      <img src="./assets/imgs/events/fatbuttrodeo.jpg" alt="Fatt Butt Rodeo event flyer" class="event-flyer thumbnail--portrait" width="103" height="129">
+                      <span class="event-label">Fatt Butt Rodeo. 05/22 10PM @ Ottobar Upstairs</span>
+                      <a class="event-link" href="https://theottobar.com/event/fat-butt-rodeo-40/upstairs-ottobar/baltimore-maryland/" aria-label="Open Fatt Butt Rodeo event page">&#128279;</a>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="event-card">
+                      <img src="./assets/imgs/events/artscape.png" alt="Artscape event flyer" class="event-flyer thumbnail--portrait" width="103" height="129">
+                      <span class="event-label">Artscape w/ The Roots 05/23 12PM @ 100 Holliday St</span>
+                      <a class="event-link" href="https://www.weaa.org/arts-culture/2026-01-09/the-roots-stephanie-mills-to-headline-artscape-2026" aria-label="Open Artscape event page">&#128279;</a>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="event-card">
+                      <img src="./assets/imgs/events/bma.jpg" alt="Charlie Duff talk event flyer" class="event-flyer thumbnail--portrait" width="103" height="129">
+                      <span class="event-label">The Making of America’s Greatest Classical Architect: A Talk by Charlie Duff 05/24 2PM @ 11 West Mount Vernon Place</span>
+                      <a class="event-link" href="https://baltimoreheritage.org/event/the-making-of-americas-greatest-classical-architect-a-talk-by-charlie-duff" aria-label="Open Charlie Duff talk event page">&#128279;</a>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="event-card">
+                      <img src="./assets/imgs/events/brb.jpg" alt="Baltimore Record Bazaar event flyer" class="event-flyer thumbnail--portrait" width="103" height="129">
+                      <span class="event-label">Baltimore Record Bazaar. 05/31 12PM, $FREE @ Peabody Heights</span>
+                      <a class="event-link" href="https://peabodyheightsbrewery.com/event/baltimore-record-bazaar/2026-05-31/" aria-label="Open Baltimore Record Bazaar event page">&#128279;</a>
+                    </article>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </aside>
 
         <!-- RIGHT COLUMN -->
         <section id="right-column">
+          <!-- Town Square -->
+          <section class="box town-square-box" aria-labelledby="town-square-title">
+            <h2 id="town-square-title">Town Square</h2>
+            <div id="townsquare-root"></div>
+          </section>
+
           <!-- Activity Stream -->
           <section class="box activity-box">
             <h2>Activity Stream</h2>
@@ -261,57 +336,6 @@
                   </li>
                 </ul>
               </section>
-            </div>
-          </section>
-
-          <!-- Bookmarks -->
-          <section class="box bookmark-rota-box">
-            <h2>Bookmark Rota - Week of 5/19/2026</h2>
-            <ul id="bookmark-rota-list">
-              <li class="bookmark-rota-li"><a href="https://anthonygallante.github.io/BracketOfBabel/#/">Bracket Archive</a></li>
-              <li class="bookmark-rota-li"><a href="https://theuselessweb.com/sites-we-lost/">The Sites We Lost</a></li>
-              <li class="bookmark-rota-li"><a href="https://aeris.edbn.me/city/sfo">Aeris - Live flight tracking in 3D</a></li>
-              <li class="bookmark-rota-li"><a href="https://greem.co.uk/otherbits/jelly.html">Nailing jelly to a wall: is it possible?</a></li>
-              <li class="bookmark-rota-li"><a href="https://www.ankle.website/">Ankle - A cultural operating system you author into. </a></li>
-              <li class="bookmark-rota-li"><a href="https://binaryforay.blogspot.com/2017/10/amcache-still-rules-everything-around.html">(Am)cache still rules everything around me (part 2 of 1)</a></li>
-              <li class="bookmark-rota-li"><a href="https://github.com/hendricius/the-sourdough-framework">The Sourdough Framework - an open-source book dedicated to helping you to make the best possible sourdough bread at home.</a></li>
-              <li class="bookmark-rota-li"><a href="https://gtfobins.org/">GTFOBins - a curated list of Unix-like executables that can be used to bypass local security restrictions in misconfigured systems.</a></li>
-              <li class="bookmark-rota-li"><a href="https://www.justine-haupt.com/rotarycellphone/">Rotary Cellphone  - The point isn't to be anachronistic. </a></li>
-              <li class="bookmark-rota-li"><a href="https://data.baltimorecity.gov/search">Open Baltimore Data Sets</a></li>
-              <li class="bookmark-rota-li"><a href="https://equipboard.com/pros/the-alchemist">The Alchemist - Equipboard</a></li>
-              <li class="bookmark-rota-li"><a href="https://marmia.aviaryplatform.com/collections/948/collection_resources/144713">Butterfly McQueen A-roll, circa 1985 WJZ-TV Collection</a></li>
-            </ul>
-          </section>
-
-          <!-- Events -->
-          <section class="box event-box">
-            <h2>Upcoming Events</h2>
-            <div class="event-grid">
-              <div class="event-slot">
-                <img src="./assets/imgs/events/gardenhours.webp" alt="Event 1 flyer" class="event-flyer">
-                <span class="event-label">Garden Hours w/ Jayswann,Tromac 05/21 8PM @ Current Space</span>
-                <a href="https://pools.events/event/WALy1Uij/garden-hours/" style="font-size: 10px">&#128279;</a>
-              </div>
-              <div class="event-slot">
-                <img src="./assets/imgs/events/fatbuttrodeo.jpg" alt="Event 2 flyer" class="event-flyer">
-                <span class="event-label">Fatt Butt Rodeo. 05/22 10PM @ Ottobar Upstairs</span>
-                <a href="https://theottobar.com/event/fat-butt-rodeo-40/upstairs-ottobar/baltimore-maryland/" style="font-size: 10px">&#128279;</a>
-              </div>
-              <div class="event-slot">
-                <img src="./assets/imgs/events/artscape.png" alt="Event 3 flyer" class="event-flyer">
-                <span class="event-label">Artscape w/ The Roots 05/23 12PM @ 100 Holliday St</span>
-                <a href="https://www.weaa.org/arts-culture/2026-01-09/the-roots-stephanie-mills-to-headline-artscape-2026" style="font-size: 10px">&#128279;</a>
-              </div>
-              <div class="event-slot">
-                <img src="./assets/imgs/events/bma.jpg" alt="Event 4 flyer" class="event-flyer">
-                <span class="event-label">The Making of America’s Greatest Classical Architect: A Talk by Charlie Duff 05/24 2PM @ 11 West Mount Vernon Place</span>
-                <a href="https://baltimoreheritage.org/event/the-making-of-americas-greatest-classical-architect-a-talk-by-charlie-duff" style="font-size: 10px">&#128279;</a>
-              </div>
-              <div class="event-slot">
-                <img src="./assets/imgs/events/brb.jpg" alt="Event 5 flyer" class="event-flyer">
-                <span class="event-label">Baltimore Record Bazaar. 05/31 12PM, $FREE @ Peabody Heights</span>
-                <a href="https://peabodyheightsbrewery.com/event/baltimore-record-bazaar/2026-05-31/" style="font-size: 10px">&#128279;</a>
-              </div>
             </div>
           </section>
 
@@ -545,5 +569,15 @@
 
     <script src="./assets/js/player.js"></script>
     <script src="./assets/js/photo_stream.js"></script>
+    <script src="./assets/js/event_carousel.js"></script>
+    <script type="module">
+      import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";
+
+      mountTownSquare(document.getElementById("townsquare-root"), {
+        serverOrigin: "https://townsquare.cauenapier.com",
+        siteKey: "site_v_ezltHN6MAW07vG",
+        theme: "host"
+      });
+    </script>
   </body>
 </html>

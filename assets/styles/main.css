@@ -511,6 +511,12 @@ Tightens padding and resets list basics for these modules.
   padding: 0;
 }
 
+#bookmark-rota-list {
+  margin: 0;
+  padding: 4px 6px;
+  min-width: 0;
+}
+
 .activity-box ul,
 .bookmark-rota-list ul,
 .secret-list ul {
@@ -525,24 +531,32 @@ Tightens padding and resets list basics for these modules.
 }
 
 .bookmark-rota-li {
-  margin-top: 2.5px;
-  margin-bottom: 3px;
+  margin: 0 0 2px;
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
   font-variation-settings: "wdth" 100;
   font-weight: 400;
   font-size: 12.5px;
+  line-height: 1.2;
   letter-spacing: 0.01em;
   position: relative;
-  padding-left: 1.5em;
+  padding-left: 1.4em;
   list-style: none;
+  min-width: 0;
+}
+
+.bookmark-rota-li a {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
 
 .bookmark-rota-li::before {
   content: "🔖";
   position: absolute;
   left: 0;
-  top: -5.25px;
+  top: 0;
+  line-height: inherit;
 }
 
 /*
@@ -682,6 +696,119 @@ Styleguide Events.Grid.
   margin-top: 0.25px;
   font-size: 8px;
   font-weight: bold;
+}
+
+/*
+Town Square: host-owned wrapper.
+Keeps the remote widget aligned with the existing right-column boxes.
+*/
+.town-square-box {
+  width: 100%;
+  padding: 10px;
+}
+
+.town-square-box h2 {
+  margin: 0 0 6px;
+  padding: 1px 6px;
+  background: #1b3b63;
+  border: 1.75px ridge #707788;
+  color: #fff;
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#townsquare-root {
+  width: 100%;
+  min-width: 0;
+}
+
+/*
+Upcoming Events carousel.
+Uses the Activity Stream's Splide behavior in the narrow left column.
+*/
+.event-box {
+  width: 100%;
+  min-width: 0;
+}
+
+.event-carousel {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.event-carousel .splide__track {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.event-carousel .splide__list {
+  display: flex;
+  align-items: stretch;
+  padding: 0 2px;
+}
+
+.event-carousel .splide__slide {
+  display: flex;
+  width: 111px;
+  min-width: 111px;
+  height: auto;
+  padding: 0 2px;
+}
+
+.event-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 107px;
+  min-width: 0;
+  height: 100%;
+  padding: 2px;
+  background: #B9DFF0;
+  border: 1.75px solid #d1d8ea;
+  color: #254770;
+  text-align: center;
+}
+
+.thumbnail--portrait {
+  display: block;
+  width: 103px;
+  min-width: 103px;
+  max-width: none;
+  height: 129px;
+  min-height: 129px;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  flex: 0 0 129px;
+}
+
+.event-card .event-label {
+  width: 100%;
+  margin-top: 3px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.event-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  min-height: 24px;
+  margin-top: auto;
+  font-size: 10px;
+}
+
+.event-link:focus-visible {
+  outline: 2px solid #003399;
+  outline-offset: 1px;
 }
 
 /*
