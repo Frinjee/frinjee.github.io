@@ -6,7 +6,7 @@ var myspaceInterval = null;
 
 // update this to your real file + labels
 var MYSPACE_SONG_URL = 'assets/js/audio/Jay-Z x 3 Doors Down - Here Without You Remix.mp3';
-var MYSPACE_SONG_NAME = 'Here Without You Remix';
+var MYSPACE_SONG_NAME = 'Song Cry x Here Without You Remix';
 var MYSPACE_SONG_ARTIST = 'Jay-Z x 3 Doors Down';
 
 $(function () {
