@@ -357,6 +357,7 @@ Styleguide Media.Player.Single.
 .music_player_track_title {
   font-size: 0.5rem;
   font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .music_player_track_artist {
@@ -735,8 +736,8 @@ Keeps the remote widget aligned with the existing right-column boxes.
 }
 
 .town-square-box h2 {
-  margin: 0 0 6px;
-  padding: 1px 6px;
+  margin: 0 -10px 6px;
+  padding: 4px 6px;
   background: #1b3b63;
   border: 1.75px ridge #707788;
   color: #fff;
