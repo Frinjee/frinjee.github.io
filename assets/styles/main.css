@@ -608,6 +608,33 @@ Styleguide Events.Grid.
   border-bottom: #222 solid 1.75px;
 }
 
+.bookmark-rota-box h2,
+.event-box h2,
+.town-square-box h2,
+.media-box h2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+  margin: 0;
+  padding: 4px 6px;
+}
+
+.bookmark-rota-box h2 {
+  width: 100%;
+}
+
+.event-box h2,
+.media-box h2 {
+  width: calc(100% + 12px);
+  margin-inline: -6px;
+}
+
+.town-square-box h2 {
+  width: calc(100% + 20px);
+  margin-inline: -10px;
+}
+
 
 #activity-photo-title {
   background-image: url("imgs/dividers/rainbowstars5.gif");
