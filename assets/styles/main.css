@@ -738,7 +738,9 @@ Keeps the remote widget aligned with the existing right-column boxes.
 .town-square-box h2 {
   margin: 0 -10px 6px;
   padding: 4px 6px;
-  background: #1b3b63;
+  background-image: url("../imgs/layout/headers/town.gif");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   border: 1.75px ridge #707788;
   color: #fff;
   font-family: "Space Grotesk", sans-serif;
