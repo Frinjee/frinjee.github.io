@@ -60,6 +60,21 @@ def stream_tsv(path):
             yield artist, title, url.decode('utf-8', 'replace')
 
 
+def cdn_to_archive_rel(url):
+    '''Convert a dead MySpace CDN URL to the archive.org myspace_dragon_hoard_2010 zip path.
+    http://cache11-music01.myspacecdn.com/81/std_xxx.mp3
+        -> 81.zip/81%2Fstd_xxx.mp3
+    Matches the logic from viewer.js parseMetadata() in myspace_dragon_hoard_searcher.
+    '''
+    from urllib.parse import quote
+    parts = url.split('/')
+    if len(parts) >= 5 and 'myspacecdn.com' in parts[2]:
+        col  = parts[3]   # e.g. '81'
+        fname = parts[4]  # e.g. 'std_0c6ecb7a...mp3'
+        return f'{col}.zip/{col}%2F{quote(fname)}'
+    return url  # unknown format — store as-is
+
+
 def build_bundle(raw_entries, prefix):
     # dedupe by (artist, title, url), sort by artist then title
     seen = {}
@@ -86,7 +101,7 @@ def build_bundle(raw_entries, prefix):
             t_list.append(s)
         return t_map[s]
 
-    # strip common url prefix
+    # compute archive rel-path; prefix is the common base URL
     p = prefix.rstrip('/')
     p_slash = p + '/'
 
@@ -95,7 +110,9 @@ def build_bundle(raw_entries, prefix):
     for artist, title, url in sorted_entries:
         ai = intern_a(artist)
         ti = intern_t(title)
-        rel = url[len(p_slash):] if url.startswith(p_slash) else url
+        # convert CDN URL to archive.org zip path rel; strip prefix if already matching
+        rel = cdn_to_archive_rel(url) if 'myspacecdn.com' in url else (
+              url[len(p_slash):] if url.startswith(p_slash) else url)
         da = ai - prev_ai
         prev_ai = ai
         encoded.append([da, ti, rel])
@@ -104,11 +121,9 @@ def build_bundle(raw_entries, prefix):
 
 
 def find_url_prefix(raw_entries):
-    # The TSV stores original dead MySpace CDN URLs (http://cache*.myspacecdn.com/...).
-    # Route them through the Wayback Machine if_ endpoint so browsers receive the raw
-    # archived MP3 without the toolbar HTML wrapper.
-    # Timestamp 20120601000000 = peak MySpace era; WB auto-redirects to nearest snapshot.
-    return 'https://web.archive.org/web/20120601000000if_/'
+    # MP3s are stored in archive.org item myspace_dragon_hoard_2010 as per-path zip files.
+    # cdn_to_archive_rel() converts each CDN URL to a bare zip path; this is the base URL.
+    return 'https://archive.org/download/myspace_dragon_hoard_2010/'
 
 
 def write_outputs(bundle, out_dir, plain=False):

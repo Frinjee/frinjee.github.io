@@ -12,9 +12,10 @@ const PAGE_SIZE     = 100;
 const DL_DELAY      = 600;   // ms between bulk downloads
 const LS_KEY        = 'hoard_bookmarks_v1';
 const ARCHIVE_PFX   = 'https://archive.org/download/';
-// Wayback Machine if_ endpoint — returns raw archived content, no toolbar HTML.
-// Timestamp 20120601000000 covers peak MySpace era; WB auto-redirects to nearest snapshot.
-const WB_IF         = 'https://web.archive.org/web/20120601000000if_/';
+// Archive item that hosts the MySpace Dragon Hoard MP3s as per-path zip files.
+// URL format: HOARD_ITEM + '{col}.zip/{col}%2F{filename}'
+// Derived from the original viewer.js parseMetadata() in myspace_dragon_hoard_searcher.
+const HOARD_ITEM    = 'https://archive.org/download/myspace_dragon_hoard_2010/';
 
 // ---- state ----
 let hoardData  = null;   // raw bundle {p, a, t, e}
@@ -137,12 +138,19 @@ function materialize(data) {
   return data.e.map(([da, ti, rel]) => {
     const ai = prev + da;
     prev = ai;
-    // rel is an absolute CDN URL (http://cache*.myspacecdn.com/...) — route through
-    // Wayback Machine if_ endpoint so the browser receives the raw archived MP3.
-    // For future bundles where rel is a bare path, fall back to data.p prefix.
-    const url = (rel.startsWith('http://') || rel.startsWith('https://'))
-      ? WB_IF + rel
-      : data.p + rel;
+    // rel is the original MySpace CDN URL (http://cache*.myspacecdn.com/{col}/{file}).
+    // Map it to the archive.org myspace_dragon_hoard_2010 zip path — the same logic
+    // used by the original viewer.js parseMetadata() in the archive item.
+    // For future rebuilt bundles where rel is already a bare archive path, fall back.
+    let url;
+    if (rel.startsWith('http://') || rel.startsWith('https://')) {
+      const parts = rel.split('/');
+      const col   = parts[3];   // e.g. '81'
+      const file  = parts[4];   // e.g. 'std_0c6ecb7a...mp3'
+      url = `${HOARD_ITEM}${col}.zip/${col}%2F${file}`;
+    } else {
+      url = data.p + rel;
+    }
     return { ai, ti, url };
   });
 }
