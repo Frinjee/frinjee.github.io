@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Dragon Hoard</title>
+  <meta name="description" content="Personal MySpace Dragon Hoard collection player.">
+
+  <!-- fonts (match site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Fuse.js v7 -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+  <style>
+    /* personal player — stripped hoard aesthetic, no bookmarks/export */
+    :root {
+      --bg:      #111118;
+      --box:     #ffffff;
+      --bdr:     #888899;
+      --hdr:     #1a1a2e;
+      --accent:  #0033cc;
+      --muted:   #666677;
+      --alt:     #f3f4fa;
+      --hl:      #e8ebff;
+      --audio-bg:#1a1a2e;
+      --font:    'IBM Plex Sans','Space Grotesk',Arial,sans-serif;
+      --mono:    'Share Tech Mono','Courier New',monospace;
+      --disp:    'Orbitron','Share Tech Mono',monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--bg); font-family: var(--font); font-size: 13px; color: #111; }
+    .shell { min-height: 100vh; padding-bottom: 66px; }
+    .inner { max-width: 800px; margin: 0 auto; padding: 0 8px; }
+
+    header {
+      background: var(--hdr);
+      border-bottom: 3px solid var(--accent);
+      padding: 10px 0 8px;
+      position: sticky; top: 0; z-index: 50;
+    }
+    .hdr-inner { max-width: 800px; margin: 0 auto; padding: 0 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    h1 { font-family: var(--disp); font-size: 14px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+    h1 span { color: #99aaff; }
+    .status { font-family: var(--mono); font-size: 11px; color: #aabbee; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .status.err { color: #ff6655; }
+    .back-link { font-size: 11px; color: #aabbee; text-decoration: none; }
+    .back-link:hover { color: #fff; }
+
+    .search-wrap { background: var(--box); border: 2px ridge var(--bdr); border-top: none; padding: 8px; }
+    #q { width: 100%; padding: 5px 8px; font-family: var(--font); font-size: 13px; border: 1px solid #aaa; border-radius: 2px; outline: none; }
+    #q:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(0,51,204,.15); }
+
+    .results-info { padding: 4px 8px; font-size: 11px; color: var(--muted); border-bottom: 1px solid #dde; font-family: var(--mono); background: var(--box); border: 2px ridge var(--bdr); border-top: none; border-bottom: 1px solid #dde; }
+    .tbl-wrap { background: var(--box); border: 2px ridge var(--bdr); border-top: none; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    thead th { background: #e8eaf6; border-bottom: 2px solid #aab; padding: 4px 6px; text-align: left; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid #dde; }
+    tbody tr:nth-child(even) { background: var(--alt); }
+    tbody tr:hover { background: var(--hl); }
+    tbody tr.playing { background: #ddeeff; }
+    td { padding: 4px 6px; vertical-align: middle; }
+    .cp { width: 30px; text-align: center; }
+    .ca { width: 38%; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .ct { max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+    .pb { background: none; border: 1px solid var(--accent); color: var(--accent); border-radius: 50%; width: 22px; height: 22px; font-size: 10px; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; padding: 0; }
+    .pb:hover, .pb.active { background: var(--accent); color: #fff; }
+
+    .pagination { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-top: 1px solid #dde; font-size: 11px; color: var(--muted); background: var(--box); border: 2px ridge var(--bdr); border-top: none; flex-wrap: wrap; }
+    .pgb { background: #e8eaf6; border: 1px solid #aab; color: var(--accent); padding: 2px 8px; font-size: 11px; cursor: pointer; border-radius: 2px; font-family: var(--font); }
+    .pgb:hover { background: var(--accent); color: #fff; }
+    .pgb:disabled { opacity: .4; cursor: default; }
+
+    .audio-bar { position: fixed; bottom: 0; left: 0; right: 0; z-index: 100; background: var(--audio-bg); border-top: 2px solid var(--accent); padding: 6px 12px; display: flex; align-items: center; min-height: 52px; }
+    .ab-inner { max-width: 800px; margin: 0 auto; width: 100%; display: flex; align-items: center; gap: 10px; }
+    .ab-label { font-family: var(--disp); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: #6677bb; white-space: nowrap; }
+    .ab-text { flex: 1; font-family: var(--mono); font-size: 11px; color: #aabbee; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+    .ab-text.idle { color: #556; font-style: italic; }
+    .abtn { background: none; border: 1px solid #445599; color: #aabbee; border-radius: 3px; padding: 3px 8px; font-size: 12px; cursor: pointer; font-family: var(--mono); }
+    .abtn:hover { background: #223366; color: #fff; }
+    .abtn.playing { border-color: #ff6644; color: #ff8866; }
+    audio { display: none; }
+
+    .overlay { position: fixed; inset: 0; z-index: 200; background: rgba(10,10,24,.92); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+    .overlay.hidden { display: none; }
+    .ov-icon { font-size: 48px; animation: pulse 1.2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.12);opacity:.7} }
+    .ov-msg { font-family: var(--disp); font-size: 12px; color: #8899ee; letter-spacing: .08em; text-transform: uppercase; }
+    .ov-sub { font-family: var(--mono); font-size: 11px; color: #556; }
+
+    .no-data { padding: 32px 16px; text-align: center; color: var(--muted); font-size: 13px; line-height: 1.7; background: var(--box); border: 2px ridge var(--bdr); border-top: none; }
+    .no-data a { color: var(--accent); }
+    .hidden { display: none !important; }
+    @media(max-width:600px) { h1{font-size:12px} .ca{width:42%} }
+  </style>
+</head>
+<body>
+
+<div class="overlay" id="overlay">
+  <div class="ov-icon" aria-hidden="true">🐉</div>
+  <div class="ov-msg" id="ov-msg">loading&hellip;</div>
+  <div class="ov-sub" id="ov-sub"></div>
+</div>
+
+<div class="shell">
+
+  <header>
+    <div class="hdr-inner">
+      <h1>🐉 <span>My</span> Hoard</h1>
+      <div class="status" id="status">loading&hellip;</div>
+      <a href="../" class="back-link">&#8592; hoard search</a>
+    </div>
+  </header>
+
+  <div class="inner">
+
+    <div class="search-wrap">
+      <input type="search" id="q" placeholder="search artist or title&hellip;" autocomplete="off" spellcheck="false" aria-label="search tracks">
+    </div>
+
+    <div class="results-info" id="rinfo" aria-live="polite"></div>
+
+    <div id="no-data" class="no-data hidden">
+      <p>No collection data found (<code>data.json.gz</code> or <code>data.json</code>).</p>
+      <p>Export your bookmarks from the <a href="../">Hoard Search</a> main app,<br>
+         then unzip <code>my-hoard-data.zip</code> into this directory and commit.</p>
+    </div>
+
+    <div class="tbl-wrap" id="tbl-wrap">
+      <table role="grid">
+        <thead>
+          <tr>
+            <th class="cp" scope="col">play</th>
+            <th class="ca" scope="col">artist</th>
+            <th class="ct" scope="col">title</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="pagination" id="pagination"></div>
+
+  </div>
+</div>
+
+<div class="audio-bar">
+  <audio id="audio-el" preload="none"></audio>
+  <div class="ab-inner">
+    <span class="ab-label">now playing</span>
+    <span class="ab-text idle" id="ab-text">nothing playing</span>
+    <button class="abtn" id="ab-btn">&#9654; play</button>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// personal player — no bookmarks, no export; reads my/data.json.gz or data.json
+const PAGE_SIZE = 100;
+let data = null, entries = [], fuseInst = null, results = [], curPage = 0;
+let curEntry = null, playing = false;
+
+const el = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+const delay = ms => new Promise(r => setTimeout(r, ms));
+const tick  = ()  => new Promise(r => setTimeout(r, 0));
+
+document.addEventListener('DOMContentLoaded', () => {
+  el('q').addEventListener('input', () => {
+    clearTimeout(el('q')._db);
+    el('q')._db = setTimeout(doSearch, 200);
+  });
+  el('q').addEventListener('keydown', e => { if (e.key === 'Escape') { el('q').value = ''; doSearch(); } });
+  const audio = el('audio-el');
+  audio.addEventListener('ended', () => { playing = false; updBtn(); });
+  audio.addEventListener('pause', () => { playing = false; updBtn(); });
+  audio.addEventListener('play',  () => { playing = true;  updBtn(); });
+  el('ab-btn').addEventListener('click', () => {
+    if (!curEntry) return;
+    playing ? audio.pause() : audio.play().catch(console.warn);
+  });
+  run();
+});
+
+async function run() {
+  setOv('loading collection\u2026', '');
+  try {
+    data = await loadData();
+    setOv('building index\u2026', '');
+    await tick();
+    entries = materialize(data);
+    buildFuse();
+    hideOv();
+    el('status').textContent = `${entries.length.toLocaleString()} tracks`;
+    renderResults([]);
+  } catch (err) {
+    el('ov-msg').textContent = '\u26a0 ' + err.message;
+    el('ov-msg').style.color = '#ff6644';
+    el('ov-sub').textContent = 'export bookmarks from Hoard Search to populate this page';
+    // show no-data message below overlay after 2s
+    setTimeout(() => {
+      hideOv();
+      el('no-data').classList.remove('hidden');
+      el('tbl-wrap').classList.add('hidden');
+      el('status').textContent = 'no data';
+      el('status').className = 'status err';
+    }, 2500);
+  }
+}
+
+async function loadData() {
+  // try data.json.gz first, then data.json
+  const tryGz = await fetch('data.json.gz', { cache: 'force-cache' }).catch(() => null);
+  if (tryGz && tryGz.ok) {
+    const buf   = await tryGz.arrayBuffer();
+    const magic = new Uint8Array(buf, 0, 2);
+    if (magic[0] === 0x1f && magic[1] === 0x8b && typeof DecompressionStream !== 'undefined') {
+      return gunzip(buf);
+    }
+    // not gzip or no DecompressionStream — fall through
+  }
+  const tryJ = await fetch('data.json', { cache: 'force-cache' }).catch(() => null);
+  if (tryJ && tryJ.ok) return tryJ.json();
+  throw new Error('data.json.gz / data.json not found');
+}
+
+async function gunzip(buf) {
+  const ds = new DecompressionStream('gzip');
+  const w  = ds.writable.getWriter(), r = ds.readable.getReader();
+  w.write(new Uint8Array(buf)); w.close();
+  const chunks = []; let done = false;
+  while (!done) { const {value,done:d} = await r.read(); done=d; if(value) chunks.push(value); }
+  const total = chunks.reduce((n,c)=>n+c.length,0);
+  const out = new Uint8Array(total); let off=0;
+  for(const c of chunks){out.set(c,off);off+=c.length;}
+  return JSON.parse(new TextDecoder().decode(out));
+}
+
+function materialize(d) {
+  let prev=0;
+  return d.e.map(([da,ti,rel])=>{
+    const ai=prev+da; prev=ai;
+    return {ai,ti,url:d.p+rel};
+  });
+}
+
+function buildFuse() {
+  fuseInst = new Fuse(entries, {
+    threshold: 0.35, ignoreLocation: true, includeScore: true,
+    keys: [
+      { name:'artist', getFn: e => data.a[e.ai] },
+      { name:'title',  getFn: e => data.t[e.ti] },
+    ],
+  });
+}
+
+function doSearch() {
+  if (!fuseInst) return;
+  const q = el('q').value.trim();
+  if (!q) { results=[]; curPage=0; renderResults([]); return; }
+  results  = fuseInst.search(q, {limit:500}).map(r=>r.item);
+  curPage  = 0;
+  renderResults(results);
+}
+
+function renderResults(slice) {
+  const all       = (results.length ? results : entries);
+  const pageCount = Math.ceil(all.length / PAGE_SIZE);
+  const start     = curPage * PAGE_SIZE;
+  const view      = all.slice(start, start + PAGE_SIZE);
+
+  if (!all.length) {
+    el('rinfo').textContent  = '';
+    el('tbody').innerHTML    = '';
+    el('pagination').innerHTML = '';
+    return;
+  }
+
+  el('rinfo').textContent = `${all.length.toLocaleString()} track${all.length===1?'':'s'}  \u2014  page ${curPage+1} of ${pageCount}`;
+
+  el('tbody').innerHTML = view.map(entry => {
+    const a = esc(data.a[entry.ai]), t = esc(data.t[entry.ti]);
+    const act = curEntry && curEntry.url===entry.url && playing;
+    return `<tr class="${act?'playing':''}">
+      <td class="cp"><button class="pb${act?' active':''}" aria-label="play ${t}">&#9654;</button></td>
+      <td class="ca" title="${a}">${a}</td>
+      <td class="ct" title="${t}">${t}</td>
+    </tr>`;
+  }).join('');
+
+  el('tbody').querySelectorAll('.pb').forEach((btn,i) => {
+    btn.addEventListener('click', () => playEntry(view[i]));
+  });
+
+  // pagination
+  if (pageCount <= 1) { el('pagination').innerHTML=''; return; }
+  el('pagination').innerHTML =
+    `<button class="pgb" id="pgp" ${curPage>0?'':'disabled'}>&#8592; prev</button>
+     <span>page ${curPage+1} / ${pageCount}</span>
+     <button class="pgb" id="pgn" ${curPage<pageCount-1?'':'disabled'}>next &#8594;</button>`;
+  el('pgp')?.addEventListener('click', ()=>{curPage--;renderResults();window.scrollTo({top:0,behavior:'smooth'});});
+  el('pgn')?.addEventListener('click', ()=>{curPage++;renderResults();window.scrollTo({top:0,behavior:'smooth'});});
+}
+
+function playEntry(entry) {
+  curEntry = entry;
+  const audio = el('audio-el');
+  audio.src = entry.url;
+  audio.play().catch(console.warn);
+  const a = data.a[entry.ai], t = data.t[entry.ti];
+  el('ab-text').textContent  = `${a} \u2014 ${t}`;
+  el('ab-text').className    = 'ab-text';
+  renderResults();
+}
+
+function updBtn() {
+  el('ab-btn').textContent = playing ? '\u23f8 pause' : '\u25b6 play';
+  el('ab-btn').className   = 'abtn' + (playing ? ' playing' : '');
+}
+
+function setOv(msg, sub) {
+  el('overlay').classList.remove('hidden');
+  el('ov-msg').textContent = msg;
+  el('ov-sub').textContent = sub||'';
+}
+function hideOv() { el('overlay').classList.add('hidden'); }
+</script>
+
+</body>
+</html>

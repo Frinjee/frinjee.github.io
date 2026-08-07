@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dragon Hoard Search</title>
+  <meta name="description" content="Search the MySpace Dragon Hoard archive — ~490k tracks, fuzzy search, stream from archive.org.">
+
+  <!-- fonts (match site) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&family=Orbitron:wght@700&family=Share+Tech+Mono&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- Unsemantic responsive grid -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/unsemantic/1.1.3/unsemantic-grid-responsive-no-ie.min.css">
+
+  <!-- app styles -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Fuse.js v7 (fuzzy search) -->
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@7.0.0/dist/fuse.min.js"></script>
+
+  <!-- JSZip (export) -->
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+</head>
+<body>
+
+<!-- loading overlay -->
+<div class="loading-overlay" id="loading-overlay">
+  <div class="loading-dragon" aria-hidden="true">🐉</div>
+  <div class="loading-msg" id="loading-msg">initializing&hellip;</div>
+  <div class="loading-sub" id="loading-sub"></div>
+</div>
+
+<!-- page shell -->
+<div class="hoard-shell">
+
+  <!-- sticky header -->
+  <header class="hoard-header" role="banner">
+    <div class="hoard-header-inner">
+      <h1 class="hoard-title">🐉 <span>Dragon</span> Hoard Search</h1>
+      <div class="hoard-status" id="status-msg" role="status" aria-live="polite">loading&hellip;</div>
+      <a href="../" class="audio-btn" style="text-decoration:none;font-size:11px;">&#8592; back</a>
+    </div>
+  </header>
+
+  <!-- grid container -->
+  <div class="grid-container hoard-inner">
+    <div class="grid-100">
+
+      <!-- search input -->
+      <div class="hoard-search-wrap">
+        <input type="search" id="q" placeholder="search artist or title&hellip;" autocomplete="off" spellcheck="false" aria-label="search tracks">
+      </div>
+
+      <!-- tab strip -->
+      <div class="hoard-tabs" role="tablist">
+        <button class="tab-btn active" data-tab="search" role="tab" aria-selected="true">search</button>
+        <button class="tab-btn" data-tab="bm" role="tab" aria-selected="false">bookmarks <span class="bm-badge" id="bm-badge" data-count="0">0</span></button>
+        <button class="tab-btn" data-tab="export" role="tab" aria-selected="false">export</button>
+      </div>
+
+      <!-- ======= SEARCH TAB ======= -->
+      <div class="tab-panel" id="tab-search" role="tabpanel">
+        <div class="results-info" id="results-info" aria-live="polite"></div>
+        <div style="overflow-x:auto">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th class="col-play" scope="col">play</th>
+                <th class="col-star" scope="col">&#9733;</th>
+                <th class="col-artist" scope="col">artist</th>
+                <th class="col-title"  scope="col">title</th>
+              </tr>
+            </thead>
+            <tbody id="results-tbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="pagination" role="navigation" aria-label="results pagination"></div>
+      </div>
+
+      <!-- ======= BOOKMARKS TAB ======= -->
+      <div class="tab-panel hidden" id="tab-bm" role="tabpanel">
+        <div class="bm-actions hidden" id="bm-actions">
+          <button class="action-btn" id="dl-btn">&#8595; bulk download</button>
+          <button class="action-btn" id="export-btn-bm">&#8595; export my-hoard-data.zip</button>
+          <button class="action-btn danger" id="clear-bm-btn">&#215; clear all</button>
+        </div>
+        <p class="bm-empty" id="bm-empty">no bookmarks yet — star tracks in the search tab to save them here</p>
+        <div style="overflow-x:auto">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th class="col-play" scope="col">play</th>
+                <th class="col-star" scope="col">&#9733;</th>
+                <th class="col-artist" scope="col">artist</th>
+                <th class="col-title"  scope="col">title</th>
+              </tr>
+            </thead>
+            <tbody id="bm-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======= EXPORT TAB ======= -->
+      <div class="tab-panel hidden" id="tab-export" role="tabpanel">
+        <div class="export-panel">
+          <h3>export personal collection</h3>
+          <p>Downloads a <code>my-hoard-data.zip</code> built from your current bookmarks.
+          The zip contains the same compact bundle format used by the main app, plus a README.</p>
+          <p>To publish your personal player: unzip into <code>hoard/my/</code> in your site repo and commit.
+          The <a href="my/index.html">my/index.html</a> player reads <code>data.json.gz</code> automatically.</p>
+          <p>MP3s are never stored — they stream live from <a href="https://archive.org" target="_blank" rel="noopener">archive.org</a>.</p>
+          <button class="action-btn" id="export-btn-panel">&#8595; export my-hoard-data.zip</button>
+        </div>
+      </div>
+
+    </div><!-- /grid-100 -->
+  </div><!-- /grid-container -->
+
+</div><!-- /hoard-shell -->
+
+<!-- sticky audio bar -->
+<div class="hoard-audio-bar" role="region" aria-label="audio player">
+  <audio id="audio-el" preload="none"></audio>
+  <div class="audio-bar-inner">
+    <span class="audio-label">now playing</span>
+    <span class="now-playing-text idle" id="now-playing-text">nothing playing</span>
+    <div class="audio-controls">
+      <button class="audio-btn" id="audio-btn" aria-label="play/pause">&#9654; play</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'material-player';
-  src:  url('../fonts/material-player.eot?c1mf5f');
-  src:  url('../fonts/material-player.eot?c1mf5f#iefix') format('embedded-opentype'),
-    url('../fonts/material-player.ttf?c1mf5f') format('truetype'),
-    url('../fonts/material-player.woff?c1mf5f') format('woff'),
-    url('../fonts/material-player.svg?c1mf5f#icomoon') format('svg');
+  src:  url('../fonts/fonts/material-player.eot?c1mf5f');
+  src:  url('../fonts/fonts/material-player.eot?c1mf5f#iefix') format('embedded-opentype'),
+    url('../fonts/fonts/material-player.ttf?c1mf5f') format('truetype'),
+    url('../fonts/fonts/material-player.woff?c1mf5f') format('woff'),
+    url('../fonts/fonts/material-player.svg?c1mf5f#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;

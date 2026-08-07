@@ -1,0 +1,48 @@
+[
+  {
+    "label": "Garden Hours w/ Jayswann, Tromac",
+    "date": "2026-05-21",
+    "time": "8PM",
+    "venue": "Current Space",
+    "img": "assets/imgs/events/gardenhours.webp",
+    "img_alt": "Garden Hours event flyer",
+    "url": "https://pools.events/event/WALy1Uij/garden-hours/"
+  },
+  {
+    "label": "Fatt Butt Rodeo",
+    "date": "2026-05-22",
+    "time": "10PM",
+    "venue": "Ottobar Upstairs",
+    "img": "assets/imgs/events/fatbuttrodeo.jpg",
+    "img_alt": "Fatt Butt Rodeo event flyer",
+    "url": "https://theottobar.com/event/fat-butt-rodeo-40/upstairs-ottobar/baltimore-maryland/"
+  },
+  {
+    "label": "Artscape w/ The Roots",
+    "date": "2026-05-23",
+    "time": "12PM",
+    "venue": "100 Holliday St",
+    "img": "assets/imgs/events/artscape.png",
+    "img_alt": "Artscape event flyer",
+    "url": "https://www.weaa.org/arts-culture/2026-01-09/the-roots-stephanie-mills-to-headline-artscape-2026"
+  },
+  {
+    "label": "The Making of America's Greatest Classical Architect: A Talk by Charlie Duff",
+    "date": "2026-05-24",
+    "time": "2PM",
+    "venue": "11 West Mount Vernon Place",
+    "img": "assets/imgs/events/bma.jpg",
+    "img_alt": "Charlie Duff talk event flyer",
+    "url": "https://baltimoreheritage.org/event/the-making-of-americas-greatest-classical-architect-a-talk-by-charlie-duff"
+  },
+  {
+    "label": "Baltimore Record Bazaar",
+    "date": "2026-05-31",
+    "time": "12PM",
+    "venue": "Peabody Heights",
+    "price": "FREE",
+    "img": "assets/imgs/events/brb.jpg",
+    "img_alt": "Baltimore Record Bazaar event flyer",
+    "url": "https://peabodyheightsbrewery.com/event/baltimore-record-bazaar/2026-05-31/"
+  }
+]

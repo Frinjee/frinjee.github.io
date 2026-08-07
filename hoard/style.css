@@ -1,0 +1,474 @@
+/*
+  hoard/style.css
+  Dragon Hoard Search — standalone retro app page
+  Aesthetic: site's MySpace profile chrome (ridge borders, white boxes, blue links, dark shell)
+  Layout: mobile-first, Unsemantic grid, max 960px centered
+*/
+
+/* ---- variables ---- */
+:root {
+  --hoard-bg:        #111118;
+  --hoard-box-bg:    #ffffff;
+  --hoard-box-bdr:   #888899;
+  --hoard-header-bg: #1a1a2e;
+  --hoard-accent:    #0033cc;
+  --hoard-accent-hl: #cc2200;
+  --hoard-tab-bg:    #dde0f0;
+  --hoard-tab-act:   #ffffff;
+  --hoard-row-alt:   #f3f4fa;
+  --hoard-row-hl:    #e8ebff;
+  --hoard-muted:     #666677;
+  --hoard-audio-bg:  #1a1a2e;
+  --hoard-star-on:   #cc8800;
+  --hoard-star-off:  #bbbbcc;
+  --font-body:       'IBM Plex Sans', 'Space Grotesk', Arial, sans-serif;
+  --font-mono:       'Share Tech Mono', 'Courier New', monospace;
+  --font-display:    'Orbitron', 'Share Tech Mono', monospace;
+}
+
+/* ---- reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--hoard-bg);
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: #111;
+}
+
+/* ---- page shell ---- */
+.hoard-shell {
+  min-height: 100vh;
+  padding-bottom: 72px; /* room for sticky audio bar */
+}
+
+.hoard-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+/* ---- header ---- */
+.hoard-header {
+  background: var(--hoard-header-bg);
+  border-bottom: 3px solid var(--hoard-accent);
+  padding: 10px 0 8px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.hoard-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.hoard-title {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.hoard-title span { color: #99aaff; }
+
+.hoard-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #aabbee;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hoard-status.error { color: #ff6655; }
+
+/* ---- search bar ---- */
+.hoard-search-wrap {
+  background: var(--hoard-box-bg);
+  border: 2px ridge var(--hoard-box-bdr);
+  border-top: none;
+  padding: 8px;
+}
+
+#q {
+  width: 100%;
+  padding: 5px 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  outline: none;
+}
+
+#q:focus { border-color: var(--hoard-accent); box-shadow: 0 0 0 2px rgba(0,51,204,0.15); }
+
+/* ---- tab strip ---- */
+.hoard-tabs {
+  background: var(--hoard-tab-bg);
+  border: 2px ridge var(--hoard-box-bdr);
+  border-top: none;
+  display: flex;
+  gap: 0;
+}
+
+.tab-btn {
+  background: var(--hoard-tab-bg);
+  border: none;
+  border-right: 1px solid var(--hoard-box-bdr);
+  padding: 5px 12px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--hoard-muted);
+  cursor: pointer;
+  transition: background 0.1s, color 0.1s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { background: #ccd0e8; color: #333; }
+
+.tab-btn.active {
+  background: var(--hoard-tab-act);
+  color: var(--hoard-accent);
+  border-bottom: 2px solid #fff;
+}
+
+.bm-badge {
+  display: inline-block;
+  background: var(--hoard-accent);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  margin-left: 4px;
+  vertical-align: middle;
+}
+
+.bm-badge[data-count="0"] { display: none; }
+
+/* ---- tab panels ---- */
+.tab-panel {
+  background: var(--hoard-box-bg);
+  border: 2px ridge var(--hoard-box-bdr);
+  border-top: none;
+}
+
+.tab-panel.hidden { display: none; }
+
+/* ---- results info bar ---- */
+.results-info {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: var(--hoard-muted);
+  border-bottom: 1px solid #dde;
+  font-family: var(--font-mono);
+}
+
+/* ---- results table ---- */
+.results-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.results-table thead th {
+  background: #e8eaf6;
+  border-bottom: 2px solid #aab;
+  padding: 4px 6px;
+  text-align: left;
+  font-weight: 700;
+  color: #333;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.results-table tbody tr { border-bottom: 1px solid #dde; }
+.results-table tbody tr:nth-child(even) { background: var(--hoard-row-alt); }
+.results-table tbody tr:hover { background: var(--hoard-row-hl); }
+.results-table tbody tr.playing { background: #ddeeff; }
+
+.results-table td {
+  padding: 4px 6px;
+  vertical-align: middle;
+}
+
+.col-play { width: 30px; text-align: center; }
+.col-star { width: 28px; text-align: center; }
+.col-artist { width: 35%; max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.col-title  { max-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.play-btn {
+  background: none;
+  border: 1px solid var(--hoard-accent);
+  color: var(--hoard-accent);
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 10px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.play-btn:hover { background: var(--hoard-accent); color: #fff; }
+.play-btn.active { background: var(--hoard-accent-hl); border-color: var(--hoard-accent-hl); color: #fff; }
+
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--hoard-star-off);
+  padding: 0;
+  line-height: 1;
+}
+
+.star-btn.on { color: var(--hoard-star-on); }
+
+/* ---- pagination ---- */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border-top: 1px solid #dde;
+  font-size: 11px;
+  color: var(--hoard-muted);
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  background: #e8eaf6;
+  border: 1px solid #aab;
+  color: var(--hoard-accent);
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: var(--font-body);
+}
+
+.page-btn:hover { background: var(--hoard-accent); color: #fff; border-color: var(--hoard-accent); }
+.page-btn:disabled { opacity: 0.4; cursor: default; }
+
+/* ---- bookmarks panel ---- */
+.bm-actions {
+  padding: 6px 8px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  border-bottom: 1px solid #dde;
+}
+
+.action-btn {
+  background: var(--hoard-accent);
+  color: #fff;
+  border: 1px solid #002299;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  border-radius: 2px;
+  font-weight: 600;
+}
+
+.action-btn:hover { background: #0044ee; }
+.action-btn:disabled { opacity: 0.5; cursor: default; }
+.action-btn.danger { background: var(--hoard-accent-hl); border-color: #991100; }
+.action-btn.danger:hover { background: #dd3311; }
+
+.bm-empty {
+  padding: 20px 8px;
+  text-align: center;
+  color: var(--hoard-muted);
+  font-style: italic;
+  font-size: 12px;
+}
+
+/* ---- export panel ---- */
+.export-panel {
+  padding: 12px 16px;
+  line-height: 1.6;
+}
+
+.export-panel h3 {
+  font-family: var(--font-display);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--hoard-accent);
+  margin-bottom: 8px;
+}
+
+.export-panel p {
+  font-size: 12px;
+  color: #444;
+  margin-bottom: 10px;
+  max-width: 540px;
+}
+
+.export-panel code {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  background: #f0f0f8;
+  border: 1px solid #ccd;
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+/* ---- sticky audio bar ---- */
+.hoard-audio-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--hoard-audio-bg);
+  border-top: 2px solid var(--hoard-accent);
+  padding: 6px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+}
+
+.audio-bar-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.audio-label {
+  font-family: var(--font-display);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6677bb;
+  white-space: nowrap;
+}
+
+.now-playing-text {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #aabbee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.now-playing-text.idle { color: #556; font-style: italic; }
+
+.audio-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.audio-btn {
+  background: none;
+  border: 1px solid #445599;
+  color: #aabbee;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: var(--font-mono);
+}
+
+.audio-btn:hover { background: #223366; color: #fff; }
+.audio-btn.playing { border-color: #ff6644; color: #ff8866; }
+.audio-btn.playing:hover { background: #331100; }
+
+#audio-el { display: none; }
+
+/* ---- loading overlay ---- */
+.loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 10, 24, 0.92);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.loading-overlay.hidden { display: none; }
+
+.loading-dragon {
+  font-size: 48px;
+  animation: dragonpulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dragonpulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.12); opacity: 0.7; }
+}
+
+.loading-msg {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: #8899ee;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.loading-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #556;
+}
+
+/* ---- section box wrapper (matches site profile box style) ---- */
+.box-section {
+  background: var(--hoard-box-bg);
+  border: 2px ridge var(--hoard-box-bdr);
+  margin-bottom: 0;
+}
+
+/* ---- utility ---- */
+.hidden { display: none !important; }
+
+/* ---- responsive breakpoints ---- */
+@media (max-width: 600px) {
+  .hoard-title { font-size: 12px; }
+  .col-artist  { width: 40%; }
+  .tab-btn     { padding: 5px 8px; font-size: 11px; }
+  .hoard-audio-bar { padding: 5px 8px; }
+  .audio-label { display: none; }
+  .results-table { font-size: 11px; }
+  .results-table thead th { font-size: 10px; }
+}
+
+@media (max-width: 400px) {
+  .col-play { width: 24px; }
+  .col-star { width: 24px; }
+  .play-btn { width: 18px; height: 18px; font-size: 8px; }
+  .star-btn { font-size: 12px; }
+}
