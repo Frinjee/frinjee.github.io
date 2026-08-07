@@ -104,18 +104,11 @@ def build_bundle(raw_entries, prefix):
 
 
 def find_url_prefix(raw_entries):
-    # scan first 200 rows to find common archive.org prefix
-    sample = []
-    for i, (_, _, url) in enumerate(raw_entries):
-        sample.append(url)
-        if i >= 200:
-            break
-    if not sample:
-        return 'https://archive.org/download/'
-    # prefix = everything up to and including the second-to-last '/' segment
-    # archive.org URLs: https://archive.org/download/<item>/...
-    prefix = 'https://archive.org/download/'
-    return prefix
+    # The TSV stores original dead MySpace CDN URLs (http://cache*.myspacecdn.com/...).
+    # Route them through the Wayback Machine if_ endpoint so browsers receive the raw
+    # archived MP3 without the toolbar HTML wrapper.
+    # Timestamp 20120601000000 = peak MySpace era; WB auto-redirects to nearest snapshot.
+    return 'https://web.archive.org/web/20120601000000if_/'
 
 
 def write_outputs(bundle, out_dir, plain=False):

@@ -12,6 +12,9 @@ const PAGE_SIZE     = 100;
 const DL_DELAY      = 600;   // ms between bulk downloads
 const LS_KEY        = 'hoard_bookmarks_v1';
 const ARCHIVE_PFX   = 'https://archive.org/download/';
+// Wayback Machine if_ endpoint — returns raw archived content, no toolbar HTML.
+// Timestamp 20120601000000 covers peak MySpace era; WB auto-redirects to nearest snapshot.
+const WB_IF         = 'https://web.archive.org/web/20120601000000if_/';
 
 // ---- state ----
 let hoardData  = null;   // raw bundle {p, a, t, e}
@@ -134,7 +137,13 @@ function materialize(data) {
   return data.e.map(([da, ti, rel]) => {
     const ai = prev + da;
     prev = ai;
-    return { ai, ti, url: data.p + rel };
+    // rel is an absolute CDN URL (http://cache*.myspacecdn.com/...) — route through
+    // Wayback Machine if_ endpoint so the browser receives the raw archived MP3.
+    // For future bundles where rel is a bare path, fall back to data.p prefix.
+    const url = (rel.startsWith('http://') || rel.startsWith('https://'))
+      ? WB_IF + rel
+      : data.p + rel;
+    return { ai, ti, url };
   });
 }
 
@@ -250,6 +259,13 @@ function setupAudio() {
   elAudio.addEventListener('ended',  () => { isPlaying = false; updateAudioBtn(); });
   elAudio.addEventListener('pause',  () => { isPlaying = false; updateAudioBtn(); });
   elAudio.addEventListener('play',   () => { isPlaying = true;  updateAudioBtn(); });
+  elAudio.addEventListener('error',  () => {
+    const e = elAudio.error;
+    const msg = e ? `stream error (code ${e.code})` : 'stream error';
+    setStatus(`\u26a0 ${msg} \u2014 try another track`, true);
+    isPlaying = false;
+    updateAudioBtn();
+  });
   elAudioBtn.addEventListener('click', () => {
     if (!curEntry) return;
     if (isPlaying) {
