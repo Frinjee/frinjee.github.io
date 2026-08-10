@@ -457,15 +457,44 @@ function setupAudio() {
   });
 
   if (elSeekBar) {
-    elSeekBar.addEventListener('mousedown',  () => { isSeeking = true; });
-    elSeekBar.addEventListener('touchstart', () => { isSeeking = true; }, { passive: true });
-    elSeekBar.addEventListener('input', () => {
-      if (elSeekTime) elSeekTime.textContent = fmtTime((elSeekBar.value / 100) * (elAudio.duration || 0));
-    });
-    elSeekBar.addEventListener('change', () => {
+    let seekResetTimer = null;
+    const clearSeekResetTimer = () => {
+      if (seekResetTimer) {
+        clearTimeout(seekResetTimer);
+        seekResetTimer = null;
+      }
+    };
+    const seekStart = () => {
+      isSeeking = true;
+      clearSeekResetTimer();
+      // Defensive reset: prevents a permanently latched seek state.
+      seekResetTimer = setTimeout(() => { isSeeking = false; }, 2000);
+    };
+    const seekCommit = () => {
+      clearSeekResetTimer();
       elAudio.currentTime = (elSeekBar.value / 100) * (elAudio.duration || 0);
       isSeeking = false;
+    };
+    const seekRelease = () => {
+      if (isSeeking) seekCommit();
+    };
+
+    elSeekBar.addEventListener('pointerdown', seekStart);
+    elSeekBar.addEventListener('mousedown', seekStart);
+    elSeekBar.addEventListener('touchstart', seekStart, { passive: true });
+    elSeekBar.addEventListener('input', () => {
+      const pct = elSeekBar.value / 100;
+      elSeekBar.style.setProperty('--pct', pct);
+      if (elSeekTime) elSeekTime.textContent = fmtTime(pct * (elAudio.duration || 0));
     });
+    elSeekBar.addEventListener('change', seekCommit);
+
+    // Some browsers/touch paths can skip change on release; commit anyway.
+    window.addEventListener('pointerup', seekRelease);
+    window.addEventListener('mouseup', seekRelease);
+    window.addEventListener('touchend', seekRelease, { passive: true });
+    window.addEventListener('touchcancel', () => { clearSeekResetTimer(); isSeeking = false; }, { passive: true });
+    window.addEventListener('blur', () => { clearSeekResetTimer(); isSeeking = false; });
   }
 
   // error — multi-stage fallback (see fallback chain below)
@@ -489,6 +518,7 @@ function setupRadio() {
     elRadioBtn.classList.toggle('active', radioMode);
     elRadioBtn.setAttribute('aria-pressed', radioMode);
     elRadioBtn.textContent = radioMode ? '\uD83D\uDCFB on air' : '\uD83D\uDCFB radio';
+    if (radioMode && !isPlaying) playRadioNext();
   });
 }
 
