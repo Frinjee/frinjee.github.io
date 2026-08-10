@@ -201,6 +201,8 @@ html, body {
 .results-table tbody tr:nth-child(even) { background: var(--hoard-row-alt); }
 .results-table tbody tr:hover { background: var(--hoard-row-hl); }
 .results-table tbody tr.playing { background: #ddeeff; }
+.results-table tbody tr.dead   { opacity: 0.42; text-decoration: line-through; }
+.results-table tbody tr.dead .play-btn { cursor: not-allowed; border-color: #999; color: #999; }
 
 .results-table td {
   padding: 4px 6px;

@@ -240,11 +240,22 @@ async function gunzip(buf) {
   return JSON.parse(new TextDecoder().decode(out));
 }
 
+const HOARD_ITEM = 'https://archive.org/download/myspace_dragon_hoard_2010/';
 function materialize(d) {
-  let prev=0;
-  return d.e.map(([da,ti,rel])=>{
-    const ai=prev+da; prev=ai;
-    return {ai,ti,url:d.p+rel};
+  let prev = 0;
+  return d.e.map(([da, ti, rel]) => {
+    const ai = prev + da; prev = ai;
+    let url;
+    if (rel.startsWith('http://') || rel.startsWith('https://')) {
+      // old-format bundle: rel is original MySpace CDN URL — map to archive.org zip path
+      const parts = rel.split('/');
+      const col = parts[3], file = parts[4];
+      url = `${HOARD_ITEM}${col}.zip/${col}%2F${file}`;
+    } else {
+      // export format: rel is already a zip-relative path; p is the base URL
+      url = d.p + rel;
+    }
+    return { ai, ti, url };
   });
 }
 

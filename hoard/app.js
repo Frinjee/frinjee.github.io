@@ -28,6 +28,12 @@ let bookmarks  = loadBookmarks();
 let curEntry   = null;   // currently playing
 let isPlaying  = false;
 let dlRunning  = false;
+// radio + seek state
+let radioMode  = false;
+let isSeeking  = false;
+// fallback state
+const deadUrls = new Set();   // permanent stream failures
+let retryCount = 0;           // reset on each new src assignment
 // hybrid search: pre-lowercased lookup arrays (indexed by ai / ti)
 let lcArtists  = [];
 let lcTitles   = [];
@@ -46,6 +52,7 @@ let elStatus, elNowPlaying, elAudio, elAudioBtn;
 let elOverlay, elOverlayMsg, elOverlaySub;
 let elTabSearch, elTabBm, elTabExport, elTabBrowse;
 let elBrowseInfo, elBrowseTbody, elBrowsePagination;
+let elSeekBar, elSeekTime, elSeekDuration, elRadioBtn;
 
 // ---- init ----
 document.addEventListener('DOMContentLoaded', () => {
@@ -71,10 +78,15 @@ document.addEventListener('DOMContentLoaded', () => {
   elBrowseInfo       = document.getElementById('browse-info');
   elBrowseTbody      = document.getElementById('browse-tbody');
   elBrowsePagination = document.getElementById('browse-pagination');
+  elSeekBar          = document.getElementById('seek-bar');
+  elSeekTime         = document.getElementById('seek-time');
+  elSeekDuration     = document.getElementById('seek-duration');
+  elRadioBtn         = document.getElementById('radio-btn');
 
   setupTabs();
   setupSearch();
   setupAudio();
+  setupRadio();
   setupBmActions();
   setupBrowse();
   updateBmBadge();
@@ -296,12 +308,18 @@ function buildRow(entry) {
   const url      = entry.url;
   const playing  = curEntry && curEntry.url === url && isPlaying;
   const starred  = isBookmarked(url);
-  return `<tr class="${playing ? 'playing' : ''}">
+  const dead     = deadUrls.has(url);
+  return `<tr class="${playing ? 'playing' : ''}${dead ? ' dead' : ''}" data-url="${esc(url)}">
     <td class="col-play"><button class="play-btn${playing ? ' active' : ''}" aria-label="play ${title}">${playing ? '&#9646;' : '&#9654;'}</button></td>
     <td class="col-star"><button class="star-btn${starred ? ' on' : ''}" aria-label="${starred ? 'remove bookmark' : 'bookmark'}">${starred ? '\u2605' : '\u2606'}</button></td>
     <td class="col-artist" title="${artist}">${artist}</td>
     <td class="col-title"  title="${title}">${title}</td>
   </tr>`;
+}
+
+function markEntryDead(url) {
+  // mark all visible rows for this URL without a full re-render
+  document.querySelectorAll(`tr[data-url="${CSS.escape(url)}"]`).forEach(r => r.classList.add('dead'));
 }
 
 function bindRowActions(tbody, slice) {
@@ -415,16 +433,44 @@ function renderBrowseResults() {
 
 // ---- audio ----
 function setupAudio() {
-  elAudio.addEventListener('ended',  () => { isPlaying = false; updateAudioBtn(); });
-  elAudio.addEventListener('pause',  () => { isPlaying = false; updateAudioBtn(); });
-  elAudio.addEventListener('play',   () => { isPlaying = true;  updateAudioBtn(); });
-  elAudio.addEventListener('error',  () => {
-    const e = elAudio.error;
-    const msg = e ? `stream error (code ${e.code})` : 'stream error';
-    setStatus(`\u26a0 ${msg} \u2014 try another track`, true);
+  elAudio.addEventListener('ended', () => {
     isPlaying = false;
     updateAudioBtn();
+    resetSeekBar();
+    if (radioMode) playRadioNext();
   });
+  elAudio.addEventListener('pause',  () => { isPlaying = false; updateAudioBtn(); });
+  elAudio.addEventListener('play',   () => { isPlaying = true;  updateAudioBtn(); });
+
+  // seek bar — track position
+  elAudio.addEventListener('timeupdate', () => {
+    if (isSeeking || !elSeekBar) return;
+    const pct = elAudio.duration ? elAudio.currentTime / elAudio.duration : 0;
+    elSeekBar.value = pct * 100;
+    elSeekBar.style.setProperty('--pct', pct);
+    if (elSeekTime) elSeekTime.textContent = fmtTime(elAudio.currentTime);
+  });
+  elAudio.addEventListener('durationchange', () => {
+    if (elSeekDuration) elSeekDuration.textContent = fmtTime(elAudio.duration);
+    if (elSeekTime)     elSeekTime.textContent = '0:00';
+    if (elSeekBar)      elSeekBar.value = 0;
+  });
+
+  if (elSeekBar) {
+    elSeekBar.addEventListener('mousedown',  () => { isSeeking = true; });
+    elSeekBar.addEventListener('touchstart', () => { isSeeking = true; }, { passive: true });
+    elSeekBar.addEventListener('input', () => {
+      if (elSeekTime) elSeekTime.textContent = fmtTime((elSeekBar.value / 100) * (elAudio.duration || 0));
+    });
+    elSeekBar.addEventListener('change', () => {
+      elAudio.currentTime = (elSeekBar.value / 100) * (elAudio.duration || 0);
+      isSeeking = false;
+    });
+  }
+
+  // error — multi-stage fallback (see fallback chain below)
+  elAudio.addEventListener('error', handleAudioError);
+
   elAudioBtn.addEventListener('click', () => {
     if (!curEntry) return;
     if (isPlaying) {
@@ -435,6 +481,97 @@ function setupAudio() {
   });
 }
 
+// ---- radio ----
+function setupRadio() {
+  if (!elRadioBtn) return;
+  elRadioBtn.addEventListener('click', () => {
+    radioMode = !radioMode;
+    elRadioBtn.classList.toggle('active', radioMode);
+    elRadioBtn.setAttribute('aria-pressed', radioMode);
+    elRadioBtn.textContent = radioMode ? '\uD83D\uDCFB on air' : '\uD83D\uDCFB radio';
+  });
+}
+
+function playRadioNext() {
+  const pool = results.length ? results : entries;
+  if (!pool.length) return;
+  // skip known-dead URLs
+  let next, attempts = 0;
+  do {
+    next = pool[Math.floor(Math.random() * pool.length)];
+    attempts++;
+  } while (attempts < 10 && pool.length > 1 && (
+    (curEntry && next.url === curEntry.url) || deadUrls.has(next.url)
+  ));
+  if (deadUrls.has(next.url)) return; // all tried, bail
+  curEntry    = next;
+  retryCount  = 0;
+  elAudio.src = next.url;
+  elAudio.play().catch(console.warn);
+  updateNowPlaying();
+  renderResults();
+  if (browseResults.length) renderBrowseResults();
+}
+
+// ---- seek bar helpers ----
+function resetSeekBar() {
+  if (!elSeekBar) return;
+  elSeekBar.value = 0;
+  elSeekBar.style.setProperty('--pct', 0);
+  if (elSeekTime)     elSeekTime.textContent     = '0:00';
+  if (elSeekDuration) elSeekDuration.textContent = '0:00';
+}
+
+function fmtTime(s) {
+  if (!isFinite(s) || s < 0) return '0:00';
+  const m   = Math.floor(s / 60);
+  const sec = String(Math.floor(s % 60)).padStart(2, '0');
+  return `${m}:${sec}`;
+}
+
+// ---- streaming fallback chain ----
+function altUrl(url) {
+  // try unencoded-slash variant: 46.zip/46%2Ffile.mp3 → 46.zip/46/file.mp3
+  return url.replace(/\.zip\/([^%/]+)%2F/, '.zip/$1/');
+}
+
+async function handleAudioError() {
+  const code = elAudio.error?.code ?? 0;
+  const src  = elAudio.src;
+
+  // code 2 = MEDIA_ERR_NETWORK — transient; retry once
+  if (code === 2 && retryCount < 1) {
+    retryCount++;
+    setStatus('\u26a0 network error \u2014 retrying\u2026', true);
+    await delay(1200);
+    elAudio.load();
+    elAudio.play().catch(console.warn);
+    return;
+  }
+
+  // code 1 = MEDIA_ERR_ABORTED — user action, no fallback needed
+  if (code !== 1) {
+    const alt = altUrl(src);
+    if (alt !== src && !deadUrls.has(alt)) {
+      // try unencoded-slash variant
+      retryCount = 0;
+      elAudio.src = alt;
+      elAudio.play().catch(console.warn);
+      return;
+    }
+    // both variants exhausted — mark dead
+    deadUrls.add(src);
+    if (alt !== src) deadUrls.add(alt);
+    markEntryDead(src);
+  }
+
+  const msg = code ? `stream error (code ${code})` : 'stream error';
+  setStatus(`\u26d4 ${msg} \u2014 track unavailable`, true);
+  isPlaying = false;
+  updateAudioBtn();
+  if (radioMode) playRadioNext();
+}
+
 function togglePlay(entry, row) {
   if (curEntry && curEntry.url === entry.url) {
     if (isPlaying) { elAudio.pause(); }
@@ -442,6 +579,7 @@ function togglePlay(entry, row) {
     return;
   }
   curEntry       = entry;
+  retryCount     = 0;
   elAudio.src    = entry.url;
   elAudio.play().catch(console.warn);
   updateNowPlaying();
