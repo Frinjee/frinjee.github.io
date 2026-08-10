@@ -41,7 +41,7 @@ body {
   position: relative;
   z-index: 1;
   width: 900px;
-  margin: 20px auto;
+  margin: 0 auto;
   color: #000;
 }
 
@@ -466,6 +466,10 @@ Shared heading treatment for major sections.
   background-image: url("imgs/dividers/cat2.gif");
   background-repeat: repeat-x;
   background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
   margin: 0;
   padding: 4px 6px;
   font-size: 12px;
@@ -732,20 +736,22 @@ Keeps the remote widget aligned with the existing right-column boxes.
 */
 .town-square-box {
   width: 100%;
-  padding: 10px;
+  padding: 0 10px 10px;
 }
 
 .town-square-box h2 {
   margin: 0 -10px 6px;
   padding: 4px 6px;
-  background-image: url("../imgs/layout/headers/town.gif");
+  background-image: url("../imgs/layout/banners/aquarium sight.gif");
   background-repeat: no-repeat;
+  background-position: center center;
   background-size: 100% 100%;
   border: 1.75px ridge #707788;
-  color: #000;
+  color: #210c48;
   font-family: "Space Grotesk", sans-serif;
   font-size: 15px;
   font-weight: 600;
+  height: 40px;
   letter-spacing: -0.02em;
   text-align: center;
   text-transform: uppercase;
@@ -1204,5 +1210,94 @@ Pads the stream a bit differently on narrow vs. wide viewports.
 @media (min-width: 700px) {
   .activity-stream {
     padding: 8px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE — mobile shell collapse.
+   Collapses the two-column layout to a single column and
+   corrects fixed-width overflow sources at narrow viewports.
+   Keep the MySpace box feel; only remove horizontal scroll.
+   ============================================================ */
+
+/* --- 1. Page shell: allow #page to shrink below 900px --- */
+#page {
+  max-width: 900px;
+  width: 100%;
+}
+
+/* --- 2. Collapse two-column grid to one column ≤ 900px --- */
+@media (max-width: 900px) {
+  #layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Remove the fixed-width pgo-card offset that bleeds on narrow screens */
+  .pgo-card {
+    margin-left: 0;
+    width: 100%;
+    max-width: 400px;
+  }
+}
+
+/* --- 3. Narrow-viewport fixes (≤ 600px) --- */
+@media (max-width: 600px) {
+  /* Top bar: wrap profile pic + info block neatly */
+  #top-bar {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .top-right {
+    flex: 0 0 auto;
+    width: 100%;
+    height: auto;
+    position: static;
+    overflow: visible;
+  }
+
+  #contact_tbl_bg {
+    display: none; /* hides the decorative backdrop that bleeds on mobile */
+  }
+
+  .top-right-actions {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  /* Media / culture-queue grid: 2 columns on mobile instead of 5 */
+  .event-grid,
+  .media-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Event and media slots: let height flex rather than staying fixed */
+  .event-slot {
+    height: auto;
+    min-height: 120px;
+  }
+
+  .media-slot {
+    height: auto;
+    min-height: 100px;
+  }
+
+  /* Bookmark rota: prevent text from widening the page */
+  .bookmark-rota-li,
+  .bookmark-rota-li a {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+
+  /* Interests box image (gif header): scale down so it never forces overflow */
+  .interests-box img,
+  .welcome-box img,
+  .details-box img,
+  .activity-box img,
+  .bookmark-rota-box img {
+    max-width: 100%;
+    height: auto;
   }
 }

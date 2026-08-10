@@ -166,6 +166,24 @@ let curEntry = null, playing = false;
 
 const el = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+function decodeNumericHtmlRefs(s) {
+  const str = String(s ?? '');
+  const cpChar = (n, radix, raw) => {
+    const cp = parseInt(n, radix);
+    return cp >= 0 && cp <= 0x10FFFF ? String.fromCodePoint(cp) : raw;
+  };
+  return str
+    .replace(/&#(\d+);/g, (m, n) => cpChar(n, 10, m))
+    .replace(/&#x([0-9a-fA-F]+);/g, (m, h) => cpChar(h, 16, m));
+}
+
+function normalizeHoardData(d) {
+  d.a = d.a.map(decodeNumericHtmlRefs);
+  d.t = d.t.map(decodeNumericHtmlRefs);
+  return d;
+}
+
 const delay = ms => new Promise(r => setTimeout(r, ms));
 const tick  = ()  => new Promise(r => setTimeout(r, 0));
 
@@ -189,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 async function run() {
   setOv('loading collection\u2026', '');
   try {
-    data = await loadData();
+    data = normalizeHoardData(await loadData());
     setOv('building index\u2026', '');
     await tick();
     entries = materialize(data);
