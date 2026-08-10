@@ -250,10 +250,13 @@ function materialize(d) {
 
 function buildFuse() {
   fuseInst = new Fuse(entries, {
-    threshold: 0.35, ignoreLocation: true, includeScore: true,
+    threshold:          0.2,
+    ignoreLocation:     true,
+    includeScore:       true,
+    minMatchCharLength: 2,
     keys: [
-      { name:'artist', getFn: e => data.a[e.ai] },
-      { name:'title',  getFn: e => data.t[e.ti] },
+      { name: 'artist', weight: 2, getFn: e => data.a[e.ai] },
+      { name: 'title',  weight: 1, getFn: e => data.t[e.ti] },
     ],
   });
 }

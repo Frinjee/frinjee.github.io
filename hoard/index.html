@@ -50,7 +50,7 @@
 
       <!-- search input -->
       <div class="hoard-search-wrap">
-        <input type="search" id="q" placeholder="search artist or title&hellip;" autocomplete="off" spellcheck="false" aria-label="search tracks">
+        <input type="search" id="q" placeholder="search artist or title&hellip; (a: or t: to scope by field)" autocomplete="off" spellcheck="false" aria-label="search tracks">
       </div>
 
       <!-- tab strip -->
@@ -58,6 +58,7 @@
         <button class="tab-btn active" data-tab="search" role="tab" aria-selected="true">search</button>
         <button class="tab-btn" data-tab="bm" role="tab" aria-selected="false">bookmarks <span class="bm-badge" id="bm-badge" data-count="0">0</span></button>
         <button class="tab-btn" data-tab="export" role="tab" aria-selected="false">export</button>
+        <button class="tab-btn" data-tab="browse" role="tab" aria-selected="false">browse</button>
       </div>
 
       <!-- ======= SEARCH TAB ======= -->
@@ -115,6 +116,29 @@
         </div>
       </div>
 
+      <!-- ======= BROWSE TAB ======= -->
+      <div class="tab-panel hidden" id="tab-browse" role="tabpanel">
+        <div class="browse-controls">
+          <div class="alpha-strip" id="alpha-strip" role="toolbar" aria-label="browse by artist initial"></div>
+          <button class="action-btn" id="shuffle-btn">&#x1F3B2; shuffle</button>
+        </div>
+        <div class="results-info" id="browse-info" aria-live="polite"></div>
+        <div style="overflow-x:auto">
+          <table class="results-table" role="grid">
+            <thead>
+              <tr>
+                <th class="col-play" scope="col">play</th>
+                <th class="col-star" scope="col">&#9733;</th>
+                <th class="col-artist" scope="col">artist</th>
+                <th class="col-title"  scope="col">title</th>
+              </tr>
+            </thead>
+            <tbody id="browse-tbody"></tbody>
+          </table>
+        </div>
+        <div class="pagination" id="browse-pagination" role="navigation" aria-label="browse pagination"></div>
+      </div>
+
     </div><!-- /grid-100 -->
   </div><!-- /grid-container -->
 
@@ -124,10 +148,18 @@
 <div class="hoard-audio-bar" role="region" aria-label="audio player">
   <audio id="audio-el" preload="none"></audio>
   <div class="audio-bar-inner">
-    <span class="audio-label">now playing</span>
-    <span class="now-playing-text idle" id="now-playing-text">nothing playing</span>
-    <div class="audio-controls">
-      <button class="audio-btn" id="audio-btn" aria-label="play/pause">&#9654; play</button>
+    <div class="audio-bar-row1">
+      <span class="audio-label">now playing</span>
+      <span class="now-playing-text idle" id="now-playing-text">nothing playing</span>
+      <div class="audio-controls">
+        <button class="audio-btn" id="radio-btn" aria-label="radio mode" aria-pressed="false">&#128251; radio</button>
+        <button class="audio-btn" id="audio-btn" aria-label="play/pause">&#9654; play</button>
+      </div>
+    </div>
+    <div class="audio-bar-row2">
+      <span class="seek-time" id="seek-time">0:00</span>
+      <input type="range" id="seek-bar" class="seek-bar" min="0" max="100" step="0.1" value="0" aria-label="seek">
+      <span class="seek-time" id="seek-duration">0:00</span>
     </div>
   </div>
 </div>

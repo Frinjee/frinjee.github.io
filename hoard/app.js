@@ -1,7 +1,8 @@
 /*
   hoard/app.js — Dragon Hoard Search
   load: version.json (no-cache) -> data.<hash>.json.gz (force-cache) -> materialize -> Fuse index
-  features: search, play, bookmarks, bulk download, export
+  features: search (hybrid contains-first + Fuse fallback, a:/t: field scope),
+            browse (A-Z letter strip / shuffle), play, bookmarks, bulk download, export
 */
 
 'use strict';
@@ -27,39 +28,55 @@ let bookmarks  = loadBookmarks();
 let curEntry   = null;   // currently playing
 let isPlaying  = false;
 let dlRunning  = false;
+// hybrid search: pre-lowercased lookup arrays (indexed by ai / ti)
+let lcArtists  = [];
+let lcTitles   = [];
+// tracks whether last search used Fuse (for '(capped)' indicator)
+let lastSearchWasFuse = false;
+// browse tab
+let letterIndex    = new Map();  // first-letter key → entries[]
+let browseResults  = [];         // current browse tab result list
+let browsePage     = 0;
+let browseLabelCtx = '';         // context string shown in browse-info
 
 // ---- dom refs (assigned after DOMContentLoaded) ----
 let elQ, elResultsInfo, elResultsTbody, elPagination;
 let elBmBadge, elBmTbody, elBmEmpty, elBmActions;
 let elStatus, elNowPlaying, elAudio, elAudioBtn;
 let elOverlay, elOverlayMsg, elOverlaySub;
-let elTabSearch, elTabBm, elTabExport;
+let elTabSearch, elTabBm, elTabExport, elTabBrowse;
+let elBrowseInfo, elBrowseTbody, elBrowsePagination;
 
 // ---- init ----
 document.addEventListener('DOMContentLoaded', () => {
-  elQ            = document.getElementById('q');
-  elResultsInfo  = document.getElementById('results-info');
-  elResultsTbody = document.getElementById('results-tbody');
-  elPagination   = document.getElementById('pagination');
-  elBmBadge      = document.getElementById('bm-badge');
-  elBmTbody      = document.getElementById('bm-tbody');
-  elBmEmpty      = document.getElementById('bm-empty');
-  elBmActions    = document.getElementById('bm-actions');
-  elStatus       = document.getElementById('status-msg');
-  elNowPlaying   = document.getElementById('now-playing-text');
-  elAudio        = document.getElementById('audio-el');
-  elAudioBtn     = document.getElementById('audio-btn');
-  elOverlay      = document.getElementById('loading-overlay');
-  elOverlayMsg   = document.getElementById('loading-msg');
-  elOverlaySub   = document.getElementById('loading-sub');
-  elTabSearch    = document.getElementById('tab-search');
-  elTabBm        = document.getElementById('tab-bm');
-  elTabExport    = document.getElementById('tab-export');
+  elQ                = document.getElementById('q');
+  elResultsInfo      = document.getElementById('results-info');
+  elResultsTbody     = document.getElementById('results-tbody');
+  elPagination       = document.getElementById('pagination');
+  elBmBadge          = document.getElementById('bm-badge');
+  elBmTbody          = document.getElementById('bm-tbody');
+  elBmEmpty          = document.getElementById('bm-empty');
+  elBmActions        = document.getElementById('bm-actions');
+  elStatus           = document.getElementById('status-msg');
+  elNowPlaying       = document.getElementById('now-playing-text');
+  elAudio            = document.getElementById('audio-el');
+  elAudioBtn         = document.getElementById('audio-btn');
+  elOverlay          = document.getElementById('loading-overlay');
+  elOverlayMsg       = document.getElementById('loading-msg');
+  elOverlaySub       = document.getElementById('loading-sub');
+  elTabSearch        = document.getElementById('tab-search');
+  elTabBm            = document.getElementById('tab-bm');
+  elTabExport        = document.getElementById('tab-export');
+  elTabBrowse        = document.getElementById('tab-browse');
+  elBrowseInfo       = document.getElementById('browse-info');
+  elBrowseTbody      = document.getElementById('browse-tbody');
+  elBrowsePagination = document.getElementById('browse-pagination');
 
   setupTabs();
   setupSearch();
   setupAudio();
   setupBmActions();
+  setupBrowse();
   updateBmBadge();
   renderBmTable();
 
@@ -81,6 +98,7 @@ async function run() {
     await tick();
     entries = materialize(hoardData);
     buildFuse();
+    buildAlphaStrip();
     hideOverlay();
     setStatus(`${hoardData.e.length.toLocaleString()} tracks ready \u2014 type to search`);
   } catch (err) {
@@ -155,15 +173,31 @@ function materialize(data) {
   });
 }
 
-// ---- fuse index ----
+// ---- fuse index + browse indexes ----
 function buildFuse() {
+  // Pre-lowercase lookup arrays: O(1) access during every hybrid search pass.
+  // Indexed by artist-index (ai) / title-index (ti) — same keys as entries[].
+  lcArtists = hoardData.a.map(s => (s || '').toLowerCase());
+  lcTitles  = hoardData.t.map(s => (s || '').toLowerCase());
+
+  // Letter index for A-Z browse tab: one O(n) pass, built once.
+  letterIndex = new Map();
+  for (const entry of entries) {
+    const first = (hoardData.a[entry.ai] || '')[0] || '';
+    const key   = /[A-Za-z]/.test(first) ? first.toUpperCase() : '#';
+    if (!letterIndex.has(key)) letterIndex.set(key, []);
+    letterIndex.get(key).push(entry);
+  }
+
+  // Fuse is now the typo-fallback only; tighter threshold reduces fuzzy noise.
   fuseInst = new Fuse(entries, {
-    threshold:      0.35,
-    ignoreLocation: true,
-    includeScore:   true,
+    threshold:          0.2,          // was 0.35 — stricter, fewer spurious hits
+    ignoreLocation:     true,
+    includeScore:       true,
+    minMatchCharLength: 2,            // don't fire on 1-char input
     keys: [
-      { name: 'artist', getFn: e => hoardData.a[e.ai] },
-      { name: 'title',  getFn: e => hoardData.t[e.ti] },
+      { name: 'artist', weight: 2, getFn: e => hoardData.a[e.ai] },
+      { name: 'title',  weight: 1, getFn: e => hoardData.t[e.ti] },
     ],
   });
 }
@@ -183,15 +217,52 @@ function setupSearch() {
 
 function doSearch() {
   if (!fuseInst) return;
-  const q = elQ.value.trim();
+  const raw = elQ.value.trim();
+
+  // parse optional field-scope prefix:  a:query  or  t:query
+  let field = null;
+  let q = raw;
+  if (/^a:/i.test(raw)) { field = 'artist'; q = raw.slice(2).trim(); }
+  else if (/^t:/i.test(raw)) { field = 'title';  q = raw.slice(2).trim(); }
+
   if (!q) {
-    results  = [];
-    curPage  = 0;
-    renderResults();
-    return;
+    results = []; curPage = 0; renderResults(); return;
   }
-  results  = fuseInst.search(q, { limit: MAX_RESULTS }).map(r => r.item);
-  curPage  = 0;
+
+  const ql = q.toLowerCase();
+  lastSearchWasFuse = false;
+
+  if (field) {
+    // field-scoped: direct prefix + contains filter; no Fuse fallback needed
+    const getLC  = field === 'artist' ? (e => lcArtists[e.ai]) : (e => lcTitles[e.ti]);
+    const pre    = entries.filter(e => getLC(e).startsWith(ql));
+    const preSet = new Set(pre);
+    const con    = [];
+    for (const e of entries) {
+      if (con.length >= MAX_RESULTS) break;
+      if (!preSet.has(e) && getLC(e).includes(ql)) con.push(e);
+    }
+    results = [...pre, ...con];
+  } else {
+    // unscoped hybrid: prefix hits first (artist + title), then contains hits,
+    // fall through to Fuse only when direct matches are sparse (typo queries).
+    const pre    = entries.filter(e => lcArtists[e.ai].startsWith(ql) || lcTitles[e.ti].startsWith(ql));
+    const preSet = new Set(pre);
+    const con    = [];
+    for (const e of entries) {
+      if (con.length >= MAX_RESULTS) break;
+      if (!preSet.has(e) && (lcArtists[e.ai].includes(ql) || lcTitles[e.ti].includes(ql))) con.push(e);
+    }
+    if (pre.length + con.length >= 5) {
+      results = [...pre, ...con];
+    } else {
+      // Fuse fallback: handles typos/transpositions
+      results           = fuseInst.search(q, { limit: MAX_RESULTS }).map(r => r.item);
+      lastSearchWasFuse = true;
+    }
+  }
+
+  curPage = 0;
   renderResults();
 }
 
@@ -209,7 +280,8 @@ function renderResults() {
     return;
   }
 
-  elResultsInfo.textContent = `${total.toLocaleString()} result${total === 1 ? '' : 's'}${total === MAX_RESULTS ? ' (capped)' : ''}  \u2014  page ${curPage + 1} of ${pageCount}`;
+  const capped = lastSearchWasFuse && total === MAX_RESULTS ? ' (capped)' : '';
+  elResultsInfo.textContent = `${total.toLocaleString()} result${total === 1 ? '' : 's'}${capped}  \u2014  page ${curPage + 1} of ${pageCount}`;
 
   const rows = slice.map(entry => buildRow(entry)).join('');
   elResultsTbody.innerHTML = rows;
@@ -243,9 +315,15 @@ function bindRowActions(tbody, slice) {
       // re-render star in place
       const btn = row.querySelector('.star-btn');
       const on  = isBookmarked(entry.url);
-      btn.className  = `star-btn${on ? ' on' : ''}`;
+      btn.className   = `star-btn${on ? ' on' : ''}`;
       btn.textContent = on ? '\u2605' : '\u2606';
       btn.setAttribute('aria-label', on ? 'remove bookmark' : 'bookmark');
+    });
+    // artist drill-down: click artist cell → filter to that artist via a: prefix
+    row.querySelector('.col-artist').addEventListener('click', () => {
+      elQ.value = `a:${hoardData.a[entry.ai]}`;
+      switchTab('search');
+      doSearch();
     });
   });
 }
@@ -260,6 +338,79 @@ function renderPagination(pageCount) {
     <button class="page-btn" id="pg-next" ${next ? '' : 'disabled'}>next &#8594;</button>`;
   elPagination.querySelector('#pg-prev')?.addEventListener('click', () => { curPage--; renderResults(); scrollTop(); });
   elPagination.querySelector('#pg-next')?.addEventListener('click', () => { curPage++; renderResults(); scrollTop(); });
+}
+
+// ---- browse tab (A-Z strip + shuffle) ----
+function setupBrowse() {
+  document.getElementById('shuffle-btn')?.addEventListener('click', doShuffle);
+}
+
+function buildAlphaStrip() {
+  const strip = document.getElementById('alpha-strip');
+  if (!strip) return;
+  // only show letters actually present in the data
+  const letters = [...'ABCDEFGHIJKLMNOPQRSTUVWXYZ#'].filter(l => letterIndex.has(l));
+  strip.innerHTML = letters.map(l =>
+    `<button class="alpha-btn" data-letter="${l}" aria-label="browse ${l}">${l}</button>`
+  ).join('');
+  strip.querySelectorAll('.alpha-btn').forEach(btn => {
+    btn.addEventListener('click', () => doBrowse(btn.dataset.letter));
+  });
+  if (elBrowseInfo) elBrowseInfo.textContent = 'select a letter or shuffle to browse';
+}
+
+function doBrowse(letter) {
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.toggle('active', b.dataset.letter === letter));
+  browseResults  = letterIndex.get(letter) || [];
+  browsePage     = 0;
+  const total    = browseResults.length;
+  browseLabelCtx = `browsing ${letter}  \u2014  ${total.toLocaleString()} track${total === 1 ? '' : 's'}`;
+  renderBrowseResults();
+}
+
+function doShuffle() {
+  if (!entries.length) return;
+  const shuffled = [];
+  const seen     = new Set();
+  while (shuffled.length < Math.min(50, entries.length)) {
+    const idx = Math.floor(Math.random() * entries.length);
+    if (!seen.has(idx)) { seen.add(idx); shuffled.push(entries[idx]); }
+  }
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+  browseResults  = shuffled;
+  browsePage     = 0;
+  browseLabelCtx = '\uD83C\uDFB2 50 random tracks';
+  renderBrowseResults();
+}
+
+function renderBrowseResults() {
+  const total     = browseResults.length;
+  const pageCount = Math.ceil(total / PAGE_SIZE);
+  const start     = browsePage * PAGE_SIZE;
+  const slice     = browseResults.slice(start, start + PAGE_SIZE);
+
+  if (!total) {
+    elBrowseInfo.textContent     = 'select a letter or shuffle to browse';
+    elBrowseTbody.innerHTML      = '';
+    elBrowsePagination.innerHTML = '';
+    return;
+  }
+
+  const pageInfo = pageCount > 1 ? `  \u2014  page ${browsePage + 1} of ${pageCount}` : '';
+  elBrowseInfo.textContent = `${browseLabelCtx}${pageInfo}`;
+
+  elBrowseTbody.innerHTML = slice.map(entry => buildRow(entry)).join('');
+  bindRowActions(elBrowseTbody, slice);
+
+  if (pageCount <= 1) { elBrowsePagination.innerHTML = ''; return; }
+  const prev = browsePage > 0;
+  const next = browsePage < pageCount - 1;
+  elBrowsePagination.innerHTML = `
+    <button class="page-btn" id="br-prev" ${prev ? '' : 'disabled'}>&#8592; prev</button>
+    <span>page ${browsePage + 1} / ${pageCount}</span>
+    <button class="page-btn" id="br-next" ${next ? '' : 'disabled'}>next &#8594;</button>`;
+  elBrowsePagination.querySelector('#br-prev')?.addEventListener('click', () => { browsePage--; renderBrowseResults(); scrollTop(); });
+  elBrowsePagination.querySelector('#br-next')?.addEventListener('click', () => { browsePage++; renderBrowseResults(); scrollTop(); });
 }
 
 // ---- audio ----
@@ -294,8 +445,9 @@ function togglePlay(entry, row) {
   elAudio.src    = entry.url;
   elAudio.play().catch(console.warn);
   updateNowPlaying();
-  // update row highlight (full re-render handles it)
+  // refresh playing indicator in search and browse tables
   renderResults();
+  if (browseResults.length) renderBrowseResults();
 }
 
 function updateNowPlaying() {
@@ -345,8 +497,8 @@ function isBookmarked(url) {
 
 function updateBmBadge() {
   const n = bookmarks.length;
-  elBmBadge.textContent       = n;
-  elBmBadge.dataset.count     = n;
+  elBmBadge.textContent   = n;
+  elBmBadge.dataset.count = n;
 }
 
 function renderBmTable() {
@@ -385,6 +537,14 @@ function renderBmTable() {
     btn.addEventListener('click', () => {
       bookmarks.splice(+btn.dataset.idx, 1);
       saveBookmarks();
+    });
+  });
+  // artist drill-down on bookmark rows (same pattern as search/browse)
+  elBmTbody.querySelectorAll('.col-artist').forEach(cell => {
+    cell.addEventListener('click', () => {
+      elQ.value = `a:${cell.textContent.trim()}`;
+      switchTab('search');
+      doSearch();
     });
   });
 }
@@ -442,7 +602,7 @@ async function exportBookmarks() {
   btn.disabled    = true;
   btn.textContent = 'building\u2026';
   try {
-    const bundle = buildExportBundle();
+    const bundle  = buildExportBundle();
     const payload = JSON.stringify(bundle, null, 0);
     const bytes   = new TextEncoder().encode(payload);
 
@@ -519,8 +679,9 @@ function setupTabs() {
 function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
   elTabSearch.classList.toggle('hidden', name !== 'search');
-  elTabBm.classList.toggle('hidden', name !== 'bm');
+  elTabBm.classList.toggle('hidden',     name !== 'bm');
   elTabExport.classList.toggle('hidden', name !== 'export');
+  elTabBrowse.classList.toggle('hidden', name !== 'browse');
   if (name === 'bm') renderBmTable();
 }
 

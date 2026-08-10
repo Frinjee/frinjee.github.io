@@ -40,7 +40,7 @@ html, body {
 /* ---- page shell ---- */
 .hoard-shell {
   min-height: 100vh;
-  padding-bottom: 72px; /* room for sticky audio bar */
+  padding-bottom: 88px; /* room for sticky audio bar (two-row) */
 }
 
 .hoard-inner {
@@ -344,11 +344,11 @@ html, body {
   z-index: 100;
   background: var(--hoard-audio-bg);
   border-top: 2px solid var(--hoard-accent);
-  padding: 6px 12px;
+  padding: 5px 12px 6px;
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 52px;
+  min-height: 68px;
 }
 
 .audio-bar-inner {
@@ -356,8 +356,24 @@ html, body {
   margin: 0 auto;
   width: 100%;
   display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* row 1: label | now-playing | controls */
+.audio-bar-row1 {
+  display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
+}
+
+/* row 2: seek time | seek bar | duration */
+.audio-bar-row2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
 }
 
 .audio-label {
@@ -403,6 +419,57 @@ html, body {
 .audio-btn:hover { background: #223366; color: #fff; }
 .audio-btn.playing { border-color: #ff6644; color: #ff8866; }
 .audio-btn.playing:hover { background: #331100; }
+
+/* radio toggle: amber "on air" state */
+#radio-btn.active { border-color: #cc8800; color: #ffcc66; }
+#radio-btn.active:hover { background: #332200; }
+
+/* seek bar */
+.seek-bar {
+  flex: 1;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(to right, #6677bb calc(var(--pct, 0) * 100%), #334 calc(var(--pct, 0) * 100%));
+  cursor: pointer;
+  outline: none;
+  border: none;
+  min-width: 0;
+}
+
+.seek-bar::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #aabbee;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 1px #334;
+}
+
+.seek-bar::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #aabbee;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 0 0 1px #334;
+}
+
+.seek-bar:hover::-webkit-slider-thumb { background: #fff; }
+.seek-bar:hover::-moz-range-thumb    { background: #fff; }
+
+.seek-time {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #6677bb;
+  white-space: nowrap;
+  min-width: 30px;
+  text-align: center;
+}
 
 #audio-el { display: none; }
 
@@ -452,6 +519,50 @@ html, body {
   margin-bottom: 0;
 }
 
+/* ---- browse tab ---- */
+.browse-controls {
+  padding: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: flex-start;
+  border-bottom: 1px solid #dde;
+}
+
+.alpha-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+.alpha-btn {
+  background: #e8eaf6;
+  border: 1px solid #aab;
+  color: var(--hoard-accent);
+  padding: 2px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  min-width: 24px;
+  text-align: center;
+  transition: background 0.1s, color 0.1s;
+}
+
+.alpha-btn:hover,
+.alpha-btn.active {
+  background: var(--hoard-accent);
+  color: #fff;
+  border-color: var(--hoard-accent);
+}
+
+/* artist column is clickable in all result tables */
+tbody td.col-artist { cursor: pointer; }
+tbody td.col-artist:hover { color: var(--hoard-accent); text-decoration: underline; }
+
 /* ---- utility ---- */
 .hidden { display: none !important; }
 
@@ -460,10 +571,12 @@ html, body {
   .hoard-title { font-size: 12px; }
   .col-artist  { width: 40%; }
   .tab-btn     { padding: 5px 8px; font-size: 11px; }
-  .hoard-audio-bar { padding: 5px 8px; }
+  .hoard-audio-bar { padding: 4px 8px 5px; }
   .audio-label { display: none; }
   .results-table { font-size: 11px; }
   .results-table thead th { font-size: 10px; }
+  #seek-duration { display: none; }
+  .seek-time { font-size: 9px; min-width: 26px; }
 }
 
 @media (max-width: 400px) {
