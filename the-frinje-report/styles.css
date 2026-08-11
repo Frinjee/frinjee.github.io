@@ -1,0 +1,275 @@
+:root {
+  --fr-bg: #f4f8ff;
+  --fr-surface: #ffffff;
+  --fr-surface-muted: #f6f5fb;
+  --fr-border: #707788;
+  --fr-ink: #101425;
+  --fr-link: #264a88;
+  --fr-teal: #1fb8c4;
+  --fr-purple: #5b2a86;
+  --fr-magenta: #d6247a;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "IBM Plex Sans", Arial, Helvetica, sans-serif;
+  color: var(--fr-ink);
+  background:
+    radial-gradient(circle at 20% 10%, rgba(31, 184, 196, 0.1), transparent 35%),
+    radial-gradient(circle at 80% 15%, rgba(214, 36, 122, 0.08), transparent 30%),
+    var(--fr-bg);
+}
+
+a {
+  color: var(--fr-link);
+}
+
+.fr-shell {
+  width: min(1120px, 100% - 2rem);
+  margin: 1rem auto 2rem;
+}
+
+.fr-back-link {
+  display: inline-block;
+  margin: 0 0 0.65rem;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+
+.fr-back-link:hover,
+.fr-back-link:focus-visible {
+  text-decoration: underline;
+}
+
+.fr-card {
+  background: var(--fr-surface);
+  border: 2px ridge var(--fr-border);
+  border-radius: 0.35rem;
+  overflow: hidden;
+}
+
+.fr-band {
+  block-size: 0.5rem;
+  inline-size: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--fr-teal) 0%,
+    var(--fr-purple) 50%,
+    var(--fr-magenta) 100%
+  );
+}
+
+.fr-band--reverse {
+  background: linear-gradient(
+    90deg,
+    var(--fr-magenta) 0%,
+    var(--fr-purple) 50%,
+    var(--fr-teal) 100%
+  );
+}
+
+.fr-hero {
+  padding: 1rem 1.1rem 1.2rem;
+}
+
+.fr-title {
+  margin: 0.5rem 0 0.2rem;
+  font-family: "Orbitron", "IBM Plex Sans", sans-serif;
+  font-size: clamp(1.45rem, 4.2vw, 2rem);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+}
+
+.fr-subtitle {
+  margin: 0;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.fr-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.85rem;
+}
+
+.fr-card-body {
+  padding: 0.9rem 1rem 1rem;
+}
+
+.fr-eyebrow {
+  margin: 0;
+  font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.fr-card-title {
+  margin: 0.4rem 0 0.5rem;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.3;
+}
+
+.fr-card-copy {
+  margin: 0 0 0.75rem;
+  line-height: 1.5;
+}
+
+.fr-cta {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--fr-border);
+  background: #eaf0ff;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.fr-cta:hover,
+.fr-cta:focus-visible {
+  background: #dce8ff;
+}
+
+.fr-list {
+  margin: 0;
+  padding-left: 1.1rem;
+  line-height: 1.5;
+}
+
+.fr-list li + li {
+  margin-top: 0.45rem;
+}
+
+.fr-subscribe-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 600;
+}
+
+.fr-subscribe-input {
+  inline-size: 100%;
+  min-height: 48px;
+  padding: 0.7rem 0.75rem;
+  border: 1px solid #9ba4bd;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+}
+
+.fr-subscribe-note {
+  margin: 0.5rem 0 0;
+  font-size: 0.86rem;
+  color: #445273;
+}
+
+.fr-article {
+  max-width: 72ch;
+  margin: 0 auto;
+}
+
+.fr-issue-header {
+  padding: 1rem 1.1rem 0.95rem;
+}
+
+.fr-issue-kicker {
+  margin: 0;
+  font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+
+.fr-issue-title {
+  margin: 0.55rem 0 0.35rem;
+  font-family: "Orbitron", "IBM Plex Sans", sans-serif;
+  font-size: clamp(1.35rem, 4.2vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.fr-issue-dek {
+  margin: 0;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  line-height: 1.4;
+}
+
+.fr-section {
+  padding: 0.35rem 1.1rem 1rem;
+}
+
+.fr-section + .fr-section {
+  border-top: 2px solid #dbe2f0;
+}
+
+.fr-section h2 {
+  margin: 0 0 0.6rem;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 1.2rem;
+}
+
+.fr-section p {
+  margin: 0 0 0.85rem;
+  line-height: 1.62;
+}
+
+.fr-callout {
+  margin: 0.1rem 0 0.95rem;
+  padding: 0.75rem 0.85rem;
+  border-left: 4px solid var(--fr-magenta);
+  background: var(--fr-surface-muted);
+}
+
+.fr-callout h3 {
+  margin: 0 0 0.35rem;
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.fr-callout p {
+  margin: 0;
+}
+
+.fr-meta-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fr-meta-list li + li {
+  margin-top: 0.8rem;
+}
+
+.fr-meta-list strong {
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+}
+
+.fr-footer {
+  padding: 0.85rem 1.1rem 1rem;
+  font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
+  font-size: 0.8rem;
+  color: #48567a;
+}
+
+@media (min-width: 760px) {
+  .fr-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+  }
+
+  .fr-hero-card {
+    grid-column: span 12;
+  }
+
+  .fr-feature-card {
+    grid-column: span 8;
+  }
+
+  .fr-archive-card,
+  .fr-subscribe-card {
+    grid-column: span 4;
+  }
+}

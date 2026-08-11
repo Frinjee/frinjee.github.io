@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>The Frinje Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="fr-shell">
+      <a class="fr-back-link" href="../index.html">&larr; Back to Jen's landing page</a>
+
+      <section class="fr-card fr-hero-card">
+        <div class="fr-band"></div>
+        <div class="fr-hero">
+          <p class="fr-eyebrow">Newsletter Webview</p>
+          <h1 class="fr-title">THE FRINJ REPORT</h1>
+          <p class="fr-subtitle">Issue archive, full webview reading, and future drops in one place.</p>
+        </div>
+        <div class="fr-band fr-band--reverse"></div>
+      </section>
+
+      <section class="fr-grid" aria-label="Frinje report bento layout">
+        <article class="fr-card fr-feature-card">
+          <div class="fr-band"></div>
+          <div class="fr-card-body">
+            <p class="fr-eyebrow">Featured Issue</p>
+            <h2 class="fr-card-title">Issue #11: Exploit Archaeology</h2>
+            <p class="fr-card-copy">Alignment failures from the Morris Worm to modern cyber-evaluation incidents, plus this week&rsquo;s tools and reads.</p>
+            <a class="fr-cta" href="./issues/issue-11-exploit-archaeology.html">Open full webview issue</a>
+          </div>
+        </article>
+
+        <article class="fr-card fr-archive-card">
+          <div class="fr-band"></div>
+          <div class="fr-card-body">
+            <p class="fr-eyebrow">Archive</p>
+            <h2 class="fr-card-title">Previous and Upcoming Issues</h2>
+            <ul class="fr-list">
+              <li>Issue #10 placeholder</li>
+              <li>Issue #09 placeholder</li>
+              <li>Issue #12 placeholder</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="fr-card fr-subscribe-card">
+          <div class="fr-band"></div>
+          <div class="fr-card-body">
+            <p class="fr-eyebrow">Subscribe</p>
+            <h2 class="fr-card-title">Email Signup Placeholder</h2>
+            <label class="fr-subscribe-label" for="fr-email">Email</label>
+            <input
+              id="fr-email"
+              class="fr-subscribe-input"
+              type="email"
+              inputmode="email"
+              autocomplete="email"
+              placeholder="Enter email (not working yet)"
+              aria-describedby="fr-email-note"
+            >
+            <p id="fr-email-note" class="fr-subscribe-note">This subscribe field is a placeholder and is not connected yet.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>
