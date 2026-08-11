@@ -51,18 +51,24 @@
           <div class="fr-band"></div>
           <div class="fr-card-body">
             <p class="fr-eyebrow">Subscribe</p>
-            <h2 class="fr-card-title">Email Signup Placeholder</h2>
-            <label class="fr-subscribe-label" for="fr-email">Email</label>
-            <input
-              id="fr-email"
-              class="fr-subscribe-input"
-              type="email"
-              inputmode="email"
-              autocomplete="email"
-              placeholder="Enter email (not working yet)"
-              aria-describedby="fr-email-note"
-            >
-            <p id="fr-email-note" class="fr-subscribe-note">This subscribe field is a placeholder and is not connected yet.</p>
+            <h2 class="fr-card-title">Subscribe</h2>
+            <p class="fr-subscriber-count">— subscribers</p>
+            <form action="BEEHIIV_EMBED_URL" method="post">
+              <label class="fr-subscribe-label" for="fr-email">Email</label>
+              <input
+                id="fr-email"
+                class="fr-subscribe-input"
+                type="email"
+                name="email"
+                inputmode="email"
+                autocomplete="email"
+                placeholder="your@email.com"
+                required
+                aria-describedby="fr-email-note"
+              >
+              <button class="fr-cta" type="submit">Subscribe</button>
+              <p id="fr-email-note" class="fr-subscribe-note">Powered by Beehiiv. Free, unsubscribe anytime.</p>
+            </form>
           </div>
         </article>
       </section>

@@ -313,3 +313,29 @@ a {
     grid-column: span 4;
   }
 }
+
+.fr-subscriber-count {
+  margin: 0 0 0.75rem;
+  font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  color: var(--fr-purple);
+}
+
+.fr-subscribe-btn {
+  flex: 0 0 auto;
+  height: 1.75rem;
+  padding: 0 0.55rem;
+  border: 1px solid var(--fr-border);
+  background: #eaf0ff;
+  font-family: "IBM Plex Sans", Arial, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.fr-subscribe-btn:hover,
+.fr-subscribe-btn:focus-visible {
+  background: #dce8ff;
+}
