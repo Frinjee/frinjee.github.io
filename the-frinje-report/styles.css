@@ -178,11 +178,16 @@ a {
   padding: 1rem 1.1rem 0.95rem;
 }
 
+.fr-issue-upper-kicker,
 .fr-issue-kicker {
   margin: 0;
   font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
   font-size: 0.85rem;
   letter-spacing: 0.04em;
+}
+
+.fr-issue-upper-kicker {
+  font-weight: 700;
 }
 
 .fr-issue-title {
@@ -193,9 +198,11 @@ a {
 }
 
 .fr-issue-dek {
-  margin: 0;
+  margin: 0 0 0.6rem;
   font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 1.2rem;
   line-height: 1.4;
+  font-weight: 600;
 }
 
 .fr-section {
@@ -204,12 +211,6 @@ a {
 
 .fr-section + .fr-section {
   border-top: 2px solid #dbe2f0;
-}
-
-.fr-section h2 {
-  margin: 0 0 0.6rem;
-  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
-  font-size: 1.2rem;
 }
 
 .fr-section p {
@@ -253,6 +254,45 @@ a {
   font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
   font-size: 0.8rem;
   color: #48567a;
+}
+
+.fr-footer-subscribe {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  max-block-size: 1.75rem;
+  overflow: hidden;
+}
+
+.fr-footer .fr-subscribe-label {
+  margin: 0;
+  flex: 0 0 auto;
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.fr-footer .fr-subscribe-input {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+  min-height: 1.75rem;
+  max-block-size: 1.75rem;
+  padding: 0.15rem 0.4rem;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.fr-footer .fr-subscribe-note {
+  margin: 0;
+  flex: 0 1 auto;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #445273;
 }
 
 @media (min-width: 760px) {
