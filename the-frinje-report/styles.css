@@ -291,12 +291,12 @@ a {
 
 .fr-subscriber-badge-label {
   font-family: "Share Tech Mono", monospace;
-  font-size: 0.4rem;
+  font-size: 0.46rem;
   color: rgb(255 255 255 / 0.85);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   line-height: 1;
-  margin-top: 0.2rem;
+  margin-top: 0.22rem;
   position: relative;
   z-index: 1;
 }
@@ -306,13 +306,45 @@ a {
 }
 
 .fr-subscribe-card .fr-subscriber-badge {
-  margin-top: 0.65rem;
-  margin-bottom: 0.65rem;
+  margin: 0 0 0 auto;
+  transform: scale(0.88);
+  transform-origin: top right;
+}
+
+.fr-subscribe-card .fr-card-body {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 0.55rem 0.85rem;
+}
+
+.fr-subscribe-card .fr-eyebrow {
+  margin-top: 0.15rem;
+}
+
+.fr-subscribe-card .fr-beehiiv-embed {
+  flex: 1 1 100%;
+  margin-top: 0.1rem;
 }
 
 .fr-footer .fr-beehiiv-embed {
+  order: 1;
   flex: 1 1 18rem;
   min-inline-size: 0;
+}
+
+.fr-footer .fr-subscriber-badge {
+  order: 2;
+  margin-inline-start: auto;
+  transform: scale(0.96);
+  transform-origin: center right;
+}
+
+@media (max-width: 540px) {
+  .fr-footer .fr-subscriber-badge {
+    margin-inline-start: 0;
+    transform-origin: center left;
+  }
 }
 
 @media (min-width: 760px) {
