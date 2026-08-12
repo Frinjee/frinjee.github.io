@@ -462,7 +462,7 @@ Shared heading treatment for major sections.
 }
 
 .activity-box h2 {
-  background-image: url("imgs/dividers/cat2.gif");
+  background-image: url("../imgs/layout/headers/ducks.gif");
   background-repeat: repeat-x;
   background-size: contain;
   display: flex;
@@ -480,7 +480,7 @@ Shared heading treatment for major sections.
 }
 
 .bookmark-rota-box h2 {
-  background-image: url("../imgs/layout/headers/ducks.gif");
+  background-image: url("imgs/dividers/cat2.gif");
   background-repeat: repeat-x;
   background-size: contain;
   display: flex;
