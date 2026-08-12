@@ -249,7 +249,7 @@ a {
   flex-wrap: wrap;
   font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
   font-size: 0.8rem;
-  color: #48567a;
+  color: color-mix(in srgb, var(--fr-ink) 62%, var(--fr-border));
 }
 
 .fr-subscriber-badge {
@@ -301,11 +301,104 @@ a {
   z-index: 1;
 }
 
-.fr-beehiiv-embed {
+.fr-subscribe-form-wrap {
   inline-size: 100%;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.fr-subscribe-form {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fr-subscribe-label {
+  flex: 1 1 100%;
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--fr-ink) 72%, var(--fr-border));
+}
+
+.fr-subscribe-input {
+  flex: 1 1 12rem;
+  min-block-size: 2.5rem;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--fr-border);
+  border-radius: 0.2rem;
+  background: var(--fr-surface);
+  color: var(--fr-ink);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.fr-subscribe-input:focus-visible {
+  outline: 2px solid var(--fr-link);
+  outline-offset: 2px;
+}
+
+.fr-subscribe-button {
+  min-block-size: 2.5rem;
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--fr-border);
+  border-radius: 0.2rem;
+  background: color-mix(in srgb, var(--fr-link) 12%, var(--fr-surface));
+  color: var(--fr-ink);
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.fr-subscribe-button:hover,
+.fr-subscribe-button:focus-visible {
+  background: color-mix(in srgb, var(--fr-link) 20%, var(--fr-surface));
+}
+
+.fr-subscribe-button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
+
+.fr-subscribe-form .cf-turnstile {
+  flex: 1 1 100%;
+  min-inline-size: 0;
+}
+
+.fr-subscribe-status {
+  margin: 0;
+  font-family: "Share Tech Mono", "IBM Plex Sans", monospace;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--fr-ink) 62%, var(--fr-border));
+}
+
+.fr-subscribe-status--busy {
+  color: var(--fr-link);
+}
+
+.fr-subscribe-status--ok {
+  color: color-mix(in srgb, var(--fr-teal) 55%, var(--fr-ink));
+}
+
+.fr-subscribe-status--error {
+  color: color-mix(in srgb, var(--fr-magenta) 70%, var(--fr-ink));
+}
+
+.fr-subscribe-honeypot,
+.fr-visually-hidden {
+  position: absolute;
+  clip-path: inset(50%);
+  overflow: hidden;
+  inline-size: 1px;
+  block-size: 1px;
+  white-space: nowrap;
 }
 
 .fr-subscribe-card .fr-subscriber-badge {
+  flex: 0 0 auto;
   margin: 0 0 0 auto;
   transform: scale(0.88);
   transform-origin: top right;
@@ -315,19 +408,33 @@ a {
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  gap: 0.55rem 0.85rem;
+  gap: 0.35rem 0.75rem;
+  padding: 0.7rem 0.85rem 0.8rem;
 }
 
-.fr-subscribe-card .fr-eyebrow {
-  margin-top: 0.15rem;
+.fr-subscribe-card .fr-subscribe-heading {
+  margin: 0.15rem 0 0;
+  flex: 1 1 0;
+  min-inline-size: 0;
+  max-inline-size: calc(100% - 4.25rem);
+  font-family: "Space Grotesk", "IBM Plex Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
-.fr-subscribe-card .fr-beehiiv-embed {
+.fr-subscribe-heading-tail {
+  white-space: nowrap;
+}
+
+.fr-subscribe-card .fr-subscribe-form-wrap {
   flex: 1 1 100%;
-  margin-top: 0.1rem;
+  order: 1;
 }
 
-.fr-footer .fr-beehiiv-embed {
+.fr-footer .fr-subscribe-form-wrap {
   order: 1;
   flex: 1 1 18rem;
   min-inline-size: 0;

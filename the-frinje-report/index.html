@@ -8,17 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles.css">
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    <script src="./subscribe.js" defer></script>
   </head>
   <body>
     <main class="fr-shell">
-      <a class="fr-back-link" href="../index.html">&larr; Back to Jen's landing page</a>
+      <a class="fr-back-link" href="../index.html">&larr; Back to Main Site</a>
 
       <section class="fr-card fr-hero-card">
         <div class="fr-band"></div>
         <div class="fr-hero">
-          <p class="fr-eyebrow">Newsletter Webview</p>
+          <p class="fr-eyebrow">Bi-Weekly Newsletter Hub</p>
           <h1 class="fr-title">THE FRINJ REPORT</h1>
-          <p class="fr-subtitle">Issue archive, full webview reading, and future drops in one place.</p>
+          <p class="fr-subtitle">Issue archive, webview reading, and future drops in one place.</p>
         </div>
         <div class="fr-band fr-band--reverse"></div>
       </section>
@@ -48,13 +50,26 @@
         <article class="fr-card fr-subscribe-card">
           <div class="fr-band"></div>
           <div class="fr-card-body">
-            <p class="fr-eyebrow">Subscribe</p>
+            <h2 class="fr-subscribe-heading">
+              Subscribe to get the next issue by
+              <span class="fr-subscribe-heading-tail">e-mail.</span>
+            </h2>
             <div class="fr-subscriber-badge" role="img" aria-label="43 subscribers">
               <span class="fr-subscriber-badge-count">43</span>
               <span class="fr-subscriber-badge-label">subs</span>
             </div>
-            <div class="fr-beehiiv-embed">
-              <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="e0ca3774-ea2e-4d28-9530-3bc7d9220a3b"></script>
+            <div class="fr-subscribe-form-wrap">
+              <form class="fr-subscribe-form" action="https://subscribe-the-frinje-report.jenifer-hammond.workers.dev/subscribe" method="post">
+                <label class="fr-subscribe-label fr-visually-hidden" for="fr-subscribe-email-index">Email</label>
+                <input class="fr-subscribe-input" id="fr-subscribe-email-index" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required aria-describedby="fr-subscribe-status-index">
+                <div class="fr-subscribe-honeypot" aria-hidden="true">
+                  <label for="fr-subscribe-company-index">Leave this field blank</label>
+                  <input id="fr-subscribe-company-index" name="company" type="text" tabindex="-1" autocomplete="off">
+                </div>
+                <button class="fr-subscribe-button" type="submit">Notify me</button>
+                <div class="cf-turnstile" data-sitekey="0x4AAAAAAENgS-qRE04tRrXR" data-action="subscribe" data-size="flexible"></div>
+              </form>
+              <p class="fr-subscribe-status" id="fr-subscribe-status-index" aria-live="polite">One email per issue. No spam.</p>
             </div>
           </div>
         </article>

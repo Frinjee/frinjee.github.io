@@ -2,3 +2,15 @@ notes/
 .cursor/
 metadata.tsv
 tools/
+_captures/
+node_modules/
+.dev.vars*
+.env*
+.wrangler/
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/
+*.log
+npm-debug.log*
+coverage/
