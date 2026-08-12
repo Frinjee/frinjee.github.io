@@ -453,8 +453,7 @@ Shared heading treatment for major sections.
 }
 
 .welcome-box .box-title,
-.secret-box h2,
-.bookmark-rota-box h2{
+.secret-box h2 {
   margin: 0;
   padding: 1px 1.25px;
   font-size: 16px;
@@ -464,6 +463,24 @@ Shared heading treatment for major sections.
 
 .activity-box h2 {
   background-image: url("imgs/dividers/cat2.gif");
+  background-repeat: repeat-x;
+  background-size: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin: 0;
+  padding: 4px 6px;
+  font-size: 12px;
+  color: #000000;
+  border: 1.75px;
+  border-style: ridge;
+  border-color: #707788;
+  font-weight: bolder;
+}
+
+.bookmark-rota-box h2 {
+  background-image: url("../imgs/layout/headers/ducks.gif");
   background-repeat: repeat-x;
   background-size: contain;
   display: flex;
@@ -503,8 +520,7 @@ Tightens padding and resets list basics for these modules.
 }
 
 .activity-box h2,
-.secret-box h2,
-.bookmark-rota-box h2 {
+.secret-box h2 {
   font-size: 15px;
 }
 
@@ -613,7 +629,6 @@ Styleguide Events.Grid.
   border-bottom: #222 solid 1.75px;
 }
 
-.bookmark-rota-box h2,
 .event-box h2,
 .town-square-box h2,
 .media-box h2 {

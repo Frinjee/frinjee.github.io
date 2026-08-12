@@ -9,24 +9,13 @@ function isValidItem(item) {
     && HTTP_URL_PATTERN.test(item.url);
 }
 
-function formatWeekHeading(displayWeek, displayDate) {
-  if (displayDate) {
-    const parsed = new Date(`${displayDate}T12:00:00`);
-    if (!Number.isNaN(parsed.getTime())) {
-      const formatted = parsed.toLocaleDateString('en-US', {
-        month: 'numeric',
-        day: 'numeric',
-        year: 'numeric',
-      });
-      return `Bookmark Rota - Week of ${formatted}`;
-    }
-  }
-
-  if (displayWeek) {
-    return `Bookmark Rota - ${displayWeek}`;
-  }
-
-  return 'Bookmark Rota';
+function formatCurrentDateHeading() {
+  const formatted = new Date().toLocaleDateString('en-US', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+  });
+  return `Bookmark Rota - Week of ${formatted}`;
 }
 
 function createListItem(title, url) {
@@ -69,11 +58,9 @@ async function loadBookmarkRota() {
     }
 
     const fragment = document.createDocumentFragment();
-    let firstValid = null;
 
     for (const item of data) {
       if (!isValidItem(item)) continue;
-      if (!firstValid) firstValid = item;
       fragment.appendChild(createListItem(item.title.trim(), item.url));
     }
 
@@ -84,8 +71,8 @@ async function loadBookmarkRota() {
 
     listEl.replaceChildren(fragment);
 
-    if (headingEl && firstValid) {
-      headingEl.textContent = formatWeekHeading(firstValid.display_week, firstValid.display_date);
+    if (headingEl) {
+      headingEl.textContent = formatCurrentDateHeading();
     }
   } catch (err) {
     console.warn('Bookmark rota fetch failed', err);
