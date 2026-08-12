@@ -18,6 +18,10 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
 
+# weekly bookmark rota feed — short cache, revalidate for Monday updates
+/assets/json/bookmarks_rota.json
+  Cache-Control: public, max-age=300, must-revalidate
+
 # HTML pages — short-lived
 /*.html
   Cache-Control: no-cache
