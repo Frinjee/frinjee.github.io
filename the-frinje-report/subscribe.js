@@ -19,6 +19,18 @@ function setStatus(status, message, stateClass) {
 	}
 }
 
+function setBadgeCount(count) {
+	if (!Number.isFinite(count) || count < 0) return;
+	const display = String(Math.trunc(count));
+	document.querySelectorAll(".fr-subscriber-badge").forEach((badge) => {
+		const countEl = badge.querySelector(".fr-subscriber-badge-count");
+		if (countEl) {
+			countEl.textContent = display;
+		}
+		badge.setAttribute("aria-label", `${display} subscribers`);
+	});
+}
+
 document.querySelectorAll(".fr-subscribe-form").forEach((form) => {
 	const wrap = form.closest(".fr-subscribe-form-wrap");
 	const status = wrap?.querySelector(".fr-subscribe-status");
@@ -47,6 +59,9 @@ document.querySelectorAll(".fr-subscribe-form").forEach((form) => {
 				setStatus(status, "You're already on the list.", "fr-subscribe-status--ok");
 			} else if (response.ok && result?.ok) {
 				setStatus(status, "You're subscribed. Watch for the next issue.", "fr-subscribe-status--ok");
+				if (Number.isFinite(result.count)) {
+					setBadgeCount(result.count);
+				}
 				form.reset();
 			} else if (response.status === 403) {
 				setStatus(
