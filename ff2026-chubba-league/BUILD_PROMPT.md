@@ -223,7 +223,7 @@ Hyperlinked title → Google Drive PDF/Doc/Sheet. Brief description. Default tem
     {
       "title": "Jen's Drafting Recap",
       "url": "https://docs.google.com/...",
-      "blurb": "Recap of draft decisions and afterthoughts from Jen."
+      "blurb": "Recap of draft decisions and afterthoughts from Jen, Tai, & Garrett."
     }
   ]
 }
