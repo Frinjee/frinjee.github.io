@@ -51,8 +51,16 @@ function createTestEnv(db) {
 		TURNSTILE_SECRET: "test-secret",
 		TURNSTILE_ACTION: "subscribe",
 		TURNSTILE_HOSTNAMES: "frinjee.github.io",
+		SUBSCRIBER_BASE_COUNT: "43",
 		subscribe_the_frinje_report: db,
 	};
+}
+
+function createCountRequest(origin = SITE_ORIGIN) {
+	return new Request("http://worker.example/count", {
+		method: "GET",
+		headers: { origin },
+	});
 }
 
 function createSubscribeRequest(email, token = "token-abc", origin = SITE_ORIGIN) {
@@ -95,7 +103,7 @@ describe("subscribe worker", () => {
 		const response = await worker.fetch(request, createTestEnv(db), ctx);
 		await waitOnExecutionContext(ctx);
 		expect(response.status).toBe(200);
-		await expect(response.json()).resolves.toEqual({ ok: true, count: 1 });
+		await expect(response.json()).resolves.toEqual({ ok: true, count: 44 });
 		expect(response.headers.get("access-control-allow-origin")).toBe(SITE_ORIGIN);
 		expect(db.records.get("reader@example.com")).toEqual({
 			email: "reader@example.com",
@@ -123,7 +131,7 @@ describe("subscribe worker", () => {
 		const response = await worker.fetch(request, createTestEnv(db), ctx);
 		await waitOnExecutionContext(ctx);
 		expect(response.status).toBe(200);
-		await expect(response.json()).resolves.toEqual({ ok: true, count: 1 });
+		await expect(response.json()).resolves.toEqual({ ok: true, count: 44 });
 		expect(db.records.has("json-reader@example.com")).toBe(true);
 	});
 
@@ -166,10 +174,10 @@ describe("subscribe worker", () => {
 		const db = createD1Mock();
 		const testEnv = createTestEnv(db);
 		const first = await worker.fetch(createSubscribeRequest("repeat@example.com", "token-1"), testEnv);
-		await expect(first.json()).resolves.toEqual({ ok: true, count: 1 });
+		await expect(first.json()).resolves.toEqual({ ok: true, count: 44 });
 		const second = await worker.fetch(createSubscribeRequest("repeat@example.com", "token-2"), testEnv);
 		expect(second.status).toBe(200);
-		await expect(second.json()).resolves.toEqual({ ok: true, duplicate: true, count: 1 });
+		await expect(second.json()).resolves.toEqual({ ok: true, duplicate: true, count: 44 });
 		expect(db.records.size).toBe(1);
 		expect(db.records.get("repeat@example.com")?.email).toBe("repeat@example.com");
 	});
@@ -178,10 +186,10 @@ describe("subscribe worker", () => {
 		const db = createD1Mock();
 		const testEnv = createTestEnv(db);
 		const first = await worker.fetch(createSubscribeRequest("one@example.com", "token-1"), testEnv);
-		await expect(first.json()).resolves.toEqual({ ok: true, count: 1 });
+		await expect(first.json()).resolves.toEqual({ ok: true, count: 44 });
 		const second = await worker.fetch(createSubscribeRequest("two@example.com", "token-2"), testEnv);
 		expect(second.status).toBe(200);
-		await expect(second.json()).resolves.toEqual({ ok: true, count: 2 });
+		await expect(second.json()).resolves.toEqual({ ok: true, count: 45 });
 		expect(db.records.size).toBe(2);
 	});
 
@@ -221,6 +229,7 @@ describe("subscribe worker", () => {
 		);
 		expect(allowed.status).toBe(204);
 		expect(allowed.headers.get("access-control-allow-origin")).toBe(SITE_ORIGIN);
+		expect(allowed.headers.get("access-control-allow-methods")).toContain("GET");
 		expect(allowed.headers.get("access-control-allow-methods")).toContain("POST");
 
 		const disallowed = await worker.fetch(
@@ -243,9 +252,54 @@ describe("subscribe worker", () => {
 		expect(response.headers.get("access-control-allow-origin")).toBeNull();
 	});
 
+	it("returns display count from GET /count", async () => {
+		const db = createD1Mock();
+		const testEnv = createTestEnv(db);
+		const empty = await worker.fetch(createCountRequest(), testEnv);
+		expect(empty.status).toBe(200);
+		await expect(empty.json()).resolves.toEqual({ ok: true, count: 43 });
+		expect(empty.headers.get("access-control-allow-origin")).toBe(SITE_ORIGIN);
+
+		await worker.fetch(createSubscribeRequest("reader@example.com"), testEnv);
+		const afterInsert = await worker.fetch(createCountRequest(), testEnv);
+		expect(afterInsert.status).toBe(200);
+		await expect(afterInsert.json()).resolves.toEqual({ ok: true, count: 44 });
+	});
+
+	it("answers CORS preflight for GET /count", async () => {
+		const allowed = await worker.fetch(
+			new Request("http://worker.example/count", {
+				method: "OPTIONS",
+				headers: { origin: SITE_ORIGIN },
+			}),
+			env,
+		);
+		expect(allowed.status).toBe(204);
+		expect(allowed.headers.get("access-control-allow-origin")).toBe(SITE_ORIGIN);
+		expect(allowed.headers.get("access-control-allow-methods")).toContain("GET");
+
+		const disallowed = await worker.fetch(
+			new Request("http://worker.example/count", {
+				method: "OPTIONS",
+				headers: { origin: "https://evil.example" },
+			}),
+			env,
+		);
+		expect(disallowed.status).toBe(403);
+	});
+
+	it("omits CORS headers on GET /count for disallowed origins", async () => {
+		const response = await worker.fetch(
+			createCountRequest("https://evil.example"),
+			createTestEnv(createD1Mock()),
+		);
+		expect(response.status).toBe(200);
+		expect(response.headers.get("access-control-allow-origin")).toBeNull();
+	});
+
 	it("returns 404 for unknown path and method", async () => {
-		const getResponse = await worker.fetch(new Request("http://worker.example/subscribe", { method: "GET" }), env);
-		expect(getResponse.status).toBe(404);
+		const getSubscribe = await worker.fetch(new Request("http://worker.example/subscribe", { method: "GET" }), env);
+		expect(getSubscribe.status).toBe(404);
 		const postWrongPath = await worker.fetch(
 			new Request("http://worker.example/other", { method: "POST" }),
 			env,

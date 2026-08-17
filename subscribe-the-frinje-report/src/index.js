@@ -53,6 +53,42 @@ function getAllowedHostnames(env) {
 	);
 }
 
+function parseSubscriberBaseCount(env) {
+	const raw = env.SUBSCRIBER_BASE_COUNT;
+	if (raw === undefined || raw === null || raw === "") {
+		return 0;
+	}
+	const parsed = Number.parseInt(String(raw), 10);
+	return Number.isFinite(parsed) && parsed >= 0 ? parsed : 0;
+}
+
+async function getDisplayCount(env) {
+	if (!env.subscribe_the_frinje_report) {
+		return null;
+	}
+	const countRow = await env.subscribe_the_frinje_report
+		.prepare("SELECT COUNT(*) AS count FROM subscriptions")
+		.first();
+	const d1Count = Number(countRow?.count ?? 0);
+	if (!Number.isFinite(d1Count)) {
+		return null;
+	}
+	return parseSubscriberBaseCount(env) + d1Count;
+}
+
+function corsPreflightResponse(origin) {
+	return new Response(null, {
+		status: 204,
+		headers: {
+			"access-control-allow-origin": origin,
+			"access-control-allow-methods": "GET, POST, OPTIONS",
+			"access-control-allow-headers": "content-type",
+			"access-control-max-age": "86400",
+			vary: "Origin",
+		},
+	});
+}
+
 async function verifyTurnstileToken({ token, clientIp, env, expectedAction, expectedHostnames }) {
 	if (typeof token !== "string" || token.length === 0 || token.length > 2048) {
 		return { ok: false, reason: "invalid-token" };
@@ -176,10 +212,7 @@ async function handleSubscribe(request, env, origin) {
 	const isDuplicate = result.meta?.changes === 0;
 	const payload = isDuplicate ? { ok: true, duplicate: true } : { ok: true };
 	try {
-		const countRow = await env.subscribe_the_frinje_report
-			.prepare("SELECT COUNT(*) AS count FROM subscriptions")
-			.first();
-		const count = Number(countRow?.count ?? 0);
+		const count = await getDisplayCount(env);
 		if (Number.isFinite(count)) {
 			payload.count = count;
 		}
@@ -189,27 +222,36 @@ async function handleSubscribe(request, env, origin) {
 	return jsonResponse(payload, 200, origin);
 }
 
+async function handleCount(env, origin) {
+	if (!env.subscribe_the_frinje_report) {
+		return jsonResponse({ ok: false, error: "database-binding-missing" }, 500, origin);
+	}
+	try {
+		const count = await getDisplayCount(env);
+		if (!Number.isFinite(count)) {
+			return jsonResponse({ ok: false, error: "count-unavailable" }, 500, origin);
+		}
+		return jsonResponse({ ok: true, count }, 200, origin);
+	} catch {
+		return jsonResponse({ ok: false, error: "count-unavailable" }, 500, origin);
+	}
+}
+
 export default {
 	async fetch(request, env) {
 		const url = new URL(request.url);
 		const origin = getAllowedOrigin(request, env);
-		if (request.method === "OPTIONS" && url.pathname === "/subscribe") {
+		if (request.method === "OPTIONS" && (url.pathname === "/subscribe" || url.pathname === "/count")) {
 			if (!origin) {
 				return new Response(null, { status: 403 });
 			}
-			return new Response(null, {
-				status: 204,
-				headers: {
-					"access-control-allow-origin": origin,
-					"access-control-allow-methods": "POST, OPTIONS",
-					"access-control-allow-headers": "content-type",
-					"access-control-max-age": "86400",
-					vary: "Origin",
-				},
-			});
+			return corsPreflightResponse(origin);
 		}
 		if (request.method === "POST" && url.pathname === "/subscribe") {
 			return handleSubscribe(request, env, origin);
+		}
+		if (request.method === "GET" && url.pathname === "/count") {
+			return handleCount(env, origin);
 		}
 		if (url.pathname === "/health") {
 			return jsonResponse({ ok: true });

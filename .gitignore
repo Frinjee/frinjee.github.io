@@ -15,6 +15,18 @@ Desktop.ini
 *.log
 npm-debug.log*
 coverage/
-_captures/
 subscribe-the-frinje-report/.vscode/
 subscribe-the-frinje-report/AGENTS.md
+
+# bookmark rota backups (live file is bookmarks_rota.json)
+assets/json/.old/
+assets/json/*.prev.json
+
+# Dropbox-synced local references (per site skill; not deployed)
+file_list.txt
+mp-skin-refs/
+
+# Python build/cache
+__pycache__/
+*.py[cod]
+.pytest_cache/

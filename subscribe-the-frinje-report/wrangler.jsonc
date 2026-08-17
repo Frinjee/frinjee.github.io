@@ -44,7 +44,8 @@
 	// "services": [  {   "binding": "MY_SERVICE",   "service": "my-service"  } ],
 	"vars": {
 		"TURNSTILE_ACTION": "subscribe",
-		"TURNSTILE_HOSTNAMES": "jenhammond.me,www.jenhammond.me,frinjee.github.io,localhost,127.0.0.1"
+		"TURNSTILE_HOSTNAMES": "jenhammond.me,www.jenhammond.me,frinjee.github.io,localhost,127.0.0.1",
+		"SUBSCRIBER_BASE_COUNT": "43"
 	},
 	"d1_databases": [
 		{

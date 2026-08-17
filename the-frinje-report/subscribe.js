@@ -1,4 +1,5 @@
 const WORKER_SUBSCRIBE_URL = "https://subscribe-the-frinje-report.jenifer-hammond.workers.dev/subscribe";
+const WORKER_COUNT_URL = WORKER_SUBSCRIBE_URL.replace(/\/subscribe$/, "/count");
 
 const STATUS_STATE_CLASSES = [
 	"fr-subscribe-status--busy",
@@ -26,10 +27,32 @@ function setBadgeCount(count) {
 		const countEl = badge.querySelector(".fr-subscriber-badge-count");
 		if (countEl) {
 			countEl.textContent = display;
+			countEl.removeAttribute("aria-hidden");
 		}
 		badge.setAttribute("aria-label", `${display} subscribers`);
 	});
 }
+
+async function loadSubscriberCount() {
+	try {
+		const response = await fetch(WORKER_COUNT_URL);
+		let result = null;
+		try {
+			result = await response.json();
+		} catch {
+			result = null;
+		}
+		if (response.ok && result?.ok && Number.isFinite(result.count)) {
+			setBadgeCount(result.count);
+		}
+	} catch {
+		// Keep HTML placeholder on network/CORS failure.
+	}
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+	loadSubscriberCount();
+});
 
 document.querySelectorAll(".fr-subscribe-form").forEach((form) => {
 	const wrap = form.closest(".fr-subscribe-form-wrap");
