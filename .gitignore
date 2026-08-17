@@ -1,7 +1,5 @@
 notes/
-.cursor/
 ff2026-chubba-league/BUILD_PROMPT.md
-
 metadata.tsv
 tools/
 _captures/
@@ -13,6 +11,10 @@ node_modules/
 Thumbs.db
 Desktop.ini
 .vscode/
+.cursor/
 *.log
 npm-debug.log*
 coverage/
+_captures/
+subscribe-the-frinje-report/.vscode/
+subscribe-the-frinje-report/AGENTS.md
