@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chubba Hubba 2026</title>
+  <!-- CDN: Unsemantic grid — https://cdnjs.cloudflare.com/ajax/libs/unsemantic/1.1.3/unsemantic-grid-responsive-no-ie.min.css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/unsemantic/1.1.3/unsemantic-grid-responsive-no-ie.min.css">
+  <!-- CDN: Google Fonts — DM Sans + Source Serif 4 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="grid-container page">
+    <header class="page-header grid-100">
+      <div class="page-header__text">
+        <h1>Chubba Hubba 2026</h1>
+        <p class="page-header__sub">2026 Resource Hub</p>
+      </div>
+      <div class="page-header__labels">
+        <span class="draft-label" aria-label="Draft type">Snake</span>
+        <span class="scoring-label" aria-label="Scoring format">Half-PPR</span>
+      </div>
+    </header>
+
+    <section class="rankings grid-100" aria-labelledby="rankings-heading">
+      <div class="section-head">
+        <h2 id="rankings-heading">Rankings</h2>
+        <p class="section-head__sub">Searchable Half-PPR board. Default shows top 12 overall.</p>
+      </div>
+
+      <div class="rankings-toolbar" role="toolbar" aria-label="Rankings filters">
+        <label class="field field--select">
+          <span class="field__label">Position</span>
+          <select id="pos-filter" name="position">
+            <option value="ALL" selected>All Pos</option>
+            <option value="QB">QB</option>
+            <option value="RB">RB</option>
+            <option value="WR">WR</option>
+            <option value="TE">TE</option>
+            <option value="K">K</option>
+            <option value="DST">D/ST</option>
+            <option value="FLEX">FLEX</option>
+          </select>
+        </label>
+
+        <div class="mode-toggle" role="group" aria-label="Projection or stats columns">
+          <button type="button" id="mode-proj" class="mode-toggle__btn is-active" aria-pressed="true">Proj</button>
+          <button type="button" id="mode-stats" class="mode-toggle__btn" aria-pressed="false">Stats</button>
+        </div>
+
+        <label class="field field--search">
+          <span class="field__label">Search</span>
+          <span class="search-wrap">
+            <!-- Lucide search icon path (inline SVG; Lucide CDN optional) -->
+            <svg class="search-wrap__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input type="search" id="player-search" name="q" placeholder="Player name" autocomplete="off">
+          </span>
+        </label>
+      </div>
+
+      <p id="rankings-status" class="rankings-status" role="status" aria-live="polite">Loading rankings…</p>
+
+      <div class="table-scroll" tabindex="0" aria-label="Player rankings table">
+        <table class="rankings-table" id="rankings-table">
+          <thead id="rankings-thead"></thead>
+          <tbody id="rankings-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="bento grid-100" aria-labelledby="resources-heading">
+      <div class="section-head">
+        <h2 id="resources-heading">Resources</h2>
+        <p class="section-head__sub">Favorite sites, weekly videos, and league docs from Jen, Tai, and Garrett.</p>
+      </div>
+
+      <div class="bento-grid">
+        <article class="bento-cell bento-cell--external" id="external-resources" aria-labelledby="external-heading">
+          <h3 id="external-heading">Our Favorite Tools/Sites</h3>
+          <div class="favorites" id="favorites-root"></div>
+          <p class="helpful-links" id="helpful-links"></p>
+        </article>
+
+        <article class="bento-cell bento-cell--video" id="video-cell" aria-labelledby="video-heading">
+          <h3 id="video-heading">Weekly Videos</h3>
+          <p class="bento-cell__sub">Short embeds from favorite channels</p>
+          <div class="video-carousel" data-carousel>
+            <div class="video-carousel__frame" id="video-frame"></div>
+            <div class="video-carousel__controls">
+              <button type="button" id="video-prev" aria-label="Previous video">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+              </button>
+              <span id="video-counter" class="video-carousel__counter" aria-live="polite">0 / 0</span>
+              <button type="button" id="video-next" aria-label="Next video">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <article class="bento-cell bento-cell--chat" id="league-chat" aria-labelledby="chat-heading">
+          <h3 id="chat-heading">League chat</h3>
+          <p class="bento-cell__sub">Coming soon.</p>
+          <div class="chat-log" role="log" aria-live="polite" aria-relevant="additions">
+            <p class="chat-bubble chat-bubble--other">Knock knock</p>
+            <p class="chat-bubble chat-bubble--self">Who's there?
+          </div>
+          <form class="chat-composer" aria-disabled="true" aria-label="Message composer">
+            <label class="chat-composer__label" for="chat-input">Message</label>
+            <input type="text" id="chat-input" name="message" disabled placeholder="Chat is not open yet">
+            <button type="button" disabled>Send</button>
+          </form>
+        </article>
+
+        <article class="bento-cell bento-cell--docs" id="league-docs" aria-labelledby="docs-heading">
+          <h3 id="docs-heading">League docs</h3>
+          <p class="bento-cell__sub">Drive files from Jen, Tai, and Garrett.</p>
+          <ul class="resource-list" id="docs-list"></ul>
+        </article>
+      </div>
+    </section>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

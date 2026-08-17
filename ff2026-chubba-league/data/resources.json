@@ -1,0 +1,100 @@
+{
+  "favorites": {
+    "Jen": [
+      {
+        "title": "4for4",
+        "url": "https://www.4for4.com/"
+      },
+      {
+        "title": "NFL Weather",
+        "url": "http://www.nflweather.com/"
+      },
+      {
+        "title": "Yahoo Fantasy Football",
+        "url": "https://football.fantasysports.yahoo.com/"
+      }
+    ],
+    "Tai": [
+      {
+        "title": "FFToolbox",
+        "url": "https://fftoolbox.fulltimefantasy.com/"
+      },
+      {
+        "title": "ESPN Fantasy Football",
+        "url": "https://www.espn.com/fantasy/football/"
+      }
+    ],
+    "Garrett": [
+      {
+        "title": "Fantasy Football with Josh and Hayden",
+        "url": "https://sports.yahoo.com/videos/shows/fantasy-football-with-josh-and-hayden/"
+      },
+      {
+        "title": "Flock Fantasy",
+        "url": "https://www.flockfantasy.com/",
+        "note": "Paid but free rankings, list of experts to follow"
+      }
+    ]
+  },
+  "helpfulLinks": [
+    {
+      "title": "Waiver Wire Primer",
+      "source": "ESPN",
+      "url": "https://www.espn.com/fantasy/football/",
+      "blurb": "How to claim and prioritize early-season free agents."
+    },
+    {
+      "title": "Beginner Draft Checklist",
+      "source": "NFL.com",
+      "url": "https://fantasy.nfl.com/",
+      "blurb": "A simple pre-draft checklist."
+    }
+  ],
+  "videos": {
+    "items": [
+      {
+        "title": "6 Running Backs Your Fantasy League Drafts Completely Wrong",
+        "youtubeId": "1heM4_8h87Y"
+      },
+      {
+        "title": "The Best Strategy for Every Draft Slot (1\u201312)",
+        "youtubeId": "kWnniDXaY6M"
+      },
+      {
+        "title": "2026 Fantasy Football Mock Draft",
+        "youtubeId": "dnIPX2KroxI"
+      },
+      {
+        "title": "The #1 Strategy in 2026 Fantasy Football Drafts",
+        "youtubeId": "cHIofzGyNME"
+      }
+    ]
+  },
+  "leagueDocs": [
+    {
+      "title": "Draft Recap Video Folder",
+      "url": "#",
+      "blurb": "Recap of draft decisions and afterthoughts from Jen."
+    },
+    {
+      "title": "Week 1 Start/Sit Notes",
+      "url": "#",
+      "blurb": "Shared notes for first-week lineup decisions."
+    },
+    {
+      "title": "Keeper / Trade Tracker",
+      "url": "#",
+      "blurb": "Spreadsheet for keepers, trades, and roster moves."
+    },
+    {
+      "title": "Rookie Watchlist",
+      "url": "#",
+      "blurb": "Shortlist of rookies to watch."
+    },
+    {
+      "title": "League FAQ",
+      "url": "#",
+      "blurb": "Answers to common beginner questions for this league."
+    }
+  ]
+}
