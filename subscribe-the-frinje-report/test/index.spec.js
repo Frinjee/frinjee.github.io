@@ -8,11 +8,21 @@ import worker from "../src";
 
 const SITE_ORIGIN = "https://frinjee.github.io";
 
-function createD1Mock() {
+function createD1Mock({ countError = false } = {}) {
 	const records = new Map();
 	return {
 		records,
-		prepare() {
+		prepare(sql) {
+			if (/SELECT COUNT\(\*\)/i.test(sql)) {
+				return {
+					async first() {
+						if (countError) {
+							throw new Error("count-query-failed");
+						}
+						return { count: records.size };
+					},
+				};
+			}
 			return {
 				bind(email, sourcePath, turnstileAction, turnstileHostname) {
 					return {
@@ -85,7 +95,7 @@ describe("subscribe worker", () => {
 		const response = await worker.fetch(request, createTestEnv(db), ctx);
 		await waitOnExecutionContext(ctx);
 		expect(response.status).toBe(200);
-		await expect(response.json()).resolves.toEqual({ ok: true });
+		await expect(response.json()).resolves.toEqual({ ok: true, count: 1 });
 		expect(response.headers.get("access-control-allow-origin")).toBe(SITE_ORIGIN);
 		expect(db.records.get("reader@example.com")).toEqual({
 			email: "reader@example.com",
@@ -113,7 +123,7 @@ describe("subscribe worker", () => {
 		const response = await worker.fetch(request, createTestEnv(db), ctx);
 		await waitOnExecutionContext(ctx);
 		expect(response.status).toBe(200);
-		await expect(response.json()).resolves.toEqual({ ok: true });
+		await expect(response.json()).resolves.toEqual({ ok: true, count: 1 });
 		expect(db.records.has("json-reader@example.com")).toBe(true);
 	});
 
@@ -156,12 +166,31 @@ describe("subscribe worker", () => {
 		const db = createD1Mock();
 		const testEnv = createTestEnv(db);
 		const first = await worker.fetch(createSubscribeRequest("repeat@example.com", "token-1"), testEnv);
-		await expect(first.json()).resolves.toEqual({ ok: true });
+		await expect(first.json()).resolves.toEqual({ ok: true, count: 1 });
 		const second = await worker.fetch(createSubscribeRequest("repeat@example.com", "token-2"), testEnv);
 		expect(second.status).toBe(200);
-		await expect(second.json()).resolves.toEqual({ ok: true, duplicate: true });
+		await expect(second.json()).resolves.toEqual({ ok: true, duplicate: true, count: 1 });
 		expect(db.records.size).toBe(1);
 		expect(db.records.get("repeat@example.com")?.email).toBe("repeat@example.com");
+	});
+
+	it("returns an incremented count after a second distinct email", async () => {
+		const db = createD1Mock();
+		const testEnv = createTestEnv(db);
+		const first = await worker.fetch(createSubscribeRequest("one@example.com", "token-1"), testEnv);
+		await expect(first.json()).resolves.toEqual({ ok: true, count: 1 });
+		const second = await worker.fetch(createSubscribeRequest("two@example.com", "token-2"), testEnv);
+		expect(second.status).toBe(200);
+		await expect(second.json()).resolves.toEqual({ ok: true, count: 2 });
+		expect(db.records.size).toBe(2);
+	});
+
+	it("still accepts a subscription when the count query fails", async () => {
+		const db = createD1Mock({ countError: true });
+		const response = await worker.fetch(createSubscribeRequest("reader@example.com"), createTestEnv(db));
+		expect(response.status).toBe(200);
+		await expect(response.json()).resolves.toEqual({ ok: true });
+		expect(db.records.has("reader@example.com")).toBe(true);
 	});
 
 	it("silently accepts honeypot submissions without writing to D1", async () => {

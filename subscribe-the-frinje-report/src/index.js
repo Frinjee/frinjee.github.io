@@ -174,7 +174,19 @@ async function handleSubscribe(request, env, origin) {
 		.run();
 
 	const isDuplicate = result.meta?.changes === 0;
-	return jsonResponse(isDuplicate ? { ok: true, duplicate: true } : { ok: true }, 200, origin);
+	const payload = isDuplicate ? { ok: true, duplicate: true } : { ok: true };
+	try {
+		const countRow = await env.subscribe_the_frinje_report
+			.prepare("SELECT COUNT(*) AS count FROM subscriptions")
+			.first();
+		const count = Number(countRow?.count ?? 0);
+		if (Number.isFinite(count)) {
+			payload.count = count;
+		}
+	} catch {
+		// Subscribe succeeded; omit count rather than failing the request.
+	}
+	return jsonResponse(payload, 200, origin);
 }
 
 export default {
