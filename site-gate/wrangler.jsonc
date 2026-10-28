@@ -1,0 +1,18 @@
+/**
+ * Deploy after jenhammond.me is proxied through Cloudflare (see DEPLOY.md).
+ * Routes deferred — sections unpublished via GitHub Pages _config.yml exclude.
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "site-gate",
+	"account_id": "ddbc2b8663b0c7ffc905be55b8ce7dca",
+	"main": "src/index.js",
+	"compatibility_date": "2026-03-10",
+	"observability": {
+		"enabled": true
+	},
+	"upload_source_maps": true,
+	"vars": {
+		"GITHUB_PAGES_HOST": "frinjee.github.io"
+	}
+}

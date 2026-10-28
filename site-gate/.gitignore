@@ -1,0 +1,5 @@
+node_modules/
+.wrangler/
+.dev.vars*
+.gate-signing-secret.tmp
+*.log

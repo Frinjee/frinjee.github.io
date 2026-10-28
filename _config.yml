@@ -1,0 +1,11 @@
+# GitHub Pages (Jekyll). Do not add .nojekyll — excluded paths would become public again.
+exclude:
+  - the-frinje-report
+  - ff2026-chubba-league
+  - site-gate
+  - subscribe-the-frinje-report
+  - node_modules
+  - notes
+  - tools
+  - .cursor
+  - .agents

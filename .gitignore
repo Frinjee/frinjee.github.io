@@ -12,11 +12,14 @@ Thumbs.db
 Desktop.ini
 .vscode/
 .cursor/
+.agents/
 *.log
 npm-debug.log*
 coverage/
 subscribe-the-frinje-report/.vscode/
 subscribe-the-frinje-report/AGENTS.md
+site-gate/.vscode/
+site-gate/AGENTS.md
 
 # bookmark rota backups (live file is bookmarks_rota.json)
 assets/json/.old/
