@@ -73,8 +73,6 @@ async function loadMoods() {
     if (saved && saved.time && saved.date) {
       timeEl.textContent = saved.time;
       dateEl.textContent = saved.date;
-    } else {
-      updateMoodTimestamp(timeEl, dateEl); // initialize once
     }
 
     // Change handler (dropdown -> UI + save)
@@ -140,6 +138,10 @@ function applyMood(mood, emojiEl, textEl, selectEl) {
   emojiEl.textContent = mood.emoji;
   textEl.textContent = mood.label;
   selectEl.value = mood.id;
+}
+
+// Later: pick a mood from the loaded list on a timer, apply it, then refresh the timestamp.
+function randomizeMoodOnInterval(moods, apply) {
 }
 
 function updateMoodTimestamp(timeEl, dateEl) {
