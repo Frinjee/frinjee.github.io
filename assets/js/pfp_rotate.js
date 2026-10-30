@@ -2,6 +2,8 @@ const PFP_BASE = 'assets/imgs/pfp/';
 const PFP_FILES = ['pfp.jpg', 'pfp-2.jpg', 'pfp-3.jpg', 'pfp-4.jpg'];
 const PFP_START_FILE = 'pfp-2.jpg';
 const EIGHT_HOURS_MS = 8 * 60 * 60 * 1000;
+// Slot 0 (pfp-2) starts at this UTC instant; first rotation after 8 hours.
+const ROTATION_ANCHOR_MS = Date.parse('2026-10-31T00:00:00Z');
 const SHUFFLE_SEED = 0x4652494e;
 
 let cachedOrder = null;
@@ -37,7 +39,9 @@ function getOrder() {
 }
 
 function getCurrentSlot() {
-  return Math.floor(Date.now() / EIGHT_HOURS_MS);
+  const elapsed = Date.now() - ROTATION_ANCHOR_MS;
+  if (elapsed < 0) return 0;
+  return Math.floor(elapsed / EIGHT_HOURS_MS);
 }
 
 function getPfpPathForSlot(slot) {
@@ -54,8 +58,12 @@ function applyProfilePic() {
 }
 
 function msUntilNextBoundary() {
+  const elapsed = Date.now() - ROTATION_ANCHOR_MS;
+  if (elapsed < 0) {
+    return Math.max(0, ROTATION_ANCHOR_MS - Date.now());
+  }
   const slot = getCurrentSlot();
-  const nextBoundary = (slot + 1) * EIGHT_HOURS_MS;
+  const nextBoundary = ROTATION_ANCHOR_MS + (slot + 1) * EIGHT_HOURS_MS;
   return Math.max(0, nextBoundary - Date.now());
 }
 
