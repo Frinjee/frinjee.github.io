@@ -1,6 +1,6 @@
 # site-gate deployment
 
-**Status: deferred.** `the-frinje-report/` and `ff2026-chubba-league/` are unpublished via root [`_config.yml`](../_config.yml) `exclude` on GitHub Pages (no password lock). Do not attach Worker routes until you intentionally re-enable edge gating.
+**Status: deferred.** `the-frinje-report/` is public on GitHub Pages except `the-frinje-report/issues/issue-11-pinning-postcards.html`, which stays excluded in root [`_config.yml`](../_config.yml). `ff2026-chubba-league/` remains unpublished. No password lock. Do not attach Worker routes until you intentionally re-enable edge gating.
 
 ---
 

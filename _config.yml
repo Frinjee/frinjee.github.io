@@ -1,6 +1,6 @@
 # GitHub Pages (Jekyll). Do not add .nojekyll — excluded paths would become public again.
 exclude:
-  - the-frinje-report
+  - the-frinje-report/issues/issue-11-pinning-postcards.html
   - ff2026-chubba-league
   - site-gate
   - subscribe-the-frinje-report
