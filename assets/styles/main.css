@@ -464,7 +464,8 @@ Shared heading treatment for major sections.
 .activity-box h2 {
   background-image: url("../imgs/layout/headers/ducks.gif");
   background-repeat: repeat-x;
-  background-size: contain;
+  background-size: auto 100%;
+  background-position: center;
   display: flex;
   align-items: center;
   justify-content: center;
