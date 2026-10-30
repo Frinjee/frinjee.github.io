@@ -33,3 +33,13 @@ mp-skin-refs/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# narrow track exceptions (keep tools/ and .cursor/ ignored above)
+!tools/
+!tools/validate-assets.py
+!.cursor/
+.cursor/*
+!.cursor/skills/
+.cursor/skills/*
+!.cursor/skills/frinjee-web-dev/
+!.cursor/skills/frinjee-web-dev/**
