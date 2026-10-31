@@ -1,5 +1,9 @@
 const MOODS_URL = 'assets/json/moods.json';
 const STORAGE_KEY = 'myspaceHeaderState';
+const STATUS_URL = 'assets/status-files/status-test-lyrics.txt';
+const INITIAL_STATUS = 'Choppa quiet missile VV diamonds time ticker';
+const ROTATION_START_MS = Date.parse('2026-11-01T16:00:00Z');
+const STATUS_DAY_HOUR = 11;
 
 function loadState() {
   try {
@@ -36,11 +40,10 @@ async function loadMoods() {
     const selectEl = document.getElementById('mood-select');
     const emojiWrapper = document.getElementById('mood-emoji-wrapper');
     const moodContainer = document.getElementById('mood-container');
-    const statusEl = document.getElementById('status-text');
     const timeEl = document.getElementById('mood-time');
     const dateEl = document.getElementById('mood-date');
 
-    if (!emojiEl || !textEl || !selectEl || !emojiWrapper || !moodContainer || !statusEl || !timeEl || !dateEl) {
+    if (!emojiEl || !textEl || !selectEl || !emojiWrapper || !moodContainer || !timeEl || !dateEl) {
       console.warn('Header elements missing');
       return;
     }
@@ -63,12 +66,7 @@ async function loadMoods() {
       if (found) currentMood = found;
     }
 
-    // Apply mood, status, and timestamp from saved state or defaults
     applyMood(currentMood, emojiEl, textEl, selectEl);
-
-    if (saved && typeof saved.status === 'string') {
-      statusEl.textContent = saved.status;
-    }
 
     if (saved && saved.time && saved.date) {
       timeEl.textContent = saved.time;
@@ -82,7 +80,7 @@ async function loadMoods() {
       applyMood(selected, emojiEl, textEl, selectEl);
       updateMoodTimestamp(timeEl, dateEl);
       selectEl.style.display = 'none';
-      persistHeaderState(selected.id, statusEl.textContent, timeEl.textContent, dateEl.textContent);
+      persistHeaderState(selected.id, timeEl.textContent, dateEl.textContent);
     });
 
     // Click emoji to toggle popup
@@ -107,26 +105,6 @@ async function loadMoods() {
     // Hide when it loses focus
     selectEl.addEventListener('blur', () => {
       selectEl.style.display = 'none';
-    });
-
-    // Status editing: enforce ~20 chars and save
-    statusEl.addEventListener('input', () => {
-      if (statusEl.textContent.length > 20) {
-        statusEl.textContent = statusEl.textContent.slice(0, 20);
-        const range = document.createRange();
-        const sel = window.getSelection();
-        range.selectNodeContents(statusEl);
-        range.collapse(false);
-        sel.removeAllRanges();
-        sel.addRange(range);
-      }
-    });
-
-    statusEl.addEventListener('blur', () => {
-      // When status changes, update timestamp + save
-      updateMoodTimestamp(timeEl, dateEl);
-      const savedMoodId = selectEl.value || currentMood.id;
-      persistHeaderState(savedMoodId, statusEl.textContent, timeEl.textContent, dateEl.textContent);
     });
 
   } catch (e) {
@@ -160,14 +138,78 @@ function updateMoodTimestamp(timeEl, dateEl) {
   });
 }
 
-function persistHeaderState(moodId, status, time, date) {
+function persistHeaderState(moodId, time, date) {
   const state = {
     moodId,
-    status,
     time,
     date
   };
   saveState(state);
 }
 
-document.addEventListener('DOMContentLoaded', loadMoods);
+function easternParts(date) {
+  const parts = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    hourCycle: 'h23'
+  }).formatToParts(date);
+  const get = (type) => parts.find(part => part.type === type).value;
+  let hour = Number(get('hour'));
+  if (hour === 24) hour = 0;
+  return {
+    year: get('year'),
+    month: get('month'),
+    day: get('day'),
+    hour
+  };
+}
+
+function statusPeriodKey(date) {
+  const { year, month, day, hour } = easternParts(date);
+  if (hour >= STATUS_DAY_HOUR) {
+    return `${year}-${month}-${day}`;
+  }
+  const prev = new Date(Date.UTC(Number(year), Number(month) - 1, Number(day)) - 86400000);
+  const yy = prev.getUTCFullYear();
+  const mm = String(prev.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(prev.getUTCDate()).padStart(2, '0');
+  return `${yy}-${mm}-${dd}`;
+}
+
+function djb2(text) {
+  let hash = 5381;
+  for (let i = 0; i < text.length; i++) {
+    hash = ((hash << 5) + hash + text.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
+async function applyDailyStatus() {
+  const statusEl = document.getElementById('status-text');
+  if (!statusEl) return;
+
+  statusEl.textContent = INITIAL_STATUS;
+  if (Date.now() < ROTATION_START_MS) return;
+
+  try {
+    const response = await fetch(STATUS_URL);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const lines = (await response.text())
+      .split(/\r?\n/)
+      .map(line => line.trim())
+      .filter(Boolean);
+    if (!lines.length) return;
+    const key = statusPeriodKey(new Date());
+    statusEl.textContent = lines[djb2(key) % lines.length];
+  } catch (e) {
+    console.warn('Failed to load status lyrics', e);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  applyDailyStatus();
+  loadMoods();
+});

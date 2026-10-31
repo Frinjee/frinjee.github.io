@@ -121,6 +121,10 @@ Wraps profile picture, header meta, and contact GIF buttons.
   margin-right: 2px;
 }
 
+#status-text {
+  white-space: nowrap;
+}
+
 .top-username {
   font-family: "IBM Plex Sans", sans-serif;
   font-optical-sizing: auto;
