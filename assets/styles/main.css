@@ -50,7 +50,6 @@ Header: top bar layout and contact strip.
 Wraps profile picture, header meta, and contact GIF buttons.
 */
 #top-bar {
-  position: relative;
   background: #ffffff;
   border: 2px ridge #707788;
   padding: 8px 10px;
@@ -154,53 +153,22 @@ Wraps profile picture, header meta, and contact GIF buttons.
 
 .top-right {
   position: relative;
-  width: 160px;
+  width: calc(80px * 400 / 167);
   height: 80px;
-  flex: 0 0 160px;
+  flex: 0 0 calc(80px * 400 / 167);
   overflow: hidden;
   transform: translateY(-2px);
   background: #ffffff;
 }
 
-#contact_tbl_bg {
+#welcome-to-page {
   position: absolute;
   inset: 0;
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
-}
-
-/* Icon strip only. Positioned on the header, not inside the transformed
-   160x80 box, so it can sit on the mood line without moving or resizing the rainbow. */
-#contact_tbl_buttons {
-  position: absolute;
-  right: 10px;
-  width: 160px;
-  height: auto;
-  top: 79px;
-  position-anchor: --mood-row;
-  top: anchor(bottom, 79px);
-  pointer-events: none;
-  z-index: 1;
-}
-
-.top-right-actions {
-  position: absolute;
-  position-anchor: --mood-row;
-  top: 79px;
-  top: anchor(bottom, 79px);
-  right: calc(10px + 160px * 0.018);
-  bottom: auto;
-  left: auto;
-  width: calc(160px * (1 - 0.015 - 0.018));
-  height: calc(160px * 86 / 669);
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  gap: calc(160px * 0.016);
-  z-index: 2;
 }
 
 .top-action {
@@ -522,13 +490,63 @@ Shared heading treatment for major sections.
   width: 100%;
 }
 
-.welcome-box__body,
-#welcome-to-page {
+.welcome-box__body {
   display: block;
   width: 85%;
   margin: 1px 2px 4px 15px;
   padding: 0;
   height: auto;
+}
+
+/* Same layout box the welcome GIF used, so the welcome body does not change size. */
+.welcome-contact {
+  position: relative;
+  width: 85%;
+  margin: 1px 2px 4px 15px;
+  aspect-ratio: 400 / 167;
+}
+
+.welcome-contact__frame {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: 2 / 1;
+  transform: translateX(-50%);
+}
+
+#contact_tbl_bg,
+#contact_tbl_buttons {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+#contact_tbl_bg {
+  object-fit: cover;
+  object-position: center;
+}
+
+#contact_tbl_buttons {
+  object-fit: fill;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.top-right-actions {
+  position: absolute;
+  top: 77%;
+  right: 1.8%;
+  bottom: 0.8%;
+  left: 1.5%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 1.6%;
+  z-index: 2;
 }
 
 /*
@@ -956,7 +974,6 @@ Styleguide Header.Mood.
 #mood-container {
   position: relative;
   display: inline-block;
-  anchor-name: --mood-row;
 }
 
 #mood-emoji-wrapper {
@@ -1351,8 +1368,8 @@ Pads the stream a bit differently on narrow vs. wide viewports.
   }
 
   .top-right {
-    flex: 0 0 160px;
-    width: 160px;
+    flex: 0 0 calc(80px * 400 / 167);
+    width: calc(80px * 400 / 167);
     height: 80px;
   }
 
