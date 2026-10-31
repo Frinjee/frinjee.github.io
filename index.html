@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/styles/main.css?v=1.4">
+    <link rel="stylesheet" href="assets/styles/main.css?v=1.6">
 
     <link rel="preconnect" href="https://townsquare.cauenapier.com" crossorigin>
     <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css">
@@ -329,47 +329,71 @@
 
           <!-- Media -->
           <section class="box media-box">
-            <h2>Culture Queue</h2>
-            <div class="media-grid">
-              <div class="media-slot">
-                <img src="./assets/imgs/media/usesoftheerotic.jpg" alt="Media 1 flyer" class="media-flyer">
-                <span class="media-label">Uses of the Erotic: The Erotic as Power by Audre Lorde</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/roffire.jpg" alt="Media 2 flyer" class="media-flyer">
-                <span class="media-label">River of Fire: My Spiritual Journey by Sister Helen Prejean</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/vart.jpg" alt="Media 3 flyer" class="media-flyer">
-                <span class="media-label">The Deserving by Elizabeth Vartkessian</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/weapons.jpg" alt="Media 4 flyer" class="media-flyer">
-                <span class="media-label">Weapons (2025) - Movie</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/kout.webp" alt="Media 5 flyer" class="media-flyer">
-                <span class="media-label">Wake Up Dead Man: A Knives Out Mystery (2025) - Movie</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/amy.jpg" alt="Media 6 flyer" class="media-flyer">
-                <span class="media-label">Billie Eilish | Good Hang with Amy Poehler (05/05/2026) - Podcast</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/asc.webp" alt="Media 7 flyer" class="media-flyer">
-                <span class="media-label">All Songs Considered: José González studies hope, Jungle brings the sunshine, more (04/07/2026) - Podcast</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/wwdtm.webp" alt="Media 8 flyer" class="media-flyer">
-                <span class="media-label">Wait Wait... Don't Tell Me! Spirit Airlines, The Book of Mormon, and Grunting (05/09/2026) - Podcast</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/lilflip.jpg" alt="Media 9 flyer" class="media-flyer">
-                <span class="media-label">Lil' Flip - La Clover Nostra III: I Trust Me (03/17/2026) - Album Release</span>
-              </div>
-              <div class="media-slot">
-                <img src="./assets/imgs/media/deckchedda.jpg" alt="Media 10 flyer" class="media-flyer">
-                <span class="media-label">Inspectah Deck & Chetta Bang - Inspectah Deck Vs. Chedda Bang (05/15/2026) - Album Release</span>
+            <h2 id="culture-queue-title">Culture Queue</h2>
+            <div id="culture-carousel" class="splide culture-carousel" aria-labelledby="culture-queue-title">
+              <div class="splide__track">
+                <ul class="splide__list">
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/usesoftheerotic.jpg" alt="Uses of the Erotic: The Erotic as Power by Audre Lorde" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Uses of the Erotic: The Erotic as Power by Audre Lorde</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/roffire.jpg" alt="River of Fire: My Spiritual Journey by Sister Helen Prejean" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">River of Fire: My Spiritual Journey by Sister Helen Prejean</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/vart.jpg" alt="The Deserving by Elizabeth Vartkessian" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">The Deserving by Elizabeth Vartkessian</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/weapons.jpg" alt="Weapons (2025) - Movie" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Weapons (2025) - Movie</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/kout.webp" alt="Wake Up Dead Man: A Knives Out Mystery (2025) - Movie" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Wake Up Dead Man: A Knives Out Mystery (2025) - Movie</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/amy.jpg" alt="Billie Eilish | Good Hang with Amy Poehler (05/05/2026) - Podcast" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Billie Eilish | Good Hang with Amy Poehler (05/05/2026) - Podcast</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/asc.webp" alt="All Songs Considered: José González studies hope, Jungle brings the sunshine, more (04/07/2026) - Podcast" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">All Songs Considered: José González studies hope, Jungle brings the sunshine, more (04/07/2026) - Podcast</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/wwdtm.webp" alt="Wait Wait... Don't Tell Me! Spirit Airlines, The Book of Mormon, and Grunting (05/09/2026) - Podcast" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Wait Wait... Don't Tell Me! Spirit Airlines, The Book of Mormon, and Grunting (05/09/2026) - Podcast</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/lilflip.jpg" alt="Lil' Flip - La Clover Nostra III: I Trust Me (03/17/2026) - Album Release" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Lil' Flip - La Clover Nostra III: I Trust Me (03/17/2026) - Album Release</span>
+                    </article>
+                  </li>
+                  <li class="splide__slide">
+                    <article class="media-card">
+                      <img src="./assets/imgs/media/deckchedda.jpg" alt="Inspectah Deck & Chetta Bang - Inspectah Deck Vs. Chedda Bang (05/15/2026) - Album Release" class="media-flyer thumbnail--culture" width="103" height="129">
+                      <span class="media-label">Inspectah Deck & Chetta Bang - Inspectah Deck Vs. Chedda Bang (05/15/2026) - Album Release</span>
+                    </article>
+                  </li>
+                </ul>
               </div>
             </div>
           </section>
@@ -387,6 +411,7 @@
     <script src="./assets/js/player.js"></script>
     <script src="./assets/js/photo_stream.js"></script>
     <script src="./assets/js/event_carousel.js"></script>
+    <script src="./assets/js/culture_carousel.js"></script>
     <script src="./assets/js/bookmark_rota.js"></script>
     <script type="module">
       import { mountTownSquare } from "https://townsquare.cauenapier.com/townsquare.mjs";

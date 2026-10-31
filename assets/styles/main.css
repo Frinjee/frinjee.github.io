@@ -724,7 +724,7 @@ Styleguide Events.Grid.
 }
 
 .event-flyer,
-.media-flyer {
+.media-flyer:not(.thumbnail--culture) {
   object-fit: fill;
   display: block;
 }
@@ -734,7 +734,7 @@ Styleguide Events.Grid.
   max-height: 95%;
 }
 
-.media-flyer {
+.media-flyer:not(.thumbnail--culture) {
   max-width: 85%;
   max-height: 80%;
 }
@@ -861,6 +861,72 @@ Uses the Activity Stream's Splide behavior in the narrow left column.
 .event-link:focus-visible {
   outline: 2px solid #003399;
   outline-offset: 1px;
+}
+
+/*
+Culture Queue carousel.
+Same Splide auto-scroll and component sizes as Upcoming Events.
+Every flyer fills the same 103x129 box.
+*/
+.culture-carousel {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  padding: 4px 0;
+}
+
+.culture-carousel .splide__track {
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.culture-carousel .splide__list {
+  display: flex;
+  align-items: stretch;
+  padding: 0 2px;
+}
+
+.culture-carousel .splide__slide {
+  display: flex;
+  width: 111px;
+  min-width: 111px;
+  height: auto;
+  padding: 0 2px;
+}
+
+.media-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 107px;
+  min-width: 0;
+  height: 100%;
+  padding: 2px;
+  background: #B9DFF0;
+  border: 1.75px solid #d1d8ea;
+  color: #254770;
+  text-align: center;
+}
+
+.thumbnail--culture {
+  display: block;
+  width: 103px;
+  min-width: 103px;
+  max-width: none;
+  height: 129px;
+  min-height: 129px;
+  max-height: none;
+  object-fit: cover;
+  object-position: center;
+  flex: 0 0 129px;
+}
+
+.media-card .media-label {
+  width: 100%;
+  margin-top: 3px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
 }
 
 /*
