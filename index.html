@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=Orbitron:wght@400..900&family=Share+Tech+Mono&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/styles/main.css?v=1.8">
+    <link rel="stylesheet" href="assets/styles/main.css?v=2.4">
 
     <link rel="preconnect" href="https://townsquare.cauenapier.com" crossorigin>
     <link rel="stylesheet" href="https://townsquare.cauenapier.com/widget.css">
@@ -33,13 +33,13 @@
           <div class="top-main-info">
             <div class="top-title-row">
               <h1 class="profile-title">Jen Hammond <span class="top-username">@Frinjee</span></h1>
+              <img id="status-rotation" src="./assets/imgs/layout/status/rotation-usage/textbeans.gif" alt="">
             </div>
 
             <div class="top-status-row">
             </div>
 
             <div class="top-status-edit-row">
-              <span class="label">&#128173;:</span>
               <span id="status-text">Choppa quiet missile VV diamonds time ticker</span>
               <!--<img id="online-now" src="assets/imgs/layout/status/online-1.gif"></img>-->
             </div>
@@ -64,30 +64,22 @@
             </div>
 
             <div class="top-links-row">
-              View My:
-              <a href="https://www.github.com/frinjee" class="top-link">Github</a>
-              <span class="divider">|</span>
-              <a href="https://www.flickr.com/photos/204607174@N02/albums/72177720333790446/with/55286408224" class="top-link">Flickr
-              <span class="divider">|</span>
-              <a href="hoard/" class="top-link">Dragon Hoard</a>
-              <span class="divider">|</span>
-              <a href="https://open.spotify.com/user/_jenh" class="top-link">Spotify</a>
             </div>
           </div>
         </div>
 
         <div class="top-right">
           <img id="contact_tbl_bg" src="./assets/imgs/layout/contact_tbl/rainbow-with-clouds.gif" alt="">
-          <img id="contact_tbl_buttons" src="./assets/imgs/layout/contact_tbl/contable-table.png" alt="">
-          <nav class="top-right-actions" aria-label="Contact">
-            <a href="https://www.github.com/frinjee" class="top-action" aria-label="GitHub"></a>
-            <a href="https://www.flickr.com/photos/204607174@N02/albums/72177720333790446/with/55286408224" class="top-action" aria-label="Flickr"></a>
-            <a href="https://soundcloud.com/frinjee" class="top-action" aria-label="SoundCloud"></a>
-            <a href="https://open.spotify.com/user/_jenh" class="top-action" aria-label="Spotify"></a>
-            <a href="mailto:jenifer_hammond@protonmail.com" class="top-action" aria-label="Email"></a>
-            <a href="hoard/" class="top-action" aria-label="Dragon Hoard"></a>
-          </nav>
         </div>
+        <img id="contact_tbl_buttons" src="./assets/imgs/layout/contact_tbl/contable-table.png" alt="">
+        <nav class="top-right-actions" aria-label="Contact">
+          <a href="https://www.github.com/frinjee" class="top-action" aria-label="GitHub"></a>
+          <a href="https://www.flickr.com/photos/204607174@N02/albums/72177720333790446/with/55286408224" class="top-action" aria-label="Flickr"></a>
+          <a href="https://soundcloud.com/frinjee" class="top-action" aria-label="SoundCloud"></a>
+          <a href="https://open.spotify.com/user/_jenh" class="top-action" aria-label="Spotify"></a>
+          <a href="mailto:jenifer_hammond@protonmail.com" class="top-action" aria-label="Email"></a>
+          <a href="hoard/" class="top-action" aria-label="Dragon Hoard"></a>
+        </nav>
       </header>
 
       <!-- MAIN LAYOUT -->
@@ -405,6 +397,7 @@
 
     <!-- jQuery is used by player.js; keep until player no longer needs it -->
     <script src="./assets/js/pfp_rotate.js" defer></script>
+    <script src="./assets/js/status_rota.js" defer></script>
     <script src="./assets/js/mood.js"></script>
     <script src="./assets/js/player.js"></script>
     <script src="./assets/js/photo_stream.js"></script>
