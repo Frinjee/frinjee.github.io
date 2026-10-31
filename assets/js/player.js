@@ -13,8 +13,10 @@ $(function () {
   // guard: only run if the player exists on this page
   if (!$('.music_player_container').length) return;
 
-  $('.music_player_track_title').text(MYSPACE_SONG_NAME);
   $('.music_player_track_artist').text(MYSPACE_SONG_ARTIST);
+  updateMyspaceTitleMarquee();
+  $(window).on('resize', updateMyspaceTitleMarquee);
+  paintMyspaceVisualizerSnapshot();
 
   $('.music_player_play_button').on('click', function () {
     if (myspaceCurrentURL === MYSPACE_SONG_URL &&
@@ -26,6 +28,19 @@ $(function () {
     startMyspacePlayer();
   });
 });
+
+function updateMyspaceTitleMarquee() {
+  var $title = $('.music_player_track_title');
+  if (!$title.length) return;
+
+  $title.removeClass('is-marquee').text(MYSPACE_SONG_NAME);
+  if ($title[0].scrollWidth <= $title[0].clientWidth) return;
+
+  var $run = $('<span class="music_player_track_title_run"></span>');
+  $run.append($('<span class="music_player_track_title_text"></span>').text(MYSPACE_SONG_NAME));
+  $run.append($('<span class="music_player_track_title_text"></span>').text(MYSPACE_SONG_NAME));
+  $title.empty().addClass('is-marquee').append($run);
+}
 
 function startMyspacePlayer() {
   stopMyspacePlayer();
@@ -61,6 +76,20 @@ function stopMyspacePlayer() {
   $('.music_player_play_button')
     .attr('aria-label', 'Play')
     .html('<i class="fa-solid fa-play"></i>');
+}
+
+// Still frame shown until playback starts. startMyspacePlayer clears it.
+var MYSPACE_VISUAL_SNAPSHOT = [2, 3, 4, 6, 5, 4, 2, 1];
+
+function paintMyspaceVisualizerSnapshot() {
+  for (var i = 0; i < MYSPACE_VISUAL_SNAPSHOT.length; i++) {
+    var $bar = $('#visual_' + i);
+    var pips = '';
+    for (var n = 0; n < MYSPACE_VISUAL_SNAPSHOT[i]; n++) {
+      pips += '<div class="music_player_visual_pip"></div>';
+    }
+    $bar.html(pips);
+  }
 }
 
 function myspaceVisualizer() {
