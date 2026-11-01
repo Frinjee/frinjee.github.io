@@ -9,13 +9,13 @@ function isValidItem(item) {
     && HTTP_URL_PATTERN.test(item.url);
 }
 
-function formatCurrentDateHeading() {
+function formatWeekLabel() {
   const formatted = new Date().toLocaleDateString('en-US', {
     month: 'numeric',
     day: 'numeric',
     year: 'numeric',
   });
-  return `Bookmark Rota - Week of ${formatted}`;
+  return `Week of ${formatted}`;
 }
 
 function createListItem(title, url) {
@@ -72,7 +72,10 @@ async function loadBookmarkRota() {
     listEl.replaceChildren(fragment);
 
     if (headingEl) {
-      headingEl.textContent = formatCurrentDateHeading();
+      const weekEl = headingEl.querySelector('.bookmark-rota-week');
+      if (weekEl) {
+        weekEl.textContent = formatWeekLabel();
+      }
     }
   } catch (err) {
     console.warn('Bookmark rota fetch failed', err);
