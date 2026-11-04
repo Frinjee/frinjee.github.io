@@ -105,6 +105,70 @@ Wraps profile picture, header meta, and contact GIF buttons.
   font-size: 11px;
 }
 
+.top-links-row {
+  flex: 0 0 auto;
+  width: 192px;
+  max-width: 100%;
+  min-height: 0;
+  max-height: 21px;
+  aspect-ratio: 192 / 21;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  overflow: hidden;
+  background-image: url("../imgs/top-bar/top-week-banner.png?v=1");
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: 100% 100%;
+}
+
+.top-week-banner {
+  margin: 0;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  font-family: "Press Start 2P", monospace;
+  font-size: 8px;
+  line-height: 1;
+  color: #210c48;
+}
+
+.top-week-banner__text {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.top-week-banner.is-marquee {
+  text-align: left;
+}
+
+.top-week-banner__run {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.top-week-banner.is-marquee .top-week-banner__text {
+  padding-right: 2em;
+}
+
+.top-week-banner.is-marquee .top-week-banner__run {
+  animation: music-player-title-marquee 12s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-week-banner.is-marquee .top-week-banner__run {
+    animation: none;
+  }
+
+  .top-week-banner.is-marquee {
+    overflow-x: auto;
+  }
+}
+
 .top-mood-row .label,
 .top-status-edit-row .label,
 .details-label {
