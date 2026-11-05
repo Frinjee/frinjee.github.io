@@ -4,6 +4,9 @@ const PFP_START_FILE = 'pfp-2.jpg';
 const EIGHT_HOURS_MS = 8 * 60 * 60 * 1000;
 // Slot 0 (pfp-2) starts at this UTC instant; first rotation after 8 hours.
 const ROTATION_ANCHOR_MS = Date.parse('2026-10-31T00:00:00Z');
+// Hold the picture from the 2026-11-05 3:00am EST slot until 5:00pm EST.
+const PAUSE_UNTIL_MS = Date.parse('2026-11-08T17:00:00-05:00');
+const PAUSE_AS_OF_MS = Date.parse('2026-11-05T08:00:00Z');
 const SHUFFLE_SEED = 0x4652494e;
 
 let cachedOrder = null;
@@ -38,8 +41,13 @@ function getOrder() {
   return cachedOrder;
 }
 
+function rotationNow() {
+  const now = Date.now();
+  return now < PAUSE_UNTIL_MS ? PAUSE_AS_OF_MS : now;
+}
+
 function getCurrentSlot() {
-  const elapsed = Date.now() - ROTATION_ANCHOR_MS;
+  const elapsed = rotationNow() - ROTATION_ANCHOR_MS;
   if (elapsed < 0) return 0;
   return Math.floor(elapsed / EIGHT_HOURS_MS);
 }
@@ -58,13 +66,15 @@ function applyProfilePic() {
 }
 
 function msUntilNextBoundary() {
-  const elapsed = Date.now() - ROTATION_ANCHOR_MS;
+  const now = Date.now();
+  if (now < PAUSE_UNTIL_MS) return PAUSE_UNTIL_MS - now;
+  const elapsed = now - ROTATION_ANCHOR_MS;
   if (elapsed < 0) {
-    return Math.max(0, ROTATION_ANCHOR_MS - Date.now());
+    return Math.max(0, ROTATION_ANCHOR_MS - now);
   }
-  const slot = getCurrentSlot();
+  const slot = Math.floor(elapsed / EIGHT_HOURS_MS);
   const nextBoundary = ROTATION_ANCHOR_MS + (slot + 1) * EIGHT_HOURS_MS;
-  return Math.max(0, nextBoundary - Date.now());
+  return Math.max(0, nextBoundary - now);
 }
 
 function scheduleNextBoundary() {

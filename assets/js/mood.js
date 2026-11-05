@@ -3,6 +3,9 @@ const STORAGE_KEY = 'myspaceHeaderState';
 const STATUS_URL = 'assets/status-files/status-test-lyrics.txt';
 const INITIAL_STATUS = 'Choppa quiet missile VV diamonds time ticker';
 const ROTATION_START_MS = Date.parse('2026-11-01T16:00:00Z');
+// Hold the 2026-11-04 Eastern period until 5:00pm EST on November 8.
+const STATUS_PAUSE_UNTIL_MS = Date.parse('2026-11-08T17:00:00-05:00');
+const STATUS_PAUSE_AS_OF_MS = Date.parse('2026-11-05T08:00:00Z');
 const STATUS_DAY_HOUR = 11;
 
 function loadState() {
@@ -192,7 +195,8 @@ async function applyDailyStatus() {
   if (!statusEl) return;
 
   statusEl.textContent = INITIAL_STATUS;
-  if (Date.now() < ROTATION_START_MS) return;
+  const effectiveMs = Date.now() < STATUS_PAUSE_UNTIL_MS ? STATUS_PAUSE_AS_OF_MS : Date.now();
+  if (effectiveMs < ROTATION_START_MS) return;
 
   try {
     const response = await fetch(STATUS_URL);
@@ -202,7 +206,7 @@ async function applyDailyStatus() {
       .map(line => line.trim())
       .filter(Boolean);
     if (!lines.length) return;
-    const key = statusPeriodKey(new Date());
+    const key = statusPeriodKey(new Date(effectiveMs));
     statusEl.textContent = lines[djb2(key) % lines.length];
   } catch (e) {
     console.warn('Failed to load status lyrics', e);
