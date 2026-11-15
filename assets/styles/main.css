@@ -1449,6 +1449,20 @@ Height is locked to the pre-change bar so the stream does not shift.
     1px 1px 0 #4f4989;
 }
 
+#activity-writing-title {
+  height: auto;
+  text-transform: none;
+}
+
+#activity-writing-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+#activity-writing-title a:hover {
+  text-decoration: underline;
+}
+
 /*
 Activity stream: photo carousel.
 Splide-powered horizontal strip of Flickr cards.

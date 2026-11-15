@@ -1,0 +1,115 @@
+/* Sizes follow the letter-page PDFs. 1rem = 12pt at the default root size. */
+
+body {
+  margin: 0;
+  background: #e4ebe3;
+  color: #2c332e;
+  font-family: "Nothing You Could Do", cursive;
+  font-size-adjust: from-font;
+  line-height: 2;
+}
+
+.sheet {
+  box-sizing: border-box;
+  width: min(100%, 51rem);
+  margin-inline: auto;
+  padding-block: 8.333rem 4rem;
+  padding-inline: 6rem;
+}
+
+@media (max-width: 51rem) {
+  .sheet {
+    padding-inline: 11.7647%;
+  }
+}
+
+.title-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 10rem;
+  padding-block: 1rem;
+  padding-inline: 1rem;
+  background: #f4f1eb;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.title-box h1,
+.subtitle,
+.byline {
+  margin: 0;
+  font-weight: 400;
+}
+
+.title-box h1 {
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 2rem;
+  font-size-adjust: cap-height from-font;
+  color: #2c332e;
+  text-wrap: balance;
+}
+
+.subtitle {
+  margin-block-start: 0.35rem;
+  font-family: "Shadows Into Light Two", cursive;
+  font-size: 1.222rem;
+  color: #434343;
+  text-wrap: balance;
+}
+
+.byline {
+  margin-block-start: 0.35rem;
+  font-family: "Just Another Hand", cursive;
+  font-size: 1.556rem;
+  color: #2c332e;
+}
+
+.sheet h2 {
+  margin: 1.75rem 0 0.25rem;
+  font-family: "Quicksand", sans-serif;
+  font-size: 1.889rem;
+  font-weight: 700;
+  font-size-adjust: cap-height from-font;
+  line-height: 1.2;
+  text-align: center;
+  color: #2c332e;
+}
+
+.prose {
+  margin: 0;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.prose + .prose {
+  margin-block-start: 1em;
+}
+
+.prose--dedication {
+  font-size: 1.556rem;
+}
+
+.prose--preface {
+  font-size: 1.778rem;
+}
+
+.prose--part {
+  font-size: 1.667rem;
+}
+
+.entries {
+  list-style: none;
+  margin: 1.75rem 0 0;
+  padding: 0;
+  font-size: 1.556rem;
+}
+
+.entries li + li {
+  margin-block-start: 0.75rem;
+}
+
+.entries a {
+  color: #2c332e;
+}
